@@ -1,1 +1,0 @@
-{\n  "name": "kamil-salameh-photography",\n  "private": false,\n  "dependencies": {\n    "next": "latest",\n    "framer-motion": "latest",\n    "tailwindcss": "latest",\n    "react-hook-form": "latest",\n    "nodemailer": "latest"\n  }\n}

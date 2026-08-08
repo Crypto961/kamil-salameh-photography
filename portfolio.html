@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Portfolio — Kamil Salameh Photography Studio</title>
-    <meta name="description" content="Explore the live Lightroom portfolio gallery of Kamil Salameh.">
-    <meta name="author" content="Kamil Salameh Photography Studio">
-    <meta name="theme-color" content="#1F4D68">
-
-    <link rel="canonical" href="https://your-domain.com/portfolio.html">
+    <meta name="description" content="Explore the full photography portfolio of Kamil Salameh.">
+    <meta name="theme-color" content="#0b0f12">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +14,152 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Dedicated Page Layout & Contrast Fixes -->
+    <style>
+        body.portfolio-page {
+            background-color: #0b0f12 !important;
+            color: #ffffff !important;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Prevent header from overlapping text */
+        .portfolio-main {
+            padding-top: 140px !important;
+            padding-bottom: 6rem;
+        }
+
+        .portfolio-header {
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio-title {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #ffffff !important;
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.1;
+        }
+
+        .portfolio-subtitle {
+            color: rgba(255, 255, 255, 0.7) !important;
+            font-size: 1.1rem;
+            max-width: 650px;
+        }
+
+        /* Lightroom Web Launch Card (Replaces broken iframe) */
+        .lightroom-launch-card {
+            background: linear-gradient(135deg, rgba(31, 77, 104, 0.25) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin-bottom: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            backdrop-filter: blur(16px);
+        }
+
+        .lightroom-launch-info h2 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .lightroom-launch-info p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            max-width: 500px;
+        }
+
+        .lightroom-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.1rem 2.2rem;
+            background-color: #ffffff;
+            color: #0b0f12 !important;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .lightroom-button:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-card .image-wrapper {
+            height: 260px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portfolio-card figcaption {
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .portfolio-card figcaption h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .portfolio-card figcaption span {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .lightroom-launch-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem 1.5rem;
+            }
+            .portfolio-main {
+                padding-top: 110px !important;
+            }
+        }
+    </style>
 </head>
 
 <body class="portfolio-page">
@@ -34,21 +177,99 @@
 </header>
 
 <main class="container portfolio-main">
+    
     <header class="portfolio-header">
         <p class="section-label">Full Collection</p>
-        <h1 class="portfolio-title">Lightroom Live Gallery</h1>
+        <h1 class="portfolio-title">Complete Archive</h1>
         <p class="portfolio-subtitle">
-            An interactive, live-updated collection hosted on Adobe Lightroom.
+            Exploring 14 signature categories across international landscapes, commercial imagery, and deep-sky astrophotography.
         </p>
     </header>
 
-    <!-- LIGHTROOM EMBEDDED ALBUM -->
-    <div class="lightroom-embed-container">
-        <iframe 
-            src="https://lightroom.adobe.com/embed/shares/07f433ae2f2042ca9301828f73dd4998/slideshow?background_color=%230B0F12&color=%23ffffff" 
-            title="Kamil Salameh Photography Portfolio — Adobe Lightroom Album"
-            allowfullscreen>
-        </iframe>
+    <!-- LIGHTROOM LIVE WEB ALBUM LAUNCH BANNER -->
+    <section class="lightroom-launch-card">
+        <div class="lightroom-launch-info">
+            <h2>Adobe Lightroom Web Album</h2>
+            <p>View the live, full-resolution interactive gallery directly hosted on Adobe Lightroom Web.</p>
+        </div>
+        <a href="https://adobe.ly/4wdhXNK" target="_blank" rel="noopener noreferrer" class="lightroom-button">
+            Open Lightroom Web Gallery ↗
+        </a>
+    </section>
+
+    <!-- CATEGORY GRID -->
+    <div class="portfolio-grid">
+        
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/france.jpg" alt="France" loading="lazy"></div>
+            <figcaption><h3>France</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/kenya.jpg" alt="Kenya" loading="lazy"></div>
+            <figcaption><h3>Kenya</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/netherlands.jpg" alt="Netherlands" loading="lazy"></div>
+            <figcaption><h3>Netherlands</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/germany.jpg" alt="Germany" loading="lazy"></div>
+            <figcaption><h3>Germany</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/norway.jpg" alt="Norway" loading="lazy"></div>
+            <figcaption><h3>Norway</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/denmark.jpg" alt="Denmark" loading="lazy"></div>
+            <figcaption><h3>Denmark</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/sweden.jpg" alt="Sweden" loading="lazy"></div>
+            <figcaption><h3>Sweden</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/belgium.jpg" alt="Belgium" loading="lazy"></div>
+            <figcaption><h3>Belgium</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/turkey.jpg" alt="Turkey" loading="lazy"></div>
+            <figcaption><h3>Turkey</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/lebanon.jpg" alt="Lebanon" loading="lazy"></div>
+            <figcaption><h3>Lebanon</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/luxembourg.jpg" alt="Luxembourg" loading="lazy"></div>
+            <figcaption><h3>Luxembourg</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/armenia.jpg" alt="Armenia" loading="lazy"></div>
+            <figcaption><h3>Armenia</h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/astrophotography.jpg" alt="Astrophotography" loading="lazy"></div>
+            <figcaption><h3>Astrophotography</h3><span>Specialty</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card">
+            <div class="image-wrapper"><img src="images/product-photography.jpg" alt="Product Photography" loading="lazy"></div>
+            <figcaption><h3>Product Photography</h3><span>Commercial</span></figcaption>
+        </figure>
+
     </div>
 </main>
 

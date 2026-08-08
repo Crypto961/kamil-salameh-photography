@@ -15,7 +15,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Dedicated Page Layout, Responsive & Lightbox Styles -->
+    <!-- Aspect-Ratio Dynamic Framing & Design Styles -->
     <style>
         body.portfolio-page {
             background-color: #0b0f12 !important;
@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* Responsive Layout Spacing */
+        /* Container Layout Spacing */
         .portfolio-main {
             padding-top: clamp(100px, 12vh, 140px) !important;
             padding-bottom: clamp(3rem, 6vh, 6rem);
@@ -98,7 +98,7 @@
             font-size: 0.95rem;
             border-radius: 50px;
             white-space: nowrap;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .lightroom-button:hover {
@@ -106,44 +106,51 @@
             transform: translateY(-2px);
         }
 
-        /* Adaptive Portfolio Grid */
+        /* Adaptive Dynamic Column Grid */
         .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: clamp(1.25rem, 2.5vw, 2rem);
+            column-count: 3;
+            column-gap: clamp(1.25rem, 2.5vw, 2rem);
         }
 
         .portfolio-card {
+            break-inside: avoid;
+            margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 0.85rem;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.4s ease, 
+                        box-shadow 0.4s ease;
             cursor: pointer;
-            margin: 0;
+            box-sizing: border-border-box;
         }
 
         .portfolio-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
         }
 
-        /* Uncropped Image Container */
+        /* Native Aspect-Ratio Frame Container */
         .portfolio-card .image-wrapper {
-            height: 280px;
+            width: 100%;
+            height: auto;
             border-radius: 12px;
             overflow: hidden;
-            background-color: #050709;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(255, 255, 255, 0.02);
+            transition: aspect-ratio 0.3s ease;
         }
 
         .portfolio-card img {
             width: 100%;
-            height: 100%;
-            object-fit: contain; /* Prevents cropping */
-            transition: transform 0.3s ease;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .portfolio-card:hover img {
@@ -183,11 +190,11 @@
             width: 100vw;
             height: 100vh;
             background-color: rgba(5, 7, 9, 0.94);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             padding: 1.5rem;
             box-sizing: border-box;
         }
@@ -209,13 +216,13 @@
             position: absolute;
             bottom: 2rem;
             color: #ffffff;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 500;
             text-align: center;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.65);
             padding: 0.5rem 1.5rem;
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .lightbox-close {
@@ -235,8 +242,18 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Mobile & Tablet Fine-Tuning */
-        @media (max-width: 768px) {
+        /* Responsive Breakpoints for Masonry Columns */
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .portfolio-grid {
+                column-count: 1;
+            }
+
             .lightroom-launch-card {
                 flex-direction: column;
                 align-items: stretch;
@@ -246,24 +263,6 @@
             .lightroom-button {
                 width: 100%;
                 box-sizing: border-box;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            }
-
-            .portfolio-card .image-wrapper {
-                height: 220px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-card .image-wrapper {
-                height: 260px;
             }
         }
     </style>
@@ -289,7 +288,7 @@
         <p class="section-label">Full Collection</p>
         <h1 class="portfolio-title">Complete Archive</h1>
         <p class="portfolio-subtitle">
-            Exploring 14+ signature categories across international landscapes, commercial imagery, and deep-sky astrophotography. Click any frame to expand.
+            Exploring 14 signature categories across international landscapes, commercial imagery, and deep-sky astrophotography. Click any frame to expand.
         </p>
     </header>
 
@@ -396,9 +395,28 @@
     </div>
 </footer>
 
-<!-- LIGHTBOX INTERACTION SCRIPT -->
+<!-- AUTOMATIC ASPECT RATIO CALCULATOR & LIGHTBOX SCRIPT -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // Automatically adapt wrapper frame aspect ratio to image dimensions
+        const images = document.querySelectorAll('.portfolio-card img');
+        
+        images.forEach(img => {
+            const applyAspectRatio = () => {
+                if (img.naturalWidth && img.naturalHeight) {
+                    const wrapper = img.closest('.image-wrapper');
+                    wrapper.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
+                }
+            };
+
+            if (img.complete) {
+                applyAspectRatio();
+            } else {
+                img.addEventListener('load', applyAspectRatio);
+            }
+        });
+
+        // Lightbox interactions
         const lightbox = document.getElementById('lightboxModal');
         const lightboxImg = document.getElementById('lightboxImage');
         const lightboxCaption = document.getElementById('lightboxCaption');

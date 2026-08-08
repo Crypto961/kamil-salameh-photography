@@ -15,7 +15,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Dedicated Page Layout & Contrast Fixes -->
+    <!-- Dedicated Page Layout, Responsive & Lightbox Styles -->
     <style>
         body.portfolio-page {
             background-color: #0b0f12 !important;
@@ -23,22 +23,27 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Prevent header from overlapping text */
+        /* Responsive Layout Spacing */
         .portfolio-main {
-            padding-top: 140px !important;
-            padding-bottom: 6rem;
+            padding-top: clamp(100px, 12vh, 140px) !important;
+            padding-bottom: clamp(3rem, 6vh, 6rem);
+            padding-left: clamp(1rem, 4vw, 2.5rem);
+            padding-right: clamp(1rem, 4vw, 2.5rem);
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .portfolio-header {
-            margin-bottom: 3rem;
+            margin-bottom: clamp(2rem, 4vh, 3rem);
             position: relative;
             z-index: 1;
         }
 
         .portfolio-title {
-            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3.8rem);
             font-weight: 700;
             color: #ffffff !important;
             margin-top: 0.5rem;
@@ -48,45 +53,49 @@
 
         .portfolio-subtitle {
             color: rgba(255, 255, 255, 0.7) !important;
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
             max-width: 650px;
+            line-height: 1.5;
         }
 
-        /* Lightroom Web Launch Card (Replaces broken iframe) */
+        /* Lightroom Web Launch Card */
         .lightroom-launch-card {
             background: linear-gradient(135deg, rgba(31, 77, 104, 0.25) 0%, rgba(255, 255, 255, 0.03) 100%);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 20px;
-            padding: 3rem 2.5rem;
-            margin-bottom: 4rem;
+            padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem);
+            margin-bottom: clamp(2.5rem, 5vh, 4rem);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
             backdrop-filter: blur(16px);
         }
 
         .lightroom-launch-info h2 {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
             color: #ffffff;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.5rem 0;
         }
 
         .lightroom-launch-info p {
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
             max-width: 500px;
+            margin: 0;
         }
 
         .lightroom-button {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.75rem;
-            padding: 1.1rem 2.2rem;
+            padding: 0.9rem 1.8rem;
             background-color: #ffffff;
             color: #0b0f12 !important;
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.95rem;
             border-radius: 50px;
             white-space: nowrap;
             transition: all 0.3s ease;
@@ -97,49 +106,64 @@
             transform: translateY(-2px);
         }
 
-        /* Portfolio Grid */
+        /* Adaptive Portfolio Grid */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: clamp(1.25rem, 2.5vw, 2rem);
         }
 
         .portfolio-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 1rem;
-            transition: transform 0.3s ease;
+            padding: 0.85rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            margin: 0;
         }
 
         .portfolio-card:hover {
             transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
+        /* Uncropped Image Container */
         .portfolio-card .image-wrapper {
-            height: 260px;
+            height: 280px;
             border-radius: 12px;
             overflow: hidden;
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: #050709;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .portfolio-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Prevents cropping */
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.03);
         }
 
         .portfolio-card figcaption {
-            padding-top: 1rem;
+            padding-top: 0.85rem;
+            padding-left: 0.25rem;
+            padding-right: 0.25rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .portfolio-card figcaption h3 {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 500;
             color: #ffffff;
+            margin: 0;
         }
 
         .portfolio-card figcaption span {
@@ -149,14 +173,97 @@
             letter-spacing: 0.05em;
         }
 
+        /* Image Expansion Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(5, 7, 9, 0.94);
+            backdrop-filter: blur(12px);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 2rem;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            color: #ffffff;
+            font-size: 2.2rem;
+            font-weight: 300;
+            cursor: pointer;
+            line-height: 1;
+            user-select: none;
+            transition: color 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Mobile & Tablet Fine-Tuning */
         @media (max-width: 768px) {
             .lightroom-launch-card {
                 flex-direction: column;
-                align-items: flex-start;
-                padding: 2rem 1.5rem;
+                align-items: stretch;
+                text-align: left;
             }
-            .portfolio-main {
-                padding-top: 110px !important;
+
+            .lightroom-button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+
+            .portfolio-card .image-wrapper {
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-card .image-wrapper {
+                height: 260px;
             }
         }
     </style>
@@ -182,7 +289,7 @@
         <p class="section-label">Full Collection</p>
         <h1 class="portfolio-title">Complete Archive</h1>
         <p class="portfolio-subtitle">
-            Exploring 14 signature categories across international landscapes, commercial imagery, and deep-sky astrophotography.
+            Exploring 14 signature categories across international landscapes, commercial imagery, and deep-sky astrophotography. Click any frame to expand.
         </p>
     </header>
 
@@ -273,6 +380,13 @@
     </div>
 </main>
 
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox-modal" id="lightboxModal" aria-hidden="true">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img class="lightbox-content" id="lightboxImage" src="" alt="Expanded View">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
 <footer class="footer">
     <div class="container footer-container">
         <div class="footer-brand">
@@ -281,6 +395,52 @@
         <p>© 2026 Kamil Salameh Photography Studio. All Rights Reserved.</p>
     </div>
 </footer>
+
+<!-- LIGHTBOX INTERACTION SCRIPT -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const lightbox = document.getElementById('lightboxModal');
+        const lightboxImg = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const closeBtn = document.getElementById('lightboxClose');
+        const cards = document.querySelectorAll('.portfolio-card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img');
+                const title = card.querySelector('h3').textContent;
+                
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxCaption.textContent = title;
+                
+                lightbox.classList.add('active');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        };
+
+        closeBtn.addEventListener('click', closeLightbox);
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

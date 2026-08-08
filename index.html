@@ -3,82 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamil Salameh Photography Studio — Photography Portfolio</title>
-    <meta name="description" content="Kamil Salameh Photography Studio creates timeless photography experiences through architecture, landscapes, portraits, travel, and editorial storytelling.">
-    <meta name="author" content="Kamil Salameh Photography Studio">
+    <title>Kamil Salameh Photography Studio — Portfolio</title>
+    <meta name="description" content="Kamil Salameh Photography Studio creates timeless visual storytelling.">
     <meta name="theme-color" content="#1F4D68">
 
-    <link rel="canonical" href="https://your-domain.com/">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Kamil Salameh Photography Studio — Photography Portfolio">
-    <meta property="og:description" content="A luxury photography experience inspired by timeless visual storytelling.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1452587925148-ce544e77e70d">
-    <meta property="og:url" content="https://your-domain.com/">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Kamil Salameh Photography Studio — Cinematic Photography Portfolio">
-    <meta name="twitter:description" content="Luxury cinematic photography portfolio.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1452587925148-ce544e77e70d">
-
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-    <rect width='100' height='100' rx='20' fill='%231F4D68'/>
-    <text x='50' y='65' font-size='60' text-anchor='middle' fill='white'>K</text>
-    </svg>">
-
-    <!-- Fonts -->
+    <!-- Fonts & Libraries -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="noise-overlay"></div>
-
-<div class="cursor">
-    <span></span>
-</div>
-
-<div class="page-loader">
-    <div class="loader-logo">
-        Kamil Salameh Photography
-    </div>
-    <div class="loader-line"></div>
-</div>
-
 <header class="site-header">
     <nav class="nav-container" aria-label="Main navigation">
-        <a href="#home" class="brand">
-            Kamil Salameh Photography
-        </a>
-
-        <button 
-            class="menu-toggle"
-            id="menuToggle"
-            aria-label="Open navigation menu"
-            aria-expanded="false"
-            aria-controls="primaryNav">
-            <span></span>
-            <span></span>
-        </button>
-
-        <div class="nav-links" id="primaryNav" aria-hidden="true">
+        <a href="index.html" class="brand">Kamil Salameh Photography</a>
+        <div class="nav-links">
             <a href="#about" class="nav-link">About</a>
-            <a href="#work" class="nav-link">Work</a>
-            <a href="journey.html" class="nav-link">Journey</a>
+            <a href="#featured" class="nav-link">Featured</a>
+            <a href="portfolio.html" target="_blank" class="nav-link">Portfolio ↗</a>
             <a href="#contact" class="nav-link">Contact</a>
         </div>
     </nav>
@@ -86,160 +35,88 @@
 
 <main>
 
-<!-- WELCOME PAGE / HERO SECTION -->
+<!-- HERO SECTION -->
 <section class="hero" id="home">
     <div class="hero-background">
-        <img 
-    src="images/hero-bg.jpg.avif"
-    alt="Kamil Salameh Photography hero cover image"
-    loading="eager">
+        <img src="images/hero-bg.jpg" alt="Kamil Salameh Photography hero image" loading="eager">
     </div>
-
     <div class="hero-gradient"></div>
-    <div class="hero-grid"></div>
-
-    <div class="floating-orb orb-one"></div>
-    <div class="floating-orb orb-two"></div>
 
     <div class="hero-content container">
-        <p class="section-label reveal">
-            Luxury Photography Studio
-        </p>
-
+        <p class="section-label">Luxury Photography Studio</p>
         <h1 class="hero-title">
             <span>Stories</span>
             <span>Frozen</span>
             <span>In</span>
             <span>Time</span>
         </h1>
-
-        <p class="hero-description reveal">
-            Creating cinematic visual narratives through architecture, landscape, portraiture, and human connection.
+        <p class="hero-description">
+            Creating cinematic visual narratives through global landscapes, architecture, astrophotography, and fine art.
         </p>
 
-        <div class="hero-actions reveal">
-            <a href="#work" class="primary-button">
-                Explore Collection
-                <span></span>
+        <div class="hero-actions">
+            <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
+                Check Portfolio ↗
             </a>
-            <a href="#contact" class="text-button">
-                Commission Work
-            </a>
+            <a href="#contact" class="text-button">Commission Work</a>
         </div>
-    </div>
-
-    <div class="hero-glass-panel">
-        <div class="panel-item">
-            <strong data-counter="18">18</strong>
-            <span>Years Experience</span>
-        </div>
-        <div class="panel-item">
-            <strong data-counter="42">42</strong>
-            <span>International Awards</span>
-        </div>
-        <div class="panel-item">
-            <strong data-counter="250">250</strong>
-            <span>Stories Captured</span>
-        </div>
-    </div>
-
-    <div class="scroll-indicator">
-        <span>Scroll</span>
-        <div></div>
     </div>
 </section>
 
-<!-- 01 — PHILOSOPHY -->
+<!-- PHILOSOPHY SECTION -->
 <section class="intro section container" id="about">
     <div class="section-header">
         <p class="section-label">01 — Philosophy</p>
-        <h2 class="section-title split">
-            Photography is not about capturing moments. It is about preserving emotions.
-        </h2>
-    </div>
-
-    <div class="intro-grid">
-        <div class="intro-copy reveal">
-            <p>
-                Kamil Salameh Photography Studio approaches photography as a cinematic discipline.
-                Every frame is designed with intention, light, architecture, and emotion.
-            </p>
-            <p>
-                Inspired by precision craftsmanship, timeless light, and the storytelling traditions of cinema.
-            </p>
-        </div>
-
-        <div class="glass-card tilt-card">
-            <div class="card-glow"></div>
-            <h3>Visual Identity</h3>
-            <p>
-                Minimal composition.
-                Natural light.
-                Timeless storytelling.
-            </p>
-        </div>
+        <h2 class="section-title">Photography is not about capturing moments. It is about preserving emotions.</h2>
     </div>
 </section>
 
-<!-- 02 — SELECTED WORK -->
-<section class="gallery-section section" id="work">
+<!-- 3-IMAGE CAROUSEL SECTION -->
+<section class="gallery-section section" id="featured">
     <div class="gallery-intro container">
-        <p class="section-label">02 — Selected Work</p>
-        <h2 class="section-title split">A cinematic collection of visual memories.</h2>
+        <div class="gallery-header-flex">
+            <div>
+                <p class="section-label">02 — Featured Work</p>
+                <h2 class="section-title">Selected Highlights</h2>
+            </div>
+            <!-- BUTTON OPENS PORTFOLIO IN A NEW TAB -->
+            <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
+                Check Full Portfolio ↗
+            </a>
+        </div>
     </div>
 
+    <!-- CAROUSEL TRACK (EXACTLY 3 FEATURED IMAGES) -->
     <div class="gallery-slider-wrapper">
-        <div class="gallery-track">
+        <div class="gallery-track featured-carousel">
             
             <article class="gallery-slide">
                 <div class="slide-image-wrapper">
-                    <img 
-                        src="https://images.unsplash.com/photo-1469474968028-56623f02e42e" 
-                        alt="Mountain landscape surrounded by mist" 
-                        loading="lazy">
+                    <img src="images/astrophotography.jpg" alt="Astrophotography" loading="lazy">
                 </div>
                 <div class="gallery-overlay">
-                    <p class="slide-category">Landscape</p>
-                    <h3 class="slide-title">Beyond The Horizon</h3>
+                    <p class="slide-category">Specialty</p>
+                    <h3 class="slide-title">Astrophotography</h3>
                 </div>
             </article>
 
             <article class="gallery-slide">
                 <div class="slide-image-wrapper">
-                    <img 
-                        src="https://images.unsplash.com/photo-1519608487953-e999c86e7455" 
-                        alt="Architectural structure photographed at night" 
-                        loading="lazy">
+                    <img src="images/france.jpg" alt="France" loading="lazy">
                 </div>
                 <div class="gallery-overlay">
-                    <p class="slide-category">Architecture</p>
-                    <h3 class="slide-title">Silent Geometry</h3>
+                    <p class="slide-category">Location</p>
+                    <h3 class="slide-title">France</h3>
                 </div>
             </article>
 
             <article class="gallery-slide">
                 <div class="slide-image-wrapper">
-                    <img 
-                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e" 
-                        alt="Portrait photography" 
-                        loading="lazy">
+                    <img src="images/product-photography.jpg" alt="Product Photography" loading="lazy">
                 </div>
                 <div class="gallery-overlay">
-                    <p class="slide-category">Portrait</p>
-                    <h3 class="slide-title">Human Stories</h3>
-                </div>
-            </article>
-
-            <article class="gallery-slide">
-                <div class="slide-image-wrapper">
-                    <img 
-                        src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429" 
-                        alt="Travel photography landscape" 
-                        loading="lazy">
-                </div>
-                <div class="gallery-overlay">
-                    <p class="slide-category">Travel</p>
-                    <h3 class="slide-title">Infinite Roads</h3>
+                    <p class="slide-category">Commercial</p>
+                    <h3 class="slide-title">Product Photography</h3>
                 </div>
             </article>
 
@@ -247,119 +124,26 @@
     </div>
 </section>
 
-<!-- MASONRY SECTION -->
-<section class="masonry-section section container">
-    <div class="masonry-grid">
-        <figure class="masonry-item large tilt-card">
-            <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="Mountain landscape" loading="lazy">
-            </div>
-            <figcaption>Mountain Stories</figcaption>
-        </figure>
-
-        <figure class="masonry-item tilt-card">
-            <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2" alt="Modern architecture" loading="lazy">
-            </div>
-            <figcaption>Modern Spaces</figcaption>
-        </figure>
-
-        <figure class="masonry-item tilt-card">
-            <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Ocean landscape" loading="lazy">
-            </div>
-            <figcaption>Ocean Light</figcaption>
-        </figure>
-
-        <figure class="masonry-item large tilt-card">
-            <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742" alt="Contemporary building" loading="lazy">
-            </div>
-            <figcaption>Architectural Vision</figcaption>
-        </figure>
-    </div>
-</section>
-
-<!-- STATISTICS -->
-<section class="statistics section">
-    <div class="container stats-container">
-        <div class="stat-card">
-            <strong data-counter="18">18</strong>
-            <span>Years Creating</span>
-        </div>
-        <div class="stat-card">
-            <strong data-counter="35">35</strong>
-            <span>Countries Visited</span>
-        </div>
-        <div class="stat-card">
-            <strong data-counter="120">120</strong>
-            <span>Editorial Features</span>
-        </div>
-        <div class="stat-card">
-            <strong data-counter="980">980</strong>
-            <span>Sessions Completed</span>
-        </div>
-    </div>
-</section>
-
-<!-- AWARDS -->
-<section class="awards section container">
-    <div class="awards-wrapper glass-card">
-        <div>
-            <p class="section-label">Recognition</p>
-            <h2>Award-winning visual storytelling.</h2>
-        </div>
-
-        <div class="award-list">
-            <div class="award-item">
-                <span>2025</span>
-                <p>International Photography Awards — Finalist</p>
-            </div>
-            <div class="award-item">
-                <span>2024</span>
-                <p>Architecture Masters Prize — Winner</p>
-            </div>
-            <div class="award-item">
-                <span>2023</span>
-                <p>Global Editorial Photography Selection</p>
-            </div>
-            <div class="award-item">
-                <span>2022</span>
-                <p>Fine Art Photography Exhibition</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 03 — CONTACT -->
+<!-- CONTACT SECTION -->
 <section class="contact section" id="contact">
-    <div class="contact-background"></div>
-
     <div class="container">
         <div class="contact-card glass-card">
             <p class="section-label">03 — Contact</p>
             <h2 class="section-title">Let's create something timeless.</h2>
-
             <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="input-group">
-                    <input type="text" id="name" name="name" required placeholder=" " aria-label="Your name">
+                    <input type="text" id="name" name="name" required placeholder=" ">
                     <label for="name">Name</label>
                 </div>
-
                 <div class="input-group">
-                    <input type="email" id="email" name="email" required placeholder=" " aria-label="Your email">
+                    <input type="email" id="email" name="email" required placeholder=" ">
                     <label for="email">Email</label>
                 </div>
-
                 <div class="input-group">
-                    <textarea id="message" name="message" rows="5" required placeholder=" " aria-label="Your message"></textarea>
+                    <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
                     <label for="message">Message</label>
                 </div>
-
-                <button class="primary-button" type="submit">
-                    Send Inquiry
-                    <span></span>
-                </button>
+                <button class="primary-button" type="submit">Send Inquiry</button>
             </form>
         </div>
     </div>
@@ -369,32 +153,10 @@
 
 <footer class="footer">
     <div class="container footer-container">
-        <div class="footer-brand">
-            Kamil Salameh Photography
-        </div>
-
+        <div class="footer-brand">Kamil Salameh Photography</div>
         <p>© 2026 Kamil Salameh Photography Studio. All Rights Reserved.</p>
-
-        <div class="footer-links">
-            <a href="#">Instagram</a>
-            <a href="#">Behance</a>
-            <a href="#">Email</a>
-        </div>
     </div>
 </footer>
-
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"ProfessionalService",
-  "name":"Kamil Salameh Photography Studio",
-  "description":"Luxury cinematic photography studio specializing in editorial, landscape, architecture, and portrait photography.",
-  "url":"https://your-domain.com",
-  "serviceType":"Photography"
-}
-</script>
-
-<script src="script.js"></script>
 
 </body>
 </html>

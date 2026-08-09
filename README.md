@@ -1,4 +1,4 @@
-# ARDEN STUDIO
+# Kamil Salameh STUDIO
 ## Luxury Cinematic Photography Portfolio
 
 A premium, cinematic photography portfolio website built with pure HTML5, CSS3, and Vanilla JavaScript.

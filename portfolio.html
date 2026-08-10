@@ -15,7 +15,6 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Aspect-Ratio Dynamic Framing & Design Styles -->
     <style>
         body.portfolio-page {
             background-color: #0b0f12 !important;
@@ -26,7 +25,6 @@
             overflow-x: hidden;
         }
 
-        /* Container Layout Spacing */
         .portfolio-main {
             padding-top: clamp(100px, 12vh, 140px) !important;
             padding-bottom: clamp(3rem, 6vh, 6rem);
@@ -137,7 +135,7 @@
             stroke-linejoin: round;
         }
 
-        /* Adaptive Dynamic Column Grid */
+        /* Dynamic Grid Layout */
         .portfolio-grid {
             column-count: 3;
             column-gap: clamp(1.25rem, 2.5vw, 2rem);
@@ -163,7 +161,6 @@
             box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
         }
 
-        /* Native Aspect-Ratio Frame Container */
         .portfolio-card .image-wrapper {
             width: 100%;
             height: auto;
@@ -211,7 +208,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* Image Expansion Lightbox Modal */
+        /* Lightbox Modal */
         .lightbox-modal {
             display: none;
             position: fixed;
@@ -273,7 +270,6 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Responsive Breakpoints for Masonry Columns */
         @media (max-width: 1024px) {
             .portfolio-grid {
                 column-count: 2;
@@ -293,7 +289,7 @@
 
             .lightroom-button {
                 width: 100%;
-                box-sizing: border-border-box;
+                box-sizing: border-box;
             }
         }
     </style>
@@ -392,12 +388,12 @@
         </figure>
 
         <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/lebanon.jpg.avif" alt="Landscape photography in Lebanon by Kamil Salameh capturing Faqra Kfardebian ancient historical ruins in a dramatic sunset using canon camera and editing in adobe lightroom " loading="lazy"></div>
+            <div class="image-wrapper"><img src="images/lebanon.jpg.avif" alt="Landscape photography in Lebanon by Kamil Salameh capturing Faqra Kfardebian ancient historical ruins in a dramatic sunset using canon camera and editing in adobe lightroom" loading="lazy"></div>
             <figcaption><h3>Lebanon 🇱🇧</h3><span>Location</span></figcaption>
         </figure>   
         
         <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/kfardebian.jpg.avif" alt="Landscape photography in Lebanon by Kamil Salameh capturing Faqra Kfardebian ancient historical ruins in a dramatic sunset using canon camera and editing in adobe lightroom " loading="lazy"></div>
+            <div class="image-wrapper"><img src="images/kfardebian.jpg.avif" alt="Landscape photography in Lebanon by Kamil Salameh capturing Faqra Kfardebian ancient historical ruins in a dramatic sunset using canon camera and editing in adobe lightroom" loading="lazy"></div>
             <figcaption><h3>Kfardebian - Lebanon 🇱🇧</h3><span>Location</span></figcaption>
         </figure>        
 
@@ -440,10 +436,8 @@
     </div>
 </footer>
 
-<!-- AUTOMATIC ASPECT RATIO CALCULATOR & LIGHTBOX SCRIPT -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Automatically adapt wrapper frame aspect ratio to image dimensions
         const images = document.querySelectorAll('.portfolio-card img');
         
         images.forEach(img => {
@@ -461,7 +455,6 @@
             }
         });
 
-        // Lightbox interactions
         const lightbox = document.getElementById('lightboxModal');
         const lightboxImg = document.getElementById('lightboxImage');
         const lightboxCaption = document.getElementById('lightboxCaption');

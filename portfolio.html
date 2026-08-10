@@ -106,6 +106,37 @@
             transform: translateY(-2px);
         }
 
+        /* Instagram Social Button */
+        .instagram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 1.6rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .instagram-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-2px);
+        }
+
+        .instagram-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         /* Adaptive Dynamic Column Grid */
         .portfolio-grid {
             column-count: 3;
@@ -123,7 +154,7 @@
                         border-color 0.4s ease, 
                         box-shadow 0.4s ease;
             cursor: pointer;
-            box-sizing: border-border-box;
+            box-sizing: border-box;
         }
 
         .portfolio-card:hover {
@@ -262,7 +293,7 @@
 
             .lightroom-button {
                 width: 100%;
-                box-sizing: border-box;
+                box-sizing: border-border-box;
             }
         }
     </style>
@@ -278,6 +309,9 @@
         <div class="nav-links">
             <a href="index.html" class="nav-link">Home</a>
             <a href="portfolio.html" class="nav-link active">Portfolio</a>
+            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
         </div>
     </nav>
 </header>
@@ -290,6 +324,12 @@
         <p class="portfolio-subtitle">
             Explore the photography portfolio of Lebanese photographer Kamil Salameh, featuring landscapes, international destinations, astrophotography and commercial photography.
         </p>
+        <div style="margin-top: 1.5rem;">
+            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="instagram-btn">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                Follow on Instagram
+            </a>
+        </div>
     </header>
 
     <!-- LIGHTROOM LIVE WEB ALBUM LAUNCH BANNER -->

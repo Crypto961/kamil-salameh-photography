@@ -51,6 +51,102 @@
             gap: 1rem;
             margin-top: 0.5rem;
         }
+
+        /* Hero Layout Grid for Animated Logo Placement */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animated Lens Container */
+        .hero-lens-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .animated-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .aperture-wrapper {
+            position: relative;
+            width: min(280px, 70vw);
+            height: min(280px, 70vw);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .lens-image-display {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            z-index: 1;
+            animation: swapImages 12s infinite step-end;
+        }
+
+        .aperture-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .aperture-blade {
+            fill: #1a2328;
+            transform-origin: center;
+            animation: apertureShutter 4s infinite ease-in-out;
+        }
+
+        @keyframes apertureShutter {
+            0%, 100% {
+                transform: scale(1);
+            }
+            40%, 60% {
+                transform: scale(0.32) rotate(18deg);
+            }
+        }
+
+        @keyframes swapImages {
+            0% {
+                background-image: url('images/luxembourg.jpg.avif');
+            }
+            33.33% {
+                background-image: url('images/france.jpg.avif');
+            }
+            66.66% {
+                background-image: url('images/product-photography.jpg.avif');
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .hero-lens-wrapper {
+                order: -1;
+            }
+        }
     </style>
 </head>
 
@@ -80,27 +176,50 @@
     </div>
     <div class="hero-gradient"></div>
 
-    <div class="hero-content container">
-        <p class="section-label">Luxury Photography Studio</p>
-        <h1 class="hero-title">
-            <span>Stories</span>
-            <span>Frozen</span>
-            <span>In</span>
-            <span>Time</span>
-        </h1>
-        <p class="hero-description">
-            Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architecture, and fine art, creating cinematic visual stories across Lebanon and around the world.
-        </p>
+    <div class="hero-content container hero-grid">
+        <!-- Left Side: Content -->
+        <div class="hero-text-block">
+            <p class="section-label">Luxury Photography Studio</p>
+            <h1 class="hero-title">
+                <span>Stories</span>
+                <span>Frozen</span>
+                <span>In</span>
+                <span>Time</span>
+            </h1>
+            <p class="hero-description">
+                Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architecture, and fine art, creating cinematic visual stories across Lebanon and around the world.
+            </p>
 
-        <div class="hero-actions">
-            <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
-                Check Portfolio ↗
-            </a>
-            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="social-button">
-                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                Instagram
-            </a>
-            <a href="#contact" class="text-button">Get In Touch</a>
+            <div class="hero-actions">
+                <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
+                    Check Portfolio ↗
+                </a>
+                <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="social-button">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    Instagram
+                </a>
+                <a href="#contact" class="text-button">Get In Touch</a>
+            </div>
+        </div>
+
+        <!-- Right Side: Animated Shutter Lens -->
+        <div class="hero-lens-wrapper">
+            <div class="animated-logo-container">
+                <div class="aperture-wrapper">
+                    <!-- Dynamic Rotating Image Frame -->
+                    <div class="lens-image-display"></div>
+
+                    <!-- Animated Aperture Vector Blades -->
+                    <svg class="aperture-svg" viewBox="0 0 100 100">
+                        <path class="aperture-blade" d="M50 0 C65 0 78 7 86 18 L50 42 L30 15 Z" />
+                        <path class="aperture-blade" style="animation-delay: 0.05s;" d="M86 18 C95 30 98 46 95 60 L57 48 L78 18 Z" />
+                        <path class="aperture-blade" style="animation-delay: 0.1s;" d="M95 60 C91 76 80 88 66 95 L48 57 L85 60 Z" />
+                        <path class="aperture-blade" style="animation-delay: 0.15s;" d="M66 95 C51 100 35 97 22 88 L42 50 L64 86 Z" />
+                        <path class="aperture-blade" style="animation-delay: 0.2s;" d="M22 88 C9 77 2 62 1 47 L43 43 L18 80 Z" />
+                        <path class="aperture-blade" style="animation-delay: 0.25s;" d="M1 47 C1 31 9 16 22 8 L50 38 L8 40 Z" />
+                    </svg>
+                </div>
+            </div>
         </div>
     </div>
 </section>

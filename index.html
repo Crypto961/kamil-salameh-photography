@@ -75,11 +75,35 @@
             stroke-linecap: round;
             stroke-linejoin: round;
         }
+
+        /* FOOTER HIGH-CONTRAST BUTTON FIX */
+        .footer {
+            background: #ffffff;
+            color: #111111;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
         .footer-socials {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-top: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .footer .social-button {
+            background: #111111;
+            color: #ffffff;
+            border: 1px solid #111111;
+            font-weight: 500;
+        }
+
+        .footer .social-button:hover {
+            background: #333333;
+            border-color: #333333;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
         }
 
         /* HERO SECTION */
@@ -109,7 +133,7 @@
             z-index: 15;
         }
 
-        /* HERO SINGLE POLAROID OVERLAY (FIXED POSITIONING FOR SMALL SCREENS) */
+        /* HERO SINGLE POLAROID OVERLAY */
         .hero-polaroid-wrapper {
             position: absolute;
             right: 7%;
@@ -142,7 +166,7 @@
             transform: rotate(3deg);
         }
 
-        /* ORIGINAL INTERACTIVE POLAROID STACK DYNAMICS */
+        /* INTERACTIVE POLAROID STACK DYNAMICS */
         .polaroid-interactive-container {
             width: 100%;
             display: flex;
@@ -212,7 +236,7 @@
             color: #ffffff;
         }
 
-        /* ORIGINAL UNFOLDED EXPANSION POSITIONS */
+        /* UNFOLDED EXPANSION POSITIONS */
         .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) {
             left: 12%;
             top: 50%;
@@ -306,7 +330,7 @@
             flex-wrap: wrap;
         }
 
-        /* RESPONSIVE ADJUSTMENTS FOR HEADER AND HERO POLAROID ONLY */
+        /* RESPONSIVE ADJUSTMENTS */
         @media (max-width: 1024px) {
             .hero-polaroid-wrapper {
                 right: 3%;
@@ -317,7 +341,7 @@
 
         @media (max-width: 768px) {
             .hero-polaroid-wrapper {
-                display: none; /* Keeps top hero overlay card hidden on mobile */
+                display: none;
             }
 
             .hero {
@@ -342,6 +366,12 @@
             .gallery-header-flex {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                gap: 1.2rem;
+                text-align: center;
             }
         }
     </style>
@@ -495,6 +525,10 @@
                     <label for="email">Email</label>
                 </div>
                 <div class="input-group">
+                    <input type="tel" id="phone" name="phone" placeholder=" ">
+                    <label for="phone">Phone Number (Optional)</label>
+                </div>
+                <div class="input-group">
                     <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
                     <label for="message">Message</label>
                 </div>
@@ -510,6 +544,9 @@
     <div class="container footer-container">
         <div class="footer-brand">Kamil Salameh Photography</div>
         <div class="footer-socials">
+            <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="social-button" aria-label="Portfolio">
+                <span>View Portfolio ↗</span>
+            </a>
             <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="social-button" aria-label="Instagram Profile">
                 <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 <span>Follow on Instagram</span>

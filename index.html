@@ -130,19 +130,37 @@
             aspect-ratio: 1 / 1;
             overflow: hidden;
             border-radius: 4px;
-            background: #111111;
+            background: #ffffff; /* Replaced black with white to eliminate dark flickers */
             position: relative;
         }
 
+        /* SEAMLESS TWO-LAYER CROSSFADE FRAMEWORK */
         .polaroid-photo {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
+        }
+
+        .polaroid-photo::before,
+        .polaroid-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
             background-size: cover;
             background-position: center;
-            /* 14 IMAGES × 5 SECONDS = 70 SECONDS TOTAL */
-            animation: smoothPolaroidRotation 70s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Base static setup using stacked layers */
+        .polaroid-photo::before {
+            z-index: 1;
+            animation: polaroidLayerA 60s infinite ease-in-out;
+        }
+
+        .polaroid-photo::after {
+            z-index: 2;
+            animation: polaroidLayerB 60s infinite ease-in-out;
         }
 
         .polaroid-caption {
@@ -156,111 +174,68 @@
             text-transform: uppercase;
         }
 
-        /* 14-IMAGE SEQUENCE: ~5s DISPLAY + SMOOTH DISSOLVE PER FRAME */
-        @keyframes smoothPolaroidRotation {
+        /* DUAL-LAYER OVERLAPPING KEYFRAMES (60s TOTAL CYCLE) */
+        @keyframes polaroidLayerA {
             /* 1. logo.png */
-            0%, 5.64% {
-                background-image: url('images/logo.png');
-                opacity: 1;
-            }
+            0%, 6.5% { background-image: url('images/logo.png'); opacity: 1; }
             7.14% { opacity: 0; }
 
-            /* 2. luxembourg.jpg.avif */
-            7.15%, 12.78% {
-                background-image: url('images/luxembourg.jpg.avif');
-                opacity: 1;
-            }
-            14.28% { opacity: 0; }
-
             /* 3. france.jpg.avif */
-            14.29%, 19.92% {
-                background-image: url('images/france.jpg.avif');
-                opacity: 1;
-            }
-            21.42% { opacity: 0; }
-
-            /* 4. product-photography.jpg.avif */
-            21.43%, 27.07% {
-                background-image: url('images/product-photography.jpg.avif');
-                opacity: 1;
-            }
-            28.57% { opacity: 0; }
+            13.5%, 20.5% { background-image: url('images/france.jpg.avif'); opacity: 1; }
+            21.4% { opacity: 0; }
 
             /* 5. lebanon.jpg.avif */
-            28.58%, 34.21% {
-                background-image: url('images/lebanon.jpg.avif');
-                opacity: 1;
-            }
-            35.71% { opacity: 0; }
-
-            /* 6. kfardebian.jpg.avif */
-            35.72%, 41.35% {
-                background-image: url('images/kfardebian.jpg.avif');
-                opacity: 1;
-            }
-            42.85% { opacity: 0; }
+            27.5%, 35% { background-image: url('images/lebanon.jpg.avif'); opacity: 1; }
+            35.7% { opacity: 0; }
 
             /* 7. denmark.jpg.avif */
-            42.86%, 48.49% {
-                background-image: url('images/denmark.jpg.avif');
-                opacity: 1;
-            }
-            49.99% { opacity: 0; }
-
-            /* 8. norway.jpg.avif */
-            50.00%, 55.64% {
-                background-image: url('images/norway.jpg.avif');
-                opacity: 1;
-            }
-            57.14% { opacity: 0; }
+            42%, 49% { background-image: url('images/denmark.jpg.avif'); opacity: 1; }
+            50% { opacity: 0; }
 
             /* 9. belgium.jpg.avif */
-            57.15%, 62.78% {
-                background-image: url('images/belgium.jpg.avif');
-                opacity: 1;
-            }
-            64.28% { opacity: 0; }
-
-            /* 10. astrophotography.jpg.avif */
-            64.29%, 69.92% {
-                background-image: url('images/astrophotography.jpg.avif');
-                opacity: 1;
-            }
-            71.42% { opacity: 0; }
+            56.5%, 63.5% { background-image: url('images/belgium.jpg.avif'); opacity: 1; }
+            64.2% { opacity: 0; }
 
             /* 11. kenya.jpg.avif */
-            71.43%, 77.07% {
-                background-image: url('images/kenya.jpg.avif');
-                opacity: 1;
-            }
-            78.57% { opacity: 0; }
-
-            /* 12. lebanon-1.jpg.avif */
-            78.58%, 84.21% {
-                background-image: url('images/lebanon-1.jpg.avif');
-                opacity: 1;
-            }
-            85.71% { opacity: 0; }
+            70.5%, 78% { background-image: url('images/kenya.jpg.avif'); opacity: 1; }
+            78.5% { opacity: 0; }
 
             /* 13. lebanon-2.jpg.avif */
-            85.72%, 91.35% {
-                background-image: url('images/lebanon-2.jpg.avif');
-                opacity: 1;
-            }
-            92.85% { opacity: 0; }
+            85%, 92% { background-image: url('images/lebanon-2.jpg.avif'); opacity: 1; }
+            92.8% { opacity: 0; }
+
+            100% { background-image: url('images/logo.png'); opacity: 1; }
+        }
+
+        @keyframes polaroidLayerB {
+            0% { opacity: 0; }
+            /* 2. luxembourg.jpg.avif */
+            6.5%, 13.5% { background-image: url('images/luxembourg.jpg.avif'); opacity: 1; }
+            14.2% { opacity: 0; }
+
+            /* 4. product-photography.jpg.avif */
+            20.5%, 27.5% { background-image: url('images/product-photography.jpg.avif'); opacity: 1; }
+            28.5% { opacity: 0; }
+
+            /* 6. kfardebian.jpg.avif */
+            35%, 42% { background-image: url('images/kfardebian.jpg.avif'); opacity: 1; }
+            42.8% { opacity: 0; }
+
+            /* 8. norway.jpg.avif */
+            49%, 56.5% { background-image: url('images/norway.jpg.avif'); opacity: 1; }
+            57.1% { opacity: 0; }
+
+            /* 10. astrophotography.jpg.avif */
+            63.5%, 70.5% { background-image: url('images/astrophotography.jpg.avif'); opacity: 1; }
+            71.4% { opacity: 0; }
+
+            /* 12. lebanon-1.jpg.avif */
+            78%, 85% { background-image: url('images/lebanon-1.jpg.avif'); opacity: 1; }
+            85.7% { opacity: 0; }
 
             /* 14. lebanon-3.jpg.avif */
-            92.86%, 98.49% {
-                background-image: url('images/lebanon-3.jpg.avif');
-                opacity: 1;
-            }
-            99.99% { opacity: 0; }
-
-            /* Loop smooth back to 1 */
-            100% {
-                background-image: url('images/logo.png');
-                opacity: 1;
-            }
+            92%, 99.5% { background-image: url('images/lebanon-3.jpg.avif'); opacity: 1; }
+            100% { opacity: 0; }
         }
 
         /* RESPONSIVE LAYOUT */

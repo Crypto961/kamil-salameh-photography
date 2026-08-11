@@ -28,29 +28,27 @@
             width: 100%;
         }
 
-        /* FIXED DESKTOP HEADER CONTRAST & OVERLAP FIX */
+        /* ORIGINAL LUXURY GLASSMORPHIC HEADER STYLE */
         .site-header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: auto;
-            padding: 0.8rem 0;
             z-index: 1000;
-            background: rgba(15, 23, 30, 0.65);
-            backdrop-filter: blur(16px) saturate(160%);
-            -webkit-backdrop-filter: blur(16px) saturate(160%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
             transition: all 0.3s ease;
         }
 
-        /* HERO SECTION ADJUSTMENTS TO PREVENT HEADER OVERLAP */
+        /* HERO SECTION — PUSHED DOWN FOR CLEARANCE */
         .hero {
             position: relative;
             overflow: hidden;
-            padding-top: 180px;
-            padding-bottom: 5rem;
+            padding-top: 240px; /* Extra top clearance so title is completely clear of header */
+            padding-bottom: 6rem;
             min-height: 90vh;
             display: flex;
             align-items: center;
@@ -76,7 +74,7 @@
         .hero-polaroid-wrapper {
             position: absolute;
             right: 7%;
-            top: 50%;
+            top: 52%;
             transform: translateY(-45%);
             z-index: 100;
         }
@@ -140,7 +138,7 @@
             will-change: transform, opacity, left, top;
         }
 
-        /* FOLDED STACK POSITIONS (DEFAULT STATE) */
+        /* FOLDED STACK POSITIONS */
         .pola-card:nth-child(1) { transform: translate(-50%, -50%) rotate(-6deg); z-index: 4; left: 50%; top: 50%; }
         .pola-card:nth-child(2) { transform: translate(-50%, -50%) rotate(4deg); z-index: 3; left: 50%; top: 50%; }
         .pola-card:nth-child(3) { transform: translate(-50%, -50%) rotate(-2deg); z-index: 2; left: 50%; top: 50%; }
@@ -175,7 +173,7 @@
             color: #ffffff;
         }
 
-        /* DESKTOP UNFOLDED SPREAD POSITIONS (4 IN A ROW) */
+        /* DESKTOP UNFOLDED SPREAD POSITIONS */
         .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) {
             left: 12%;
             top: 50%;
@@ -246,19 +244,41 @@
             margin-top: 2px;
         }
 
-        /* FOOTER HIGH-CONTRAST BUTTON FIX */
+        /* STRICT SINGLE-ROW FOOTER FIX */
         .footer {
             background: #ffffff;
             color: #111111;
-            padding: 3rem 0;
+            padding: 2.5rem 0;
             border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
 
+        .footer-container {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            flex-wrap: nowrap !important;
+            gap: 1.5rem;
+        }
+
+        .footer-brand {
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
         .footer-socials {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
             gap: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .footer-copyright {
+            margin: 0;
+            white-space: nowrap;
+            font-size: 0.88rem;
+            color: #555555;
         }
 
         .social-button {
@@ -310,10 +330,7 @@
             flex-wrap: wrap;
         }
 
-        /* ==========================================================
-           RESPONSIVE ADJUSTMENTS FOR MOBILE & TABLETS
-           ========================================================== */
-
+        /* RESPONSIVE LAYOUTS */
         @media (max-width: 1024px) {
             .hero-polaroid-wrapper {
                 right: 3%;
@@ -328,7 +345,7 @@
             }
 
             .hero {
-                padding-top: 120px;
+                padding-top: 150px;
                 padding-bottom: 3rem;
                 min-height: auto;
                 text-align: left;
@@ -351,17 +368,27 @@
                 align-items: flex-start;
             }
 
+            /* FOOTER WRAPS ON MOBILE ONLY */
+            .footer-container {
+                flex-direction: column !important;
+                text-align: center;
+                gap: 1rem;
+            }
+            .footer-copyright {
+                white-space: normal;
+            }
+
             /* MOBILE POLAROID EXPANSION: AUTOMATIC 2-COLUMN GRID (2 PER ROW) */
             .polaroid-fan-wrapper {
                 min-height: 300px;
             }
 
             .polaroid-interactive-container.is-expanded .polaroid-fan-wrapper {
-                min-height: 540px; /* Expands height cleanly to accommodate 2 rows */
+                min-height: 540px;
             }
 
             .pola-card {
-                width: 160px; /* Dynamic size to fit 2 items comfortably on mobile */
+                width: 160px;
                 padding: 8px 8px 20px 8px;
             }
 
@@ -370,25 +397,21 @@
                 margin-top: 6px;
             }
 
-            /* TOP LEFT (CARD 1) */
             .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) {
                 left: 27%;
                 top: 26%;
                 transform: translate(-50%, -50%) rotate(-4deg) scale(1);
             }
-            /* TOP RIGHT (CARD 2) */
             .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) {
                 left: 73%;
                 top: 26%;
                 transform: translate(-50%, -50%) rotate(3deg) scale(1);
             }
-            /* BOTTOM LEFT (CARD 3) */
             .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) {
                 left: 27%;
                 top: 74%;
                 transform: translate(-50%, -50%) rotate(-2deg) scale(1);
             }
-            /* BOTTOM RIGHT (CARD 4) */
             .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) {
                 left: 73%;
                 top: 74%;
@@ -582,7 +605,7 @@
                 <span>Follow on Instagram</span>
             </a>
         </div>
-        <p>© 2026 Kamil Salameh Photography Studio. All Rights Reserved.</p>
+        <p class="footer-copyright">© 2026 Kamil Salameh Photography Studio. All Rights Reserved.</p>
     </div>
 </footer>
 

@@ -87,7 +87,7 @@
             z-index: 10;
         }
 
-        /* POLAROID OVERLAY CONTAINER */
+        /* REUSABLE POLAROID STACK STYLING */
         .polaroid-overlay-wrapper {
             position: absolute;
             right: 7%;
@@ -95,6 +95,13 @@
             transform: translateY(-50%);
             z-index: 100;
             pointer-events: auto;
+        }
+
+        .polaroid-inline-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2.5rem;
         }
 
         .polaroid-stack {
@@ -158,12 +165,34 @@
 
         .polaroid-photo::before {
             z-index: 1;
-            animation: polaroidLayerA 60s infinite ease-in-out;
         }
 
         .polaroid-photo::after {
             z-index: 2;
+        }
+
+        /* HERO POLAROID ANIMATIONS */
+        .hero-photo::before {
+            animation: polaroidLayerA 60s infinite ease-in-out;
+        }
+        .hero-photo::after {
             animation: polaroidLayerB 60s infinite ease-in-out;
+        }
+
+        /* PHILOSOPHY POLAROID ANIMATIONS (OFFSET BY 20s FOR VARIETY) */
+        .philosophy-photo::before {
+            animation: polaroidLayerA 60s infinite ease-in-out -20s;
+        }
+        .philosophy-photo::after {
+            animation: polaroidLayerB 60s infinite ease-in-out -20s;
+        }
+
+        /* FEATURED POLAROID ANIMATIONS (OFFSET BY 40s FOR VARIETY) */
+        .featured-photo::before {
+            animation: polaroidLayerA 60s infinite ease-in-out -40s;
+        }
+        .featured-photo::after {
+            animation: polaroidLayerB 60s infinite ease-in-out -40s;
         }
 
         .polaroid-caption {
@@ -175,6 +204,22 @@
             color: #1a1a1a;
             letter-spacing: 0.08em;
             text-transform: uppercase;
+        }
+
+        /* PHILOSOPHY LAYOUT ADJUSTMENT */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        /* FEATURED WORK LAYOUT ADJUSTMENT */
+        .featured-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
         }
 
         /* DUAL-LAYER OVERLAPPING KEYFRAMES (60s TOTAL CYCLE) */
@@ -238,6 +283,10 @@
                 display: flex;
                 justify-content: center;
             }
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
     </style>
 </head>
@@ -298,10 +347,10 @@
         <div class="polaroid-stack">
             <div class="polaroid-card">
                 <div class="polaroid-image-frame">
-                    <div class="polaroid-photo"></div>
+                    <div class="polaroid-photo hero-photo"></div>
                 </div>
                 <div class="polaroid-caption">
-                    Kamil Salameh Photography Portfolio
+                    Kamil Salameh Portfolio
                 </div>
             </div>
         </div>
@@ -310,16 +359,30 @@
 
 <!-- PHILOSOPHY SECTION -->
 <section class="intro section container" id="about">
-    <div class="section-header">
-        <p class="section-label">01 — Philosophy</p>
-        <h2 class="section-title">Photography is not about capturing moments. It is about preserving emotions.</h2>
+    <div class="philosophy-grid">
+        <div class="section-header">
+            <p class="section-label">01 — Philosophy</p>
+            <h2 class="section-title">Photography is not about capturing moments. It is about preserving emotions.</h2>
+        </div>
+        <div class="polaroid-inline-wrapper">
+            <div class="polaroid-stack">
+                <div class="polaroid-card">
+                    <div class="polaroid-image-frame">
+                        <div class="polaroid-photo philosophy-photo"></div>
+                    </div>
+                    <div class="polaroid-caption">
+                        Visual Stories
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- 3-IMAGE CAROUSEL SECTION -->
-<section class="gallery-section section" id="featured">
-    <div class="gallery-intro container">
-        <div class="gallery-header-flex">
+<!-- FEATURED WORK SECTION -->
+<section class="gallery-section section container" id="featured">
+    <div class="featured-layout">
+        <div class="gallery-header-flex" style="width: 100%;">
             <div>
                 <p class="section-label">02 — Featured Work</p>
                 <h2 class="section-title">Selected Highlights</h2>
@@ -328,42 +391,18 @@
                 Check Full Portfolio ↗
             </a>
         </div>
-    </div>
 
-    <!-- CAROUSEL TRACK -->
-    <div class="gallery-slider-wrapper">
-        <div class="gallery-track featured-carousel">
-            
-            <article class="gallery-slide">
-                <div class="slide-image-wrapper">
-                    <img src="images/luxembourg.jpg.avif" alt="luxembourg" loading="lazy">
+        <div class="polaroid-inline-wrapper">
+            <div class="polaroid-stack">
+                <div class="polaroid-card">
+                    <div class="polaroid-image-frame">
+                        <div class="polaroid-photo featured-photo"></div>
+                    </div>
+                    <div class="polaroid-caption">
+                        Featured Gallery
+                    </div>
                 </div>
-                <div class="gallery-overlay">
-                    <p class="slide-category">Landscape Photography</p>
-                    <h3 class="slide-title">Lebanon</h3>
-                </div>
-            </article>
-
-            <article class="gallery-slide">
-                <div class="slide-image-wrapper">
-                    <img src="images/france.jpg.avif" alt="France" loading="lazy">
-                </div>
-                <div class="gallery-overlay">
-                    <p class="slide-category">Location</p>
-                    <h3 class="slide-title">France</h3>
-                </div>
-            </article>
-
-            <article class="gallery-slide">
-                <div class="slide-image-wrapper">
-                    <img src="images/product-photography.jpg.avif" alt="Product Photography" loading="lazy">
-                </div>
-                <div class="gallery-overlay">
-                    <p class="slide-category">Commercial</p>
-                    <h3 class="slide-title">Product Photography</h3>
-                </div>
-            </article>
-
+            </div>
         </div>
     </div>
 </section>

@@ -18,6 +18,21 @@
 
     <link rel="stylesheet" href="style.css">
     <style>
+        /* HEADER GLASSMORPHISM & VISIBILITY FIX */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(18, 24, 27, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            transition: background 0.3s ease;
+        }
+
         .social-button {
             display: inline-flex;
             align-items: center;
@@ -56,6 +71,7 @@
         .hero {
             position: relative;
             overflow: hidden;
+            padding-top: 100px; /* Offset for fixed header */
         }
 
         .hero-content {
@@ -67,7 +83,7 @@
         .polaroid-overlay-wrapper {
             position: absolute;
             right: 7%;
-            top: 50%;
+            top: 52%;
             transform: translateY(-50%);
             z-index: 100;
             pointer-events: auto;
@@ -122,7 +138,7 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            animation: rotatePolaroidPhotos 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            animation: rotateAllPortfolioPhotos 24s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .polaroid-caption {
@@ -136,33 +152,78 @@
             text-transform: uppercase;
         }
 
-        /* KEYFRAME ANIMATIONS FOR ROTATING IMAGES */
-        @keyframes rotatePolaroidPhotos {
-            0%, 28% {
+        /* FULL PORTFOLIO FOLDER IMAGE ROTATION KEYFRAMES (8 IMAGES) */
+        @keyframes rotateAllPortfolioPhotos {
+            0%, 10.5% {
                 background-image: url('images/luxembourg.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            31% {
-                opacity: 0.15;
+            12% {
+                opacity: 0.1;
                 transform: scale(1.03);
             }
-            33.33%, 61% {
+            12.5%, 23% {
                 background-image: url('images/france.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            64% {
-                opacity: 0.15;
+            24.5% {
+                opacity: 0.1;
                 transform: scale(1.03);
             }
-            66.66%, 95% {
+            25%, 35.5% {
                 background-image: url('images/product-photography.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            98% {
-                opacity: 0.15;
+            37% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            37.5%, 48% {
+                background-image: url('images/hero-bg.jpg');
+                opacity: 1;
+                transform: scale(1);
+            }
+            49.5% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            50%, 60.5% {
+                background-image: url('images/portrait.jpg');
+                opacity: 1;
+                transform: scale(1);
+            }
+            62% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            62.5%, 73% {
+                background-image: url('images/astro.jpg');
+                opacity: 1;
+                transform: scale(1);
+            }
+            74.5% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            75%, 85.5% {
+                background-image: url('images/architecture.jpg');
+                opacity: 1;
+                transform: scale(1);
+            }
+            87% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            87.5%, 98% {
+                background-image: url('images/street.jpg');
+                opacity: 1;
+                transform: scale(1);
+            }
+            99.5% {
+                opacity: 0.1;
                 transform: scale(1.03);
             }
             100% {
@@ -246,7 +307,7 @@
                     <div class="polaroid-photo"></div>
                 </div>
                 <div class="polaroid-caption">
-                    Kamil Salameh Photography Portfolio
+                    Kamil Salameh Portfolio
                 </div>
             </div>
         </div>

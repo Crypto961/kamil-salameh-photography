@@ -75,11 +75,15 @@
             margin-top: 0.5rem;
         }
 
-        /* HERO SECTION OVERLAY LAYOUT */
+        /* HERO SECTION LAYOUT FIX */
         .hero {
             position: relative;
             overflow: hidden;
-            padding-top: 100px;
+            padding-top: 120px;
+            padding-bottom: 6rem; /* Ensures hero height fully encapsulates action buttons */
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
         }
 
         .hero-content {
@@ -87,11 +91,21 @@
             z-index: 10;
         }
 
+        .hero-actions {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            position: relative;
+            z-index: 15;
+        }
+
         /* REUSABLE POLAROID STACK STYLING */
         .polaroid-overlay-wrapper {
             position: absolute;
             right: 7%;
-            top: 52%;
+            top: 50%;
             transform: translateY(-50%);
             z-index: 100;
             pointer-events: auto;
@@ -179,7 +193,7 @@
             animation: polaroidLayerB 60s infinite ease-in-out;
         }
 
-        /* PHILOSOPHY POLAROID ANIMATIONS (OFFSET BY 20s FOR VARIETY) */
+        /* PHILOSOPHY POLAROID ANIMATIONS */
         .philosophy-photo::before {
             animation: polaroidLayerA 60s infinite ease-in-out -20s;
         }
@@ -187,7 +201,7 @@
             animation: polaroidLayerB 60s infinite ease-in-out -20s;
         }
 
-        /* FEATURED POLAROID ANIMATIONS (OFFSET BY 40s FOR VARIETY) */
+        /* FEATURED POLAROID ANIMATIONS */
         .featured-photo::before {
             animation: polaroidLayerA 60s infinite ease-in-out -40s;
         }
@@ -206,7 +220,7 @@
             text-transform: uppercase;
         }
 
-        /* PHILOSOPHY LAYOUT ADJUSTMENT */
+        /* PHILOSOPHY LAYOUT */
         .philosophy-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -214,7 +228,7 @@
             align-items: center;
         }
 
-        /* FEATURED WORK LAYOUT ADJUSTMENT */
+        /* FEATURED WORK LAYOUT */
         .featured-layout {
             display: flex;
             flex-direction: column;
@@ -274,6 +288,9 @@
 
         /* RESPONSIVE LAYOUT */
         @media (max-width: 1100px) {
+            .hero {
+                padding-bottom: 4rem;
+            }
             .polaroid-overlay-wrapper {
                 position: relative;
                 right: auto;

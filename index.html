@@ -52,99 +52,153 @@
             margin-top: 0.5rem;
         }
 
-        /* Hero Layout Grid for Animated Logo Placement */
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            align-items: center;
-            gap: 2rem;
-            width: 100%;
+        /* OVERLAY APERTURE LENS ASSEMBLY - HIGH PRIORITY FRONT Z-INDEX */
+        .hero {
             position: relative;
-            z-index: 2;
-        }
-
-        /* Animated Lens Container */
-        .hero-lens-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        .animated-logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .aperture-wrapper {
-            position: relative;
-            width: min(280px, 70vw);
-            height: min(280px, 70vw);
-            border-radius: 50%;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.15);
         }
 
-        .lens-image-display {
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .lens-overlay-wrapper {
             position: absolute;
-            top: 0;
-            left: 0;
+            right: 6%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100; /* Placed at the absolute front */
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lens-camera-container {
+            position: relative;
+            width: clamp(240px, 22vw, 320px);
+            height: clamp(240px, 22vw, 320px);
+            border-radius: 50%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            background: radial-gradient(circle, #1a2328 0%, #0a0e10 100%);
+            padding: 10px;
+            box-sizing: border-box;
+            backdrop-filter: blur(8px);
+        }
+
+        .lens-outer-ring {
+            position: relative;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
             border-radius: 50%;
-            z-index: 1;
-            animation: swapImages 12s infinite step-end;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .aperture-svg {
+        /* Rotating Photo Frame inside Lens */
+        .lens-photo-slide {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            animation: rotateLensPhotos 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Smooth Aperture Shutter Animation Layer */
+        .lens-aperture-svg {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             z-index: 2;
             pointer-events: none;
+            transform-origin: center center;
+            animation: apertureShutterAction 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .aperture-blade {
-            fill: #1a2328;
-            transform-origin: center;
-            animation: apertureShutter 4s infinite ease-in-out;
+        .aperture-blade-path {
+            fill: #12181b;
+            stroke: rgba(255, 255, 255, 0.12);
+            stroke-width: 0.75;
         }
 
-        @keyframes apertureShutter {
-            0%, 100% {
+        /* Realistic Glass Reflection Overlay */
+        .lens-glass-reflection {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            z-index: 3;
+            pointer-events: none;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.03) 40%, transparent 60%);
+            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.6);
+        }
+
+        /* KEYFRAME ANIMATIONS */
+        @keyframes rotateLensPhotos {
+            0%, 28% {
+                background-image: url('images/luxembourg.jpg.avif');
                 transform: scale(1);
             }
-            40%, 60% {
-                transform: scale(0.32) rotate(18deg);
-            }
-        }
-
-        @keyframes swapImages {
-            0% {
-                background-image: url('images/luxembourg.jpg.avif');
-            }
-            33.33% {
+            33.33%, 61% {
                 background-image: url('images/france.jpg.avif');
+                transform: scale(1.03);
             }
-            66.66% {
+            66.66%, 95% {
                 background-image: url('images/product-photography.jpg.avif');
+                transform: scale(1);
+            }
+            100% {
+                background-image: url('images/luxembourg.jpg.avif');
+                transform: scale(1);
             }
         }
 
-        @media (max-width: 900px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
+        @keyframes apertureShutterAction {
+            0%, 25% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
             }
-            .hero-lens-wrapper {
-                order: -1;
+            30%, 33.33% {
+                transform: scale(2.8) rotate(45deg);
+                opacity: 0.15;
+            }
+            38%, 58% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            63%, 66.66% {
+                transform: scale(2.8) rotate(45deg);
+                opacity: 0.15;
+            }
+            71%, 91% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            96%, 100% {
+                transform: scale(2.8) rotate(45deg);
+                opacity: 0.15;
+            }
+        }
+
+        /* Mobile / Tablet Responsive Fallback */
+        @media (max-width: 1100px) {
+            .lens-overlay-wrapper {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin: 2.5rem auto 0 auto;
             }
         }
     </style>
@@ -176,49 +230,50 @@
     </div>
     <div class="hero-gradient"></div>
 
-    <div class="hero-content container hero-grid">
-        <!-- Left Side: Content -->
-        <div class="hero-text-block">
-            <p class="section-label">Luxury Photography Studio</p>
-            <h1 class="hero-title">
-                <span>Stories</span>
-                <span>Frozen</span>
-                <span>In</span>
-                <span>Time</span>
-            </h1>
-            <p class="hero-description">
-                Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architecture, and fine art, creating cinematic visual stories across Lebanon and around the world.
-            </p>
+    <!-- Original Hero Text Block (Untouched & Fully Visible) -->
+    <div class="hero-content container">
+        <p class="section-label">Luxury Photography Studio</p>
+        <h1 class="hero-title">
+            <span>Stories</span>
+            <span>Frozen</span>
+            <span>In</span>
+            <span>Time</span>
+        </h1>
+        <p class="hero-description">
+            Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architecture, and fine art, creating cinematic visual stories across Lebanon and around the world.
+        </p>
 
-            <div class="hero-actions">
-                <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
-                    Check Portfolio ↗
-                </a>
-                <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="social-button">
-                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                    Instagram
-                </a>
-                <a href="#contact" class="text-button">Get In Touch</a>
-            </div>
+        <div class="hero-actions">
+            <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
+                Check Portfolio ↗
+            </a>
+            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="social-button">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                Instagram
+            </a>
+            <a href="#contact" class="text-button">Get In Touch</a>
         </div>
+    </div>
 
-        <!-- Right Side: Animated Shutter Lens -->
-        <div class="hero-lens-wrapper">
-            <div class="animated-logo-container">
-                <div class="aperture-wrapper">
-                    <!-- Dynamic Rotating Image Frame -->
-                    <div class="lens-image-display"></div>
+    <!-- High-Z-Index Overlay Animated Aperture Lens -->
+    <div class="lens-overlay-wrapper">
+        <div class="lens-camera-container">
+            <div class="lens-outer-ring">
+                <!-- Rotating Photo Layer -->
+                <div class="lens-photo-slide"></div>
 
-                    <!-- Animated Aperture Vector Blades -->
-                    <svg class="aperture-svg" viewBox="0 0 100 100">
-                        <path class="aperture-blade" d="M50 0 C65 0 78 7 86 18 L50 42 L30 15 Z" />
-                        <path class="aperture-blade" style="animation-delay: 0.05s;" d="M86 18 C95 30 98 46 95 60 L57 48 L78 18 Z" />
-                        <path class="aperture-blade" style="animation-delay: 0.1s;" d="M95 60 C91 76 80 88 66 95 L48 57 L85 60 Z" />
-                        <path class="aperture-blade" style="animation-delay: 0.15s;" d="M66 95 C51 100 35 97 22 88 L42 50 L64 86 Z" />
-                        <path class="aperture-blade" style="animation-delay: 0.2s;" d="M22 88 C9 77 2 62 1 47 L43 43 L18 80 Z" />
-                        <path class="aperture-blade" style="animation-delay: 0.25s;" d="M1 47 C1 31 9 16 22 8 L50 38 L8 40 Z" />
-                    </svg>
-                </div>
+                <!-- High-Precision SVG Mechanical Diaphragm -->
+                <svg class="lens-aperture-svg" viewBox="0 0 100 100">
+                    <path class="aperture-blade-path" d="M50 0 L100 20 L50 42 L25 15 Z" />
+                    <path class="aperture-blade-path" d="M100 20 L90 75 L55 48 L78 18 Z" />
+                    <path class="aperture-blade-path" d="M90 75 L45 100 L48 56 L85 60 Z" />
+                    <path class="aperture-blade-path" d="M45 100 L0 80 L50 58 L20 85 Z" />
+                    <path class="aperture-blade-path" d="M0 80 L10 25 L45 52 L22 80 Z" />
+                    <path class="aperture-blade-path" d="M10 25 L50 0 L52 44 L15 40 Z" />
+                </svg>
+
+                <!-- Realistic Glass Reflection Ring -->
+                <div class="lens-glass-reflection"></div>
             </div>
         </div>
     </div>

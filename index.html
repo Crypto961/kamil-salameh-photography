@@ -7,6 +7,10 @@
     <meta name="description" content="Kamil Salameh Photography — Lebanese photographer specializing in landscape photography, astrophotography, architecture and fine art across Lebanon and international destinations.">
     <meta name="theme-color" content="#1F4D68">
 
+    <!-- Favicon / Tab Logo -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
     <!-- Fonts & Libraries -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,7 +134,7 @@
             aspect-ratio: 1 / 1;
             overflow: hidden;
             border-radius: 4px;
-            background: #ffffff; /* Replaced black with white to eliminate dark flickers */
+            background: #ffffff;
             position: relative;
         }
 
@@ -152,7 +156,6 @@
             transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Base static setup using stacked layers */
         .polaroid-photo::before {
             z-index: 1;
             animation: polaroidLayerA 60s infinite ease-in-out;
@@ -176,31 +179,24 @@
 
         /* DUAL-LAYER OVERLAPPING KEYFRAMES (60s TOTAL CYCLE) */
         @keyframes polaroidLayerA {
-            /* 1. logo.png */
             0%, 6.5% { background-image: url('images/logo.png'); opacity: 1; }
             7.14% { opacity: 0; }
 
-            /* 3. france.jpg.avif */
             13.5%, 20.5% { background-image: url('images/france.jpg.avif'); opacity: 1; }
             21.4% { opacity: 0; }
 
-            /* 5. lebanon.jpg.avif */
             27.5%, 35% { background-image: url('images/lebanon.jpg.avif'); opacity: 1; }
             35.7% { opacity: 0; }
 
-            /* 7. denmark.jpg.avif */
             42%, 49% { background-image: url('images/denmark.jpg.avif'); opacity: 1; }
             50% { opacity: 0; }
 
-            /* 9. belgium.jpg.avif */
             56.5%, 63.5% { background-image: url('images/belgium.jpg.avif'); opacity: 1; }
             64.2% { opacity: 0; }
 
-            /* 11. kenya.jpg.avif */
             70.5%, 78% { background-image: url('images/kenya.jpg.avif'); opacity: 1; }
             78.5% { opacity: 0; }
 
-            /* 13. lebanon-2.jpg.avif */
             85%, 92% { background-image: url('images/lebanon-2.jpg.avif'); opacity: 1; }
             92.8% { opacity: 0; }
 
@@ -209,31 +205,24 @@
 
         @keyframes polaroidLayerB {
             0% { opacity: 0; }
-            /* 2. luxembourg.jpg.avif */
             6.5%, 13.5% { background-image: url('images/luxembourg.jpg.avif'); opacity: 1; }
             14.2% { opacity: 0; }
 
-            /* 4. product-photography.jpg.avif */
             20.5%, 27.5% { background-image: url('images/product-photography.jpg.avif'); opacity: 1; }
             28.5% { opacity: 0; }
 
-            /* 6. kfardebian.jpg.avif */
             35%, 42% { background-image: url('images/kfardebian.jpg.avif'); opacity: 1; }
             42.8% { opacity: 0; }
 
-            /* 8. norway.jpg.avif */
             49%, 56.5% { background-image: url('images/norway.jpg.avif'); opacity: 1; }
             57.1% { opacity: 0; }
 
-            /* 10. astrophotography.jpg.avif */
             63.5%, 70.5% { background-image: url('images/astrophotography.jpg.avif'); opacity: 1; }
             71.4% { opacity: 0; }
 
-            /* 12. lebanon-1.jpg.avif */
             78%, 85% { background-image: url('images/lebanon-1.jpg.avif'); opacity: 1; }
             85.7% { opacity: 0; }
 
-            /* 14. lebanon-3.jpg.avif */
             92%, 99.5% { background-image: url('images/lebanon-3.jpg.avif'); opacity: 1; }
             100% { opacity: 0; }
         }
@@ -312,7 +301,7 @@
                     <div class="polaroid-photo"></div>
                 </div>
                 <div class="polaroid-caption">
-                    Kamil Salameh Photography Portfolio
+                    Kamil Salameh Portfolio
                 </div>
             </div>
         </div>

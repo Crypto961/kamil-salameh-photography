@@ -75,12 +75,12 @@
             margin-top: 0.5rem;
         }
 
-        /* HERO SECTION LAYOUT FIX */
+        /* HERO SECTION */
         .hero {
             position: relative;
             overflow: hidden;
             padding-top: 120px;
-            padding-bottom: 6rem; /* Ensures hero height fully encapsulates action buttons */
+            padding-bottom: 6rem;
             min-height: 85vh;
             display: flex;
             align-items: center;
@@ -101,29 +101,164 @@
             z-index: 15;
         }
 
-        /* REUSABLE POLAROID STACK STYLING */
-        .polaroid-overlay-wrapper {
+        /* HERO SINGLE POLAROID OVERLAY */
+        .hero-polaroid-wrapper {
             position: absolute;
             right: 7%;
             top: 50%;
             transform: translateY(-50%);
             z-index: 100;
-            pointer-events: auto;
         }
 
-        .polaroid-inline-wrapper {
+        /* INTERACTIVE POLAROID FAN / UNFOLD CONTAINER */
+        .polaroid-interactive-container {
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 2.5rem;
+            padding: 3rem 0;
+            cursor: pointer;
+            perspective: 1200px;
         }
 
-        .polaroid-stack {
+        .polaroid-fan-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 380px;
+            width: 100%;
+            max-width: 1100px;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* INTERACTIVE CARD STYLING */
+        .pola-card {
+            position: absolute;
+            width: 240px;
+            background: #ffffff;
+            padding: 12px 12px 28px 12px;
+            border-radius: 8px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.12);
+            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+            user-select: none;
+            will-change: transform, opacity;
+        }
+
+        /* FOLDED STACK POSITIONS (DEFAULT STATE) */
+        .pola-card:nth-child(1) { transform: translate(-50%, -50%) rotate(-6deg); z-index: 4; left: 50%; top: 50%; }
+        .pola-card:nth-child(2) { transform: translate(-50%, -50%) rotate(4deg); z-index: 3; left: 50%; top: 50%; }
+        .pola-card:nth-child(3) { transform: translate(-50%, -50%) rotate(-2deg); z-index: 2; left: 50%; top: 50%; }
+        .pola-card:nth-child(4) { transform: translate(-50%, -50%) rotate(8deg); z-index: 1; left: 50%; top: 50%; }
+
+        /* HINT BADGE FOR CLICK INTERACTION */
+        .polaroid-interactive-container::after {
+            content: '✦ Click Stack to Unfold';
+            position: absolute;
+            bottom: 0px;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .polaroid-interactive-container:hover::after {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .polaroid-interactive-container.is-expanded::after {
+            content: '✕ Click to Collapse';
+            background: rgba(0, 0, 0, 0.4);
+            color: #ffffff;
+        }
+
+        /* UNFOLDED SPREAD POSITIONS (EXPANDED STATE) */
+        .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) {
+            left: 12%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-4deg) scale(1.02);
+            z-index: 10;
+        }
+        .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) {
+            left: 37%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(2deg) scale(1.02);
+            z-index: 11;
+        }
+        .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) {
+            left: 63%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-2deg) scale(1.02);
+            z-index: 12;
+        }
+        .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) {
+            left: 88%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(5deg) scale(1.02);
+            z-index: 13;
+        }
+
+        /* INDIVIDUAL CARD HOVER EFFECT WHEN EXPANDED */
+        .polaroid-interactive-container.is-expanded .pola-card:hover {
+            transform: translate(-50%, -60%) rotate(0deg) scale(1.12) !important;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            z-index: 20 !important;
+        }
+
+        .pola-frame {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 4px;
+            background: #111111;
+        }
+
+        .pola-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .pola-card:hover .pola-frame img {
+            transform: scale(1.06);
+        }
+
+        .pola-caption {
+            margin-top: 12px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .pola-subcaption {
+            display: block;
+            font-size: 0.65rem;
+            color: #777777;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        /* HERO SINGLE POLAROID */
+        .hero-pola-stack {
             position: relative;
             width: clamp(260px, 22vw, 320px);
         }
-
-        .polaroid-stack::before {
+        .hero-pola-stack::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -133,176 +268,47 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
-
-        .polaroid-card {
+        .hero-pola-card {
             position: relative;
             z-index: 2;
             background: #ffffff;
             padding: 14px 14px 38px 14px;
             border-radius: 8px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
             transform: rotate(3deg);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .polaroid-card:hover {
-            transform: rotate(0deg) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-        }
-
-        .polaroid-image-frame {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            border-radius: 4px;
-            background: #ffffff;
-            position: relative;
-        }
-
-        /* SEAMLESS TWO-LAYER CROSSFADE FRAMEWORK */
-        .polaroid-photo {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .polaroid-photo::before,
-        .polaroid-photo::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .polaroid-photo::before {
-            z-index: 1;
-        }
-
-        .polaroid-photo::after {
-            z-index: 2;
-        }
-
-        /* HERO POLAROID ANIMATIONS */
-        .hero-photo::before {
-            animation: polaroidLayerA 60s infinite ease-in-out;
-        }
-        .hero-photo::after {
-            animation: polaroidLayerB 60s infinite ease-in-out;
-        }
-
-        /* PHILOSOPHY POLAROID ANIMATIONS */
-        .philosophy-photo::before {
-            animation: polaroidLayerA 60s infinite ease-in-out -20s;
-        }
-        .philosophy-photo::after {
-            animation: polaroidLayerB 60s infinite ease-in-out -20s;
-        }
-
-        /* FEATURED POLAROID ANIMATIONS */
-        .featured-photo::before {
-            animation: polaroidLayerA 60s infinite ease-in-out -40s;
-        }
-        .featured-photo::after {
-            animation: polaroidLayerB 60s infinite ease-in-out -40s;
-        }
-
-        .polaroid-caption {
-            margin-top: 14px;
-            text-align: center;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        /* PHILOSOPHY LAYOUT */
-        .philosophy-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+        /* SECTION FLEX LAYOUTS */
+        .philosophy-vertical-layout {
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            gap: 2rem;
+            text-align: center;
         }
 
-        /* FEATURED WORK LAYOUT */
-        .featured-layout {
+        .featured-vertical-layout {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2rem;
         }
 
-        /* DUAL-LAYER OVERLAPPING KEYFRAMES (60s TOTAL CYCLE) */
-        @keyframes polaroidLayerA {
-            0%, 6.5% { background-image: url('images/logo.png'); opacity: 1; }
-            7.14% { opacity: 0; }
-
-            13.5%, 20.5% { background-image: url('images/france.jpg.avif'); opacity: 1; }
-            21.4% { opacity: 0; }
-
-            27.5%, 35% { background-image: url('images/lebanon.jpg.avif'); opacity: 1; }
-            35.7% { opacity: 0; }
-
-            42%, 49% { background-image: url('images/denmark.jpg.avif'); opacity: 1; }
-            50% { opacity: 0; }
-
-            56.5%, 63.5% { background-image: url('images/belgium.jpg.avif'); opacity: 1; }
-            64.2% { opacity: 0; }
-
-            70.5%, 78% { background-image: url('images/kenya.jpg.avif'); opacity: 1; }
-            78.5% { opacity: 0; }
-
-            85%, 92% { background-image: url('images/lebanon-2.jpg.avif'); opacity: 1; }
-            92.8% { opacity: 0; }
-
-            100% { background-image: url('images/logo.png'); opacity: 1; }
+        /* RESPONSIVE DESIGN FOR UNFOLDED POLAROIDS */
+        @media (max-width: 992px) {
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) { left: 20%; top: 30%; }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) { left: 75%; top: 30%; }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) { left: 20%; top: 75%; }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) { left: 75%; top: 75%; }
+            
+            .polaroid-fan-wrapper {
+                min-height: 520px;
+            }
         }
 
-        @keyframes polaroidLayerB {
-            0% { opacity: 0; }
-            6.5%, 13.5% { background-image: url('images/luxembourg.jpg.avif'); opacity: 1; }
-            14.2% { opacity: 0; }
-
-            20.5%, 27.5% { background-image: url('images/product-photography.jpg.avif'); opacity: 1; }
-            28.5% { opacity: 0; }
-
-            35%, 42% { background-image: url('images/kfardebian.jpg.avif'); opacity: 1; }
-            42.8% { opacity: 0; }
-
-            49%, 56.5% { background-image: url('images/norway.jpg.avif'); opacity: 1; }
-            57.1% { opacity: 0; }
-
-            63.5%, 70.5% { background-image: url('images/astrophotography.jpg.avif'); opacity: 1; }
-            71.4% { opacity: 0; }
-
-            78%, 85% { background-image: url('images/lebanon-1.jpg.avif'); opacity: 1; }
-            85.7% { opacity: 0; }
-
-            92%, 99.5% { background-image: url('images/lebanon-3.jpg.avif'); opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        /* RESPONSIVE LAYOUT */
-        @media (max-width: 1100px) {
-            .hero {
-                padding-bottom: 4rem;
-            }
-            .polaroid-overlay-wrapper {
-                position: relative;
-                right: auto;
-                top: auto;
-                transform: none;
-                margin: 2.5rem auto 0 auto;
-                display: flex;
-                justify-content: center;
-            }
-            .philosophy-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+        @media (max-width: 600px) {
+            .pola-card {
+                width: 180px;
             }
         }
     </style>
@@ -334,7 +340,6 @@
     </div>
     <div class="hero-gradient"></div>
 
-    <!-- Hero Text Block -->
     <div class="hero-content container">
         <p class="section-label">Luxury Photography Studio</p>
         <h1 class="hero-title">
@@ -359,14 +364,14 @@
         </div>
     </div>
 
-    <!-- POLAROID CARD STACK OVERLAY -->
-    <div class="polaroid-overlay-wrapper">
-        <div class="polaroid-stack">
-            <div class="polaroid-card">
-                <div class="polaroid-image-frame">
-                    <div class="polaroid-photo hero-photo"></div>
+    <!-- HERO FIXED STACK -->
+    <div class="hero-polaroid-wrapper">
+        <div class="hero-pola-stack">
+            <div class="hero-pola-card">
+                <div class="pola-frame">
+                    <img src="images/logo.png" alt="Kamil Salameh">
                 </div>
-                <div class="polaroid-caption">
+                <div class="pola-caption">
                     Kamil Salameh Portfolio
                 </div>
             </div>
@@ -374,31 +379,40 @@
     </div>
 </section>
 
-<!-- PHILOSOPHY SECTION -->
+<!-- 01 — PHILOSOPHY SECTION (INTERACTIVE UNFOLDING POLAROIDS) -->
 <section class="intro section container" id="about">
-    <div class="philosophy-grid">
-        <div class="section-header">
+    <div class="philosophy-vertical-layout">
+        <div class="section-header" style="max-width: 800px;">
             <p class="section-label">01 — Philosophy</p>
             <h2 class="section-title">Photography is not about capturing moments. It is about preserving emotions.</h2>
         </div>
-        <div class="polaroid-inline-wrapper">
-            <div class="polaroid-stack">
-                <div class="polaroid-card">
-                    <div class="polaroid-image-frame">
-                        <div class="polaroid-photo philosophy-photo"></div>
-                    </div>
-                    <div class="polaroid-caption">
-                        Visual Stories
-                    </div>
+
+        <div class="polaroid-interactive-container" onclick="togglePolaroidSpread(this)">
+            <div class="polaroid-fan-wrapper">
+                <div class="pola-card">
+                    <div class="pola-frame"><img src="images/lebanon.jpg.avif" alt="Lebanon Landscape"></div>
+                    <div class="pola-caption">Cedars of God<span class="pola-subcaption">Bcharre, Lebanon</span></div>
+                </div>
+                <div class="pola-card">
+                    <div class="pola-frame"><img src="images/france.jpg.avif" alt="France Architecture"></div>
+                    <div class="pola-caption">Parisian Light<span class="pola-subcaption">Paris, France</span></div>
+                </div>
+                <div class="pola-card">
+                    <div class="pola-frame"><img src="images/astrophotography.jpg.avif" alt="Astrophotography"></div>
+                    <div class="pola-caption">Night Skies<span class="pola-subcaption">Kfardebian, Lebanon</span></div>
+                </div>
+                <div class="pola-card">
+                    <div class="pola-frame"><img src="images/norway.jpg.avif" alt="Norway Fjords"></div>
+                    <div class="pola-caption">Nordic Silence<span class="pola-subcaption">Fjords, Norway</span></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- FEATURED WORK SECTION -->
+<!-- 02 — FEATURED WORK SECTION (INTERACTIVE UNFOLDING POLAROIDS) -->
 <section class="gallery-section section container" id="featured">
-    <div class="featured-layout">
+    <div class="featured-vertical-layout">
         <div class="gallery-header-flex" style="width: 100%;">
             <div>
                 <p class="section-label">02 — Featured Work</p>
@@ -409,15 +423,23 @@
             </a>
         </div>
 
-        <div class="polaroid-inline-wrapper">
-            <div class="polaroid-stack">
-                <div class="polaroid-card">
-                    <div class="polaroid-image-frame">
-                        <div class="polaroid-photo featured-photo"></div>
-                    </div>
-                    <div class="polaroid-caption">
-                        Featured Gallery
-                    </div>
+        <div class="polaroid-interactive-container" onclick="togglePolaroidSpread(this)">
+            <div class="polaroid-fan-wrapper">
+                <div class="pola-card">
+                    <div class="pola-frame"><img src="images/kenya.jpg.avif" alt="Kenya Wildlife"></div>
+                    <div class="pola-caption">Wild Horizon<span class="pola-subcaption">Masai Mara, Kenya</span></div>
+                </div>
+                <div class="pola-card">
+                    <div class="pola-frame"><img src="images/belgium.jpg.avif" alt="Belgium Streets"></div>
+                    <div class="pola-caption">Gothic Alleyways<span class="pola-subcaption">Bruges, Belgium</span></div>
+                </div>
+                <div class="pola-card">
+                    <div class="pola-frame"><img src="images/denmark.jpg.avif" alt="Denmark Architecture"></div>
+                    <div class="pola-caption">Nordic Lines<span class="pola-subcaption">Copenhagen, Denmark</span></div>
+                </div>
+                <div class="pola-card">
+                    <div class="pola-frame"><img src="images/product-photography.jpg.avif" alt="Fine Art Still Life"></div>
+                    <div class="pola-caption">Fine Art Details<span class="pola-subcaption">Studio Collection</span></div>
                 </div>
             </div>
         </div>
@@ -463,6 +485,12 @@
         <p>© 2026 Kamil Salameh Photography Studio. All Rights Reserved.</p>
     </div>
 </footer>
+
+<script>
+    function togglePolaroidSpread(container) {
+        container.classList.toggle('is-expanded');
+    }
+</script>
 
 </body>
 </html>

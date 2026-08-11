@@ -22,6 +22,12 @@
 
     <link rel="stylesheet" href="style.css">
     <style>
+        /* BASE & RESET PREVENTIONS */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         /* LUXURY GLASSMORPHIC HEADER STYLE */
         .site-header {
             position: fixed;
@@ -40,6 +46,7 @@
         .social-button {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.6rem;
             padding: 0.75rem 1.4rem;
             border-radius: 50px;
@@ -79,8 +86,8 @@
         .hero {
             position: relative;
             overflow: hidden;
-            padding-top: 120px;
-            padding-bottom: 6rem;
+            padding-top: 140px;
+            padding-bottom: 5rem;
             min-height: 85vh;
             display: flex;
             align-items: center;
@@ -89,6 +96,7 @@
         .hero-content {
             position: relative;
             z-index: 10;
+            max-width: 650px;
         }
 
         .hero-actions {
@@ -96,7 +104,7 @@
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1.25rem;
+            gap: 1rem;
             position: relative;
             z-index: 15;
         }
@@ -116,9 +124,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 3rem 0;
+            padding: 2.5rem 0;
             cursor: pointer;
             perspective: 1200px;
+            position: relative;
         }
 
         .polaroid-fan-wrapper {
@@ -153,13 +162,13 @@
 
         /* HINT BADGE FOR CLICK INTERACTION */
         .polaroid-interactive-container::after {
-            content: '✦ Click Stack to Unfold';
+            content: '✦ Tap / Click Stack to Unfold';
             position: absolute;
-            bottom: 0px;
+            bottom: -10px;
             font-size: 0.75rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.7);
             background: rgba(255, 255, 255, 0.08);
             padding: 6px 14px;
             border-radius: 20px;
@@ -176,12 +185,12 @@
         }
 
         .polaroid-interactive-container.is-expanded::after {
-            content: '✕ Click to Collapse';
-            background: rgba(0, 0, 0, 0.4);
+            content: '✕ Tap / Click to Collapse';
+            background: rgba(0, 0, 0, 0.5);
             color: #ffffff;
         }
 
-        /* UNFOLDED SPREAD POSITIONS (EXPANDED STATE) */
+        /* DESKTOP UNFOLDED SPREAD POSITIONS */
         .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) {
             left: 12%;
             top: 50%;
@@ -207,7 +216,6 @@
             z-index: 13;
         }
 
-        /* INDIVIDUAL CARD HOVER EFFECT WHEN EXPANDED */
         .polaroid-interactive-container.is-expanded .pola-card:hover {
             transform: translate(-50%, -60%) rotate(0deg) scale(1.12) !important;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
@@ -294,21 +302,119 @@
             gap: 2rem;
         }
 
-        /* RESPONSIVE DESIGN FOR UNFOLDED POLAROIDS */
-        @media (max-width: 992px) {
-            .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) { left: 20%; top: 30%; }
-            .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) { left: 75%; top: 30%; }
-            .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) { left: 20%; top: 75%; }
-            .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) { left: 75%; top: 75%; }
-            
+        .gallery-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* ==========================================================
+           RESPONSIVE DESIGN (TABLETS & MOBILE SMARTPHONES)
+           ========================================================== */
+
+        /* TABLET & SMALL DESKTOP (<= 1024px) */
+        @media (max-width: 1024px) {
+            .hero-polaroid-wrapper {
+                right: 3%;
+                transform: translateY(-50%) scale(0.85);
+            }
+
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) { left: 15%; }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) { left: 38%; }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) { left: 62%; }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) { left: 85%; }
+            .pola-card { width: 200px; }
+        }
+
+        /* TABLET PORTRAIT & MOBILE (<= 768px) */
+        @media (max-width: 768px) {
+            .hero-polaroid-wrapper {
+                display: none; /* Hide static background overlay card on smaller screens */
+            }
+
+            .hero {
+                padding-top: 110px;
+                padding-bottom: 3.5rem;
+                min-height: auto;
+                text-align: left;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-actions .primary-button, 
+            .hero-actions .social-button, 
+            .hero-actions .text-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .gallery-header-flex {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            /* VERTICAL STACK UNFOLDING FOR MOBILE TO PREVENT HORIZONTAL CUTOFF */
             .polaroid-fan-wrapper {
-                min-height: 520px;
+                min-height: 320px;
+            }
+
+            .polaroid-interactive-container.is-expanded .polaroid-fan-wrapper {
+                min-height: 1150px; /* Space out cards vertically when expanded */
+            }
+
+            .pola-card {
+                width: 230px;
+            }
+
+            /* VERTICAL EXPANSION POSITIONS */
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) {
+                left: 50%;
+                top: 12%;
+                transform: translate(-50%, 0) rotate(-3deg);
+            }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) {
+                left: 50%;
+                top: 36%;
+                transform: translate(-50%, 0) rotate(2deg);
+            }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) {
+                left: 50%;
+                top: 60%;
+                transform: translate(-50%, 0) rotate(-2deg);
+            }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) {
+                left: 50%;
+                top: 84%;
+                transform: translate(-50%, 0) rotate(3deg);
+            }
+
+            .polaroid-interactive-container.is-expanded .pola-card:hover {
+                transform: translate(-50%, -5px) scale(1.05) !important;
             }
         }
 
-        @media (max-width: 600px) {
+        /* SMALL MOBILE SMARTPHONES (<= 480px) */
+        @media (max-width: 480px) {
+            .site-header {
+                padding: 0.5rem 0;
+            }
+
+            .nav-links {
+                gap: 0.75rem;
+                font-size: 0.85rem;
+            }
+
             .pola-card {
-                width: 180px;
+                width: 200px;
+            }
+
+            .polaroid-interactive-container.is-expanded .polaroid-fan-wrapper {
+                min-height: 1050px;
             }
         }
     </style>
@@ -364,7 +470,7 @@
         </div>
     </div>
 
-    <!-- HERO FIXED STACK -->
+    <!-- HERO FIXED STACK (DESKTOP ONLY) -->
     <div class="hero-polaroid-wrapper">
         <div class="hero-pola-stack">
             <div class="hero-pola-card">

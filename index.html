@@ -138,7 +138,7 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            animation: rotateAllPortfolioPhotos 24s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            animation: rotateCustomPortfolioList 28s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .polaroid-caption {
@@ -152,82 +152,151 @@
             text-transform: uppercase;
         }
 
-        /* FULL PORTFOLIO FOLDER IMAGE ROTATION KEYFRAMES (8 IMAGES) */
-        @keyframes rotateAllPortfolioPhotos {
-            0%, 10.5% {
+        /* EXACT REQUESTED 14-IMAGE ROTATION SEQUENCE */
+        @keyframes rotateCustomPortfolioList {
+            /* 1. logo.png */
+            0%, 5.5% {
+                background-image: url('images/logo.png');
+                opacity: 1;
+                transform: scale(1);
+            }
+            7.14% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            /* 2. luxembourg.jpg.avif */
+            7.15%, 12.6% {
                 background-image: url('images/luxembourg.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            12% {
+            14.28% {
                 opacity: 0.1;
                 transform: scale(1.03);
             }
-            12.5%, 23% {
+            /* 3. france.jpg.avif */
+            14.29%, 19.8% {
                 background-image: url('images/france.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            24.5% {
+            21.42% {
                 opacity: 0.1;
                 transform: scale(1.03);
             }
-            25%, 35.5% {
+            /* 4. product-photography.jpg.avif */
+            21.43%, 26.9% {
                 background-image: url('images/product-photography.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            37% {
+            28.57% {
                 opacity: 0.1;
                 transform: scale(1.03);
             }
-            37.5%, 48% {
-                background-image: url('images/hero-bg.jpg');
+            /* 5. lebanon.jpg.avif */
+            28.58%, 34.1% {
+                background-image: url('images/lebanon.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            49.5% {
+            35.71% {
                 opacity: 0.1;
                 transform: scale(1.03);
             }
-            50%, 60.5% {
-                background-image: url('images/portrait.jpg');
+            /* 6. kfardebian.jpg.avif */
+            35.72%, 41.2% {
+                background-image: url('images/kfardebian.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            62% {
+            42.85% {
                 opacity: 0.1;
                 transform: scale(1.03);
             }
-            62.5%, 73% {
-                background-image: url('images/astro.jpg');
+            /* 7. denmark.jpg.avif */
+            42.86%, 48.4% {
+                background-image: url('images/denmark.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            74.5% {
+            49.99% {
                 opacity: 0.1;
                 transform: scale(1.03);
             }
-            75%, 85.5% {
-                background-image: url('images/architecture.jpg');
+            /* 8. norway.jpg.avif */
+            50.00%, 55.5% {
+                background-image: url('images/norway.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            87% {
+            57.14% {
                 opacity: 0.1;
                 transform: scale(1.03);
             }
-            87.5%, 98% {
-                background-image: url('images/street.jpg');
+            /* 9. belgium.jpg.avif */
+            57.15%, 62.6% {
+                background-image: url('images/belgium.jpg.avif');
                 opacity: 1;
                 transform: scale(1);
             }
-            99.5% {
+            64.28% {
                 opacity: 0.1;
                 transform: scale(1.03);
             }
+            /* 10. astrophotography.jpg.avif */
+            64.29%, 69.8% {
+                background-image: url('images/astrophotography.jpg.avif');
+                opacity: 1;
+                transform: scale(1);
+            }
+            71.42% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            /* 11. kenya.jpg.avif */
+            71.43%, 76.9% {
+                background-image: url('images/kenya.jpg.avif');
+                opacity: 1;
+                transform: scale(1);
+            }
+            78.57% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            /* 12. lebanon-1.jpg.avif */
+            78.58%, 84.1% {
+                background-image: url('images/lebanon-1.jpg.avif');
+                opacity: 1;
+                transform: scale(1);
+            }
+            85.71% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            /* 13. lebanon-2.jpg.avif */
+            85.72%, 91.2% {
+                background-image: url('images/lebanon-2.jpg.avif');
+                opacity: 1;
+                transform: scale(1);
+            }
+            92.85% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            /* 14. lebanon-3.jpg.avif */
+            92.86%, 98.4% {
+                background-image: url('images/lebanon-3.jpg.avif');
+                opacity: 1;
+                transform: scale(1);
+            }
+            99.99% {
+                opacity: 0.1;
+                transform: scale(1.03);
+            }
+            /* Loop back to start */
             100% {
-                background-image: url('images/luxembourg.jpg.avif');
+                background-image: url('images/logo.png');
                 opacity: 1;
                 transform: scale(1);
             }
@@ -274,7 +343,7 @@
     </div>
     <div class="hero-gradient"></div>
 
-    <!-- Original Hero Text Block -->
+    <!-- Hero Text Block -->
     <div class="hero-content container">
         <p class="section-label">Luxury Photography Studio</p>
         <h1 class="hero-title">
@@ -330,14 +399,13 @@
                 <p class="section-label">02 — Featured Work</p>
                 <h2 class="section-title">Selected Highlights</h2>
             </div>
-            <!-- BUTTON OPENS PORTFOLIO IN A NEW TAB -->
             <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
                 Check Full Portfolio ↗
             </a>
         </div>
     </div>
 
-    <!-- CAROUSEL TRACK (EXACTLY 3 FEATURED IMAGES) -->
+    <!-- CAROUSEL TRACK -->
     <div class="gallery-slider-wrapper">
         <div class="gallery-track featured-carousel">
             

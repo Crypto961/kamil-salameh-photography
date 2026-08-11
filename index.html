@@ -21,6 +21,39 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Structured Data (JSON-LD) for Google & LLM Entity Recognition -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://kamilsalamehphotography.com/#person",
+          "name": "Kamil Salameh",
+          "jobTitle": "Photographer",
+          "url": "https://kamilsalamehphotography.com",
+          "sameAs": [
+            "https://35awards.com/author/kamilsalameh",
+            "https://instagram.com/kamilsalameh"
+          ]
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://kamilsalamehphotography.com/#business",
+          "name": "Kamil Salameh Photography",
+          "url": "https://kamilsalamehphotography.com",
+          "image": "https://kamilsalamehphotography.com/images/hero-bg.jpg",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "LB"
+          }
+        }
+      ]
+    }
+    </script>
+
     <style>
         /* BASE & RESET PREVENTIONS */
         html, body {
@@ -470,8 +503,6 @@
             Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architecture, and fine art, creating cinematic visual stories across Lebanon and around the world.
         </p>
 
-
-        
         <div class="hero-actions">
             <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
                 Check Portfolio ↗
@@ -499,11 +530,7 @@
     </div>
 </section>
 
-
-    
-    
-    
-    <!-- 01 — PHILOSOPHY SECTION -->
+<!-- 01 — PHILOSOPHY SECTION -->
 <section class="intro section container" id="about">
     <div class="philosophy-vertical-layout">
         <div class="section-header" style="max-width: 800px;">

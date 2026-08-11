@@ -1,12 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
   <url>
     <loc>https://kamilsalamehphotography.com/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.00</priority>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/hero-bg.jpg.avif</image:loc>
+      <image:title>Kamil Salameh Photography</image:title>
+    </image:image>
   </url>
 
+  <!-- Portfolio Page -->
   <url>
     <loc>https://kamilsalamehphotography.com/portfolio.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <!-- Country & Topic Gallery Images -->
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/kfardebian.jpg.avif</image:loc>
+      <image:title>Neowise Comet over Kfardebian Lebanon</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/kenya.jpg.avif</image:loc>
+      <image:title>Wildlife Photography Kenya</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/armenia.jpg.avif</image:loc>
+      <image:title>Street Photography Armenia</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/lebanon.jpg.avif</image:loc>
+      <image:title>Lebanon Landscape and Architecture</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/astrophotography.jpg.avif</image:loc>
+      <image:title>Astrophotography</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/france.jpg.avif</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/germany.jpg.avif</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/netherlands.jpg.avif</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/norway.jpg.avif</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/turkey.jpg.avif</image:loc>
+    </image:image>
   </url>
 
 </urlset>

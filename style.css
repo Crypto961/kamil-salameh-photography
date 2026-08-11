@@ -2178,6 +2178,102 @@ button {
     gap:25px;
 
 }
+/* Animated Logo Container */
+.animated-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 1.5rem;
+}
 
+/* Lens Aperture Assembly */
+.aperture-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Rotating Image Behind Aperture */
+.lens-image-display {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 1;
+    animation: swapImages 12s infinite step-end;
+}
+
+/* Vector SVG Aperture Overlay */
+.aperture-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.aperture-blade {
+    fill: #2c3539; /* Match your dark charcoal logo color */
+    transform-origin: center;
+    animation: apertureShutter 4s infinite ease-in-out;
+}
+
+/* Typography Under Aperture */
+.logo-typography {
+    text-align: center;
+    color: #ffffff;
+}
+
+.logo-brand-name {
+    font-family: 'Inter', serif, sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0;
+    color: #313d42; /* Use #ffffff if on dark background */
+}
+
+.logo-sub-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+    color: #6a777d;
+}
+
+/* Animations */
+@keyframes apertureShutter {
+    0%, 100% {
+        transform: scale(1); /* Closed / Standard opening */
+    }
+    40%, 60% {
+        transform: scale(0.35) rotate(15deg); /* Closes down to reveal picture, then opens */
+    }
+}
+
+/* Image Cycling Keyframes */
+@keyframes swapImages {
+    0% {
+        background-image: url('images/luxembourg.jpg.avif');
+    }
+    33.33% {
+        background-image: url('images/france.jpg.avif');
+    }
+    66.66% {
+        background-image: url('images/product-photography.jpg.avif');
+    }
 
 }

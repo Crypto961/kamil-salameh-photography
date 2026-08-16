@@ -38,7 +38,7 @@
         }
 
         .cart-trigger-btn {
-            background: var(--blue-900);
+            background: var(--blue-900, #1f4d68);
             color: #ffffff;
             padding: 0.55rem 1.1rem;
             border-radius: 50px;
@@ -53,11 +53,11 @@
         }
 
         .cart-trigger-btn:hover {
-            background: var(--blue-700);
+            background: var(--blue-700, #2c688d);
         }
 
         .cart-count-badge {
-            background: var(--blue-500);
+            background: var(--blue-500, #3a82ee);
             color: #ffffff;
             font-size: 0.72rem;
             font-weight: 700;
@@ -82,7 +82,7 @@
         .store-subtitle {
             max-width: 680px;
             margin: 0 auto;
-            color: var(--blue-700);
+            color: var(--blue-700, #2c688d);
             font-size: 1rem;
             line-height: 1.6;
         }
@@ -94,7 +94,7 @@
 
         .simulator-card {
             background: #ffffff;
-            border-radius: var(--radius-md);
+            border-radius: 12px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(0, 0, 0, 0.06);
             overflow: hidden;
@@ -112,6 +112,7 @@
             padding: 3rem 2rem;
             overflow: hidden;
             transition: background 0.5s ease;
+            min-height: 480px;
         }
 
         /* Wall Stage View */
@@ -141,17 +142,6 @@
             border-radius: 8px 8px 0 0;
             box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
             z-index: 2;
-        }
-
-        .mock-console-table::before {
-            content: '';
-            position: absolute;
-            top: -12px;
-            left: 2%;
-            right: 2%;
-            height: 12px;
-            background: #475569;
-            border-radius: 4px 4px 0 0;
         }
 
         /* Desk Stage View */
@@ -184,7 +174,7 @@
         .artwork-image-element {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* ENFORCES NO CROPPING */
+            object-fit: contain;
             display: block;
             border-radius: 1px;
         }
@@ -246,7 +236,7 @@
             border-radius: 2px;
         }
 
-        /* SPECIAL PRODUCT SIMULATIONS (Coasters, Puzzle, Book) */
+        /* SPECIAL PRODUCTS (Coasters, Book) */
         .coaster-grid-preview {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -256,6 +246,7 @@
             backdrop-filter: blur(10px);
             border-radius: 12px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 5;
         }
 
         .coaster-item-disc {
@@ -281,6 +272,7 @@
             display: flex;
             position: relative;
             overflow: hidden;
+            z-index: 5;
         }
 
         .book-spread-preview::after {
@@ -324,7 +316,7 @@
             font-size: 0.76rem;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: var(--blue-700);
+            color: var(--blue-700, #2c688d);
             font-weight: 700;
             margin-bottom: 0.5rem;
             display: block;
@@ -339,22 +331,22 @@
         .opt-btn {
             padding: 0.45rem 0.85rem;
             border-radius: 7px;
-            border: 1px solid var(--soft-gray);
+            border: 1px solid #e2e8f0;
             background: #ffffff;
             font-size: 0.82rem;
-            color: var(--black);
+            color: #0f172a;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .opt-btn:hover {
-            border-color: var(--blue-500);
+            border-color: #3a82ee;
         }
 
         .opt-btn.active {
-            background: var(--blue-900);
+            background: var(--blue-900, #1f4d68);
             color: #ffffff;
-            border-color: var(--blue-900);
+            border-color: var(--blue-900, #1f4d68);
             font-weight: 600;
         }
 
@@ -377,7 +369,7 @@
         }
 
         .thumb-item.active {
-            border-color: var(--blue-500);
+            border-color: var(--blue-500, #3a82ee);
             transform: scale(1.04);
         }
 
@@ -390,7 +382,7 @@
         .sim-price-display {
             font-size: 1.8rem;
             font-weight: 300;
-            color: var(--blue-900);
+            color: var(--blue-900, #1f4d68);
             margin-top: 0.8rem;
         }
 
@@ -408,10 +400,10 @@
 
         .product-card {
             background: #ffffff;
-            border-radius: var(--radius-sm);
+            border-radius: 8px;
             border: 1px solid rgba(0,0,0,0.06);
             overflow: hidden;
-            box-shadow: var(--shadow-soft);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
@@ -452,14 +444,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-top: 1px solid var(--soft-gray);
+            border-top: 1px solid #f1f5f9;
             padding-top: 0.9rem;
         }
 
         .product-price-start {
             font-size: 1.05rem;
             font-weight: 600;
-            color: var(--blue-900);
+            color: var(--blue-900, #1f4d68);
         }
 
         /* DRAWER CART */
@@ -500,7 +492,7 @@
 
         .cart-header {
             padding: 1.4rem;
-            border-bottom: 1px solid var(--soft-gray);
+            border-bottom: 1px solid #f1f5f9;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -524,7 +516,7 @@
             gap: 0.9rem;
             margin-bottom: 1.1rem;
             padding-bottom: 1.1rem;
-            border-bottom: 1px solid var(--soft-gray);
+            border-bottom: 1px solid #f1f5f9;
         }
 
         .cart-item-img {
@@ -552,13 +544,13 @@
         .cart-item-price {
             font-size: 0.88rem;
             font-weight: 600;
-            color: var(--blue-900);
+            color: var(--blue-900, #1f4d68);
         }
 
         .checkout-footer {
             padding: 1.4rem;
-            border-top: 1px solid var(--soft-gray);
-            background: var(--off-white);
+            border-top: 1px solid #f1f5f9;
+            background: #f8fafc;
         }
 
         .checkout-total-row {
@@ -571,13 +563,28 @@
 
         .cod-badge {
             background: rgba(31, 77, 104, 0.1);
-            color: var(--blue-900);
+            color: var(--blue-900, #1f4d68);
             padding: 0.4rem;
             border-radius: 6px;
             font-size: 0.76rem;
             text-align: center;
             margin-bottom: 0.8rem;
             font-weight: 500;
+        }
+
+        .primary-button {
+            background: var(--blue-900, #1f4d68);
+            color: #ffffff;
+            padding: 0.75rem 1.2rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .primary-button:hover {
+            background: var(--blue-700, #2c688d);
         }
 
         @media (max-width: 900px) {
@@ -595,7 +602,7 @@
         <div class="nav-links">
             <a href="index.html#about" class="nav-link">About</a>
             <a href="portfolio.html" class="nav-link">Portfolio ↗</a>
-            <a href="order.html" class="nav-link" style="color: var(--blue-500); font-weight: 600;">Store & Prints</a>
+            <a href="order.html" class="nav-link" style="color: var(--blue-500, #3a82ee); font-weight: 600;">Store & Prints</a>
             <button class="cart-trigger-btn" onclick="openCartDrawer()">
                 <span>Bag</span>
                 <span class="cart-count-badge" id="cartCount">0</span>
@@ -610,7 +617,7 @@
     <p class="section-label">Interactive Art Studio</p>
     <h1 class="store-title">Realistic Product Visualizer</h1>
     <p class="store-subtitle">
-        Simulate all fine art products with precise dynamic aspect ratio preservation, realistic material rendering, and interactive staging before placing your cash-on-delivery order.
+        Simulate all fine art products with precise dynamic aspect ratio preservation, realistic material rendering, and interactive staging before placing your order.
     </p>
 </section>
 
@@ -654,20 +661,20 @@
                 <div class="config-group" id="artworkSelectGroup">
                     <label class="config-label">2. Select Photograph</label>
                     <div class="image-picker-thumbs">
-                        <div class="thumb-item active" onclick="selectArtwork('images/lebanon.jpg.avif', 'Faqra Temple, Lebanon', this)">
-                            <img src="images/lebanon.jpg.avif" alt="Faqra Temple">
+                        <div class="thumb-item active" onclick="selectArtwork('images/lebanon.jpg', 'Faqra Temple, Lebanon', this)">
+                            <img src="images/lebanon.jpg" alt="Faqra Temple">
                         </div>
-                        <div class="thumb-item" onclick="selectArtwork('images/astrophotography.jpg.avif', 'Night Skies, Kfardebian', this)">
-                            <img src="images/astrophotography.jpg.avif" alt="Night Skies">
+                        <div class="thumb-item" onclick="selectArtwork('images/astrophotography.jpg', 'Night Skies, Kfardebian', this)">
+                            <img src="images/astrophotography.jpg" alt="Night Skies">
                         </div>
-                        <div class="thumb-item" onclick="selectArtwork('images/kenya.jpg.avif', 'Masai Mara, Kenya', this)">
-                            <img src="images/kenya.jpg.avif" alt="Masai Mara">
+                        <div class="thumb-item" onclick="selectArtwork('images/kenya.jpg', 'Masai Mara, Kenya', this)">
+                            <img src="images/kenya.jpg" alt="Masai Mara">
                         </div>
-                        <div class="thumb-item" onclick="selectArtwork('images/norway.jpg.avif', 'Nordic Silence, Norway', this)">
-                            <img src="images/norway.jpg.avif" alt="Nordic Silence">
+                        <div class="thumb-item" onclick="selectArtwork('images/norway.jpg', 'Nordic Silence, Norway', this)">
+                            <img src="images/norway.jpg" alt="Nordic Silence">
                         </div>
-                        <div class="thumb-item" onclick="selectArtwork('images/france.jpg.avif', 'Parisian Light, France', this)">
-                            <img src="images/france.jpg.avif" alt="Parisian Light">
+                        <div class="thumb-item" onclick="selectArtwork('images/france.jpg', 'Parisian Light, France', this)">
+                            <img src="images/france.jpg" alt="Parisian Light">
                         </div>
                     </div>
                 </div>
@@ -714,7 +721,7 @@
 
     <div class="catalog-grid">
         <div class="product-card">
-            <img src="images/astrophotography.jpg.avif" alt="Framed Fine Art Canvas" class="product-card-img">
+            <img src="images/astrophotography.jpg" alt="Framed Fine Art Canvas" class="product-card-img">
             <div class="product-card-body">
                 <div>
                     <h3 class="product-title">Fine Art Canvas (Framed)</h3>
@@ -728,7 +735,7 @@
         </div>
 
         <div class="product-card">
-            <img src="images/norway.jpg.avif" alt="Unframed Fine Art Canvas" class="product-card-img">
+            <img src="images/norway.jpg" alt="Unframed Fine Art Canvas" class="product-card-img">
             <div class="product-card-body">
                 <div>
                     <h3 class="product-title">Fine Art Canvas (Unframed)</h3>
@@ -742,7 +749,7 @@
         </div>
 
         <div class="product-card">
-            <img src="images/france.jpg.avif" alt="Desk Wooden Frame" class="product-card-img">
+            <img src="images/france.jpg" alt="Desk Wooden Frame" class="product-card-img">
             <div class="product-card-body">
                 <div>
                     <h3 class="product-title">Desk Wooden Frame Print</h3>
@@ -756,7 +763,7 @@
         </div>
 
         <div class="product-card">
-            <img src="images/product-photography.jpg.avif" alt="Artisan Coaster Sets" class="product-card-img">
+            <img src="images/product-photography.jpg" alt="Artisan Coaster Sets" class="product-card-img">
             <div class="product-card-body">
                 <div>
                     <h3 class="product-title">Artisan Ceramic Coasters</h3>
@@ -770,7 +777,7 @@
         </div>
 
         <div class="product-card">
-            <img src="images/belgium.jpg.avif" alt="Collector Fine Art Puzzle" class="product-card-img">
+            <img src="images/belgium.jpg" alt="Collector Fine Art Puzzle" class="product-card-img">
             <div class="product-card-body">
                 <div>
                     <h3 class="product-title">Collector Fine Art Puzzle</h3>
@@ -784,7 +791,7 @@
         </div>
 
         <div class="product-card">
-            <img src="images/kenya.jpg.avif" alt="Bespoke Travel Photo Book" class="product-card-img">
+            <img src="images/kenya.jpg" alt="Bespoke Travel Photo Book" class="product-card-img">
             <div class="product-card-body">
                 <div>
                     <h3 class="product-title">Bespoke Travel & Memory Book</h3>
@@ -819,17 +826,14 @@
             </div>
 
             <form id="checkoutForm" onsubmit="handleCheckout(event)">
-                <div class="input-group" style="margin-bottom: 0.8rem;">
-                    <input type="text" id="custName" required placeholder=" " style="padding: 0.75rem; border: 1px solid var(--soft-gray); border-radius: 6px; width: 100%;">
-                    <label for="custName" style="left: 10px;">Full Name</label>
+                <div style="margin-bottom: 0.8rem;">
+                    <input type="text" id="custName" required placeholder="Full Name" style="padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%;">
                 </div>
-                <div class="input-group" style="margin-bottom: 0.8rem;">
-                    <input type="tel" id="custPhone" required placeholder=" " style="padding: 0.75rem; border: 1px solid var(--soft-gray); border-radius: 6px; width: 100%;">
-                    <label for="custPhone" style="left: 10px;">Phone Number</label>
+                <div style="margin-bottom: 0.8rem;">
+                    <input type="tel" id="custPhone" required placeholder="Phone Number" style="padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%;">
                 </div>
-                <div class="input-group" style="margin-bottom: 0.8rem;">
-                    <textarea id="custAddress" rows="2" required placeholder=" " style="padding: 0.75rem; border: 1px solid var(--soft-gray); border-radius: 6px; width: 100%;"></textarea>
-                    <label for="custAddress" style="left: 10px;">Delivery Address</label>
+                <div style="margin-bottom: 0.8rem;">
+                    <textarea id="custAddress" rows="2" required placeholder="Delivery Address" style="padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%;"></textarea>
                 </div>
                 <button type="submit" class="primary-button" style="width: 100%; text-align: center;">Confirm Order (Cash on Delivery)</button>
             </form>

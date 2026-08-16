@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine Art Prints & Editions | Kamil Salameh Photography</title>
+    <meta name="description" content="Acquire museum-grade fine art prints, canvas editions, custom coasters, collector puzzles, and bespoke travel memory photo books by Kamil Salameh.">
+    <meta name="theme-color" content="#1F4D68">
+
+    <!-- Favicon / Tab Logo -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
+    <!-- Fonts & Libraries -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* BASE & PAGE OVERRIDES */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* HEADER STYLING */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .cart-trigger-btn {
+            position: relative;
+            background: var(--blue-900);
+            color: #ffffff;
+            padding: 0.55rem 1.1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .cart-trigger-btn:hover {
+            background: var(--blue-700);
+        }
+
+        .cart-count-badge {
+            background: var(--blue-500);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+        }
+
+        /* HERO AREA */
+        .store-hero {
+            padding-top: 220px;
+            padding-bottom: 3rem;
+            text-align: center;
+        }
+
+        .store-title {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 300;
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .store-subtitle {
+            max-width: 680px;
+            margin: 0 auto;
+            color: var(--blue-700);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* LIVE WALL SIMULATION SECTION */
+        .simulator-section {
+            padding: 2rem 0 5rem 0;
+        }
+
+        .simulator-card {
+            background: #ffffff;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-deep);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            min-height: 620px;
+        }
+
+        .living-room-stage {
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, #e2e8f0, #cbd5e1);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        /* Mock Living Room Backing Elements */
+        .wall-texture {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+        }
+
+        .mock-sofa {
+            position: absolute;
+            bottom: -20px;
+            width: 82%;
+            height: 140px;
+            background: #334155;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -15px 40px rgba(0,0,0,0.25);
+            z-index: 2;
+        }
+
+        .mock-sofa::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 5%;
+            right: 5%;
+            height: 30px;
+            background: #475569;
+            border-radius: 12px;
+        }
+
+        .artwork-frame-container {
+            position: relative;
+            z-index: 5;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* DYNAMIC FRAME COLOR STYLES */
+        .frame-style-none { border: none; }
+        .frame-style-black { border: 16px solid #111111; box-shadow: inset 0 0 5px rgba(0,0,0,0.5), 0 30px 60px rgba(0,0,0,0.45); }
+        .frame-style-wooden { border: 16px solid #854d0e; box-shadow: inset 0 0 5px rgba(0,0,0,0.5), 0 30px 60px rgba(0,0,0,0.45); }
+        .frame-style-white { border: 16px solid #f8fafc; box-shadow: inset 0 0 5px rgba(0,0,0,0.2), 0 30px 60px rgba(0,0,0,0.35); }
+        .frame-style-grey { border: 16px solid #64748b; box-shadow: inset 0 0 5px rgba(0,0,0,0.4), 0 30px 60px rgba(0,0,0,0.4); }
+        .frame-style-gold { border: 16px solid #d97706; box-shadow: inset 0 0 5px rgba(0,0,0,0.3), 0 30px 60px rgba(0,0,0,0.45); }
+
+        /* SIMULATOR CONFIGURATOR PANEL */
+        .config-panel {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #ffffff;
+            overflow-y: auto;
+        }
+
+        .config-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .config-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--blue-700);
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .option-selector-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .opt-btn {
+            padding: 0.5rem 0.9rem;
+            border-radius: 8px;
+            border: 1px solid var(--soft-gray);
+            background: #ffffff;
+            font-size: 0.85rem;
+            color: var(--black);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover {
+            border-color: var(--blue-500);
+        }
+
+        .opt-btn.active {
+            background: var(--blue-900);
+            color: #ffffff;
+            border-color: var(--blue-900);
+            font-weight: 600;
+        }
+
+        .image-picker-thumbs {
+            display: flex;
+            gap: 0.6rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .thumb-item {
+            width: 65px;
+            height: 65px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .thumb-item.active {
+            border-color: var(--blue-500);
+            transform: scale(1.05);
+        }
+
+        .thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sim-price-display {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--blue-900);
+            margin-top: 1rem;
+        }
+
+        /* COLLECTION CATALOG SECTION */
+        .catalog-section {
+            padding: 4rem 0;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(0,0,0,0.06);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .product-card-img {
+            height: 240px;
+            width: 100%;
+            object-fit: cover;
+            background: #111111;
+        }
+
+        .product-card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .product-desc {
+            font-size: 0.88rem;
+            color: #555555;
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+        }
+
+        .product-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--soft-gray);
+            padding-top: 1rem;
+        }
+
+        .product-price-start {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--blue-900);
+        }
+
+        /* SLIDE-OUT CART & CHECKOUT DRAWER */
+        .cart-drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-drawer-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: min(480px, 100vw);
+            height: 100%;
+            background: #ffffff;
+            z-index: 2001;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-drawer-overlay.open .cart-drawer {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--soft-gray);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--black);
+        }
+
+        .cart-items-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--soft-gray);
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .cart-item-meta {
+            font-size: 0.78rem;
+            color: #666666;
+            margin: 0.2rem 0;
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--blue-900);
+        }
+
+        .checkout-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--soft-gray);
+            background: var(--off-white);
+        }
+
+        .checkout-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .cod-badge {
+            background: rgba(31, 77, 104, 0.1);
+            color: var(--blue-900);
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        /* RESPONSIVE BREAKPOINTS */
+        @media (max-width: 900px) {
+            .simulator-card {
+                grid-template-columns: 1fr;
+            }
+            .living-room-stage {
+                min-height: 380px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .store-hero {
+                padding-top: 160px;
+            }
+            .catalog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <nav class="nav-container" aria-label="Main navigation">
+        <a href="index.html" class="brand">Kamil Salameh Photography</a>
+        <div class="nav-links">
+            <a href="index.html#about" class="nav-link">About</a>
+            <a href="portfolio.html" class="nav-link">Portfolio ↗</a>
+            <a href="order.html" class="nav-link" style="color: var(--blue-500); font-weight: 600;">Store & Prints</a>
+            <button class="cart-trigger-btn" onclick="openCartDrawer()">
+                <span>Bag</span>
+                <span class="cart-count-badge" id="cartCount">0</span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="store-hero container">
+    <p class="section-label">Exclusive Fine Art Editions</p>
+    <h1 class="store-title">Museum-Grade Prints & Collections</h1>
+    <p class="store-subtitle">
+        Bring cinematic landscapes, astrophotography, and architectural moments into your physical space. Handcrafted with ultra-archival pigments, custom woodwork, and gallery presentation.
+    </p>
+</section>
+
+<!-- LIVE WALL SIMULATION & CUSTOMIZER -->
+<section class="simulator-section container">
+    <div class="simulator-card">
+        
+        <!-- Interactive Wall Preview Stage -->
+        <div class="living-room-stage" id="wallStage">
+            <div class="wall-texture"></div>
+            
+            <div class="artwork-frame-container frame-style-black" id="artFrame" style="width: 280px; height: 186px;">
+                <img src="images/lebanon.jpg.avif" alt="Selected Artwork Preview" class="artwork-image" id="stageImg">
+            </div>
+
+            <div class="mock-sofa"></div>
+        </div>
+
+        <!-- Customizer Panel -->
+        <div class="config-panel">
+            <div>
+                <p class="section-label" style="margin-bottom: 0.8rem;">Interactive Visualizer</p>
+                <h2 style="font-weight: 300; font-size: 1.6rem; margin-bottom: 1.2rem;">Custom Wall Print Preview</h2>
+
+                <!-- Image Selection -->
+                <div class="config-group">
+                    <label class="config-label">1. Select Artwork</label>
+                    <div class="image-picker-thumbs">
+                        <div class="thumb-item active" onclick="selectArtwork('images/lebanon.jpg.avif', 'Faqra Temple, Lebanon', this)">
+                            <img src="images/lebanon.jpg.avif" alt="Faqra Temple">
+                        </div>
+                        <div class="thumb-item" onclick="selectArtwork('images/astrophotography.jpg.avif', 'Night Skies, Kfardebian', this)">
+                            <img src="images/astrophotography.jpg.avif" alt="Night Skies">
+                        </div>
+                        <div class="thumb-item" onclick="selectArtwork('images/kenya.jpg.avif', 'Masai Mara, Kenya', this)">
+                            <img src="images/kenya.jpg.avif" alt="Masai Mara">
+                        </div>
+                        <div class="thumb-item" onclick="selectArtwork('images/norway.jpg.avif', 'Nordic Silence, Norway', this)">
+                            <img src="images/norway.jpg.avif" alt="Nordic Silence">
+                        </div>
+                        <div class="thumb-item" onclick="selectArtwork('images/france.jpg.avif', 'Parisian Light, France', this)">
+                            <img src="images/france.jpg.avif" alt="Parisian Light">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Format -->
+                <div class="config-group">
+                    <label class="config-label">2. Product Medium</label>
+                    <div class="option-selector-grid" id="mediumOptions">
+                        <button class="opt-btn active" onclick="setMedium('framed-canvas', this)">Framed Canvas</button>
+                        <button class="opt-btn" onclick="setMedium('unframed-canvas', this)">Unframed Canvas</button>
+                        <button class="opt-btn" onclick="setMedium('desk-wood', this)">Desk Wooden Frame</button>
+                    </div>
+                </div>
+
+                <!-- Size Selector -->
+                <div class="config-group">
+                    <label class="config-label">3. Dimension Scale</label>
+                    <div class="option-selector-grid" id="sizeOptions">
+                        <!-- Dynamic sizing buttons populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Frame Color Selector -->
+                <div class="config-group" id="frameColorGroup">
+                    <label class="config-label">4. Frame Finish</label>
+                    <div class="option-selector-grid">
+                        <button class="opt-btn active" onclick="setFrameColor('black', this)">Black</button>
+                        <button class="opt-btn" onclick="setFrameColor('wooden', this)">Wooden</button>
+                        <button class="opt-btn" onclick="setFrameColor('white', this)">White</button>
+                        <button class="opt-btn" onclick="setFrameColor('grey', this)">Grey</button>
+                        <button class="opt-btn" onclick="setFrameColor('gold', this)">Gold</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Price & Add Button -->
+            <div>
+                <div class="sim-price-display" id="simPrice">$1,250</div>
+                <button class="primary-button" style="width: 100%; margin-top: 1rem; text-align: center;" onclick="addSimulatedToCart()">
+                    Add Custom Piece To Bag
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- COMPLETE CATALOG COLLECTION -->
+<section class="catalog-section container">
+    <div class="section-header">
+        <p class="section-label">Bespoke Editions</p>
+        <h2 class="section-title">Exclusive Products & Accessories</h2>
+    </div>
+
+    <div class="catalog-grid">
+
+        <!-- Desk Frame -->
+        <div class="product-card">
+            <img src="images/france.jpg.avif" alt="Desk Wooden Frame Print" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Desk Wooden Frame Print</h3>
+                    <p class="product-desc">Archival photo print framed in premium handcrafted desk wood. Designed for intimate work spaces and display stands.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $180</span>
+                    <button class="primary-button" style="padding: 0.6rem 1rem; font-size: 0.85rem;" onclick="openCustomizerModal('desk-wood')">Configure</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Unframed -->
+        <div class="product-card">
+            <img src="images/norway.jpg.avif" alt="Canvas Print Unframed" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Fine Art Canvas (Unframed)</h3>
+                    <p class="product-desc">Heavyweight gallery-wrapped cotton canvas with protective UV matte coating. Ready to stretch or display frameless.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $250</span>
+                    <button class="primary-button" style="padding: 0.6rem 1rem; font-size: 0.85rem;" onclick="openCustomizerModal('unframed-canvas')">Configure</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Framed -->
+        <div class="product-card">
+            <img src="images/astrophotography.jpg.avif" alt="Canvas Print Framed" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Fine Art Canvas (Framed)</h3>
+                    <p class="product-desc">Museum-grade canvas enclosed within a floating wood shadowbox frame. Available in Black, Wooden, White, Grey, and Gold.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $350</span>
+                    <button class="primary-button" style="padding: 0.6rem 1rem; font-size: 0.85rem;" onclick="openCustomizerModal('framed-canvas')">Configure</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cup Coasters -->
+        <div class="product-card">
+            <img src="images/product-photography.jpg.avif" alt="Custom Cup Coasters" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Artisan Coaster Sets</h3>
+                    <p class="product-desc">Heat-resistant ceramic coasters with non-slip cork backings. Available in sets of 6 or 12 with custom color/monochrome options.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $120</span>
+                    <button class="primary-button" style="padding: 0.6rem 1rem; font-size: 0.85rem;" onclick="openCoasterModal()">Configure</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Puzzles -->
+        <div class="product-card">
+            <img src="images/belgium.jpg.avif" alt="Fine Art Puzzles" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Collector Fine Art Puzzle</h3>
+                    <p class="product-desc">High-definition precision-cut wooden puzzle pieces transforming landscape photographs into immersive tangible art.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $150</span>
+                    <button class="primary-button" style="padding: 0.6rem 1rem; font-size: 0.85rem;" onclick="openPuzzleModal()">Configure</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Travel Memory Book -->
+        <div class="product-card">
+            <img src="images/kenya.jpg.avif" alt="Travel Memory Image Book" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Bespoke Travel & Memory Photo Book</h3>
+                    <p class="product-desc">Luxury hardbound magazine photo book. Curate full portfolio collections or submit personal wedding and travel memory photos.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $600</span>
+                    <button class="primary-button" style="padding: 0.6rem 1rem; font-size: 0.85rem;" onclick="openBookModal()">Configure Book</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- CONTACT & CASH ON DELIVERY FOOTER INFO -->
+<section class="section container" style="padding-top: 2rem;">
+    <div class="glass-card" style="padding: 3rem; text-align: center; background: #ffffff;">
+        <p class="section-label">Seamless Concierge Ordering</p>
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem;">Direct Delivery & Cash On Delivery</h2>
+        <p style="max-width: 600px; margin: 0 auto; color: #555555; line-height: 1.6;">
+            Every order is handcrafted to order. Review your selection in the bag, enter your shipping destination, and complete payment upon white-glove arrival.
+        </p>
+    </div>
+</section>
+
+</main>
+
+<!-- SHOPPING BAG & CHECKOUT SLIDE-OUT DRAWER -->
+<div class="cart-drawer-overlay" id="cartOverlay">
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <h3 style="font-weight: 400; font-size: 1.3rem;">Your Shopping Bag</h3>
+            <button class="cart-close-btn" onclick="closeCartDrawer()">&times;</button>
+        </div>
+
+        <div class="cart-items-body" id="cartItemsList">
+            <!-- Cart Items render dynamically -->
+        </div>
+
+        <div class="checkout-footer">
+            <div class="cod-badge">
+                ❖ Payment Method: Cash on Delivery (COD)
+            </div>
+            <div class="checkout-total-row">
+                <span>Total:</span>
+                <span id="cartTotalAmount">$0</span>
+            </div>
+
+            <form id="checkoutForm" onsubmit="handleCheckout(event)">
+                <div class="input-group" style="margin-bottom: 1rem;">
+                    <input type="text" id="custName" required placeholder=" " style="padding: 0.8rem; border: 1px solid var(--soft-gray); border-radius: 6px; width: 100%;">
+                    <label for="custName" style="left: 10px;">Full Name</label>
+                </div>
+                <div class="input-group" style="margin-bottom: 1rem;">
+                    <input type="tel" id="custPhone" required placeholder=" " style="padding: 0.8rem; border: 1px solid var(--soft-gray); border-radius: 6px; width: 100%;">
+                    <label for="custPhone" style="left: 10px;">Phone Number</label>
+                </div>
+                <div class="input-group" style="margin-bottom: 1rem;">
+                    <textarea id="custAddress" rows="3" required placeholder=" " style="padding: 0.8rem; border: 1px solid var(--soft-gray); border-radius: 6px; width: 100%;"></textarea>
+                    <label for="custAddress" style="left: 10px;">Delivery Address</label>
+                </div>
+                <button type="submit" class="primary-button" style="width: 100%; text-align: center;">Place Order (Cash on Delivery)</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container footer-container">
+        <div class="footer-brand">Kamil Salameh Photography</div>
+        <div class="footer-socials">
+            <a href="portfolio.html" class="social-button" aria-label="Portfolio">
+                <span>View Portfolio ↗</span>
+            </a>
+            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="social-button" aria-label="Instagram Profile">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <span>Follow on Instagram</span>
+            </a>
+        </div>
+        <p class="footer-copyright">© 2026 Kamil Salameh Photography Studio. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="order.js"></script>
+
+</body>
+</html>

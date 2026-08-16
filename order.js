@@ -1,5 +1,5 @@
 /* ==========================================================
-   PREMIUM STUDIO CONFIGURATOR LOGIC
+   PREMIUM STUDIO CONFIGURATOR LOGIC (UPDATED)
    ========================================================== */
 
 let cart = [];
@@ -15,12 +15,10 @@ function toggleAccordion(id) {
     const content = document.getElementById(id);
     const isActive = content.classList.contains('active');
     
-    // Close all
     document.querySelectorAll('.accordion-content').forEach(el => {
         el.classList.remove('active');
     });
 
-    // Toggle target
     if (!isActive) {
         content.classList.add('active');
     }
@@ -32,9 +30,9 @@ function selectProduct(type, btn) {
     btn.classList.add('active');
     currentState.product = type;
     
-    // Toggle Frame Options visibility
+    // Toggle Frame Options visibility based on product type
     const finishSection = document.getElementById('finish-section');
-    if (type === 'canvas-unframed' || type === 'puzzle') {
+    if (type === 'canvas-unframed') {
         finishSection.style.display = 'none';
         document.getElementById('artStage').style.setProperty('--frame-border', 'none');
     } else {
@@ -46,20 +44,27 @@ function selectProduct(type, btn) {
     updatePrice();
 }
 
-// Artwork Selection
+// Artwork Selection (Fixed Image Aspect Ratio Bug)
 function selectArt(img) {
     document.querySelectorAll('.img-thumb').forEach(el => el.classList.remove('active'));
     img.classList.add('active');
     currentState.imageSrc = img.src;
     
     const previewImg = document.getElementById('previewImg');
-    previewImg.src = img.src;
-
-    // Calculate dynamic aspect ratio based on natural image size
+    
+    // Define the onload behavior BEFORE changing the source to handle cached images perfectly
     previewImg.onload = function() {
         const ratio = this.naturalWidth / this.naturalHeight;
         document.getElementById('artStage').style.setProperty('--aspect-ratio', ratio);
     };
+    
+    // Update the source
+    previewImg.src = img.src;
+
+    // Fallback for instantly loaded cached images
+    if (previewImg.complete) {
+        previewImg.onload();
+    }
 }
 
 // Size Selection
@@ -68,7 +73,6 @@ function selectSize(btn) {
     btn.classList.add('active');
     currentState.size = btn.dataset.size;
     
-    // Dynamically scale the artwork on the wall
     document.getElementById('artStage').style.setProperty('--frame-width', btn.dataset.width);
     updatePrice();
 }
@@ -88,7 +92,7 @@ function updatePrice() {
     if (currentState.size === 'A3') basePrice = 600;
 
     if (currentState.product === 'canvas-unframed') basePrice *= 0.8;
-    if (currentState.product === 'puzzle') basePrice = 280;
+    if (currentState.product === 'desk-wood') basePrice = 320;
 
     currentState.price = basePrice;
     document.getElementById('livePrice').textContent = `$${basePrice.toLocaleString()}`;
@@ -122,7 +126,7 @@ function renderCart() {
     }
 
     cartItems.innerHTML = cart.map(item => `
-        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
             <img src="${item.img}" style="width: 80px; height: 80px; object-fit: cover;">
             <div>
                 <div style="font-weight: 600; font-size: 0.9rem;">${item.product}</div>
@@ -133,7 +137,7 @@ function renderCart() {
     `).join('');
 }
 
-// Premium Checkout Validation (Email OR Phone Required)
+// Premium Checkout Validation
 function processCheckout(e) {
     e.preventDefault();
     
@@ -141,7 +145,7 @@ function processCheckout(e) {
     const phone = document.getElementById('custPhone').value.trim();
     const errorMsg = document.getElementById('checkoutError');
 
-    // Custom Validation Logic
+    // Validation: Require either Email OR Phone
     if (!email && !phone) {
         errorMsg.style.display = 'block';
         return;
@@ -156,7 +160,7 @@ function processCheckout(e) {
 
     alert("Thank you. Your bespoke edition request has been received.");
     
-    // Reset
+    // Reset Data
     cart = [];
     renderCart();
     document.getElementById('cartCount').textContent = "0";

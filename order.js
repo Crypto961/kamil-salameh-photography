@@ -1,201 +1,239 @@
 /* ==========================================================
-   KAMIL SALAMEH PHOTOGRAPHY STUDIO — STORE & SIMULATOR JS
+   KAMIL SALAMEH PHOTOGRAPHY STUDIO — ADVANCED SIMULATOR JS
    ========================================================== */
 
 let cart = [];
 
 // SIMULATOR STATE
-let currentConfig = {
+let simState = {
+    productKey: 'framed-canvas',
     artworkTitle: 'Faqra Temple, Lebanon',
     artworkSrc: 'images/lebanon.jpg.avif',
-    medium: 'framed-canvas',
-    size: 'A1',
-    frameColor: 'black',
-    price: 1250
+    sizeKey: 'A1',
+    frameFinish: 'wooden',
+    aspectRatio: 1.5, // Natural width / height ratio
+    price: 1400
 };
 
-// PRICING MATRICES
-const PRICING = {
-    'desk-wood': { 'A5': 180, 'A4': 240, 'A3': 320 },
+// PRICING MATRICES FOR ALL PRODUCTS
+const CATALOG_PRICING = {
+    'framed-canvas': { 'A5': 350, 'A4': 450, 'A3': 600, 'A2': 950, 'A1': 1400, 'A0': 2400 },
     'unframed-canvas': { 'A5': 250, 'A4': 320, 'A3': 450, 'A2': 750, 'A1': 1100, 'A0': 1800 },
-    'framed-canvas': { 'A5': 350, 'A4': 450, 'A3': 600, 'A2': 950, 'A1': 1400, 'A0': 2400 }
+    'desk-wood': { 'A5': 180, 'A4': 240, 'A3': 320 },
+    'coasters': { 'Set of 6': 120, 'Set of 12': 220 },
+    'puzzle': { '500 Pcs (A3)': 150, '1000 Pcs (A2)': 280 },
+    'photo-book': { 'Standard 40-Page': 600, 'Collector 80-Page': 1200 }
 };
 
-// WALL SIMULATOR DIMENSION SCALING (WIDTH in PX)
-const SIZE_DIMENSIONS = {
-    'A5': { width: 140, height: 95 },
-    'A4': { width: 180, height: 120 },
-    'A3': { width: 230, height: 153 },
-    'A2': { width: 300, height: 200 },
-    'A1': { width: 380, height: 253 },
-    'A0': { width: 480, height: 320 }
+// RELATIVE DISPLAY BASE SIZES (PIXELS MAX BOUNDARY)
+const SIZE_SCALES = {
+    'A5': 160,
+    'A4': 210,
+    'A3': 270,
+    'A2': 330,
+    'A1': 390,
+    'A0': 450,
+    'Set of 6': 260,
+    'Set of 12': 320,
+    '500 Pcs (A3)': 270,
+    '1000 Pcs (A2)': 340,
+    'Standard 40-Page': 340,
+    'Collector 80-Page': 390
 };
 
-// INITIALIZE STORE SIMULATOR
 document.addEventListener('DOMContentLoaded', () => {
-    updateSizeOptions();
-    recalculateSimulator();
+    updateImageAspectRatio(simState.artworkSrc, () => {
+        renderProductControls();
+        renderStageSimulation();
+    });
 });
+
+// CALCULATE NATURAL ASPECT RATIO TO ENSURE ZERO IMAGE CROPPING
+function updateImageAspectRatio(src, callback) {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+        simState.aspectRatio = img.naturalWidth / img.naturalHeight;
+        if (callback) callback();
+    };
+    img.onerror = () => {
+        simState.aspectRatio = 1.5; // Default landscape fall-back
+        if (callback) callback();
+    };
+}
+
+// SELECT PRODUCT
+function selectProduct(productKey, element) {
+    if (element) {
+        document.querySelectorAll('#productLineOptions .opt-btn').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+    simState.productKey = productKey;
+
+    // Reset default size for selected product
+    const availableSizes = Object.keys(CATALOG_PRICING[productKey]);
+    simState.sizeKey = availableSizes[0];
+
+    // Toggle Frame Finish Visibility
+    const frameGroup = document.getElementById('frameColorGroup');
+    if (productKey === 'framed-canvas') {
+        frameGroup.style.display = 'block';
+        if (simState.frameFinish === 'none') simState.frameFinish = 'wooden';
+    } else {
+        frameGroup.style.display = 'none';
+        simState.frameFinish = 'none';
+    }
+
+    renderProductControls();
+    renderStageSimulation();
+}
 
 // SELECT ARTWORK
 function selectArtwork(src, title, element) {
     document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
     element.classList.add('active');
 
-    currentConfig.artworkSrc = src;
-    currentConfig.artworkTitle = title;
-    document.getElementById('stageImg').src = src;
+    simState.artworkSrc = src;
+    simState.artworkTitle = title;
+
+    updateImageAspectRatio(src, () => {
+        renderStageSimulation();
+    });
 }
 
-// SET MEDIUM FORMAT
-function setMedium(mediumKey, element) {
-    document.querySelectorAll('#mediumOptions .opt-btn').forEach(el => el.classList.remove('active'));
-    element.classList.add('active');
-
-    currentConfig.medium = mediumKey;
-
-    // Toggle Frame Color Selector availability
-    const frameGroup = document.getElementById('frameColorGroup');
-    if (mediumKey === 'unframed-canvas') {
-        frameGroup.style.display = 'none';
-        currentConfig.frameColor = 'none';
-    } else if (mediumKey === 'desk-wood') {
-        frameGroup.style.display = 'none';
-        currentConfig.frameColor = 'wooden';
-    } else {
-        frameGroup.style.display = 'block';
-        currentConfig.frameColor = 'black';
-    }
-
-    updateSizeOptions();
-    recalculateSimulator();
-}
-
-// UPDATE AVAILABLE SIZES BASED ON MEDIUM
-function updateSizeOptions() {
+// RENDER DYNAMIC SIZE BUTTONS & PRICING
+function renderProductControls() {
     const sizeContainer = document.getElementById('sizeOptions');
     sizeContainer.innerHTML = '';
 
-    const availableSizes = Object.keys(PRICING[currentConfig.medium]);
-    if (!availableSizes.includes(currentConfig.size)) {
-        currentConfig.size = availableSizes[0];
-    }
-
-    availableSizes.forEach(size => {
+    const sizes = Object.keys(CATALOG_PRICING[simState.productKey]);
+    sizes.forEach(sz => {
         const btn = document.createElement('button');
-        btn.className = `opt-btn ${size === currentConfig.size ? 'active' : ''}`;
-        btn.textContent = size;
+        btn.className = `opt-btn ${sz === simState.sizeKey ? 'active' : ''}`;
+        btn.textContent = sz;
         btn.onclick = () => {
             document.querySelectorAll('#sizeOptions .opt-btn').forEach(el => el.classList.remove('active'));
             btn.classList.add('active');
-            currentConfig.size = size;
-            recalculateSimulator();
+            simState.sizeKey = sz;
+            renderStageSimulation();
         };
         sizeContainer.appendChild(btn);
     });
 }
 
-// SET FRAME FINISH COLOR
-function setFrameColor(colorKey, element) {
-    document.querySelectorAll('#frameColorGroup .opt-btn').forEach(el => el.classList.remove('active'));
+// SET FRAME FINISH MATERIAL
+function setFrameFinish(finishKey, element) {
+    document.querySelectorAll('#frameFinishOptions .opt-btn').forEach(el => el.classList.remove('active'));
     element.classList.add('active');
-    currentConfig.frameColor = colorKey;
-    recalculateSimulator();
+    simState.frameFinish = finishKey;
+    renderStageSimulation();
 }
 
-// RECALCULATE PRICE AND VISUAL SCALE
-function recalculateSimulator() {
+// RENDER STAGE ENVIRONMENT & DYNAMIC ASPECT RATIO MAPPING
+function renderStageSimulation() {
+    const viewport = document.getElementById('stageViewport');
+    const mount = document.getElementById('stageMount');
+    const mockConsole = document.getElementById('mockConsole');
+    const mockDesk = document.getElementById('mockDesk');
+    const spotlight = document.getElementById('wallSpotlight');
+
     // Calculate Price
-    const basePrice = PRICING[currentConfig.medium][currentConfig.size];
-    let frameMarkup = 0;
-
-    if (currentConfig.medium === 'framed-canvas') {
-        if (currentConfig.frameColor === 'gold') frameMarkup = 150;
-        else if (currentConfig.frameColor === 'wooden') frameMarkup = 80;
+    let basePrice = CATALOG_PRICING[simState.productKey][simState.sizeKey];
+    if (simState.productKey === 'framed-canvas') {
+        if (simState.frameFinish === 'gold') basePrice += 100;
+        if (simState.frameFinish === 'wooden') basePrice += 50;
     }
+    simState.price = basePrice;
+    document.getElementById('simPrice').textContent = `$${simState.price.toLocaleString()}`;
 
-    currentConfig.price = basePrice + frameMarkup;
-    document.getElementById('simPrice').textContent = `$${currentConfig.price.toLocaleString()}`;
-
-    // Apply Wall Frame Styling & Scaling
-    const frameElement = document.getElementById('artFrame');
-    const dims = SIZE_DIMENSIONS[currentConfig.size];
-
-    frameElement.style.width = `${dims.width}px`;
-    frameElement.style.height = `${dims.height}px`;
-
-    // Reset frame classes
-    frameElement.className = 'artwork-frame-container';
-    if (currentConfig.medium === 'unframed-canvas') {
-        frameElement.classList.add('frame-style-none');
-    } else if (currentConfig.medium === 'desk-wood') {
-        frameElement.classList.add('frame-style-wooden');
+    // Environment Backdrop Switcher
+    if (['framed-canvas', 'unframed-canvas', 'puzzle'].includes(simState.productKey)) {
+        viewport.className = 'stage-viewport stage-env-wall';
+        mockConsole.style.display = 'block';
+        mockDesk.style.display = 'none';
+        spotlight.style.display = 'block';
     } else {
-        frameElement.classList.add(`frame-style-${currentConfig.frameColor}`);
+        viewport.className = 'stage-viewport stage-env-desk';
+        mockConsole.style.display = 'none';
+        mockDesk.style.display = 'block';
+        spotlight.style.display = 'none';
+    }
+
+    // Dynamic Sizing based on Aspect Ratio
+    const baseScale = SIZE_SCALES[simState.sizeKey] || 300;
+    let targetWidth, targetHeight;
+
+    if (simState.aspectRatio >= 1) { // Landscape
+        targetWidth = baseScale;
+        targetHeight = baseScale / simState.aspectRatio;
+    } else { // Portrait
+        targetHeight = baseScale;
+        targetWidth = baseScale * simState.aspectRatio;
+    }
+
+    // Render Stage Visual Based on Product Type
+    if (simState.productKey === 'coasters') {
+        const count = simState.sizeKey === 'Set of 6' ? 6 : 9;
+        let coasterHTML = `<div class="coaster-grid-preview">`;
+        for (let i = 0; i < count; i++) {
+            coasterHTML += `
+                <div class="coaster-item-disc">
+                    <img src="${simState.artworkSrc}" alt="Coaster Print">
+                </div>`;
+        }
+        coasterHTML += `</div>`;
+        mount.innerHTML = coasterHTML;
+
+    } else if (simState.productKey === 'photo-book') {
+        mount.innerHTML = `
+            <div class="book-spread-preview">
+                <div class="book-page-half">
+                    <img src="${simState.artworkSrc}" alt="Left Page">
+                </div>
+                <div class="book-page-half">
+                    <img src="images/kenya.jpg.avif" alt="Right Page">
+                </div>
+            </div>
+        `;
+
+    } else {
+        // Wall Canvas, Unframed Print, Desk Frame, or Puzzle Display
+        let frameClass = 'frame-finish-none';
+        if (simState.productKey === 'framed-canvas' || simState.productKey === 'desk-wood') {
+            frameClass = `frame-finish-${simState.frameFinish === 'none' ? 'wooden' : simState.frameFinish}`;
+        }
+
+        mount.innerHTML = `
+            <div class="artwork-presentation-box ${frameClass}" style="width: ${targetWidth}px; height: ${targetHeight}px;">
+                <img src="${simState.artworkSrc}" alt="${simState.artworkTitle}" class="artwork-image-element">
+            </div>
+        `;
     }
 }
 
-// ADD CUSTOM PIECE TO BAG
-function addSimulatedToCart() {
-    const cartItem = {
-        id: Date.now(),
-        title: `${currentConfig.artworkTitle}`,
-        meta: `${getMediumName(currentConfig.medium)} (${currentConfig.size}) ${currentConfig.frameColor !== 'none' ? '- ' + capitalize(currentConfig.frameColor) + ' Frame' : ''}`,
-        price: currentConfig.price,
-        img: currentConfig.artworkSrc
-    };
-
-    cart.push(cartItem);
-    updateCartUI();
-    openCartDrawer();
-}
-
-// HELPER MODAL CONSTRUCTORS FOR ACCESSORY PRODUCTS
-function openCoasterModal() {
-    const item = {
-        id: Date.now(),
-        title: 'Artisan Coaster Set (12 Pack)',
-        meta: 'Square Format - Mixed Fine Art Landscapes (Colored)',
-        price: 220,
-        img: 'images/product-photography.jpg.avif'
-    };
-    cart.push(item);
-    updateCartUI();
-    openCartDrawer();
-}
-
-function openPuzzleModal() {
-    const item = {
-        id: Date.now(),
-        title: 'Collector Fine Art Puzzle (A2 Size)',
-        meta: '1000 Precision-Cut Pieces - Faqra Temple Edition',
-        price: 280,
-        img: 'images/belgium.jpg.avif'
-    };
-    cart.push(item);
-    updateCartUI();
-    openCartDrawer();
-}
-
-function openBookModal() {
-    const item = {
-        id: Date.now(),
-        title: 'Bespoke Travel & Memory Photo Book',
-        meta: 'Custom Hardcover Magazine Format (Up to 100 Photos)',
-        price: 1200,
-        img: 'images/kenya.jpg.avif'
-    };
-    cart.push(item);
-    updateCartUI();
-    openCartDrawer();
-}
-
-function openCustomizerModal(mediumKey) {
-    setMedium(mediumKey, document.querySelector(`#mediumOptions button[onclick*="${mediumKey}"]`));
-    window.scrollTo({ top: 300, behavior: 'smooth' });
+// QUICK LOAD PRODUCT FROM CATALOG CARDS
+function loadProductToSim(productKey) {
+    const btn = document.querySelector(`#productLineOptions button[onclick*="${productKey}"]`);
+    selectProduct(productKey, btn);
+    window.scrollTo({ top: 350, behavior: 'smooth' });
 }
 
 // CART DRAWER MANAGEMENT
+function addSimulatedToCart() {
+    const item = {
+        id: Date.now(),
+        title: `${simState.artworkTitle}`,
+        meta: `${getProductName(simState.productKey)} (${simState.sizeKey}) ${simState.frameFinish !== 'none' ? '- ' + capitalize(simState.frameFinish) + ' Finish' : ''}`,
+        price: simState.price,
+        img: simState.artworkSrc
+    };
+
+    cart.push(item);
+    updateCartUI();
+    openCartDrawer();
+}
+
 function openCartDrawer() {
     document.getElementById('cartOverlay').classList.add('open');
 }
@@ -233,7 +271,7 @@ function updateCartUI() {
                     <div class="cart-item-meta">${item.meta}</div>
                     <div class="cart-item-price">$${item.price.toLocaleString()}</div>
                 </div>
-                <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 0.85rem;">Remove</button>
+                <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 0.82rem;">Remove</button>
             </div>
         `;
     }).join('');
@@ -241,7 +279,7 @@ function updateCartUI() {
     totalDisplay.textContent = `$${total.toLocaleString()}`;
 }
 
-// CASH ON DELIVERY CHECKOUT FORM SUBMISSION
+// CHECKOUT SUBMISSION
 function handleCheckout(event) {
     event.preventDefault();
 
@@ -254,7 +292,7 @@ function handleCheckout(event) {
     const phone = document.getElementById('custPhone').value;
     const address = document.getElementById('custAddress').value;
 
-    alert(`Thank you, ${name}! Your order has been placed successfully.\n\nOur concierge team will contact you at ${phone} to confirm delivery to:\n${address}\n\nPayment Method: Cash on Delivery.`);
+    alert(`Thank you, ${name}! Your order has been placed.\n\nOur team will contact you at ${phone} to confirm delivery to:\n${address}\n\nPayment Method: Cash on Delivery.`);
 
     cart = [];
     updateCartUI();
@@ -262,12 +300,16 @@ function handleCheckout(event) {
     document.getElementById('checkoutForm').reset();
 }
 
-// UTILITY HELPERS
-function getMediumName(key) {
-    if (key === 'framed-canvas') return 'Framed Canvas Print';
-    if (key === 'unframed-canvas') return 'Unframed Canvas Print';
-    if (key === 'desk-wood') return 'Desk Wooden Frame Print';
-    return key;
+function getProductName(key) {
+    const names = {
+        'framed-canvas': 'Framed Fine Art Canvas',
+        'unframed-canvas': 'Unframed Fine Art Canvas',
+        'desk-wood': 'Desk Wooden Frame Print',
+        'coasters': 'Artisan Coaster Set',
+        'puzzle': 'Collector Fine Art Puzzle',
+        'photo-book': 'Bespoke Travel Memory Book'
+    };
+    return names[key] || key;
 }
 
 function capitalize(str) {

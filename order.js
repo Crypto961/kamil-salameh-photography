@@ -4,14 +4,14 @@
 
 let cart = [];
 
-// SIMULATOR STATE
+// SIMULATOR STATE (DEFAULT TO .jpg.avif)
 let simState = {
     productKey: 'framed-canvas',
     artworkTitle: 'Faqra Temple, Lebanon',
-    artworkSrc: 'images/lebanon.jpg',
+    artworkSrc: 'images/lebanon.jpg.avif',
     sizeKey: 'A1',
     frameFinish: 'wooden',
-    aspectRatio: 1.5, // Natural width / height ratio
+    aspectRatio: 1.5,
     price: 1400
 };
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// CALCULATE NATURAL ASPECT RATIO TO ENSURE ZERO IMAGE CROPPING
+// CALCULATE NATURAL ASPECT RATIO FOR AVIF IMAGES
 function updateImageAspectRatio(src, callback) {
     const img = new Image();
     img.onload = () => {
@@ -60,7 +60,7 @@ function updateImageAspectRatio(src, callback) {
         if (callback) callback();
     };
     img.onerror = () => {
-        simState.aspectRatio = 1.5; // Fallback landscape aspect ratio on image path miss
+        simState.aspectRatio = 1.5; // Fallback landscape ratio
         if (callback) callback();
     };
     img.src = src;
@@ -198,7 +198,7 @@ function renderStageSimulation() {
                     <img src="${simState.artworkSrc}" alt="Left Page">
                 </div>
                 <div class="book-page-half">
-                    <img src="images/kenya.jpg" alt="Right Page">
+                    <img src="images/kenya.jpg.avif" alt="Right Page">
                 </div>
             </div>
         `;

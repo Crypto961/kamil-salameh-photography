@@ -150,6 +150,35 @@
             left: 1rem;
         }
 
+        /* Dynamic Product Simulation Section */
+        .simulation-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .simulation-container.active {
+            display: block;
+        }
+
+        .simulation-header {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(111, 175, 199, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .simulation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
         /* Success Message State */
         .order-success-message {
             display: none;
@@ -170,8 +199,13 @@
             margin: 0 auto;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media (max-width: 768px) {
-            .form-grid-row {
+            .form-grid-row, .simulation-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -199,7 +233,7 @@
         <p class="section-label">Acquisitions & Inquiries</p>
         <h1 class="order-title">Print Orders & Commissions</h1>
         <p class="order-subtitle">
-            Secure fine art photographic prints from the global collection or request professional commercial shooting availability.
+            Secure fine art prints, custom merchandise, or book professional commercial architectural shoots.
         </p>
     </header>
 
@@ -221,11 +255,15 @@
                 <div class="input-group">
                     <select id="orderType" name="order_type" required>
                         <option value="" disabled selected></option>
-                        <option value="Fine Art Print">Fine Art Print Purchase</option>
+                        <option value="Fine Art Print">Fine Art Print / Canvas Purchase</option>
+                        <option value="Desk Frames">Desk Wooden Frames</option>
+                        <option value="Coasters">Cup Coaster Set</option>
+                        <option value="Collector Puzzle">Collector Puzzle</option>
+                        <option value="Memory Book">Bespoke Memory Book</option>
                         <option value="Commercial Project">Commercial / Architecture Project</option>
                         <option value="Private Booking">Private Photography Session</option>
                     </select>
-                    <label for="orderType">Inquiry Type</label>
+                    <label for="orderType">Inquiry / Product Type</label>
                 </div>
                 <div class="input-group">
                     <input type="text" id="printPiece" name="item_reference" placeholder=" ">
@@ -233,20 +271,28 @@
                 </div>
             </div>
 
+            <!-- DYNAMIC PRODUCT SIMULATOR PANEL -->
+            <div class="simulation-container" id="simulationContainer">
+                <div class="simulation-header" id="simHeaderTitle">Product Customization Options</div>
+                <div class="simulation-grid" id="simGridContent">
+                    <!-- Injected dynamically via order.js -->
+                </div>
+            </div>
+
             <div class="input-group">
                 <textarea id="orderDetails" name="message" rows="5" required placeholder=" "></textarea>
-                <label for="orderDetails">Specifications (Sizes, Material, Location, or Vision)</label>
+                <label for="orderDetails">Additional Specifications or Delivery Notes</label>
             </div>
 
             <button class="primary-button" type="submit" style="width: 100%; border: none; cursor: pointer;">
-                Submit Inquiry ↗
+                Submit Order / Inquiry ↗
             </button>
         </form>
 
         <!-- SUCCESS VIEW -->
         <div class="order-success-message" id="orderSuccess">
             <h3>Request Received Successfully</h3>
-            <p>Thank you for your interest. Kamil Salameh will review your specifications and contact you shortly via email.</p>
+            <p>Thank you for your order. Kamil Salameh will review your specifications and contact you shortly via email.</p>
         </div>
     </div>
 </main>

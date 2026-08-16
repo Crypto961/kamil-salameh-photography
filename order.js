@@ -36,6 +36,15 @@ const SIZE_SCALES = {
     'Standard 40-Page': 340, 'Collector 80-Page': 390
 };
 
+// PUZZLE INTERACTION VARIABLES
+let selectedPieces = new Set();
+let isDragging = false;
+let dragStarted = false;
+let startX = 0;
+let startY = 0;
+let initialPositions = new Map();
+let highestZ = 10;
+
 document.addEventListener('DOMContentLoaded', () => {
     updateImageAspectRatio(simState.artworkSrc, () => {
         renderProductControls();
@@ -76,7 +85,6 @@ function selectProduct(productKey, element) {
         simState.frameFinish = 'none';
     }
 
-    // Toggle multi-select indicator tag
     const multiHint = document.getElementById('multiSelectHint');
     if (['photo-book', 'coasters'].includes(productKey)) {
         multiHint.style.display = 'inline';
@@ -93,7 +101,6 @@ function handleArtworkClick(src, title, element) {
     const isMultiProduct = ['photo-book', 'coasters'].includes(simState.productKey);
 
     if (isMultiProduct) {
-        // Multi-select toggle
         const existingIndex = simState.selectedArtworks.findIndex(item => item.src === src);
         if (existingIndex > -1) {
             if (simState.selectedArtworks.length > 1) {
@@ -107,7 +114,6 @@ function handleArtworkClick(src, title, element) {
         simState.artworkSrc = simState.selectedArtworks[0].src;
         simState.artworkTitle = simState.selectedArtworks[0].title;
     } else {
-        // Single selection
         document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active', 'selected-multi'));
         element.classList.add('active');
 
@@ -136,12 +142,10 @@ function handleCustomImageUpload(event) {
         const uploadedTitle = `Custom: ${file.name}`;
         simState.customUploadedImage = { src: uploadedSrc, name: file.name };
 
-        // Automatically populate into checkout attachment
         const dt = new DataTransfer();
         dt.items.add(file);
         document.getElementById('checkoutCustomFile').files = dt.files;
 
-        // Add to active simulation artwork
         simState.selectedArtworks = [{ src: uploadedSrc, title: uploadedTitle }];
         simState.artworkSrc = uploadedSrc;
         simState.artworkTitle = uploadedTitle;
@@ -185,13 +189,9 @@ function setFrameFinish(finishKey, element) {
 function renderStageSimulation() {
     const viewport = document.getElementById('stageViewport');
     const mount = document.getElementById('stageMount');
-    const mockConsole = document.getElementById('mockConsole');
-    const mockDesk = document.getElementById('mockDesk');
-    const spotlight = document.getElementById('wallSpotlight');
 
     if (!viewport || !mount) return;
 
-    // Calculate Price
     let basePrice = CATALOG_PRICING[simState.productKey][simState.sizeKey];
     if (simState.productKey === 'framed-canvas') {
         if (simState.frameFinish === 'gold') basePrice += 100;
@@ -200,20 +200,6 @@ function renderStageSimulation() {
     simState.price = basePrice;
     document.getElementById('simPrice').textContent = `$${simState.price.toLocaleString()}`;
 
-    // Environment Backdrop Switcher
-    if (['framed-canvas', 'unframed-canvas', 'puzzle'].includes(simState.productKey)) {
-        viewport.className = 'stage-viewport stage-env-wall';
-        mockConsole.style.display = 'block';
-        mockDesk.style.display = 'none';
-        spotlight.style.display = 'block';
-    } else {
-        viewport.className = 'stage-viewport stage-env-desk';
-        mockConsole.style.display = 'none';
-        mockDesk.style.display = 'block';
-        spotlight.style.display = 'none';
-    }
-
-    // Dynamic Aspect Ratio Sizing
     const baseScale = SIZE_SCALES[simState.sizeKey] || 300;
     let targetWidth, targetHeight;
 
@@ -225,11 +211,22 @@ function renderStageSimulation() {
         targetWidth = baseScale * simState.aspectRatio;
     }
 
-    // 1. COASTERS MULTI-SELECT DISPLAY
-    if (simState.productKey === 'coasters') {
+    // 1. PUZZLE INTERACTIVE MODE
+    if (simState.productKey === 'puzzle') {
+        mount.innerHTML = `
+            <div class="puzzle-board-wrapper" id="puzzleBoard">
+                <div class="puzzle-piece" data-id="1" style="top: 0px; left: 0px; background-image: url('${simState.artworkSrc}'); background-position: 0px 0px;"></div>
+                <div class="puzzle-piece" data-id="2" style="top: 0px; left: 190px; background-image: url('${simState.artworkSrc}'); background-position: -190px 0px;"></div>
+                <div class="puzzle-piece" data-id="3" style="top: 125px; left: 0px; background-image: url('${simState.artworkSrc}'); background-position: 0px -125px;"></div>
+                <div class="puzzle-piece" data-id="4" style="top: 125px; left: 190px; background-image: url('${simState.artworkSrc}'); background-position: -190px -125px;"></div>
+            </div>
+        `;
+        initPuzzleInteractions();
+
+    // 2. COASTERS MULTI-SELECT DISPLAY
+    } else if (simState.productKey === 'coasters') {
         const totalCount = simState.sizeKey === 'Set of 6' ? 6 : 9;
         let coasterHTML = `<div class="coaster-grid-preview">`;
-        
         for (let i = 0; i < totalCount; i++) {
             const artItem = simState.selectedArtworks[i % simState.selectedArtworks.length];
             coasterHTML += `
@@ -240,7 +237,7 @@ function renderStageSimulation() {
         coasterHTML += `</div>`;
         mount.innerHTML = coasterHTML;
 
-    // 2. TRAVEL MEMORY BOOK SPREAD (POLAROID FORMAT)
+    // 3. TRAVEL MEMORY BOOK SPREAD (POLAROID FORMAT)
     } else if (simState.productKey === 'photo-book') {
         const leftArt = simState.selectedArtworks[0] || { src: simState.artworkSrc, title: 'Memory 1' };
         const rightArt = simState.selectedArtworks[1] || simState.selectedArtworks[0] || { src: simState.artworkSrc, title: 'Memory 2' };
@@ -262,7 +259,7 @@ function renderStageSimulation() {
             </div>
         `;
 
-    // 3. CANVAS, DESK FRAME, OR PUZZLE
+    // 4. CANVAS / DESK FRAME
     } else {
         let frameClass = 'frame-finish-none';
         if (simState.productKey === 'framed-canvas' || simState.productKey === 'desk-wood') {
@@ -275,6 +272,103 @@ function renderStageSimulation() {
             </div>
         `;
     }
+}
+
+// PUZZLE INTERACTION LOGIC
+function initPuzzleInteractions() {
+    const pieces = document.querySelectorAll('.puzzle-piece');
+    const viewport = document.getElementById('stageViewport');
+
+    selectedPieces.clear();
+
+    pieces.forEach(piece => {
+        piece.addEventListener('pointerdown', onPuzzlePointerDown);
+    });
+
+    if (viewport) {
+        viewport.addEventListener('pointerdown', (e) => {
+            if (!e.target.classList.contains('puzzle-piece')) {
+                clearPuzzleSelection();
+            }
+        });
+    }
+}
+
+function onPuzzlePointerDown(e) {
+    e.stopPropagation();
+    const piece = e.currentTarget;
+    const isMultiKey = e.ctrlKey || e.metaKey || e.shiftKey;
+
+    dragStarted = false;
+    startX = e.clientX;
+    startY = e.clientY;
+
+    if (isMultiKey) {
+        if (selectedPieces.has(piece)) {
+            selectedPieces.delete(piece);
+            piece.classList.remove('selected');
+        } else {
+            selectedPieces.add(piece);
+            piece.classList.add('selected');
+        }
+    } else {
+        if (!selectedPieces.has(piece)) {
+            clearPuzzleSelection();
+            selectedPieces.add(piece);
+            piece.classList.add('selected');
+        }
+    }
+
+    highestZ += selectedPieces.size;
+    selectedPieces.forEach(p => { p.style.zIndex = highestZ; });
+
+    initialPositions.clear();
+    selectedPieces.forEach(p => {
+        initialPositions.set(p, { left: p.offsetLeft, top: p.offsetTop });
+    });
+
+    window.addEventListener('pointermove', onPuzzlePointerMove);
+    window.addEventListener('pointerup', onPuzzlePointerUp);
+}
+
+function onPuzzlePointerMove(e) {
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+
+    if (!dragStarted && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
+        dragStarted = true;
+        isDragging = true;
+    }
+
+    if (isDragging) {
+        selectedPieces.forEach(piece => {
+            const initPos = initialPositions.get(piece);
+            if (initPos) {
+                piece.style.left = `${initPos.left + dx}px`;
+                piece.style.top = `${initPos.top + dy}px`;
+            }
+        });
+    }
+}
+
+function onPuzzlePointerUp(e) {
+    window.removeEventListener('pointermove', onPuzzlePointerMove);
+    window.removeEventListener('pointerup', onPuzzlePointerUp);
+
+    if (!dragStarted && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+        clearPuzzleSelection();
+        const piece = e.target;
+        selectedPieces.add(piece);
+        piece.classList.add('selected');
+    }
+
+    isDragging = false;
+    dragStarted = false;
+}
+
+function clearPuzzleSelection() {
+    selectedPieces.forEach(piece => piece.classList.remove('selected'));
+    selectedPieces.clear();
 }
 
 // QUICK LOAD FROM CATALOG

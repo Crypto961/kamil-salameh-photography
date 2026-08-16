@@ -8,7 +8,7 @@ let cart = [];
 let simState = {
     productKey: 'framed-canvas',
     artworkTitle: 'Faqra Temple, Lebanon',
-    artworkSrc: 'images/lebanon.jpg.avif',
+    artworkSrc: 'images/lebanon.jpg',
     sizeKey: 'A1',
     frameFinish: 'wooden',
     aspectRatio: 1.5, // Natural width / height ratio
@@ -51,15 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
 // CALCULATE NATURAL ASPECT RATIO TO ENSURE ZERO IMAGE CROPPING
 function updateImageAspectRatio(src, callback) {
     const img = new Image();
-    img.src = src;
     img.onload = () => {
-        simState.aspectRatio = img.naturalWidth / img.naturalHeight;
+        if (img.naturalWidth && img.naturalHeight) {
+            simState.aspectRatio = img.naturalWidth / img.naturalHeight;
+        } else {
+            simState.aspectRatio = 1.5;
+        }
         if (callback) callback();
     };
     img.onerror = () => {
-        simState.aspectRatio = 1.5; // Default landscape fall-back
+        simState.aspectRatio = 1.5; // Fallback landscape aspect ratio on image path miss
         if (callback) callback();
     };
+    img.src = src;
 }
 
 // SELECT PRODUCT
@@ -138,6 +142,8 @@ function renderStageSimulation() {
     const mockDesk = document.getElementById('mockDesk');
     const spotlight = document.getElementById('wallSpotlight');
 
+    if (!viewport || !mount) return;
+
     // Calculate Price
     let basePrice = CATALOG_PRICING[simState.productKey][simState.sizeKey];
     if (simState.productKey === 'framed-canvas') {
@@ -192,7 +198,7 @@ function renderStageSimulation() {
                     <img src="${simState.artworkSrc}" alt="Left Page">
                 </div>
                 <div class="book-page-half">
-                    <img src="images/kenya.jpg.avif" alt="Right Page">
+                    <img src="images/kenya.jpg" alt="Right Page">
                 </div>
             </div>
         `;

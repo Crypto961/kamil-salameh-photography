@@ -1,340 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Living Room Art & Puzzle Simulation</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none; /* Prevents unwanted browser text highlighting during drag */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine Art Prints & Editions | Kamil Salameh Photography</title>
+    <meta name="description" content="Acquire museum-grade fine art prints, canvas editions, custom coasters, collector puzzles, and bespoke photo books by Kamil Salameh.">
+    <meta name="theme-color" content="#1F4D68">
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #1a1a1a;
-      color: #e0e0e0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
 
-    .controls {
-      margin-bottom: 15px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      font-size: 14px;
-    }
+    <!-- Fonts & CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
-    .btn {
-      background: #333;
-      color: #fff;
-      border: 1px solid #555;
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
 
-    .btn:hover {
-      background: #444;
-    }
+        /* HEADER */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
 
-    /* Living Room Canvas Container */
-    .room-container {
-      position: relative;
-      width: 900px;
-      height: 550px;
-      background: #8e8d8a; /* Wall color */
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
+        .cart-trigger-btn {
+            background: var(--blue-900, #1f4d68);
+            color: #ffffff;
+            padding: 0.55rem 1.1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-    /* Floor */
-    .room-floor {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 140px;
-      background: #d8c3a5; /* Hardwood tone */
-      border-top: 8px solid #a8927a; /* Baseboard */
-    }
+        .cart-trigger-btn:hover {
+            background: var(--blue-700, #2c688d);
+        }
 
-    /* Furniture Layout */
-    .tv-unit {
-      position: absolute;
-      bottom: 130px;
-      left: 60px;
-      width: 220px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        .cart-count-badge {
+            background: var(--blue-500, #3a82ee);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+        }
 
-    .tv-screen {
-      width: 200px;
-      height: 115px;
-      background: #111;
-      border: 4px solid #222;
-      border-radius: 4px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
+        /* HERO AREA */
+        .store-hero {
+            padding-top: 180px;
+            padding-bottom: 2.5rem;
+            text-align: center;
+        }
 
-    .tv-stand {
-      width: 180px;
-      height: 35px;
-      background: #4e3629;
-      margin-top: 5px;
-      border-radius: 2px;
-    }
+        .store-title {
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+            font-weight: 300;
+            letter-spacing: -0.04em;
+            margin-bottom: 0.8rem;
+        }
 
-    .sofa {
-      position: absolute;
-      bottom: 80px;
-      right: 80px;
-      width: 320px;
-      height: 110px;
-      background: #2b3a42;
-      border-radius: 12px 12px 4px 4px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    }
+        .store-subtitle {
+            max-width: 680px;
+            margin: 0 auto;
+            color: var(--blue-700, #2c688d);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
 
-    .sofa-back {
-      position: absolute;
-      top: -20px;
-      width: 100%;
-      height: 45px;
-      background: #3f5159;
-      border-radius: 10px 10px 0 0;
-    }
+        /* SIMULATOR CONTAINER */
+        .simulator-section {
+            padding: 1rem 0 4rem 0;
+        }
 
-    .sofa-cushions {
-      display: flex;
-      height: 100%;
-      gap: 4px;
-      padding: 6px;
-    }
+        .simulator-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            min-height: 640px;
+        }
 
-    .cushion {
-      flex: 1;
-      background: #354751;
-      border-radius: 4px;
-    }
+        /* STAGE ENVIRONMENT (LIVING ROOM) */
+        .stage-viewport {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: hidden;
+            transition: background 0.5s ease;
+            min-height: 520px;
+            background: #8e8d8a;
+            user-select: none;
+        }
 
-    /* Puzzle Interactive Zone */
-    .puzzle-board {
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 400px;
-      height: 260px;
-      background: rgba(0, 0, 0, 0.15);
-      border: 2px dashed rgba(255, 255, 255, 0.3);
-      border-radius: 4px;
-    }
+        .room-floor {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 130px;
+            background: #d8c3a5;
+            border-top: 8px solid #a8927a;
+            z-index: 1;
+        }
 
-    /* Puzzle Pieces */
-    .puzzle-piece {
-      position: absolute;
-      width: 196px;
-      height: 126px;
-      background-image: url('https://picsum.photos/id/1015/400/260');
-      background-size: 400px 260px;
-      border: 2px solid #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      cursor: grab;
-      touch-action: none;
-      transition: box-shadow 0.15s ease, border-color 0.15s ease;
-    }
+        /* LIVING ROOM FURNITURE */
+        .tv-unit {
+            position: absolute;
+            bottom: 120px;
+            left: 40px;
+            width: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
 
-    .puzzle-piece:active {
-      cursor: grabbing;
-    }
+        .tv-screen {
+            width: 160px;
+            height: 95px;
+            background: #111;
+            border: 3px solid #222;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
 
-    /* Selection States */
-    .puzzle-piece.selected {
-      border-color: #00d2ff;
-      box-shadow: 0 0 12px #00d2ff, 0 6px 15px rgba(0,0,0,0.5);
-      z-index: 100 !important;
-    }
+        .tv-stand {
+            width: 150px;
+            height: 30px;
+            background: #4e3629;
+            margin-top: 4px;
+            border-radius: 2px;
+        }
 
-    /* Piece Positions in Source Image */
-    .p-1 { background-position: 0 0; }
-    .p-2 { background-position: -200px 0; }
-    .p-3 { background-position: 0 -130px; }
-    .p-4 { background-position: -200px -130px; }
-  </style>
+        .sofa {
+            position: absolute;
+            bottom: 70px;
+            right: 40px;
+            width: 260px;
+            height: 95px;
+            background: #2b3a42;
+            border-radius: 12px 12px 4px 4px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            z-index: 2;
+        }
+
+        .sofa-back {
+            position: absolute;
+            top: -18px;
+            width: 100%;
+            height: 40px;
+            background: #3f5159;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .sofa-cushions {
+            display: flex;
+            height: 100%;
+            gap: 4px;
+            padding: 5px;
+        }
+
+        .cushion {
+            flex: 1;
+            background: #354751;
+            border-radius: 4px;
+        }
+
+        /* ARTWORK DISPLAY FRAME */
+        .artwork-presentation-box {
+            position: relative;
+            z-index: 5;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 85%;
+            max-height: 420px;
+        }
+
+        .artwork-image-element {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 1px;
+        }
+
+        /* FINISH FRAMES */
+        .frame-finish-none { border: none; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35); }
+        .frame-finish-wooden {
+            padding: 14px;
+            background: linear-gradient(135deg, #8c5a2b 0%, #543314 40%, #734720 70%, #3d230b 100%);
+            box-shadow: inset 2px 2px 4px rgba(255,255,255,0.35), inset -3px -3px 6px rgba(0,0,0,0.7), 0 25px 50px rgba(0,0,0,0.45);
+            border-radius: 3px;
+        }
+        .frame-finish-black {
+            padding: 14px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #111111 50%, #1a1a1a 100%);
+            box-shadow: inset 1px 1px 3px rgba(255,255,255,0.2), inset -2px -2px 5px rgba(0,0,0,0.8), 0 25px 50px rgba(0,0,0,0.45);
+            border-radius: 2px;
+        }
+        .frame-finish-white {
+            padding: 14px;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            box-shadow: inset 1px 1px 3px rgba(255,255,255,0.9), inset -2px -2px 5px rgba(0,0,0,0.15), 0 20px 40px rgba(0,0,0,0.25);
+            border-radius: 2px;
+        }
+        .frame-finish-gold {
+            padding: 14px;
+            background: linear-gradient(135deg, #f59e0b 0%, #b45309 40%, #d97706 70%, #78350f 100%);
+            box-shadow: inset 2px 2px 4px rgba(255,255,255,0.5), inset -3px -3px 6px rgba(0,0,0,0.6), 0 25px 50px rgba(0,0,0,0.4);
+            border-radius: 3px;
+        }
+        .frame-finish-grey {
+            padding: 14px;
+            background: linear-gradient(135deg, #94a3b8 0%, #475569 100%);
+            box-shadow: inset 1px 1px 3px rgba(255,255,255,0.3), inset -2px -2px 5px rgba(0,0,0,0.5), 0 22px 45px rgba(0,0,0,0.35);
+            border-radius: 2px;
+        }
+
+        /* PUZZLE INTERACTIVE BOARD */
+        .puzzle-board-wrapper {
+            position: relative;
+            width: 380px;
+            height: 250px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            z-index: 5;
+        }
+
+        .puzzle-piece {
+            position: absolute;
+            width: 186px;
+            height: 121px;
+            background-size: 380px 250px;
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: grab;
+            touch-action: none;
+            transition: box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+
+        .puzzle-piece:active { cursor: grabbing; }
+
+        .puzzle-piece.selected {
+            border-color: #00d2ff;
+            box-shadow: 0 0 12px #00d2ff, 0 6px 15px rgba(0,0,0,0.5);
+            z-index: 100 !important;
+        }
+
+        /* COASTERS PREVIEW */
+        .coaster-grid-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            z-index: 5;
+        }
+
+        .coaster-item-disc {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2), inset 0 0 0 2px rgba(255,255,255,0.5);
+        }
+
+        .coaster-item-disc img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* TRAVEL MEMORY BOOK SPREAD */
+        .book-spread-preview {
+            width: min(500px, 90vw);
+            height: 300px;
+            background: #fdfbf7;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+            border-radius: 4px;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+            border: 1px solid #e2e8f0;
+        }
+
+        .book-spread-preview::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 50%;
+            width: 16px;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.18) 100%);
+            z-index: 10;
+        }
+
+        .book-page-half {
+            width: 50%;
+            height: 100%;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #faf8f5;
+        }
+
+        .polaroid-card {
+            background: #ffffff;
+            padding: 8px 8px 24px 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: rotate(-2deg);
+            max-width: 95%;
+            max-height: 95%;
+        }
+
+        .polaroid-card.rotate-right { transform: rotate(2deg); }
+
+        .polaroid-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .polaroid-caption {
+            font-size: 0.65rem;
+            color: #555555;
+            text-align: center;
+            margin-top: 6px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* CONFIGURATOR PANEL */
+        .config-panel {
+            padding: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #ffffff;
+            overflow-y: auto;
+        }
+
+        .config-group { margin-bottom: 1.3rem; }
+
+        .config-label {
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--blue-700, #2c688d);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-selector-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .opt-btn {
+            padding: 0.45rem 0.85rem;
+            border-radius: 7px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            font-size: 0.82rem;
+            color: #0f172a;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover { border-color: #3a82ee; }
+
+        .opt-btn.active {
+            background: var(--blue-900, #1f4d68);
+            color: #ffffff;
+            border-color: var(--blue-900, #1f4d68);
+            font-weight: 600;
+        }
+
+        .image-picker-thumbs {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.4rem;
+        }
+
+        .thumb-item {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .thumb-item.active {
+            border-color: var(--blue-500, #3a82ee);
+            transform: scale(1.04);
+        }
+
+        .thumb-item.selected-multi::after {
+            content: '✓';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: #3a82ee;
+            color: #ffffff;
+            font-size: 0.65rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .custom-upload-card {
+            border: 1px dashed var(--blue-500, #3a82ee);
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: var(--blue-700, #2c688d);
+            font-weight: 600;
+            text-align: center;
+            padding: 4px;
+        }
+
+        .sim-price-display {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--blue-900, #1f4d68);
+            margin-top: 0.8rem;
+        }
+
+        /* CATALOG SECTION */
+        .catalog-section { padding: 3rem 0; }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.06);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover { transform: translateY(-5px); }
+
+        .product-card-img {
+            height: 230px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product-card-body {
+            padding: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .product-title { font-size: 1.2rem; font-weight: 500; margin-bottom: 0.4rem; }
+        .product-desc { font-size: 0.85rem; color: #555555; line-height: 1.5; margin-bottom: 1.2rem; }
+
+        .product-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 0.9rem;
+        }
+
+        .product-price-start { font-size: 1.05rem; font-weight: 600; color: var(--blue-900, #1f4d68); }
+
+        /* DRAWER CART */
+        .cart-drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-drawer-overlay.open { opacity: 1; pointer-events: auto; }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0; right: 0;
+            width: min(460px, 100vw);
+            height: 100%;
+            background: #ffffff;
+            z-index: 2001;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-drawer-overlay.open .cart-drawer { transform: translateX(0); }
+
+        .cart-header {
+            padding: 1.4rem;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+        .cart-items-body { flex-grow: 1; overflow-y: auto; padding: 1.4rem; }
+
+        .cart-item {
+            display: flex;
+            gap: 0.9rem;
+            margin-bottom: 1.1rem;
+            padding-bottom: 1.1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .cart-item-img { width: 65px; height: 65px; border-radius: 6px; object-fit: cover; }
+        .cart-item-details { flex-grow: 1; }
+        .cart-item-name { font-size: 0.9rem; font-weight: 600; }
+        .cart-item-meta { font-size: 0.76rem; color: #666666; margin: 0.2rem 0; }
+        .cart-item-price { font-size: 0.88rem; font-weight: 600; color: var(--blue-900, #1f4d68); }
+
+        .checkout-footer {
+            padding: 1.4rem;
+            border-top: 1px solid #f1f5f9;
+            background: #f8fafc;
+        }
+
+        .checkout-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .cod-badge {
+            background: rgba(31, 77, 104, 0.1);
+            color: var(--blue-900, #1f4d68);
+            padding: 0.4rem;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            text-align: center;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .primary-button {
+            background: var(--blue-900, #1f4d68);
+            color: #ffffff;
+            padding: 0.75rem 1.2rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .primary-button:hover { background: var(--blue-700, #2c688d); }
+
+        @media (max-width: 900px) {
+            .simulator-card { grid-template-columns: 1fr; }
+            .stage-viewport { min-height: 420px; }
+        }
+    </style>
 </head>
+
 <body>
 
-  <div class="controls">
-    <button class="btn" onclick="resetPieces()">Scramble / Reset</button>
-    <button class="btn" onclick="clearSelection()">Deselect All</button>
-    <span><strong>Tip:</strong> Click to toggle selection. Hold <code>Ctrl</code> / <code>Cmd</code> or <code>Shift</code> for multi-select.</span>
-  </div>
+<header class="site-header">
+    <nav class="nav-container" aria-label="Main navigation">
+        <a href="index.html" class="brand">Kamil Salameh Photography</a>
+        <div class="nav-links">
+            <a href="index.html#about" class="nav-link">About</a>
+            <a href="portfolio.html" class="nav-link">Portfolio ↗</a>
+            <a href="order.html" class="nav-link" style="color: var(--blue-500, #3a82ee); font-weight: 600;">Store & Prints</a>
+            <button class="cart-trigger-btn" onclick="openCartDrawer()">
+                <span>Bag</span>
+                <span class="cart-count-badge" id="cartCount">0</span>
+            </button>
+        </div>
+    </nav>
+</header>
 
-  <div class="room-container" id="room">
-    <!-- Background Decor -->
-    <div class="room-floor"></div>
+<main>
 
-    <div class="tv-unit">
-      <div class="tv-screen"></div>
-      <div class="tv-stand"></div>
+<section class="store-hero container">
+    <p class="section-label">Interactive Art Studio</p>
+    <h1 class="store-title">Living Room Visualizer & Interactive Studio</h1>
+    <p class="store-subtitle">
+        Preview prints in a realistic home environment, solve interactive art puzzles, customize coaster sets, or design photo book spreads.
+    </p>
+</section>
+
+<!-- REALISTIC MULTI-PRODUCT SIMULATOR -->
+<section class="simulator-section container">
+    <div class="simulator-card">
+        
+        <!-- Adaptive Living Room Viewport -->
+        <div class="stage-viewport" id="stageViewport">
+            <div class="room-floor"></div>
+
+            <div class="tv-unit">
+                <div class="tv-screen"></div>
+                <div class="tv-stand"></div>
+            </div>
+
+            <div class="sofa">
+                <div class="sofa-back"></div>
+                <div class="sofa-cushions">
+                    <div class="cushion"></div>
+                    <div class="cushion"></div>
+                    <div class="cushion"></div>
+                </div>
+            </div>
+
+            <!-- Dynamic Presentation Stage Mount -->
+            <div id="stageMount">
+                <!-- Dynamically rendered via order.js -->
+            </div>
+        </div>
+
+        <!-- Customizer Panel Controls -->
+        <div class="config-panel">
+            <div>
+                <p class="section-label" style="margin-bottom: 0.5rem;">Interactive Studio</p>
+                <h2 style="font-weight: 300; font-size: 1.5rem; margin-bottom: 1.1rem;">Configure Edition</h2>
+
+                <!-- 1. Select Product Type -->
+                <div class="config-group">
+                    <label class="config-label">1. Product Line</label>
+                    <div class="option-selector-grid" id="productLineOptions">
+                        <button class="opt-btn active" onclick="selectProduct('framed-canvas', this)">Framed Canvas</button>
+                        <button class="opt-btn" onclick="selectProduct('unframed-canvas', this)">Unframed Canvas</button>
+                        <button class="opt-btn" onclick="selectProduct('desk-wood', this)">Desk Wooden Frame</button>
+                        <button class="opt-btn" onclick="selectProduct('coasters', this)">Artisan Coasters</button>
+                        <button class="opt-btn" onclick="selectProduct('puzzle', this)">Collector Puzzle</button>
+                        <button class="opt-btn" onclick="selectProduct('photo-book', this)">Travel Memory Book</button>
+                    </div>
+                </div>
+
+                <!-- 2. Select Artwork (Supports Single, Multi-Select & Custom Uploads) -->
+                <div class="config-group" id="artworkSelectGroup">
+                    <label class="config-label">
+                        <span>2. Select Photograph(s)</span>
+                        <span id="multiSelectHint" style="font-size: 0.7rem; color: #3a82ee; font-weight: normal; display: none;">Multi-select enabled</span>
+                    </label>
+                    <div class="image-picker-thumbs">
+                        <!-- Custom Upload Option -->
+                        <div class="thumb-item custom-upload-card" onclick="triggerCustomUpload()">
+                            <span>＋ Upload Custom</span>
+                            <input type="file" id="customFileInput" accept="image/*" style="display: none;" onchange="handleCustomImageUpload(event)">
+                        </div>
+
+                        <div class="thumb-item active" onclick="handleArtworkClick('images/lebanon.jpg.avif', 'Faqra Temple, Lebanon', this)">
+                            <img src="images/lebanon.jpg.avif" alt="Faqra Temple">
+                        </div>
+                        <div class="thumb-item" onclick="handleArtworkClick('images/astrophotography.jpg.avif', 'Night Skies, Kfardebian', this)">
+                            <img src="images/astrophotography.jpg.avif" alt="Night Skies">
+                        </div>
+                        <div class="thumb-item" onclick="handleArtworkClick('images/kenya.jpg.avif', 'Masai Mara, Kenya', this)">
+                            <img src="images/kenya.jpg.avif" alt="Masai Mara">
+                        </div>
+                        <div class="thumb-item" onclick="handleArtworkClick('images/norway.jpg.avif', 'Nordic Silence, Norway', this)">
+                            <img src="images/norway.jpg.avif" alt="Nordic Silence">
+                        </div>
+                        <div class="thumb-item" onclick="handleArtworkClick('images/france.jpg.avif', 'Parisian Light, France', this)">
+                            <img src="images/france.jpg.avif" alt="Parisian Light">
+                        </div>
+                        <div class="thumb-item" onclick="handleArtworkClick('images/armenia.jpg.avif', 'Armenia', this)">
+                            <img src="images/armenia.jpg.avif" alt="Armenia">
+                        </div>
+                        <div class="thumb-item" onclick="handleArtworkClick('images/turkey.jpg.avif', 'Turkey', this)">
+                            <img src="images/turkey.jpg.avif" alt="Turkey">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Size Option Selector -->
+                <div class="config-group">
+                    <label class="config-label">3. Dimension / Specification</label>
+                    <div class="option-selector-grid" id="sizeOptions">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- 4. Frame Color Finish Selector -->
+                <div class="config-group" id="frameColorGroup">
+                    <label class="config-label">4. Realistic Frame Material</label>
+                    <div class="option-selector-grid" id="frameFinishOptions">
+                        <button class="opt-btn active" onclick="setFrameFinish('wooden', this)">Handcrafted Wood</button>
+                        <button class="opt-btn" onclick="setFrameFinish('black', this)">Matte Black</button>
+                        <button class="opt-btn" onclick="setFrameFinish('white', this)">Gallery White</button>
+                        <button class="opt-btn" onclick="setFrameFinish('grey', this)">Slate Grey</button>
+                        <button class="opt-btn" onclick="setFrameFinish('gold', this)">Brushed Gold</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price & Order Add -->
+            <div>
+                <div class="sim-price-display" id="simPrice">$1,400</div>
+                <button class="primary-button" style="width: 100%; margin-top: 0.8rem; text-align: center;" onclick="addSimulatedToCart()">
+                    Add Configured Item To Bag
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- CATALOG COLLECTION -->
+<section class="catalog-section container">
+    <div class="section-header">
+        <p class="section-label">Bespoke Editions</p>
+        <h2 class="section-title">Product Catalog & Custom Options</h2>
     </div>
 
-    <div class="sofa">
-      <div class="sofa-back"></div>
-      <div class="sofa-cushions">
-        <div class="cushion"></div>
-        <div class="cushion"></div>
-        <div class="cushion"></div>
-      </div>
+    <div class="catalog-grid">
+        <div class="product-card">
+            <img src="images/astrophotography.jpg.avif" alt="Framed Fine Art Canvas" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Fine Art Canvas (Framed)</h3>
+                    <p class="product-desc">Museum-grade heavy canvas encased in handcrafted wood shadowbox floating frames.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $350</span>
+                    <button class="primary-button" style="padding: 0.5rem 0.9rem; font-size: 0.82rem;" onclick="loadProductToSim('framed-canvas')">Simulate Item</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/norway.jpg.avif" alt="Unframed Fine Art Canvas" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Fine Art Canvas (Unframed)</h3>
+                    <p class="product-desc">Archival gallery-wrapped cotton canvas with matte protective coating.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $250</span>
+                    <button class="primary-button" style="padding: 0.5rem 0.9rem; font-size: 0.82rem;" onclick="loadProductToSim('unframed-canvas')">Simulate Item</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/france.jpg.avif" alt="Desk Wooden Frame" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Desk Wooden Frame Print</h3>
+                    <p class="product-desc">Handcrafted desk-standing wooden photo frame for tabletop workspaces.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $180</span>
+                    <button class="primary-button" style="padding: 0.5rem 0.9rem; font-size: 0.82rem;" onclick="loadProductToSim('desk-wood')">Simulate Item</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/product-photography.jpg.avif" alt="Artisan Coaster Sets" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Artisan Ceramic Coasters</h3>
+                    <p class="product-desc">Heat-resistant ceramic coaster sets. Multi-select photos to customize each coaster.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $120</span>
+                    <button class="primary-button" style="padding: 0.5rem 0.9rem; font-size: 0.82rem;" onclick="loadProductToSim('coasters')">Simulate Item</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/belgium.jpg.avif" alt="Collector Fine Art Puzzle" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Collector Fine Art Puzzle</h3>
+                    <p class="product-desc">Interactive wooden puzzle pieces transforming fine art photography into hands-on art.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $150</span>
+                    <button class="primary-button" style="padding: 0.5rem 0.9rem; font-size: 0.82rem;" onclick="loadProductToSim('puzzle')">Simulate Item</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/kenya.jpg.avif" alt="Bespoke Travel Photo Book" class="product-card-img">
+            <div class="product-card-body">
+                <div>
+                    <h3 class="product-title">Bespoke Travel & Memory Book</h3>
+                    <p class="product-desc">Luxury hardbound memory book. Multi-select photos to feature in side-by-side Polaroid format.</p>
+                </div>
+                <div class="product-card-footer">
+                    <span class="product-price-start">From $600</span>
+                    <button class="primary-button" style="padding: 0.5rem 0.9rem; font-size: 0.82rem;" onclick="loadProductToSim('photo-book')">Simulate Item</button>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
-    <!-- Puzzle Frame on Wall -->
-    <div class="puzzle-board" id="board"></div>
+</main>
 
-    <!-- Interactive Pieces -->
-    <div class="puzzle-piece p-1" data-id="1" style="top: 300px; left: 50px;"></div>
-    <div class="puzzle-piece p-2" data-id="2" style="top: 300px; left: 260px;"></div>
-    <div class="puzzle-piece p-3" data-id="3" style="top: 300px; left: 470px;"></div>
-    <div class="puzzle-piece p-4" data-id="4" style="top: 300px; left: 680px;"></div>
-  </div>
+<!-- CART DRAWER -->
+<div class="cart-drawer-overlay" id="cartOverlay">
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <h3 style="font-weight: 400; font-size: 1.25rem;">Shopping Bag</h3>
+            <button class="cart-close-btn" onclick="closeCartDrawer()">&times;</button>
+        </div>
 
-  <script>
-    const pieces = document.querySelectorAll('.puzzle-piece');
-    const container = document.getElementById('room');
-    
-    let selectedPieces = new Set();
-    let isDragging = false;
-    let dragStarted = false;
-    let startX = 0;
-    let startY = 0;
-    let initialPositions = new Map();
+        <div class="cart-items-body" id="cartItemsList"></div>
 
-    // Highest z-index tracking
-    let highestZ = 10;
+        <div class="checkout-footer">
+            <div class="cod-badge">❖ Payment Method: Cash on Delivery (COD)</div>
+            <div class="checkout-total-row">
+                <span>Total Amount:</span>
+                <span id="cartTotalAmount">$0</span>
+            </div>
 
-    pieces.forEach(piece => {
-      piece.addEventListener('pointerdown', onPointerDown);
-    });
+            <form id="checkoutForm" onsubmit="handleCheckout(event)">
+                <div style="margin-bottom: 0.8rem;">
+                    <input type="text" id="custName" required placeholder="Full Name" style="padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%;">
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                    <input type="tel" id="custPhone" required placeholder="Phone Number" style="padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%;">
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                    <textarea id="custAddress" rows="2" required placeholder="Delivery Address" style="padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%;"></textarea>
+                </div>
+                
+                <!-- CUSTOM IMAGE ATTACHMENT FOR CHECKOUT -->
+                <div style="margin-bottom: 0.8rem; background: #ffffff; padding: 0.6rem; border: 1px dashed #cbd5e1; border-radius: 6px;">
+                    <label style="font-size: 0.75rem; font-weight: 600; color: #2c688d; display: block; margin-bottom: 0.3rem;">
+                        Attach Custom Image File (Optional)
+                    </label>
+                    <input type="file" id="checkoutCustomFile" accept="image/*" style="font-size: 0.78rem; width: 100%;">
+                </div>
 
-    // Deselect when clicking empty background space
-    container.addEventListener('pointerdown', (e) => {
-      if (e.target === container || e.target.classList.contains('room-floor')) {
-        clearSelection();
-      }
-    });
+                <button type="submit" class="primary-button" style="width: 100%; text-align: center;">Confirm Order (Cash on Delivery)</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-    function onPointerDown(e) {
-      e.stopPropagation();
-      const piece = e.currentTarget;
-      const isMultiKey = e.ctrlKey || e.metaKey || e.shiftKey;
+<footer class="footer">
+    <div class="container footer-container">
+        <div class="footer-brand">Kamil Salameh Photography</div>
+        <p class="footer-copyright">© 2026 Kamil Salameh Photography Studio. All Rights Reserved.</p>
+    </div>
+</footer>
 
-      dragStarted = false;
-      startX = e.clientX;
-      startY = e.clientY;
-
-      // Selection logic fix (allows selecting, multi-selecting, and toggling off)
-      if (isMultiKey) {
-        if (selectedPieces.has(piece)) {
-          selectedPieces.delete(piece);
-          piece.classList.remove('selected');
-        } else {
-          selectedPieces.add(piece);
-          piece.classList.add('selected');
-        }
-      } else {
-        if (!selectedPieces.has(piece)) {
-          clearSelection();
-          selectedPieces.add(piece);
-          piece.classList.add('selected');
-        }
-      }
-
-      // Bring selected elements to front
-      highestZ += selectedPieces.size;
-      selectedPieces.forEach(p => {
-        p.style.zIndex = highestZ;
-      });
-
-      // Record starting offsets for all selected items
-      initialPositions.clear();
-      selectedPieces.forEach(p => {
-        initialPositions.set(p, {
-          left: p.offsetLeft,
-          top: p.offsetTop
-        });
-      });
-
-      window.addEventListener('pointermove', onPointerMove);
-      window.addEventListener('pointerup', onPointerUp);
-    }
-
-    function onPointerMove(e) {
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-
-      // Threshold check to differentiate between a click and a drag
-      if (!dragStarted && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
-        dragStarted = true;
-        isDragging = true;
-      }
-
-      if (isDragging) {
-        selectedPieces.forEach(piece => {
-          const initPos = initialPositions.get(piece);
-          if (initPos) {
-            piece.style.left = `${initPos.left + dx}px`;
-            piece.style.top = `${initPos.top + dy}px`;
-          }
-        });
-      }
-    }
-
-    function onPointerUp(e) {
-      window.removeEventListener('pointermove', onPointerMove);
-      window.removeEventListener('pointerup', onPointerUp);
-
-      // Handle click vs drag deselection
-      if (!dragStarted && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
-        // If it was just a static click on an already selected item (and not multi-selecting), reset to just this piece
-        clearSelection();
-        const piece = e.target;
-        selectedPieces.add(piece);
-        piece.classList.add('selected');
-      }
-
-      isDragging = false;
-      dragStarted = false;
-    }
-
-    function clearSelection() {
-      selectedPieces.forEach(piece => piece.classList.remove('selected'));
-      selectedPieces.clear();
-    }
-
-    function resetPieces() {
-      clearSelection();
-      const coords = [
-        { top: '380px', left: '70px' },
-        { top: '380px', left: '280px' },
-        { top: '380px', left: '490px' },
-        { top: '380px', left: '680px' }
-      ];
-      pieces.forEach((piece, idx) => {
-        piece.style.top = coords[idx].top;
-        piece.style.left = coords[idx].left;
-        piece.style.zIndex = 1;
-      });
-    }
-  </script>
+<script src="order.js"></script>
 </body>
 </html>

@@ -150,33 +150,102 @@
             left: 1rem;
         }
 
-        /* Dynamic Product Simulation Section */
-        .simulation-container {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px dashed rgba(255, 255, 255, 0.15);
+        /* LIVE VISUAL SIMULATION SECTION */
+        .visual-simulation-wrapper {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 1.5rem;
+            padding: 1.75rem;
             display: none;
             animation: fadeIn 0.4s ease forwards;
         }
 
-        .simulation-container.active {
-            display: block;
+        .visual-simulation-wrapper.active {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            align-items: center;
         }
 
-        .simulation-header {
-            font-size: 0.9rem;
+        /* Simulated Artwork Canvas/Frame Mockup */
+        .preview-canvas-box {
+            width: 100%;
+            height: 220px;
+            background: #141a20;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            border: 10px solid #222; /* Dynamic Frame Color */
+        }
+
+        .preview-artwork-inner {
+            width: 85%;
+            height: 80%;
+            background: linear-gradient(135deg, rgba(111, 175, 199, 0.2), rgba(20, 26, 32, 0.8)), url('images/hero.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .preview-details-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .preview-tag {
+            font-size: 0.75rem;
             font-weight: 600;
             color: rgba(111, 175, 199, 0.9);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
         }
 
-        .simulation-grid {
+        .preview-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .preview-specs-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
             display: grid;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .preview-specs-list span {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Dynamic Options Grid */
+        .simulation-options-grid {
+            display: none;
             grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
+            gap: 1.5rem;
+        }
+
+        .simulation-options-grid.active {
+            display: grid;
         }
 
         /* Success Message State */
@@ -204,8 +273,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 768px) {
-            .form-grid-row, .simulation-grid {
+        @media (max-width: 850px) {
+            .visual-simulation-wrapper.active {
+                grid-template-columns: 1fr;
+            }
+            .form-grid-row, .simulation-options-grid.active {
                 grid-template-columns: 1fr;
             }
         }
@@ -233,7 +305,7 @@
         <p class="section-label">Acquisitions & Inquiries</p>
         <h1 class="order-title">Print Orders & Commissions</h1>
         <p class="order-subtitle">
-            Secure fine art prints, custom merchandise, or book professional commercial architectural shoots.
+            Secure fine art prints, custom merchandise, or book professional commercial architectural shoots with live visual previews.
         </p>
     </header>
 
@@ -271,17 +343,28 @@
                 </div>
             </div>
 
-            <!-- DYNAMIC PRODUCT SIMULATOR PANEL -->
-            <div class="simulation-container" id="simulationContainer">
-                <div class="simulation-header" id="simHeaderTitle">Product Customization Options</div>
-                <div class="simulation-grid" id="simGridContent">
-                    <!-- Injected dynamically via order.js -->
+            <!-- LIVE VISUAL SIMULATION CONTAINER -->
+            <div class="visual-simulation-wrapper" id="visualSimulationWrapper">
+                <div class="preview-canvas-box" id="previewCanvasBox">
+                    <div class="preview-artwork-inner" id="previewArtworkText">Fine Art Preview</div>
                 </div>
+                <div class="preview-details-panel">
+                    <span class="preview-tag">Live Visual Simulation</span>
+                    <h3 class="preview-title" id="simTitleDisplay">Custom Artwork</h3>
+                    <ul class="preview-specs-list" id="simSpecsList">
+                        <!-- Populated dynamically via JavaScript -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- DYNAMIC SELECT OPTIONS CONTAINER -->
+            <div class="simulation-options-grid" id="simulationOptionsGrid">
+                <!-- Populated dynamically via JavaScript -->
             </div>
 
             <div class="input-group">
                 <textarea id="orderDetails" name="message" rows="5" required placeholder=" "></textarea>
-                <label for="orderDetails">Additional Specifications or Delivery Notes</label>
+                <label for="orderDetails">Additional Specifications or Delivery Notes (Cash on Delivery)</label>
             </div>
 
             <button class="primary-button" type="submit" style="width: 100%; border: none; cursor: pointer;">

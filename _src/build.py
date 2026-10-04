@@ -17,7 +17,7 @@ import datetime
 import os
 import re
 
-VERSION = "20261004b"
+VERSION = "20261004c"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -189,7 +189,7 @@ def build_sitemap():
         with open(os.path.join(ROOT, name + ".html"), encoding="utf-8") as f:
             html = f.read()
         images = []
-        for src in re.findall(r'<img[^>]+src="(images/[^"]+\.avif)"', html):
+        for src in re.findall(r'<img[^>]+(?:src|data-full)="(images/[^"]+\.avif)"', html):
             if src not in images:
                 images.append(src)
         out += ["  <url>",

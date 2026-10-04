@@ -51,7 +51,7 @@ This fills in the shared header, footer, `<head>` tags and identity structured d
 - Every page carries JSON-LD for **Kamil Salameh** (`Person`) and **Kamil Salameh Photography** (`ProfessionalService`) with stable `@id`s and `sameAs` links to Instagram, LinkedIn and 35AWARDS. Keep those profiles linking back to the website.
 - `about.html` is a `ProfilePage` with an FAQ (`FAQPage`) that mirrors the visible questions. Keep the visible text and the JSON-LD in sync.
 - `portfolio.html` lists each photo as an `ImageObject` with creator, copyright, license and acquire-license page (eligible for Google Images' "Licensable" badge).
-- Homepage polaroids use 600px JPEG thumbnails in `images/thumbs/` (same colour conversion) so they load instantly on phones; the full-size AVIFs are used in the portfolio.
+- Homepage polaroids and the portfolio grid use JPEG versions in `images/thumbs/` (600px) and `images/web/` (1200px), colour-converted from the BT.2020 originals, so they load fast on phones. The full-screen viewer swaps in the full-size AVIF original (`data-full`). `turkey.jpg.avif` is an HDR (PQ) image and is served as-is.
 - Social previews use JPEGs in `images/og/` (1200×630), converted from the BT.2020 AVIFs with a proper colour conversion.
 
 ## Motion

@@ -35,8 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = card.querySelector("h3").textContent.trim();
 
         lastTrigger = card;
-        lightboxImg.src = img.src;
+        // Show the already-loaded version instantly, then swap in the
+        // full-resolution original once it has downloaded.
+        lightboxImg.src = img.currentSrc || img.src;
         lightboxImg.alt = img.alt;
+        const full = img.dataset.full;
+        if (full && full !== lightboxImg.src) {
+            const hiRes = new Image();
+            hiRes.onload = () => {
+                if (lastTrigger === card && lightbox.classList.contains("active")) {
+                    lightboxImg.src = full;
+                }
+            };
+            hiRes.src = full;
+        }
         lightboxCaption.textContent = title;
 
         lightbox.classList.add("active");

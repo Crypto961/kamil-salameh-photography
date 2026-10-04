@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://kamilsalamehphotography.com/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-10-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
     <image:image>
@@ -17,7 +17,7 @@
   <!-- Portfolio Page -->
   <url>
     <loc>https://kamilsalamehphotography.com/portfolio.html</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-10-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <!-- Country & Topic Gallery Images -->
@@ -56,6 +56,28 @@
     <image:image>
       <image:loc>https://kamilsalamehphotography.com/images/turkey.jpg.avif</image:loc>
     </image:image>
+  </url>
+
+  <!-- Prints & Commissions -->
+  <url>
+    <loc>https://kamilsalamehphotography.com/order.html</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Legal -->
+  <url>
+    <loc>https://kamilsalamehphotography.com/privacy.html</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://kamilsalamehphotography.com/terms.html</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
   </url>
 
 </urlset>

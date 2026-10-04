@@ -5,13 +5,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const orderForm = document.getElementById('orderForm');
-    const orderSuccess = document.getElementById('orderSuccess');
     const orderTypeSelect = document.getElementById('orderType');
     
     const visualSimulationWrapper = document.getElementById('visualSimulationWrapper');
     const simulationOptionsGrid = document.getElementById('simulationOptionsGrid');
     const previewCanvasBox = document.getElementById('previewCanvasBox');
-    const previewArtworkText = document.getElementById('previewArtworkText');
     const simTitleDisplay = document.getElementById('simTitleDisplay');
     const simSpecsList = document.getElementById('simSpecsList');
 
@@ -59,11 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 else previewCanvasBox.style.borderColor = '#333333';
 
                 simTitleDisplay.textContent = `Fine Art Print (${size})`;
-                simSpecsList.innerHTML = `
-                    <li>Format: <span>Fine Art Photographic Print</span></li>
-                    <li>Selected Size: <span>${size}</span></li>
-                    <li>Finishing: <span>${finish}</span></li>
-                `;
+                renderSpecs([
+                    ['Format', 'Fine Art Photographic Print'],
+                    ['Selected Size', size],
+                    ['Finishing', finish]
+                ]);
             }
         },
         "Desk Frames": {
@@ -97,11 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 else previewCanvasBox.style.borderColor = '#1a1a1a';
 
                 simTitleDisplay.textContent = `Desk Wooden Frame`;
-                simSpecsList.innerHTML = `
-                    <li>Product: <span>Desk Frame Stand</span></li>
-                    <li>Dimensions: <span>${size}</span></li>
-                    <li>Material: <span>${finish}</span></li>
-                `;
+                renderSpecs([
+                    ['Product', 'Desk Frame Stand'],
+                    ['Dimensions', size],
+                    ['Material', finish]
+                ]);
             }
         },
         "Coasters": {
@@ -132,11 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 previewCanvasBox.style.borderColor = '#444';
 
                 simTitleDisplay.textContent = `Cup Coaster Set (${count})`;
-                simSpecsList.innerHTML = `
-                    <li>Category: <span>Home Decor Coasters</span></li>
-                    <li>Silhouette: <span>${shape}</span></li>
-                    <li>Quantity: <span>${count}</span></li>
-                `;
+                renderSpecs([
+                    ['Category', 'Home Decor Coasters'],
+                    ['Silhouette', shape],
+                    ['Quantity', count]
+                ]);
             }
         },
         "Collector Puzzle": {
@@ -168,11 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 previewCanvasBox.style.borderColor = '#6fa7c7';
 
                 simTitleDisplay.textContent = `Collector Puzzle`;
-                simSpecsList.innerHTML = `
-                    <li>Item: <span>Photo Collector Puzzle</span></li>
-                    <li>Size: <span>${size}</span></li>
-                    <li>Packaging: <span>${box}</span></li>
-                `;
+                renderSpecs([
+                    ['Item', 'Photo Collector Puzzle'],
+                    ['Size', size],
+                    ['Packaging', box]
+                ]);
             }
         },
         "Memory Book": {
@@ -206,11 +204,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 previewCanvasBox.style.borderColor = '#2c3e50';
 
                 simTitleDisplay.textContent = `Bespoke Memory Book`;
-                simSpecsList.innerHTML = `
-                    <li>Product: <span>Hardcover Storybook</span></li>
-                    <li>Theme: <span>${theme}</span></li>
-                    <li>Extent: <span>${pages}</span></li>
-                `;
+                renderSpecs([
+                    ['Product', 'Hardcover Storybook'],
+                    ['Theme', theme],
+                    ['Extent', pages]
+                ]);
             }
         }
     };
@@ -220,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         orderTypeSelect.addEventListener('change', function () {
             const val = this.value;
             if (productConfigs[val]) {
+                previewCanvasBox.style.borderRadius = '';
                 visualSimulationWrapper.classList.add('active');
                 simulationOptionsGrid.classList.add('active');
                 simulationOptionsGrid.innerHTML = productConfigs[val].optionsHtml;
@@ -232,9 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     sel.addEventListener('change', () => triggerVisualUpdate(val));
                 });
             } else {
-                visualSimulationWrapper.classList.remove('active');
-                simulationOptionsGrid.classList.remove('active');
-                simulationOptionsGrid.innerHTML = '';
+                resetSimulation();
             }
         });
     }
@@ -252,32 +249,27 @@ document.addEventListener('DOMContentLoaded', () => {
         config.updateVisual(inputs);
     }
 
-    // Handle form submission
+    // Spec list is built with textContent so option values are never parsed as HTML
+    function renderSpecs(rows) {
+        simSpecsList.replaceChildren(...rows.map(([label, value]) => {
+            const li = document.createElement('li');
+            const span = document.createElement('span');
+            span.textContent = value;
+            li.append(`${label}: `, span);
+            return li;
+        }));
+    }
+
+    function resetSimulation() {
+        visualSimulationWrapper.classList.remove('active');
+        simulationOptionsGrid.classList.remove('active');
+        simulationOptionsGrid.innerHTML = '';
+        previewCanvasBox.style.borderRadius = '';
+        previewCanvasBox.style.borderColor = '';
+    }
+
+    // Submission itself is handled by site.js (data-ajax-form)
     if (orderForm) {
-        orderForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const formData = {
-                name: document.getElementById('clientName').value.trim(),
-                email: document.getElementById('clientEmail').value.trim(),
-                orderType: orderTypeSelect.value,
-                itemReference: document.getElementById('printPiece').value.trim(),
-                message: document.getElementById('orderDetails').value.trim()
-            };
-
-            simulationOptionsGrid.querySelectorAll('select').forEach(sel => {
-                formData[sel.name] = sel.value;
-            });
-
-            if (!formData.name || !formData.email || !formData.orderType || !formData.message) {
-                alert('Please fill in all required fields before submitting.');
-                return;
-            }
-
-            orderForm.style.display = 'none';
-            orderSuccess.style.display = 'block';
-
-            console.log('Order Form Submitted with Visual Simulation State:', formData);
-        });
+        orderForm.addEventListener('ks:submitted', resetSimulation);
     }
 });

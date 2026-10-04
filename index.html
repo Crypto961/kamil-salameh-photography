@@ -100,14 +100,35 @@
     <style>
         html, body {
             overflow-x: hidden;
+            background: #0b0f12;
+        }
+
+        body {
+            color: #ffffff;
+        }
+
+        .section {
+            padding: clamp(80px, 10vw, 140px) 0;
+        }
+
+        .section-title {
+            color: #ffffff;
+            font-size: clamp(2.4rem, 5vw, 4.6rem);
+            letter-spacing: -.04em;
+            line-height: 1.08;
+        }
+
+        .section .section-label,
+        .hero .section-label {
+            color: var(--blue-400);
         }
 
         /* HERO */
         .hero {
             position: relative;
             overflow: hidden;
-            padding-top: 160px;
-            padding-bottom: 6rem;
+            padding-top: 130px;
+            padding-bottom: 4rem;
             height: auto;
             min-height: 100vh;
             min-height: 100svh;
@@ -116,10 +137,25 @@
             background: var(--black);
         }
 
+        .hero-background img {
+            transform: none;
+        }
+
         .hero-gradient {
             background:
-                linear-gradient(90deg, rgba(7, 20, 28, .92) 0%, rgba(7, 20, 28, .72) 45%, rgba(7, 20, 28, .25) 100%),
-                linear-gradient(0deg, rgba(7, 20, 28, .6) 0%, transparent 35%);
+                linear-gradient(90deg, rgba(11, 15, 18, .78) 0%, rgba(11, 15, 18, .45) 42%, rgba(11, 15, 18, 0) 75%),
+                linear-gradient(0deg, rgba(11, 15, 18, .85) 0%, rgba(11, 15, 18, 0) 30%);
+        }
+
+        .hero-title {
+            font-size: clamp(3.4rem, 6.6vw, 6.4rem);
+            letter-spacing: -.05em;
+            line-height: .95;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, .25);
+        }
+
+        .hero-description {
+            text-shadow: 0 1px 12px rgba(0, 0, 0, .35);
         }
 
         .hero-description {
@@ -209,8 +245,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2.5rem 0 3.5rem;
-            cursor: pointer;
+            padding: 1rem 0;
             perspective: 1200px;
             position: relative;
             border-radius: 24px;
@@ -229,7 +264,7 @@
             background: #ffffff;
             padding: 12px 12px 28px 12px;
             border-radius: 8px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.3);
             transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
             user-select: none;
         }
@@ -239,29 +274,6 @@
         .pola-card:nth-child(3) { transform: translate(-50%, -50%) rotate(-2deg); z-index: 2; left: 50%; top: 50%; }
         .pola-card:nth-child(4) { transform: translate(-50%, -50%) rotate(8deg); z-index: 1; left: 50%; top: 50%; }
 
-        .stack-hint {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.68rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--blue-900);
-            background: rgba(31, 77, 104, 0.06);
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid rgba(31, 77, 104, 0.15);
-            white-space: nowrap;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        .stack-hint .hint-close { display: none; }
-        .polaroid-interactive-container:hover .stack-hint {
-            background: rgba(31, 77, 104, 0.12);
-        }
-        .polaroid-interactive-container.is-expanded .hint-open { display: none; }
-        .polaroid-interactive-container.is-expanded .hint-close { display: inline; }
 
         .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) { left: 12%; transform: translate(-50%, -50%) rotate(-4deg) scale(1.02); z-index: 10; }
         .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) { left: 37%; transform: translate(-50%, -50%) rotate(2deg) scale(1.02); z-index: 11; }
@@ -317,14 +329,27 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2rem;
+            gap: clamp(2rem, 5vw, 4rem);
+        }
+
+        .philosophy-vertical-layout .section-header {
+            max-width: 900px;
+            align-self: flex-start;
         }
 
         .philosophy-copy {
             max-width: 640px;
+            margin-top: 28px;
             font-size: 1.1rem;
             line-height: 1.85;
-            color: #31434d;
+            color: rgba(255, 255, 255, .7);
+        }
+
+        .section-divider {
+            width: var(--container);
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .12), transparent);
         }
 
         .gallery-header-flex {
@@ -341,14 +366,62 @@
         }
 
         /* CONTACT */
+        .contact-card.glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+            border: 1px solid rgba(255, 255, 255, .12);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .4);
+        }
         .contact-card .section-title {
-            font-size: clamp(2.2rem, 5vw, 4.5rem);
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
         }
         .contact-intro {
             margin-top: 20px;
             max-width: 560px;
-            color: #40515a;
+            color: rgba(255, 255, 255, .7);
             line-height: 1.7;
+        }
+        .contact .input-group input,
+        .contact .input-group textarea {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 16px;
+            padding: 1.2rem 1.25rem;
+            color: #ffffff;
+            transition: border-color .3s ease, background .3s ease;
+        }
+        .contact .input-group input:focus,
+        .contact .input-group textarea:focus {
+            border-color: rgba(111, 175, 199, .8);
+            background: rgba(255, 255, 255, .07);
+        }
+        .contact .input-group label {
+            left: 1.25rem;
+            top: 1.2rem;
+            color: rgba(255, 255, 255, .55);
+        }
+        .contact .input-group input:focus + label,
+        .contact .input-group textarea:focus + label,
+        .contact .input-group input:not(:placeholder-shown) + label,
+        .contact .input-group textarea:not(:placeholder-shown) + label {
+            transform: translateY(-32px) scale(.88);
+            transform-origin: left;
+            font-size: inherit;
+            color: rgba(111, 175, 199, .95);
+            background: #10161b;
+            padding: 0 6px;
+            left: 1rem;
+        }
+        .contact .form-consent {
+            color: rgba(255, 255, 255, .75);
+        }
+        .contact .form-consent input {
+            accent-color: var(--blue-400);
+        }
+        .contact .form-status.is-error {
+            color: #ff8a80;
+        }
+        .contact .form-status.is-success {
+            color: #7fd1a8;
         }
         .contact-intro a {
             text-decoration: underline;
@@ -373,6 +446,10 @@
         @media (max-width: 768px) {
             .hero-polaroid-wrapper {
                 display: none;
+            }
+
+            .hero-gradient {
+                background: linear-gradient(180deg, rgba(11, 15, 18, .55) 0%, rgba(11, 15, 18, .45) 40%, rgba(11, 15, 18, .85) 100%);
             }
 
             .hero {
@@ -523,7 +600,7 @@
             <p class="philosophy-copy">From the Roman ruins of Faqra to the fjords of Norway and the night skies above Mount Lebanon, every frame is composed slowly, with patience for the light.</p>
         </div>
 
-        <div class="polaroid-interactive-container" role="button" tabindex="0" aria-expanded="false" aria-label="Philosophy photo stack: press to spread or collapse the photographs">
+        <div class="polaroid-interactive-container is-expanded">
             <div class="polaroid-fan-wrapper">
                 <figure class="pola-card">
                     <div class="pola-frame"><img src="images/lebanon.jpg.avif" alt="Faqra Roman temple ruins at sunset in Kfardebian, Lebanon" loading="lazy" decoding="async"></div>
@@ -542,10 +619,11 @@
                     <figcaption class="pola-caption">Nordic Silence<span class="pola-subcaption">Oslo, Norway</span></figcaption>
                 </figure>
             </div>
-            <span class="stack-hint" aria-hidden="true"><span class="hint-open">✦ Tap to unfold</span><span class="hint-close">✕ Tap to collapse</span></span>
         </div>
     </div>
 </section>
+
+<div class="section-divider" aria-hidden="true"></div>
 
 <!-- 02 — FEATURED WORK -->
 <section class="gallery-section section container" id="featured" aria-labelledby="featured-title">
@@ -555,10 +633,10 @@
                 <p class="section-label">02 — Featured Work</p>
                 <h2 class="section-title" id="featured-title">Selected Highlights</h2>
             </div>
-            <a href="portfolio.html" class="primary-button is-dark">Full Portfolio</a>
+            <a href="portfolio.html" class="primary-button">Full Portfolio</a>
         </div>
 
-        <div class="polaroid-interactive-container" role="button" tabindex="0" aria-expanded="false" aria-label="Featured work photo stack: press to spread or collapse the photographs">
+        <div class="polaroid-interactive-container is-expanded">
             <div class="polaroid-fan-wrapper">
                 <figure class="pola-card">
                     <div class="pola-frame"><img src="images/kenya.jpg.avif" alt="Monkey in the wild in the Masai Mara, Kenya" loading="lazy" decoding="async"></div>
@@ -577,10 +655,11 @@
                     <figcaption class="pola-caption">Fine Art Details<span class="pola-subcaption">Studio Collection</span></figcaption>
                 </figure>
             </div>
-            <span class="stack-hint" aria-hidden="true"><span class="hint-open">✦ Tap to unfold</span><span class="hint-close">✕ Tap to collapse</span></span>
         </div>
     </div>
 </section>
+
+<div class="section-divider" aria-hidden="true"></div>
 
 <!-- 03 — CONTACT -->
 <section class="contact section" id="contact" aria-labelledby="contact-title">
@@ -619,7 +698,7 @@
                     <span>I agree that the details I provide will be used to respond to my inquiry, as described in the <a href="privacy.html">Privacy Policy</a>.</span>
                 </label>
 
-                <button class="primary-button is-dark" type="submit">Send Inquiry</button>
+                <button class="primary-button" type="submit">Send Inquiry</button>
                 <p class="form-status" role="status" aria-live="polite"></p>
             </form>
         </div>

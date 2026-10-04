@@ -3,106 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamil Salameh Photography | Lebanese Photographer & Landscape Photography</title>
+    <title>Kamil Salameh Photography | Lebanese Landscape &amp; Fine Art Photographer</title>
     <meta name="description" content="Kamil Salameh Photography — Lebanese photographer specializing in landscape photography, astrophotography, architecture and fine art across Lebanon and international destinations.">
-    <meta name="theme-color" content="#1F4D68">
+    <link rel="canonical" href="https://kamilsalamehphotography.com/">
 
-    <!-- Favicon / Tab Logo -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Kamil Salameh Photography">
+    <meta property="og:title" content="Kamil Salameh Photography">
+    <meta property="og:description" content="Landscape, astrophotography, architecture and fine art photography from Lebanon and around the world.">
+    <meta property="og:url" content="https://kamilsalamehphotography.com/">
+    <meta property="og:image" content="https://kamilsalamehphotography.com/images/hero-bg.jpg.avif">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#07141C">
+
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="preload" href="fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css?v=20261004">
+    <link rel="preload" href="images/hero-bg.jpg.avif" as="image" type="image/avif">
 
-    <!-- Fonts & Libraries -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Structured Data (JSON-LD) for Google & LLM Entity Recognition -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
     {
-      "@type": "Person",
-      "founder": "@id": https://kamilsalamehphotography.com/#person",
-      "name": "Kamil Salameh",
-      "jobTitle": "Assistant Director of Billing & Professional Photographer",
-      "url": "https://kamilsalamehphotography.com",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "TotalCare"
-      },
-      "sameAs": [
-        "https://35awards.com/author/kamilsalameh",
-        "https://lb.linkedin.com/in/kamilsalameh",        
-        "https://instagram.com/kamilsalameh"
-      ],
-      "knowsAbout": [
-        "Architectural Photography",
-        "Street Photography",
-        "Landscape Photography",
-        "Healthcare Billing Management",
-        "Departmental Strategy",
-        "Corporate Leadership",
-        "Management Consulting",
-        "Mentorship",
-        "Publishing & Authoring",
-        "Canon Photography",
-        "Adobe Lightroom"
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://kamilsalamehphotography.com/#person",
+          "name": "Kamil Salameh",
+          "jobTitle": "Assistant Director of Billing & Professional Photographer",
+          "url": "https://kamilsalamehphotography.com",
+          "image": "https://kamilsalamehphotography.com/images/logo.png",
+          "nationality": {
+            "@type": "Country",
+            "name": "Lebanon"
+          },
+          "worksFor": {
+            "@type": "Organization",
+            "name": "TotalCare"
+          },
+          "sameAs": [
+            "https://35awards.com/author/kamilsalameh",
+            "https://lb.linkedin.com/in/kamilsalameh",
+            "https://instagram.com/kamilsalameh"
+          ],
+          "knowsAbout": [
+            "Architectural Photography",
+            "Street Photography",
+            "Landscape Photography",
+            "Astrophotography",
+            "Fine Art Photography",
+            "Healthcare Billing Management",
+            "Departmental Strategy",
+            "Corporate Leadership",
+            "Management Consulting",
+            "Mentorship",
+            "Publishing & Authoring",
+            "Canon Photography",
+            "Adobe Lightroom"
+          ]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://kamilsalamehphotography.com/#business",
+          "name": "Kamil Salameh Photography",
+          "url": "https://kamilsalamehphotography.com",
+          "logo": "https://kamilsalamehphotography.com/images/logo.png",
+          "image": "https://kamilsalamehphotography.com/images/hero-bg.jpg.avif",
+          "description": "Fine art prints, commissions and photography sessions by Lebanese photographer Kamil Salameh.",
+          "founder": { "@id": "https://kamilsalamehphotography.com/#person" },
+          "priceRange": "$$",
+          "areaServed": "Worldwide",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "LB"
+          },
+          "sameAs": [
+            "https://instagram.com/kamilsalameh"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://kamilsalamehphotography.com/#website",
+          "url": "https://kamilsalamehphotography.com",
+          "name": "Kamil Salameh Photography",
+          "publisher": { "@id": "https://kamilsalamehphotography.com/#business" },
+          "inLanguage": "en"
+        }
       ]
-    },
-    {
-      "@type": "LocalBusiness",
-      "@id": "https://kamilsalamehphotography.com/#business",
-      "name": "Kamil Salameh Photography",
-      "url": "https://kamilsalamehphotography.com",
-      "image": "https://kamilsalamehphotography.com/images/hero-bg.jpg",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "LB"
-      }
     }
-  ]
-}
-</script>
+    </script>
+
     <style>
-        /* BASE & RESET PREVENTIONS */
         html, body {
             overflow-x: hidden;
-            width: 100%;
+            background: #0b0f12;
         }
 
-        /* ORIGINAL LUXURY GLASSMORPHIC HEADER STYLE */
-        .site-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
+        body {
+            color: #ffffff;
         }
 
-      
-        /* HERO SECTION — PUSHED DOWN FOR CLEARANCE */
+        .section {
+            padding: clamp(80px, 10vw, 140px) 0;
+        }
+
+        .section-title {
+            color: #ffffff;
+            font-size: clamp(2.4rem, 5vw, 4.6rem);
+            letter-spacing: -.04em;
+            line-height: 1.08;
+        }
+
+        .section .section-label,
+        .hero .section-label {
+            color: var(--blue-400);
+        }
+
+        /* HERO */
         .hero {
             position: relative;
             overflow: hidden;
-            padding-top: 260px; /* Extra top clearance so title is completely clear of header */
-            padding-bottom: 6rem;
-            min-height: 120vh;
+            padding-top: 130px;
+            padding-bottom: 4rem;
+            height: auto;
+            min-height: 100vh;
+            min-height: 100svh;
             display: flex;
             align-items: center;
+            background: var(--black);
+        }
+
+        .hero-background img {
+            transform: none;
+        }
+
+        .hero-gradient {
+            background:
+                linear-gradient(90deg, rgba(11, 15, 18, .78) 0%, rgba(11, 15, 18, .45) 42%, rgba(11, 15, 18, 0) 75%),
+                linear-gradient(0deg, rgba(11, 15, 18, .85) 0%, rgba(11, 15, 18, 0) 30%);
+        }
+
+        .hero-title {
+            font-size: clamp(3.4rem, 6.6vw, 6.4rem);
+            letter-spacing: -.05em;
+            line-height: .95;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, .25);
+        }
+
+        .hero-description {
+            text-shadow: 0 1px 12px rgba(0, 0, 0, .35);
+        }
+
+        .hero-description {
+            color: rgba(255, 255, 255, .85);
+        }
+
+        .hero .section-label {
+            color: var(--blue-400);
         }
 
         .hero-content {
@@ -112,27 +173,26 @@
         }
 
         .hero-actions {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1rem 1.5rem;
             position: relative;
             z-index: 15;
         }
 
-        /* HERO SINGLE POLAROID OVERLAY */
         .hero-polaroid-wrapper {
             position: absolute;
             right: 7%;
             top: 52%;
             transform: translateY(-45%);
-            z-index: 100;
+            z-index: 5;
         }
 
         .hero-pola-stack {
             position: relative;
-            width: clamp(260px, 22vw, 320px);
+            width: clamp(240px, 22vw, 320px);
         }
         .hero-pola-stack::before {
             content: '';
@@ -154,27 +214,48 @@
             transform: rotate(3deg);
         }
 
-        /* INTERACTIVE POLAROID STACK DYNAMICS */
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.95rem 1.6rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 0.72rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .social-button:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+        .social-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* INTERACTIVE POLAROID STACKS */
         .polaroid-interactive-container {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2.5rem 0;
-            cursor: pointer;
+            padding: 1rem 0;
             perspective: 1200px;
             position: relative;
+            border-radius: 24px;
         }
 
         .polaroid-fan-wrapper {
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 380px;
             width: 100%;
             max-width: 1100px;
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .pola-card {
@@ -183,76 +264,25 @@
             background: #ffffff;
             padding: 12px 12px 28px 12px;
             border-radius: 8px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.3);
             transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
             user-select: none;
-            will-change: transform, opacity, left, top;
         }
 
-        /* FOLDED STACK POSITIONS */
         .pola-card:nth-child(1) { transform: translate(-50%, -50%) rotate(-6deg); z-index: 4; left: 50%; top: 50%; }
         .pola-card:nth-child(2) { transform: translate(-50%, -50%) rotate(4deg); z-index: 3; left: 50%; top: 50%; }
         .pola-card:nth-child(3) { transform: translate(-50%, -50%) rotate(-2deg); z-index: 2; left: 50%; top: 50%; }
         .pola-card:nth-child(4) { transform: translate(-50%, -50%) rotate(8deg); z-index: 1; left: 50%; top: 50%; }
 
-        .polaroid-interactive-container::after {
-            content: '✦ Tap / Click Stack to Unfold';
-            position: absolute;
-            bottom: -10px;
-            font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.7);
-            background: rgba(255, 255, 255, 0.08);
-            padding: 6px 14px;
-            border-radius: 20px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
 
-        .polaroid-interactive-container:hover::after {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.18);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .polaroid-interactive-container.is-expanded::after {
-            content: '✕ Tap / Click to Collapse';
-            background: rgba(0, 0, 0, 0.5);
-            color: #ffffff;
-        }
-
-        /* DESKTOP UNFOLDED SPREAD POSITIONS */
-        .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) {
-            left: 12%;
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(-4deg) scale(1.02);
-            z-index: 10;
-        }
-        .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) {
-            left: 37%;
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(2deg) scale(1.02);
-            z-index: 11;
-        }
-        .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) {
-            left: 63%;
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(-2deg) scale(1.02);
-            z-index: 12;
-        }
-        .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) {
-            left: 88%;
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(5deg) scale(1.02);
-            z-index: 13;
-        }
+        .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) { left: 12%; transform: translate(-50%, -50%) rotate(-4deg) scale(1.02); z-index: 10; }
+        .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) { left: 37%; transform: translate(-50%, -50%) rotate(2deg) scale(1.02); z-index: 11; }
+        .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) { left: 63%; transform: translate(-50%, -50%) rotate(-2deg) scale(1.02); z-index: 12; }
+        .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) { left: 88%; transform: translate(-50%, -50%) rotate(5deg) scale(1.02); z-index: 13; }
 
         .polaroid-interactive-container.is-expanded .pola-card:hover {
-            transform: translate(-50%, -60%) rotate(0deg) scale(1.12) !important;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            transform: translate(-50%, -56%) rotate(0deg) scale(1.1) !important;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
             z-index: 20 !important;
         }
 
@@ -279,7 +309,6 @@
         .pola-caption {
             margin-top: 12px;
             text-align: center;
-            font-family: 'Inter', sans-serif;
             font-size: 0.78rem;
             font-weight: 600;
             color: #1a1a1a;
@@ -290,79 +319,9 @@
         .pola-subcaption {
             display: block;
             font-size: 0.65rem;
-            color: #777777;
+            color: #666666;
             font-weight: 400;
             margin-top: 2px;
-        }
-
-        /* STRICT SINGLE-ROW FOOTER FIX */
-        .footer {
-            background: #ffffff;
-            color: #111111;
-            padding: 2.5rem 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
-        }
-
-        .footer-container {
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: center !important;
-            justify-content: space-between !important;
-            flex-wrap: nowrap !important;
-            gap: 1.5rem;
-        }
-
-        .footer-brand {
-            white-space: nowrap;
-            font-weight: 600;
-        }
-
-        .footer-socials {
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: center !important;
-            gap: 0.8rem;
-            white-space: nowrap;
-        }
-
-        .footer-copyright {
-            margin: 0;
-            white-space: nowrap;
-            font-size: 0.88rem;
-            color: #555555;
-        }
-
-        .social-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            padding: 0.75rem 1.4rem;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .footer .social-button {
-            background: #111111;
-            color: #ffffff;
-            border: 1px solid #111111;
-            font-weight: 500;
-        }
-
-        .footer .social-button:hover {
-            background: #333333;
-            border-color: #333333;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
         }
 
         .philosophy-vertical-layout,
@@ -370,7 +329,27 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2rem;
+            gap: clamp(2rem, 5vw, 4rem);
+        }
+
+        .philosophy-vertical-layout .section-header {
+            max-width: 900px;
+            align-self: flex-start;
+        }
+
+        .philosophy-copy {
+            max-width: 640px;
+            margin-top: 28px;
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: rgba(255, 255, 255, .7);
+        }
+
+        .section-divider {
+            width: var(--container);
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .12), transparent);
         }
 
         .gallery-header-flex {
@@ -379,13 +358,87 @@
             align-items: flex-end;
             gap: 1.5rem;
             flex-wrap: wrap;
+            width: 100%;
         }
 
-        /* RESPONSIVE LAYOUTS */
+        .section-header {
+            margin-bottom: 0;
+        }
+
+        /* CONTACT */
+        .contact-card.glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+            border: 1px solid rgba(255, 255, 255, .12);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .4);
+        }
+        .contact-card .section-title {
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+        }
+        .contact-intro {
+            margin-top: 20px;
+            max-width: 560px;
+            color: rgba(255, 255, 255, .7);
+            line-height: 1.7;
+        }
+        .contact .input-group input,
+        .contact .input-group textarea {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 16px;
+            padding: 1.2rem 1.25rem;
+            color: #ffffff;
+            transition: border-color .3s ease, background .3s ease;
+        }
+        .contact .input-group input:focus,
+        .contact .input-group textarea:focus {
+            border-color: rgba(111, 175, 199, .8);
+            background: rgba(255, 255, 255, .07);
+        }
+        .contact .input-group label {
+            left: 1.25rem;
+            top: 1.2rem;
+            color: rgba(255, 255, 255, .55);
+        }
+        .contact .input-group input:focus + label,
+        .contact .input-group textarea:focus + label,
+        .contact .input-group input:not(:placeholder-shown) + label,
+        .contact .input-group textarea:not(:placeholder-shown) + label {
+            transform: translateY(-32px) scale(.88);
+            transform-origin: left;
+            font-size: inherit;
+            color: rgba(111, 175, 199, .95);
+            background: #10161b;
+            padding: 0 6px;
+            left: 1rem;
+        }
+        .contact .form-consent {
+            color: rgba(255, 255, 255, .75);
+        }
+        .contact .form-consent input {
+            accent-color: var(--blue-400);
+        }
+        .contact .form-status.is-error {
+            color: #ff8a80;
+        }
+        .contact .form-status.is-success {
+            color: #7fd1a8;
+        }
+        .contact-intro a {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .contact-form {
+            margin-top: 48px;
+            gap: 28px;
+        }
+        .contact-form .primary-button {
+            justify-self: start;
+        }
+
         @media (max-width: 1024px) {
             .hero-polaroid-wrapper {
                 right: 3%;
-                transform: translateY(-45%) scale(0.85);
+                transform: translateY(-45%) scale(0.8);
             }
             .pola-card { width: 200px; }
         }
@@ -395,11 +448,18 @@
                 display: none;
             }
 
+            .hero-gradient {
+                background: linear-gradient(180deg, rgba(11, 15, 18, .55) 0%, rgba(11, 15, 18, .45) 40%, rgba(11, 15, 18, .85) 100%);
+            }
+
             .hero {
-                padding-top: 150px;
-                padding-bottom: 3rem;
+                padding-top: 130px;
+                padding-bottom: 4rem;
                 min-height: auto;
-                text-align: left;
+            }
+
+            .hero-title {
+                font-size: clamp(3.2rem, 16vw, 4.5rem);
             }
 
             .hero-actions {
@@ -407,11 +467,19 @@
                 align-items: stretch;
             }
 
-            .hero-actions .primary-button, 
-            .hero-actions .social-button, 
-            .hero-actions .text-button {
+            .hero-actions .primary-button,
+            .hero-actions .social-button {
                 width: 100%;
                 text-align: center;
+            }
+
+            .hero-actions .text-button {
+                align-self: flex-start;
+                margin-top: .5rem;
+            }
+
+            .section-title {
+                font-size: clamp(2.2rem, 10vw, 3rem);
             }
 
             .gallery-header-flex {
@@ -419,17 +487,10 @@
                 align-items: flex-start;
             }
 
-            /* FOOTER WRAPS ON MOBILE ONLY */
-            .footer-container {
-                flex-direction: column !important;
-                text-align: center;
-                gap: 1rem;
-            }
-            .footer-copyright {
-                white-space: normal;
+            .contact-form .primary-button {
+                justify-self: stretch;
             }
 
-            /* MOBILE POLAROID EXPANSION: AUTOMATIC 2-COLUMN GRID (2 PER ROW) */
             .polaroid-fan-wrapper {
                 min-height: 300px;
             }
@@ -439,40 +500,24 @@
             }
 
             .pola-card {
-                width: 160px;
+                width: 150px;
                 padding: 8px 8px 20px 8px;
             }
 
             .pola-caption {
-                font-size: 0.68rem;
+                font-size: 0.66rem;
                 margin-top: 6px;
             }
 
-            .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) {
-                left: 27%;
-                top: 26%;
-                transform: translate(-50%, -50%) rotate(-4deg) scale(1);
-            }
-            .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) {
-                left: 73%;
-                top: 26%;
-                transform: translate(-50%, -50%) rotate(3deg) scale(1);
-            }
-            .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) {
-                left: 27%;
-                top: 74%;
-                transform: translate(-50%, -50%) rotate(-2deg) scale(1);
-            }
-            .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) {
-                left: 73%;
-                top: 74%;
-                transform: translate(-50%, -50%) rotate(4deg) scale(1);
-            }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(1) { left: 27%; top: 26%; transform: translate(-50%, -50%) rotate(-4deg); }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(2) { left: 73%; top: 26%; transform: translate(-50%, -50%) rotate(3deg); }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(3) { left: 27%; top: 74%; transform: translate(-50%, -50%) rotate(-2deg); }
+            .polaroid-interactive-container.is-expanded .pola-card:nth-child(4) { left: 73%; top: 74%; transform: translate(-50%, -50%) rotate(4deg); }
         }
 
         @media (max-width: 480px) {
             .pola-card {
-                width: 145px;
+                width: 138px;
             }
             .polaroid-interactive-container.is-expanded .polaroid-fan-wrapper {
                 min-height: 480px;
@@ -483,161 +528,178 @@
 
 <body>
 
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <header class="site-header">
     <nav class="nav-container" aria-label="Main navigation">
-        <a href="index.html" class="brand">Kamil Salameh Photography</a>
-        <div class="nav-links">
-            <a href="#about" class="nav-link">About</a>
-            <a href="#featured" class="nav-link">Featured</a>
-            <a href="portfolio.html" target="_blank" class="nav-link">Portfolio ↗</a>
-            <a href="#contact" class="nav-link">Contact</a>
-            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="Instagram">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        <a href="index.html" class="brand">Kamil Salameh <span>Photography</span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><span></span><span></span></button>
+        <div class="nav-links" id="primary-nav">
+            <a href="#about">About</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="order.html">Prints &amp; Commissions</a>
+            <a href="#contact">Contact</a>
+            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="nav-instagram" aria-label="Instagram (opens in a new tab)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <span class="nav-instagram-label">Instagram</span>
             </a>
         </div>
     </nav>
 </header>
 
-<main>
+<main id="main">
 
-<!-- HERO SECTION -->
-<section class="hero" id="Home">
+<!-- HERO -->
+<section class="hero" id="home" aria-labelledby="hero-title">
     <div class="hero-background">
-        <img src="images/hero-bg.jpg" alt="Kamil Salameh Photography hero image" loading="eager">
+        <img src="images/hero-bg.jpg.avif" alt="" fetchpriority="high" decoding="async">
     </div>
     <div class="hero-gradient"></div>
 
     <div class="hero-content container">
-        <p class="section-label">Luxury Photography Studio</p>
-       
-        <h1 class="hero-title">
+        <p class="section-label">Fine Art Photography · Lebanon</p>
+
+        <h1 class="hero-title" id="hero-title">
             <span>Stories</span>
             <span>Frozen</span>
             <span>In</span>
             <span>Time</span>
         </h1>
         <p class="hero-description">
-            Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architecture, and fine art, creating cinematic visual stories across Lebanon and around the world.
+            Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architecture and fine art, creating cinematic visual stories across Lebanon and around the world.
         </p>
 
         <div class="hero-actions">
-            <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
-                Check Portfolio ↗
-            </a>
+            <a href="portfolio.html" class="primary-button">View Portfolio</a>
             <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="social-button">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 Instagram
             </a>
-            <a href="#contact" class="text-button">Get In Touch</a>
+            <a href="#contact" class="text-button">Get in Touch</a>
         </div>
     </div>
 
-    <!-- HERO FIXED POLAROID STACK -->
-    <div class="hero-polaroid-wrapper">
+    <div class="hero-polaroid-wrapper" aria-hidden="true">
         <div class="hero-pola-stack">
             <div class="hero-pola-card">
                 <div class="pola-frame">
-                    <img src="images/logo.png" alt="Kamil Salameh">
+                    <img src="images/logo.png" alt="">
                 </div>
-                <div class="pola-caption">
-                    Kamil Salameh Portfolio
-                </div>
+                <div class="pola-caption">Kamil Salameh Portfolio</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 01 — PHILOSOPHY SECTION -->
-<section class="intro section container" id="about">
+<!-- 01 — PHILOSOPHY -->
+<section class="intro section container" id="about" aria-labelledby="about-title">
     <div class="philosophy-vertical-layout">
-        <div class="section-header" style="max-width: 800px;">
+        <div class="section-header">
             <p class="section-label">01 — Philosophy</p>
-            <h2 class="section-title">Photography is not about capturing moments. It is about preserving emotions.</h2>
+            <h2 class="section-title" id="about-title">Photography is not about capturing moments. It is about preserving emotions.</h2>
+            <p class="philosophy-copy">From the Roman ruins of Faqra to the fjords of Norway and the night skies above Mount Lebanon, every frame is composed slowly, with patience for the light.</p>
         </div>
 
-        <div class="polaroid-interactive-container" onclick="togglePolaroidSpread(this)">
+        <div class="polaroid-interactive-container is-expanded">
             <div class="polaroid-fan-wrapper">
-                <div class="pola-card">
-                    <div class="pola-frame"><img src="images/lebanon.jpg.avif" alt="Faqra Temple"></div>
-                    <div class="pola-caption">Faqra Temple<span class="pola-subcaption">Kfardebian, Lebanon</span></div>
-                </div>
-                <div class="pola-card">
-                    <div class="pola-frame"><img src="images/france.jpg.avif" alt="France Architecture"></div>
-                    <div class="pola-caption">Parisian Light<span class="pola-subcaption">Paris, France</span></div>
-                </div>
-                <div class="pola-card">
-                    <div class="pola-frame"><img src="images/astrophotography.jpg.avif" alt="Astrophotography"></div>
-                    <div class="pola-caption">Night Skies<span class="pola-subcaption">Kfardebian, Lebanon</span></div>
-                </div>
-                <div class="pola-card">
-                    <div class="pola-frame"><img src="images/norway.jpg.avif" alt="Norway Fjords"></div>
-                    <div class="pola-caption">Nordic Silence<span class="pola-subcaption">Oslo, Norway</span></div>
-                </div>
+                <figure class="pola-card">
+                    <div class="pola-frame"><img src="images/lebanon.jpg.avif" alt="Faqra Roman temple ruins at sunset in Kfardebian, Lebanon" loading="lazy" decoding="async"></div>
+                    <figcaption class="pola-caption">Faqra Temple<span class="pola-subcaption">Kfardebian, Lebanon</span></figcaption>
+                </figure>
+                <figure class="pola-card">
+                    <div class="pola-frame"><img src="images/france.jpg.avif" alt="Parisian architecture in soft evening light" loading="lazy" decoding="async"></div>
+                    <figcaption class="pola-caption">Parisian Light<span class="pola-subcaption">Paris, France</span></figcaption>
+                </figure>
+                <figure class="pola-card">
+                    <div class="pola-frame"><img src="images/astrophotography.jpg.avif" alt="Star-filled night sky over the mountains of Kfardebian" loading="lazy" decoding="async"></div>
+                    <figcaption class="pola-caption">Night Skies<span class="pola-subcaption">Kfardebian, Lebanon</span></figcaption>
+                </figure>
+                <figure class="pola-card">
+                    <div class="pola-frame"><img src="images/norway.jpg.avif" alt="Calm Norwegian landscape" loading="lazy" decoding="async"></div>
+                    <figcaption class="pola-caption">Nordic Silence<span class="pola-subcaption">Oslo, Norway</span></figcaption>
+                </figure>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 02 — FEATURED WORK SECTION -->
-<section class="gallery-section section container" id="featured">
+<div class="section-divider" aria-hidden="true"></div>
+
+<!-- 02 — FEATURED WORK -->
+<section class="gallery-section section container" id="featured" aria-labelledby="featured-title">
     <div class="featured-vertical-layout">
-        <div class="gallery-header-flex" style="width: 100%;">
+        <div class="gallery-header-flex">
             <div>
                 <p class="section-label">02 — Featured Work</p>
-                <h2 class="section-title">Selected Highlights</h2>
+                <h2 class="section-title" id="featured-title">Selected Highlights</h2>
             </div>
-            <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="primary-button">
-                Check Full Portfolio ↗
-            </a>
+            <a href="portfolio.html" class="primary-button">Full Portfolio</a>
         </div>
 
-        <div class="polaroid-interactive-container" onclick="togglePolaroidSpread(this)">
+        <div class="polaroid-interactive-container is-expanded">
             <div class="polaroid-fan-wrapper">
-                <div class="pola-card">
-                    <div class="pola-frame"><img src="images/kenya.jpg.avif" alt="Kenya Wildlife"></div>
-                    <div class="pola-caption">Wild Horizon<span class="pola-subcaption">Masai Mara, Kenya</span></div>
-                </div>
-                <div class="pola-card">
-                    <div class="pola-frame"><img src="images/belgium.jpg.avif" alt="Belgium Streets"></div>
-                    <div class="pola-caption">Gothic Alleyways<span class="pola-subcaption">Dinant, Belgium</span></div>
-                </div>
-                <div class="pola-card">
-                    <div class="pola-frame"><img src="images/denmark.jpg.avif" alt="Denmark Architecture"></div>
-                    <div class="pola-caption">Nordic Lines<span class="pola-subcaption">Copenhagen, Denmark</span></div>
-                </div>
-                <div class="pola-card">
-                    <div class="pola-frame"><img src="images/product-photography.jpg.avif" alt="Fine Art Still Life"></div>
-                    <div class="pola-caption">Fine Art Details<span class="pola-subcaption">Studio Collection</span></div>
-                </div>
+                <figure class="pola-card">
+                    <div class="pola-frame"><img src="images/kenya.jpg.avif" alt="Monkey in the wild in the Masai Mara, Kenya" loading="lazy" decoding="async"></div>
+                    <figcaption class="pola-caption">Wild Horizon<span class="pola-subcaption">Masai Mara, Kenya</span></figcaption>
+                </figure>
+                <figure class="pola-card">
+                    <div class="pola-frame"><img src="images/belgium.jpg.avif" alt="Historic streets and architecture of Dinant, Belgium" loading="lazy" decoding="async"></div>
+                    <figcaption class="pola-caption">Gothic Alleyways<span class="pola-subcaption">Dinant, Belgium</span></figcaption>
+                </figure>
+                <figure class="pola-card">
+                    <div class="pola-frame"><img src="images/denmark.jpg.avif" alt="Architectural lines in Copenhagen, Denmark" loading="lazy" decoding="async"></div>
+                    <figcaption class="pola-caption">Nordic Lines<span class="pola-subcaption">Copenhagen, Denmark</span></figcaption>
+                </figure>
+                <figure class="pola-card">
+                    <div class="pola-frame"><img src="images/product-photography.jpg.avif" alt="Fine art still life product photograph" loading="lazy" decoding="async"></div>
+                    <figcaption class="pola-caption">Fine Art Details<span class="pola-subcaption">Studio Collection</span></figcaption>
+                </figure>
             </div>
         </div>
     </div>
 </section>
 
-<!-- CONTACT SECTION -->
-<section class="contact section" id="contact">
+<div class="section-divider" aria-hidden="true"></div>
+
+<!-- 03 — CONTACT -->
+<section class="contact section" id="contact" aria-labelledby="contact-title">
     <div class="container">
         <div class="contact-card glass-card">
             <p class="section-label">03 — Contact</p>
-            <h2 class="section-title">Let's create something timeless.</h2>
-            <form class="contact-form" action="https://formspree.io/f/mgawakay" method="POST">
+            <h2 class="section-title" id="contact-title">Let's create something timeless.</h2>
+            <p class="contact-intro">For commissions, collaborations or general questions, send a message below. For prints and products, use the <a href="order.html">order request form</a>.</p>
+
+            <form class="contact-form" action="https://formspree.io/f/mgawakay" method="POST" data-ajax-form>
+                <input type="hidden" name="_subject" value="New inquiry — kamilsalamehphotography.com">
+                <div class="hp-field" aria-hidden="true">
+                    <label for="contact-gotcha">Leave this field empty</label>
+                    <input type="text" id="contact-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+                </div>
+
                 <div class="input-group">
-                    <input type="text" id="name" name="name" required placeholder=" ">
+                    <input type="text" id="name" name="name" required maxlength="100" autocomplete="name" placeholder=" ">
                     <label for="name">Name</label>
                 </div>
                 <div class="input-group">
-                    <input type="email" id="email" name="email" required placeholder=" ">
+                    <input type="email" id="email" name="email" required maxlength="150" autocomplete="email" placeholder=" ">
                     <label for="email">Email</label>
                 </div>
                 <div class="input-group">
-                    <input type="tel" id="phone" name="phone" placeholder=" ">
-                    <label for="phone">Phone Number (Optional)</label>
+                    <input type="tel" id="phone" name="phone" maxlength="30" autocomplete="tel" placeholder=" ">
+                    <label for="phone">Phone (optional)</label>
                 </div>
                 <div class="input-group">
-                    <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
+                    <textarea id="message" name="message" rows="5" required maxlength="5000" placeholder=" "></textarea>
                     <label for="message">Message</label>
                 </div>
+
+                <label class="form-consent">
+                    <input type="checkbox" name="privacy_consent" value="yes" required>
+                    <span>I agree that the details I provide will be used to respond to my inquiry, as described in the <a href="privacy.html">Privacy Policy</a>.</span>
+                </label>
+
                 <button class="primary-button" type="submit">Send Inquiry</button>
+                <p class="form-status" role="status" aria-live="polite"></p>
             </form>
         </div>
     </div>
@@ -645,27 +707,49 @@
 
 </main>
 
-<footer class="footer">
-    <div class="container footer-container">
-        <div class="footer-brand">Kamil Salameh Photography</div>
-        <div class="footer-socials">
-            <a href="portfolio.html" target="_blank" rel="noopener noreferrer" class="social-button" aria-label="Portfolio">
-                <span>View Portfolio ↗</span>
-            </a>
-            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="social-button" aria-label="Instagram Profile">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                <span>Follow on Instagram</span>
-            </a>
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <p class="footer-brand">Kamil Salameh Photography</p>
+                <p class="footer-tagline">Landscape, astrophotography, architecture and fine art photography. Based in Lebanon, working worldwide.</p>
+            </div>
+            <nav aria-label="Footer">
+                <h2>Explore</h2>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="order.html">Prints &amp; Commissions</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
+                </ul>
+            </nav>
+            <nav aria-label="Legal">
+                <h2>Legal</h2>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="privacy.html#cookies">Cookie Policy</a></li>
+                    <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                    <li><button type="button" class="link-button" data-open-privacy-notice>Privacy notice</button></li>
+                </ul>
+            </nav>
         </div>
-        <p class="footer-copyright">© 2026 Kamil Salameh Photography Studio. All Rights Reserved.</p>
+        <div class="footer-bottom">
+            <p>© <span data-year>2026</span> Kamil Salameh Photography. All rights reserved.</p>
+            <p>All photographs on this website are the copyrighted work of Kamil Salameh. They may not be copied, downloaded, reproduced or used, including for AI training, without prior written permission.</p>
+        </div>
     </div>
 </footer>
 
-<script>
-    function togglePolaroidSpread(container) {
-        container.classList.toggle('is-expanded');
-    }
-</script>
+<div class="privacy-notice" id="privacyNotice" role="region" aria-label="Privacy notice" hidden>
+    <strong>Your privacy</strong>
+    <p>This website sets no cookies and uses no analytics or advertising trackers. Details you send through a form are used only to reply to you. <a href="privacy.html">Read the Privacy Policy</a>.</p>
+    <div class="privacy-notice-actions">
+        <button type="button" data-dismiss-notice>Understood</button>
+    </div>
+</div>
+
+<script src="site.js?v=20261004"></script>
 
 </body>
 </html>

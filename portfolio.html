@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photography Portfolio | Kamil Salameh Photography</title>
     <meta name="description" content="Explore the photography portfolio of Kamil Salameh, a Lebanese photographer specializing in landscape photography, astrophotography, architecture and fine art across Lebanon and international destinations.">
-    <meta name="theme-color" content="#0b0f12">
+    <link rel="canonical" href="https://kamilsalamehphotography.com/portfolio.html">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Kamil Salameh Photography">
+    <meta property="og:title" content="Photography Portfolio | Kamil Salameh">
+    <meta property="og:description" content="Landscapes, international destinations, astrophotography and commercial photography by Kamil Salameh.">
+    <meta property="og:url" content="https://kamilsalamehphotography.com/portfolio.html">
+    <meta property="og:image" content="https://kamilsalamehphotography.com/images/kfardebian.jpg.avif">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#07141C">
+
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="preload" href="fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css?v=20261004">
 
     <style>
         body.portfolio-page {
@@ -21,8 +30,11 @@
             color: #ffffff !important;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+        }
+
+        .portfolio-page .section-label {
+            color: var(--blue-400);
         }
 
         .portfolio-main {
@@ -155,6 +167,11 @@
             box-sizing: border-box;
         }
 
+        .portfolio-card:focus-visible {
+            outline: 3px solid var(--blue-400);
+            outline-offset: 4px;
+        }
+
         .portfolio-card:hover {
             transform: translateY(-6px);
             border-color: rgba(255, 255, 255, 0.22);
@@ -254,6 +271,9 @@
         }
 
         .lightbox-close {
+            background: none;
+            border: 0;
+            padding: 0.25rem 0.5rem;
             position: absolute;
             top: 1.5rem;
             right: 2rem;
@@ -268,6 +288,24 @@
 
         .lightbox-close:hover {
             color: rgba(255, 255, 255, 0.6);
+        }
+
+        .portfolio-rights {
+            margin-top: 2.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .portfolio-rights a {
+            color: #ffffff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .lightbox-content {
+            -webkit-user-drag: none;
+            user-select: none;
         }
 
         @media (max-width: 1024px) {
@@ -297,206 +335,182 @@
 
 <body class="portfolio-page">
 
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <header class="site-header">
     <nav class="nav-container" aria-label="Main navigation">
-        <a href="index.html" class="brand">
-            Kamil Salameh Photography
-        </a>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="portfolio.html" class="nav-link active">Portfolio</a>
-            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="Instagram">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        <a href="index.html" class="brand">Kamil Salameh <span>Photography</span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><span></span><span></span></button>
+        <div class="nav-links" id="primary-nav">
+            <a href="index.html#about">About</a>
+            <a href="portfolio.html" aria-current="page">Portfolio</a>
+            <a href="order.html">Prints &amp; Commissions</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="nav-instagram" aria-label="Instagram (opens in a new tab)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <span class="nav-instagram-label">Instagram</span>
             </a>
         </div>
     </nav>
 </header>
 
-<main class="container portfolio-main">
-    
+<main id="main" class="container portfolio-main">
+
     <header class="portfolio-header">
         <p class="section-label">Full Collection</p>
         <h1 class="portfolio-title">Photography Portfolio</h1>
         <p class="portfolio-subtitle">
-            Explore the photography portfolio of Lebanese photographer Kamil Salameh, featuring landscapes, international destinations, astrophotography and commercial photography.
+            Landscapes, international destinations, astrophotography and commercial work by Lebanese photographer Kamil Salameh. Select any image to view it full screen.
         </p>
         <div style="margin-top: 1.5rem;">
             <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer" class="instagram-btn">
-                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 Follow on Instagram
             </a>
         </div>
     </header>
 
-    <!-- LIGHTROOM LIVE WEB ALBUM LAUNCH BANNER -->
-    <section class="lightroom-launch-card">
+    <section class="lightroom-launch-card" aria-labelledby="lightroom-title">
         <div class="lightroom-launch-info">
-            <h2>Adobe Lightroom Web Album</h2>
-            <p>View the live, full-resolution interactive gallery directly hosted on Adobe Lightroom Web.</p>
+            <h2 id="lightroom-title">Adobe Lightroom Web Album</h2>
+            <p>View the full-resolution interactive gallery hosted on Adobe Lightroom. This opens Adobe's website, which has its own privacy policy.</p>
         </div>
         <a href="https://adobe.ly/4wdhXNK" target="_blank" rel="noopener noreferrer" class="lightroom-button">
-            Open Lightroom Web Gallery ↗
+            Open Lightroom Gallery ↗
         </a>
     </section>
 
-    <!-- CATEGORY GRID -->
     <div class="portfolio-grid">
-        
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/france.jpg.avif" alt="France" loading="lazy"></div>
-            <figcaption><h3>France 🇫🇷</h3><span>Location</span></figcaption>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View France photograph full screen">
+            <div class="image-wrapper"><img src="images/france.jpg.avif" alt="Architecture and street scenes in France" loading="lazy" decoding="async"></div>
+            <figcaption><h3>France <span aria-hidden="true">🇫🇷</span></h3><span>Location</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/kenya.jpg.avif" alt="Kenya" loading="lazy"></div>
-            <figcaption><h3>Kenya 🇰🇪</h3><span>Location</span></figcaption>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Kenya photograph full screen">
+            <div class="image-wrapper"><img src="images/kenya.jpg.avif" alt="Wildlife photography in the Masai Mara, Kenya" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Kenya <span aria-hidden="true">🇰🇪</span></h3><span>Location</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/netherlands.jpg.avif" alt="Netherlands" loading="lazy"></div>
-            <figcaption><h3>Netherlands 🇳🇱</h3><span>Location</span></figcaption>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Netherlands photograph full screen">
+            <div class="image-wrapper"><img src="images/netherlands.jpg.avif" alt="Landscape and architecture in the Netherlands" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Netherlands <span aria-hidden="true">🇳🇱</span></h3><span>Location</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/germany.jpg.avif" alt="Germany" loading="lazy"></div>
-            <figcaption><h3>Germany 🇩🇪</h3><span>Location</span></figcaption>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Germany photograph full screen">
+            <div class="image-wrapper"><img src="images/germany.jpg.avif" alt="Architecture photography in Germany" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Germany <span aria-hidden="true">🇩🇪</span></h3><span>Location</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/norway.jpg.avif" alt="Norway" loading="lazy"></div>
-            <figcaption><h3>Norway 🇳🇴</h3><span>Location</span></figcaption>
-        </figure>
-        
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/denmark.jpg.avif" alt="Denmark" loading="lazy"></div>
-            <figcaption><h3>Denmark 🇩🇰</h3><span>Location</span></figcaption>
-        </figure>        
-
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/sweden.jpg.avif" alt="Sweden" loading="lazy"></div>
-            <figcaption><h3>Sweden 🇸🇪</h3><span>Location</span></figcaption>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Norway photograph full screen">
+            <div class="image-wrapper"><img src="images/norway.jpg.avif" alt="Nordic landscape in Norway" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Norway <span aria-hidden="true">🇳🇴</span></h3><span>Location</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/belgium.jpg.avif" alt="Belgium" loading="lazy"></div>
-            <figcaption><h3>Belgium 🇧🇪</h3><span>Location</span></figcaption>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Denmark photograph full screen">
+            <div class="image-wrapper"><img src="images/denmark.jpg.avif" alt="Architectural lines in Copenhagen, Denmark" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Denmark <span aria-hidden="true">🇩🇰</span></h3><span>Location</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/turkey.jpg.avif" alt="Turkey" loading="lazy"></div>
-            <figcaption><h3>Turkey 🇹🇷</h3><span>Location</span></figcaption>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Sweden photograph full screen">
+            <div class="image-wrapper"><img src="images/sweden.jpg.avif" alt="Scandinavian scenery in Sweden" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Sweden <span aria-hidden="true">🇸🇪</span></h3><span>Location</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/lebanon.jpg.avif" alt="Landscape photography in Lebanon by Kamil Salameh capturing Faqra Kfardebian ancient historical ruins in a dramatic sunset using canon camera and editing in adobe lightroom" loading="lazy"></div>
-            <figcaption><h3>Lebanon 🇱🇧</h3><span>Location</span></figcaption>
-        </figure>   
-        
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/kfardebian.jpg.avif" alt="Landscape photography in Lebanon by Kamil Salameh capturing Faqra Kfardebian ancient historical ruins in a dramatic sunset using canon camera and editing in adobe lightroom" loading="lazy"></div>
-            <figcaption><h3>Kfardebian - Lebanon 🇱🇧</h3><span>Location</span></figcaption>
-        </figure>        
-
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/luxembourg.jpg.avif" alt="Luxembourg" loading="lazy"></div>
-            <figcaption><h3>Luxembourg 🇱🇺</h3><span>Location</span></figcaption>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Belgium photograph full screen">
+            <div class="image-wrapper"><img src="images/belgium.jpg.avif" alt="Historic streets of Dinant, Belgium" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Belgium <span aria-hidden="true">🇧🇪</span></h3><span>Location</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/armenia.jpg.avif" alt="Armenia" loading="lazy"></div>
-            <figcaption><h3>Armenia 🇦🇲</h3><span>Location</span></figcaption>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Turkey photograph full screen">
+            <div class="image-wrapper"><img src="images/turkey.jpg.avif" alt="Travel photography in Turkey" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Turkey <span aria-hidden="true">🇹🇷</span></h3><span>Location</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/astrophotography.jpg.avif" alt="Astrophotography" loading="lazy"></div>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Lebanon photograph full screen">
+            <div class="image-wrapper"><img src="images/lebanon.jpg.avif" alt="Faqra Roman temple ruins at sunset in Kfardebian, Lebanon" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Lebanon <span aria-hidden="true">🇱🇧</span></h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Kfardebian, Lebanon photograph full screen">
+            <div class="image-wrapper"><img src="images/kfardebian.jpg.avif" alt="Neowise comet over Kfardebian, Lebanon" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Kfardebian, Lebanon <span aria-hidden="true">🇱🇧</span></h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Luxembourg photograph full screen">
+            <div class="image-wrapper"><img src="images/luxembourg.jpg.avif" alt="Old town architecture in Luxembourg" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Luxembourg <span aria-hidden="true">🇱🇺</span></h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Armenia photograph full screen">
+            <div class="image-wrapper"><img src="images/armenia.jpg.avif" alt="Street photography in Armenia" loading="lazy" decoding="async"></div>
+            <figcaption><h3>Armenia <span aria-hidden="true">🇦🇲</span></h3><span>Location</span></figcaption>
+        </figure>
+
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Astrophotography photograph full screen">
+            <div class="image-wrapper"><img src="images/astrophotography.jpg.avif" alt="Night sky astrophotography in Lebanon" loading="lazy" decoding="async"></div>
             <figcaption><h3>Astrophotography</h3><span>Specialty</span></figcaption>
         </figure>
 
-        <figure class="portfolio-card">
-            <div class="image-wrapper"><img src="images/product-photography.jpg.avif" alt="Product Photography" loading="lazy"></div>
+        <figure class="portfolio-card" tabindex="0" role="button" aria-label="View Product Photography photograph full screen">
+            <div class="image-wrapper"><img src="images/product-photography.jpg.avif" alt="Fine art still life product photograph" loading="lazy" decoding="async"></div>
             <figcaption><h3>Product Photography</h3><span>Commercial</span></figcaption>
         </figure>
 
     </div>
+
+    <p class="portfolio-rights">Interested in a print of any image? <a href="order.html">Request a print</a>. All images © Kamil Salameh. No reproduction without written permission.</p>
 </main>
 
-<!-- LIGHTBOX MODAL -->
-<div class="lightbox-modal" id="lightboxModal" aria-hidden="true">
-    <span class="lightbox-close" id="lightboxClose">&times;</span>
-    <img class="lightbox-content" id="lightboxImage" src="" alt="Expanded View">
+<div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Photograph viewer" aria-hidden="true">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close viewer">&times;</button>
+    <img class="lightbox-content" id="lightboxImage" src="data:," alt="">
     <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 
-<footer class="footer">
-    <div class="container footer-container">
-        <div class="footer-brand">
-            Kamil Salameh Photography
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <p class="footer-brand">Kamil Salameh Photography</p>
+                <p class="footer-tagline">Landscape, astrophotography, architecture and fine art photography. Based in Lebanon, working worldwide.</p>
+            </div>
+            <nav aria-label="Footer">
+                <h2>Explore</h2>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="order.html">Prints &amp; Commissions</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
+                </ul>
+            </nav>
+            <nav aria-label="Legal">
+                <h2>Legal</h2>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="privacy.html#cookies">Cookie Policy</a></li>
+                    <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                    <li><button type="button" class="link-button" data-open-privacy-notice>Privacy notice</button></li>
+                </ul>
+            </nav>
         </div>
-        <p>© 2026 Kamil Salameh Photography Studio. All Rights Reserved.</p>
+        <div class="footer-bottom">
+            <p>© <span data-year>2026</span> Kamil Salameh Photography. All rights reserved.</p>
+            <p>All photographs on this website are the copyrighted work of Kamil Salameh. They may not be copied, downloaded, reproduced or used, including for AI training, without prior written permission.</p>
+        </div>
     </div>
 </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const images = document.querySelectorAll('.portfolio-card img');
-        
-        images.forEach(img => {
-            const applyAspectRatio = () => {
-                if (img.naturalWidth && img.naturalHeight) {
-                    const wrapper = img.closest('.image-wrapper');
-                    wrapper.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
-                }
-            };
+<div class="privacy-notice" id="privacyNotice" role="region" aria-label="Privacy notice" hidden>
+    <strong>Your privacy</strong>
+    <p>This website sets no cookies and uses no analytics or advertising trackers. Details you send through a form are used only to reply to you. <a href="privacy.html">Read the Privacy Policy</a>.</p>
+    <div class="privacy-notice-actions">
+        <button type="button" data-dismiss-notice>Understood</button>
+    </div>
+</div>
 
-            if (img.complete) {
-                applyAspectRatio();
-            } else {
-                img.addEventListener('load', applyAspectRatio);
-            }
-        });
-
-        const lightbox = document.getElementById('lightboxModal');
-        const lightboxImg = document.getElementById('lightboxImage');
-        const lightboxCaption = document.getElementById('lightboxCaption');
-        const closeBtn = document.getElementById('lightboxClose');
-        const cards = document.querySelectorAll('.portfolio-card');
-
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                const img = card.querySelector('img');
-                const title = card.querySelector('h3').textContent;
-                
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-                lightboxCaption.textContent = title;
-                
-                lightbox.classList.add('active');
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        const closeLightbox = () => {
-            lightbox.classList.remove('active');
-            lightbox.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-        };
-
-        closeBtn.addEventListener('click', closeLightbox);
-        
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
-            }
-        });
-    });
-</script>
+<script src="site.js?v=20261004"></script>
+<script src="portfolio.js?v=20261004"></script>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 /* ==========================================================
    KAMIL SALAMEH PHOTOGRAPHY
-   Shared site behaviour: header, mobile menu, privacy notice
+   Shared site behaviour: header, mobile menu, motion, privacy notice
    and form submission.
    ========================================================== */
 
@@ -41,6 +41,82 @@
             }
         });
     }
+
+    /* ---------- Motion: scroll reveals + polaroid stacks ----------
+       Content is fully visible without JavaScript. Only elements that start
+       below the fold are hidden for a reveal, so nothing flashes on load.
+       Respects the visitor's reduced-motion preference. */
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const canObserve = "IntersectionObserver" in window;
+    const belowFold = (el) => el.getBoundingClientRect().top > window.innerHeight * 0.92;
+
+    if (!reduceMotion && canObserve) {
+        const revealables = Array.from(document.querySelectorAll("[data-reveal]")).filter(belowFold);
+        revealables.forEach((el) => el.classList.add("reveal-pending"));
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                el.classList.add("is-revealed");
+                revealObserver.unobserve(el);
+                // Hand control back to the element's own transitions (e.g. hover effects).
+                el.addEventListener("transitionend", function done(e) {
+                    if (e.target !== el || e.propertyName !== "transform") return;
+                    el.classList.remove("reveal-pending", "is-revealed");
+                    el.removeEventListener("transitionend", done);
+                });
+            });
+        }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+
+        revealables.forEach((el) => revealObserver.observe(el));
+
+        // Fallback for jumps (anchor links, fast scrolls): reveal anything the
+        // visitor has already scrolled past, so no section stays hidden.
+        let ticking = false;
+        window.addEventListener("scroll", () => {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(() => {
+                ticking = false;
+                document.querySelectorAll(".reveal-pending:not(.is-revealed)").forEach((el) => {
+                    if (el.getBoundingClientRect().top < window.innerHeight) {
+                        el.classList.add("is-revealed");
+                        revealObserver.unobserve(el);
+                    }
+                });
+            });
+        }, { passive: true });
+    }
+
+    document.querySelectorAll(".polaroid-interactive-container").forEach((stack) => {
+        const setSpread = (spread) => {
+            stack.classList.toggle("is-expanded", spread);
+            stack.setAttribute("aria-expanded", String(spread));
+        };
+
+        // Fan the stack out when it scrolls into view (it is spread by default
+        // in the HTML, so it stays readable without JavaScript).
+        if (!reduceMotion && canObserve && belowFold(stack)) {
+            setSpread(false);
+            const fanObserver = new IntersectionObserver((entries) => {
+                if (!entries[0].isIntersecting) return;
+                window.setTimeout(() => setSpread(true), 250);
+                fanObserver.disconnect();
+            }, { threshold: 0.35 });
+            fanObserver.observe(stack);
+        }
+
+        const toggleSpread = () => setSpread(!stack.classList.contains("is-expanded"));
+        stack.addEventListener("click", toggleSpread);
+        stack.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggleSpread();
+            }
+        });
+    });
 
     /* ---------- Footer year ---------- */
 

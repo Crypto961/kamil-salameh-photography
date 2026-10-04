@@ -8,13 +8,16 @@ Static HTML, CSS and vanilla JavaScript, hosted on GitHub Pages. No build step a
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Home: hero, philosophy, featured work, contact form |
+| `index.html` | Home: hero, philosophy, featured work, services, contact form |
+| `about.html` | About Kamil Salameh: biography, quick facts, FAQ |
 | `portfolio.html` | Full gallery with keyboard-accessible lightbox |
 | `order.html` | Print / product / commission request form with live preview |
 | `privacy.html` | Privacy & Cookie Policy (GDPR, Lebanese Law 81/2018) |
 | `terms.html` | Terms & Conditions, copyright and image licensing, order terms |
 | `404.html` | Not-found page served by GitHub Pages |
-| `sitemap.xml` / `sitemap.xsl` | XML sitemap for search engines, styled for humans |
+| `sitemap.xml` / `sitemap.xsl` | XML sitemap for search engines, styled for humans (generated) |
+| `robots.txt` | Crawler rules: search and AI answer engines get full access; AI training crawlers get text but not `/images/` |
+| `llms.txt` | Plain-text summary of who Kamil Salameh is, for AI assistants |
 
 ## Scripts
 
@@ -33,6 +36,23 @@ Static HTML, CSS and vanilla JavaScript, hosted on GitHub Pages. No build step a
 
 Photos live in `images/` as AVIF exported from Lightroom. They use a wide-gamut BT.2020 colour space signalled in the file's `nclx` colour box. **Do not batch-recompress them with tools that drop that box** (for example sharp/libvips): the colours will look washed out. If you need smaller files, re-export from Lightroom (long edge 2048px, quality ~70).
 
-## Shared header and footer
+## Editing pages (important)
 
-The header, footer and privacy notice markup is repeated in every page. When changing navigation or legal links, update all six HTML files.
+The HTML pages in the repository root are **generated**. Edit the templates in `_src/`, then run:
+
+```sh
+python3 _src/build.py
+```
+
+This fills in the shared header, footer, `<head>` tags and identity structured data, adds per-page SEO and social tags (defined in `SEO` in `_src/build.py`), adds cache-busting version tags to CSS/JS links, and regenerates `sitemap.xml`. Bump `VERSION` in `_src/build.py` whenever `style.css` or a `.js` file changes. GitHub Pages does not publish `_src/`.
+
+## SEO and AI discoverability
+
+- Every page carries JSON-LD for **Kamil Salameh** (`Person`) and **Kamil Salameh Photography** (`ProfessionalService`) with stable `@id`s and `sameAs` links to Instagram, LinkedIn and 35AWARDS. Keep those profiles linking back to the website.
+- `about.html` is a `ProfilePage` with an FAQ (`FAQPage`) that mirrors the visible questions. Keep the visible text and the JSON-LD in sync.
+- `portfolio.html` lists each photo as an `ImageObject` with creator, copyright, license and acquire-license page (eligible for Google Images' "Licensable" badge).
+- Social previews use JPEGs in `images/og/` (1200×630), converted from the BT.2020 AVIFs with a proper colour conversion.
+
+## Motion
+
+Hero entrance animations are CSS-only. Scroll reveals (`data-reveal`) and the polaroid stacks (fan out on scroll, tap to stack/unfold) are handled in `site.js`. Content stays fully visible without JavaScript, and all motion is off for visitors who prefer reduced motion.

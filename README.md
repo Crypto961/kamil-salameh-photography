@@ -1,79 +1,38 @@
-# Kamil Salameh STUDIO
-## Luxury Cinematic Photography Portfolio
+# Kamil Salameh Photography
 
-A premium, cinematic photography portfolio website built with pure HTML5, CSS3, and Vanilla JavaScript.
+Portfolio, print-request and commission website for Lebanese photographer Kamil Salameh — [kamilsalamehphotography.com](https://kamilsalamehphotography.com).
 
-Designed with inspiration from:
+Static HTML, CSS and vanilla JavaScript, hosted on GitHub Pages. No build step and no third-party runtime dependencies.
 
-- Apple
-- Stripe
-- Microsoft
-- IBM
-- World Economic Forum
-- Leica
-- Hasselblad
-- Awwwards-winning digital experiences
-- Active Theory
-- Locomotive
-- Studio Freight
-- Minimal Gallery
+## Pages
 
-The goal of this project is to create a digital experience that feels less like a traditional portfolio and more like an immersive cinematic exhibition.
+| File | Purpose |
+| --- | --- |
+| `index.html` | Home: hero, philosophy, featured work, contact form |
+| `portfolio.html` | Full gallery with keyboard-accessible lightbox |
+| `order.html` | Print / product / commission request form with live preview |
+| `privacy.html` | Privacy & Cookie Policy (GDPR, Lebanese Law 81/2018) |
+| `terms.html` | Terms & Conditions, copyright and image licensing, order terms |
+| `404.html` | Not-found page served by GitHub Pages |
+| `sitemap.xml` / `sitemap.xsl` | XML sitemap for search engines, styled for humans |
 
----
+## Scripts
 
-# Features
+- `site.js` — shared: header state, mobile menu, privacy notice, polaroid stacks, AJAX form submission to Formspree
+- `portfolio.js` — portfolio aspect ratios and lightbox
+- `order.js` — order form product options and preview
 
-## Visual Experience
+## Privacy & security notes
 
-- Luxury editorial aesthetic
-- Large cinematic typography
-- Premium whitespace
-- Soft blue atmospheric lighting
-- Glassmorphism UI
-- Animated gradients
-- Noise texture overlay
-- Abstract grid backgrounds
-- Floating light elements
-- Depth-based interactions
-- 3D perspective effects
+- **No cookies, analytics or trackers.** The Inter font is self-hosted in `fonts/` (SIL OFL 1.1), so no requests go to Google Fonts or other CDNs.
+- Forms post to Formspree (`https://formspree.io/f/mgawakay`) with a honeypot field and a required privacy-consent checkbox.
+- Every page carries a Content-Security-Policy meta tag allowing only same-origin scripts, styles, fonts and images, plus Formspree for form submissions. **No inline scripts** — keep JavaScript in `.js` files or the CSP will block it.
+- If you ever add analytics, embeds (YouTube, Instagram widgets, maps) or third-party fonts: update the CSP, update `privacy.html`, and replace the informational privacy notice with a real opt-in consent prompt that blocks them until accepted.
 
+## Images
 
----
+Photos live in `images/` as AVIF exported from Lightroom. They use a wide-gamut BT.2020 colour space signalled in the file's `nclx` colour box. **Do not batch-recompress them with tools that drop that box** (for example sharp/libvips): the colours will look washed out. If you need smaller files, re-export from Lightroom (long edge 2048px, quality ~70).
 
-# Motion Design
+## Shared header and footer
 
-Powered by:
-
-- GSAP
-- GSAP ScrollTrigger
-- Lenis Smooth Scroll
-- SplitType
-
-
-Included animations:
-
-- Smooth scrolling
-- Momentum scrolling
-- Text character reveals
-- Blur reveals
-- Fade transitions
-- Scale animations
-- Layered parallax
-- Mouse-controlled perspective
-- 3D card tilt
-- Image zoom
-- Ken Burns effects
-- Horizontal pinned gallery
-- Scroll storytelling
-- Floating elements
-- Glass reflections
-- Animated counters
-- Section morphing
-
-
----
-
-# Technology
-
-Built with:
+The header, footer and privacy notice markup is repeated in every page. When changing navigation or legal links, update all six HTML files.

@@ -1,4 +1,34 @@
+# robots.txt for kamilsalamehphotography.com
+#
+# Goal: maximum discoverability for Kamil Salameh and Kamil Salameh Photography
+# in search engines and AI assistants, while keeping the photographs themselves
+# out of AI model training (see terms.html#copyright).
+
+# Search engines and everyone else: full access.
 User-agent: *
 Allow: /
+
+# AI search and answer engines (they cite and link back): full access,
+# including images, so they can describe and recommend the work.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+User-agent: DuckAssistBot
+Allow: /
+
+# AI model training crawlers: may read the text (biography, services, FAQ)
+# so models learn who Kamil Salameh is, but not the copyrighted photographs.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: meta-externalagent
+Allow: /
+Disallow: /images/
 
 Sitemap: https://kamilsalamehphotography.com/sitemap.xml

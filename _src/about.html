@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{SEO}}
+
+{{HEAD}}
+
+    <!-- Page structured data: profile, breadcrumbs and FAQ (mirrors the visible content) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfilePage",
+          "@id": "https://kamilsalamehphotography.com/about.html#webpage",
+          "url": "https://kamilsalamehphotography.com/about.html",
+          "name": "About Kamil Salameh | Lebanese Photographer",
+          "isPartOf": { "@id": "https://kamilsalamehphotography.com/#website" },
+          "mainEntity": { "@id": "https://kamilsalamehphotography.com/#person" },
+          "about": { "@id": "https://kamilsalamehphotography.com/#person" },
+          "dateModified": "2026-10-04",
+          "inLanguage": "en",
+          "breadcrumb": { "@id": "https://kamilsalamehphotography.com/about.html#breadcrumb" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://kamilsalamehphotography.com/about.html#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kamilsalamehphotography.com/" },
+            { "@type": "ListItem", "position": 2, "name": "About Kamil Salameh", "item": "https://kamilsalamehphotography.com/about.html" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://kamilsalamehphotography.com/about.html#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Who is Kamil Salameh?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architectural and street photography, and fine art. He is the founder of Kamil Salameh Photography and photographs across Lebanon and internationally." }
+            },
+            {
+              "@type": "Question",
+              "name": "What does Kamil Salameh Photography specialize in?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Kamil Salameh Photography specializes in landscape photography, astrophotography and night skies, architectural and street photography, fine art photography and product photography, and offers fine art prints, photo gifts, commercial projects and private photography sessions." }
+            },
+            {
+              "@type": "Question",
+              "name": "Where is Kamil Salameh based?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Kamil Salameh is based in Lebanon. Much of his Lebanese work is made in Mount Lebanon around Kfardebian, home to the Roman temple ruins of Faqra, and his portfolio also covers France, Belgium, the Netherlands, Luxembourg, Germany, Denmark, Sweden, Norway, Turkey, Armenia and Kenya." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I buy prints of Kamil Salameh's photographs?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Fine art prints and canvas from A5 to A0, framed or unframed, as well as desk frames, coaster sets, collector puzzles and memory books, can be requested through the order form at kamilsalamehphotography.com/order.html. Each request receives a personal quote; within Lebanon, payment is cash on delivery." }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Kamil Salameh accept photography commissions?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Kamil Salameh accepts commercial and architectural photography projects, product photography and private photography sessions. Requests can be sent through the contact or order forms on kamilsalamehphotography.com." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I use or license Kamil Salameh's photographs?",
+              "acceptedAnswer": { "@type": "Answer", "text": "All photographs are protected by copyright and may not be used without prior written permission. Licensing for editorial or commercial use can be requested through the contact form on kamilsalamehphotography.com." }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I contact Kamil Salameh?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Use the contact form at kamilsalamehphotography.com/#contact or send a direct message on Instagram at @kamilsalameh." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        body.about-page {
+            background: #0b0f12;
+            color: rgba(255, 255, 255, .78);
+        }
+
+        .about-page .section-label {
+            color: var(--blue-400);
+        }
+
+        .about-hero {
+            position: relative;
+            padding: clamp(140px, 18vh, 200px) 0 clamp(60px, 8vw, 100px);
+            overflow: hidden;
+        }
+
+        .about-hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: clamp(40px, 6vw, 90px);
+            align-items: center;
+        }
+
+        .about-hero h1 {
+            color: #ffffff;
+            font-size: clamp(2.8rem, 6.4vw, 5.6rem);
+            font-weight: 300;
+            line-height: 1.02;
+            letter-spacing: -.045em;
+        }
+
+        .about-lead {
+            margin-top: 28px;
+            max-width: 620px;
+            font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+            line-height: 1.8;
+            color: rgba(255, 255, 255, .8);
+        }
+
+        .about-portrait {
+            position: relative;
+            border-radius: 6px;
+            background: #ffffff;
+            padding: 14px 14px 46px;
+            transform: rotate(2.5deg);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .55);
+        }
+
+        .about-portrait img {
+            aspect-ratio: 4 / 5;
+            border-radius: 3px;
+        }
+
+        .about-portrait figcaption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 14px;
+            text-align: center;
+            color: #1a1a1a;
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .about-body {
+            padding-bottom: clamp(80px, 10vw, 140px);
+        }
+
+        .about-columns {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: clamp(40px, 6vw, 100px);
+            align-items: start;
+        }
+
+        .facts {
+            position: sticky;
+            top: 110px;
+            padding: clamp(28px, 3vw, 40px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: linear-gradient(160deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015));
+        }
+
+        .facts h2 {
+            color: #ffffff;
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .facts dl {
+            display: grid;
+            gap: 18px;
+        }
+
+        .facts dt {
+            color: rgba(255, 255, 255, .5);
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        .facts dd {
+            margin-top: 4px;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .facts a {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .prose h2 {
+            margin: 56px 0 16px;
+            color: #ffffff;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 300;
+            letter-spacing: -.03em;
+        }
+
+        .prose h2:first-child {
+            margin-top: 0;
+        }
+
+        .prose p {
+            line-height: 1.85;
+            font-size: 1.05rem;
+        }
+
+        .prose p + p {
+            margin-top: 16px;
+        }
+
+        .prose a {
+            color: #ffffff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .faq {
+            padding: clamp(70px, 9vw, 120px) 0;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .faq-title {
+            color: #ffffff;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 300;
+            letter-spacing: -.04em;
+            margin-bottom: 40px;
+        }
+
+        .faq details {
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+        }
+
+        .faq summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 26px 0;
+            color: #ffffff;
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            font-weight: 400;
+        }
+
+        .faq summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq summary::after {
+            content: "+";
+            color: var(--blue-400);
+            font-size: 1.4rem;
+            line-height: 1;
+            transition: transform .4s var(--transition);
+        }
+
+        .faq details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq details p {
+            max-width: 760px;
+            padding-bottom: 26px;
+            line-height: 1.8;
+        }
+
+        .faq details a {
+            color: #ffffff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .about-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .about-cta .ghost-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 18px 34px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, .25);
+            color: #ffffff;
+            font-size: .72rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            transition: background .3s ease;
+        }
+
+        .about-cta .ghost-button:hover {
+            background: rgba(255, 255, 255, .08);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .about-hero .section-label,
+            .about-hero h1,
+            .about-hero .about-lead,
+            .about-hero .about-cta {
+                animation: ks-rise 1.1s cubic-bezier(.22, 1, .36, 1) both;
+            }
+            .about-hero h1 { animation-delay: .12s; }
+            .about-hero .about-lead { animation-delay: .3s; }
+            .about-hero .about-cta { animation-delay: .45s; }
+            .about-portrait {
+                animation: ks-drop 1.3s cubic-bezier(.34, 1.56, .64, 1) .4s both;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .about-hero-grid,
+            .about-columns {
+                grid-template-columns: 1fr;
+            }
+            .about-portrait {
+                max-width: 360px;
+                margin: 0 auto;
+            }
+            .facts {
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body class="about-page">
+
+{{HEADER}}
+
+<main id="main">
+
+    <section class="about-hero" aria-labelledby="about-title">
+        <div class="container about-hero-grid">
+            <div>
+                <p class="section-label">About the photographer</p>
+                <h1 id="about-title">Kamil Salameh</h1>
+                <p class="about-lead">Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architectural and street photography, and fine art. He is the founder of <strong>Kamil Salameh Photography</strong>, a fine art photography studio based in Lebanon that creates cinematic visual stories across Lebanon and around the world.</p>
+                <div class="about-cta">
+                    <a href="portfolio.html" class="primary-button">View Portfolio</a>
+                    <a href="order.html" class="ghost-button">Prints &amp; Commissions</a>
+                </div>
+            </div>
+            <figure class="about-portrait">
+                <img src="images/lebanon.jpg.avif" alt="Faqra Roman temple ruins at sunset in Kfardebian, Lebanon, photographed by Kamil Salameh" width="2048" height="1639" fetchpriority="high" decoding="async">
+                <figcaption>Faqra Temple · Kfardebian, Lebanon</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="about-body" aria-label="Biography">
+        <div class="container about-columns">
+
+            <aside class="facts" aria-labelledby="facts-title" data-reveal>
+                <h2 id="facts-title">At a glance</h2>
+                <dl>
+                    <div><dt>Name</dt><dd>Kamil Salameh</dd></div>
+                    <div><dt>Studio</dt><dd>Kamil Salameh Photography</dd></div>
+                    <div><dt>Based in</dt><dd>Lebanon</dd></div>
+                    <div><dt>Specialties</dt><dd>Landscape, astrophotography, architecture, street, fine art and product photography</dd></div>
+                    <div><dt>Photographed in</dt><dd>Lebanon, France, Belgium, the Netherlands, Luxembourg, Germany, Denmark, Sweden, Norway, Turkey, Armenia and Kenya</dd></div>
+                    <div><dt>Tools</dt><dd>Canon cameras, Adobe Lightroom</dd></div>
+                    <div><dt>Offers</dt><dd>Fine art prints and canvas, photo gifts, commercial and architectural projects, private sessions</dd></div>
+                    <div><dt>Profiles</dt><dd><a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer me">Instagram</a> · <a href="https://lb.linkedin.com/in/kamilsalameh" target="_blank" rel="noopener noreferrer me">LinkedIn</a> · <a href="https://35awards.com/author/kamilsalameh" target="_blank" rel="noopener noreferrer me">35AWARDS</a></dd></div>
+                </dl>
+            </aside>
+
+            <div class="prose">
+                <h2 data-reveal>Lebanon, seen slowly</h2>
+                <p data-reveal>Much of Kamil Salameh's Lebanese work is made in Mount Lebanon, around Kfardebian. There he photographs the Roman temple ruins of Faqra in the last light of the day, and the dark mountain skies above them, including the Neowise comet. His landscapes favour patience over spectacle: waiting for the light, composing carefully, and developing each image with care in Adobe Lightroom.</p>
+
+                <h2 data-reveal>A portfolio beyond borders</h2>
+                <p data-reveal>Beyond Lebanon, his portfolio follows architecture, streets and landscapes across France, Belgium, the Netherlands, Luxembourg, Germany, Denmark, Sweden and Norway, as well as Turkey, Armenia and the wildlife of the Masai Mara in Kenya. From the riverside facades of Dinant to the colourful harbour of Copenhagen, the work is united by a cinematic, emotional approach: <em>photography is not about capturing moments, it is about preserving emotions</em>.</p>
+
+                <h2 data-reveal>Craft and process</h2>
+                <p data-reveal>Kamil works with Canon cameras and develops every photograph in Adobe Lightroom. Alongside landscape and astrophotography, he creates product and still-life photography for brands, and architectural images for businesses.</p>
+
+                <h2 data-reveal>Prints, gifts and commissions</h2>
+                <p data-reveal>Kamil Salameh Photography produces fine art photographic prints and canvas from A5 to A0, framed or unframed, as well as wooden desk frames, coaster sets, collector puzzles and bespoke memory books. The studio also accepts commercial and architectural projects and private photography sessions. Every request receives a personal quote: <a href="order.html">request a print or commission</a>.</p>
+
+                <h2 data-reveal>Professional background</h2>
+                <p data-reveal>Alongside photography, Kamil Salameh is Assistant Director of Billing at TotalCare, with experience in healthcare billing management, departmental strategy, leadership and mentorship. More on <a href="https://lb.linkedin.com/in/kamilsalameh" target="_blank" rel="noopener noreferrer me">LinkedIn</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq" aria-labelledby="faq-title">
+        <div class="container">
+            <p class="section-label">FAQ</p>
+            <h2 class="faq-title" id="faq-title" data-reveal>Frequently asked questions</h2>
+
+            <details data-reveal>
+                <summary>Who is Kamil Salameh?</summary>
+                <p>Kamil Salameh is a Lebanese photographer specializing in landscape photography, astrophotography, architectural and street photography, and fine art. He is the founder of Kamil Salameh Photography and photographs across Lebanon and internationally.</p>
+            </details>
+            <details data-reveal>
+                <summary>What does Kamil Salameh Photography specialize in?</summary>
+                <p>Kamil Salameh Photography specializes in landscape photography, astrophotography and night skies, architectural and street photography, fine art photography and product photography, and offers fine art prints, photo gifts, commercial projects and private photography sessions.</p>
+            </details>
+            <details data-reveal>
+                <summary>Where is Kamil Salameh based?</summary>
+                <p>Kamil Salameh is based in Lebanon. Much of his Lebanese work is made in Mount Lebanon around Kfardebian, home to the Roman temple ruins of Faqra, and his portfolio also covers France, Belgium, the Netherlands, Luxembourg, Germany, Denmark, Sweden, Norway, Turkey, Armenia and Kenya.</p>
+            </details>
+            <details data-reveal>
+                <summary>Can I buy prints of Kamil Salameh's photographs?</summary>
+                <p>Yes. Fine art prints and canvas from A5 to A0, framed or unframed, as well as desk frames, coaster sets, collector puzzles and memory books, can be requested through the <a href="order.html">order form</a>. Each request receives a personal quote; within Lebanon, payment is cash on delivery.</p>
+            </details>
+            <details data-reveal>
+                <summary>Does Kamil Salameh accept photography commissions?</summary>
+                <p>Yes. Kamil Salameh accepts commercial and architectural photography projects, product photography and private photography sessions. Requests can be sent through the <a href="index.html#contact">contact form</a> or the <a href="order.html">order form</a>.</p>
+            </details>
+            <details data-reveal>
+                <summary>Can I use or license Kamil Salameh's photographs?</summary>
+                <p>All photographs are protected by copyright and may not be used without prior written permission. Licensing for editorial or commercial use can be requested through the <a href="index.html#contact">contact form</a>. See the <a href="terms.html#copyright">Terms &amp; Conditions</a>.</p>
+            </details>
+            <details data-reveal>
+                <summary>How can I contact Kamil Salameh?</summary>
+                <p>Use the <a href="index.html#contact">contact form</a> or send a direct message on <a href="https://instagram.com/kamilsalameh" target="_blank" rel="noopener noreferrer">Instagram at @kamilsalameh</a>.</p>
+            </details>
+        </div>
+    </section>
+
+</main>
+
+{{FOOTER}}
+
+</body>
+</html>

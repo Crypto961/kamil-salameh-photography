@@ -1,7 +1,7 @@
 /* ==========================================================
    KAMIL SALAMEH PHOTOGRAPHY
-   Shared site behaviour: header, mobile menu, privacy notice,
-   polaroid stacks and form submission.
+   Shared site behaviour: header, mobile menu, privacy notice
+   and form submission.
    ========================================================== */
 
 "use strict";
@@ -82,23 +82,6 @@
                 notice.hidden = false;
                 const dismiss = notice.querySelector("[data-dismiss-notice]");
                 if (dismiss) dismiss.focus();
-            }
-        });
-    });
-
-    /* ---------- Polaroid stacks ---------- */
-
-    document.querySelectorAll(".polaroid-interactive-container").forEach((stack) => {
-        const toggleStack = () => {
-            const expanded = stack.classList.toggle("is-expanded");
-            stack.setAttribute("aria-expanded", String(expanded));
-        };
-
-        stack.addEventListener("click", toggleStack);
-        stack.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                toggleStack();
             }
         });
     });

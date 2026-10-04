@@ -14,6 +14,7 @@ Static HTML, CSS and vanilla JavaScript, hosted on GitHub Pages. No build step a
 | `privacy.html` | Privacy & Cookie Policy (GDPR, Lebanese Law 81/2018) |
 | `terms.html` | Terms & Conditions, copyright and image licensing, order terms |
 | `404.html` | Not-found page served by GitHub Pages |
+| `sitemap.xml` / `sitemap.xsl` | XML sitemap for search engines, styled for humans |
 
 ## Scripts
 
@@ -30,7 +31,7 @@ Static HTML, CSS and vanilla JavaScript, hosted on GitHub Pages. No build step a
 
 ## Images
 
-Photos live in `images/` as AVIF, max 2048px on the long edge, with EXIF/XMP metadata (camera serial numbers etc.) stripped. Keep new uploads under ~500 KB and strip metadata before committing.
+Photos live in `images/` as AVIF exported from Lightroom. They use a wide-gamut BT.2020 colour space signalled in the file's `nclx` colour box. **Do not batch-recompress them with tools that drop that box** (for example sharp/libvips): the colours will look washed out. If you need smaller files, re-export from Lightroom (long edge 2048px, quality ~70).
 
 ## Shared header and footer
 

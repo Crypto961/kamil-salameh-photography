@@ -158,7 +158,7 @@ def build():
                 .replace("{{HEADER}}", nav)
                 .replace("{{FOOTER}}", footer))
         if name == "index":
-            html = html.replace('href="index.html#contact">Contact', 'href="#contact">Contact')
+            html = html.replace('href="/#contact">Contact', 'href="#contact">Contact')
         if name == "404":
             # Served for any missing URL, including nested ones, so use root-relative paths.
             html = re.sub(r'(href|src)="(?!https?:|#|data:|/)([^"]+)"', r'\1="/\2"', html)

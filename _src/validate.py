@@ -262,6 +262,7 @@ def check_robots():
 def write_inventory(photos, parsed):
     os.makedirs(os.path.join(ROOT, "_reports"), exist_ok=True)
     sys.path.insert(0, HERE)
+    sys.dont_write_bytecode = True  # keep _src/ free of __pycache__
     import build  # noqa: E402  (reuse the dimension reader)
     rows = []
     for p in photos:

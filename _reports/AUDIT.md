@@ -77,7 +77,11 @@ The repository holds one photograph per destination: 3 of Lebanon, 8 of Europe, 
 
 Resolved on 16 October 2026: the two Lebanon photographs were published; the hero image was removed; "Enforce HTTPS" was turned on by the owner (not independently verifiable from this environment).
 
-Still open:
+On 16 October 2026 the owner also confirmed the remaining places: Bekaa Valley (field), statue of Saint Charbel in Faraya, Zaanse Schans in Zaandam (windmills), Stockholm (spire), Grund in Luxembourg (valley) and Saarburg, Germany (church; written "Saaburg" by the owner and read as Saarburg). Captions, alt text, filenames and structured data were updated from `_src/photos.json`.
+
+Still open: none from the audit.
+
+Previously open (now resolved):
 
 1. **Unverified places**: confirm the windmill site, German town, Swedish church and Luxembourg district. Edit `_src/photos.json`, then build.
 2. **Lebanon photographs**: if the field and the statue can be located (town or monument name), add it to their `place`/`alt` in `_src/photos.json`.

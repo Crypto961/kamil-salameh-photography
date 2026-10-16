@@ -32,28 +32,28 @@
     {
       "id": "netherlands",
       "original": "images/netherlands.jpg.avif",
-      "slug": "dutch-windmills-riverbank-netherlands-kamil-salameh",
-      "title": "Dutch Windmills",
-      "place": "Netherlands",
-      "alt": "Two traditional Dutch windmills on a riverbank in warm evening light, Netherlands",
+      "slug": "zaanse-schans-windmills-zaandam-netherlands-kamil-salameh",
+      "title": "Zaanse Schans Windmills",
+      "place": "Zaandam, Netherlands",
+      "alt": "Traditional windmills of the Zaanse Schans on the riverbank in warm evening light, Zaandam, Netherlands",
       "portfolio": true,
       "evidence": {
         "subject": "pixels",
-        "location": "filename (Netherlands); exact site unverified"
+        "location": "owner confirmation (2026-10-16): Zaanse Schans, Zaandam"
       },
       "original_sha256": "6185abc077288172f37313eee70f438c069484f9688211f148f2355adeae4646"
     },
     {
       "id": "germany",
       "original": "images/germany.jpg.avif",
-      "slug": "church-spire-autumn-leaves-germany-kamil-salameh",
+      "slug": "church-autumn-leaves-saarburg-germany-kamil-salameh",
       "title": "Church in Autumn",
-      "place": "Germany",
-      "alt": "Red-brick church with a tall spire framed by yellow autumn leaves under a blue sky, Germany",
+      "place": "Saarburg, Germany",
+      "alt": "Red-brick church with a tall spire framed by yellow autumn leaves under a blue sky in Saarburg, Germany",
       "portfolio": true,
       "evidence": {
         "subject": "pixels",
-        "location": "filename (Germany); town and church unverified"
+        "location": "owner confirmation (2026-10-16): Saarburg (owner wrote 'Saaburg'; read as Saarburg, Rhineland-Palatinate)"
       },
       "original_sha256": "550e10e7e1adbe7b1a0f5207c9ddb4724b80fea4318e5e9372c42e0bdd2d454d"
     },
@@ -88,14 +88,14 @@
     {
       "id": "sweden",
       "original": "images/sweden.jpg.avif",
-      "slug": "gothic-church-spire-street-sweden-kamil-salameh",
+      "slug": "gothic-church-spire-stockholm-sweden-kamil-salameh",
       "title": "Gothic Spire",
-      "place": "Sweden",
-      "alt": "Openwork Gothic church spire seen down a historic street, Sweden",
+      "place": "Stockholm, Sweden",
+      "alt": "Openwork Gothic church spire seen down a historic street in Stockholm, Sweden",
       "portfolio": true,
       "evidence": {
         "subject": "pixels",
-        "location": "filename (Sweden); city and church unverified (resembles Riddarholmen Church, Stockholm)"
+        "location": "owner confirmation (2026-10-16): Stockholm (church not named)"
       },
       "original_sha256": "0ba047522a20932df1662966c0dfa33fb32d24cc9c5c00a8930693bcd47fb224"
     },
@@ -159,42 +159,42 @@
     {
       "id": "lebanon-1",
       "original": "images/lebanon-1.jpg.avif",
-      "slug": "green-field-tree-line-lebanon-kamil-salameh",
+      "slug": "bekaa-valley-field-lebanon-kamil-salameh",
       "title": "Open Field",
-      "place": "Lebanon",
-      "alt": "Green field and a line of trees beneath a blue sky with white clouds, Lebanon",
+      "place": "Bekaa Valley, Lebanon",
+      "alt": "Green field and a line of trees beneath a blue sky with white clouds in the Bekaa Valley, Lebanon",
       "portfolio": true,
       "evidence": {
         "subject": "pixels",
-        "location": "owner (filename; publication confirmed by the owner on 2026-10-16); exact site unverified"
+        "location": "owner confirmation (2026-10-16): Bekaa Valley"
       },
       "original_sha256": "35901a59e96b5649495c304aa121caa45dbcd6158486f62a38f0cfda0366398e"
     },
     {
       "id": "lebanon-2",
       "original": "images/lebanon-2.jpg.avif",
-      "slug": "praying-statue-silhouette-sunset-lebanon-kamil-salameh",
-      "title": "Statue at Sunset",
-      "place": "Lebanon",
-      "alt": "Silhouette of a hooded praying statue against an orange setting sun, Lebanon",
+      "slug": "st-charbel-statue-faraya-lebanon-kamil-salameh",
+      "title": "Statue of Saint Charbel",
+      "place": "Faraya, Lebanon",
+      "alt": "Silhouette of the statue of Saint Charbel against an orange setting sun in Faraya, Lebanon",
       "portfolio": true,
       "evidence": {
-        "subject": "pixels (statue not identified)",
-        "location": "owner (filename; publication confirmed by the owner on 2026-10-16); exact site unverified"
+        "subject": "pixels; statue identified by the owner as Saint Charbel",
+        "location": "owner confirmation (2026-10-16): statue of Saint Charbel, Faraya"
       },
       "original_sha256": "2868f4e771dc02d02fc5e357057b5c4630e46f79ae00d2ebac6b53b69da46d29"
     },
     {
       "id": "luxembourg",
       "original": "images/luxembourg.jpg.avif",
-      "slug": "old-town-valley-viaduct-luxembourg-kamil-salameh",
+      "slug": "grund-valley-viaduct-luxembourg-kamil-salameh",
       "title": "Old Town Valley",
-      "place": "Luxembourg",
-      "alt": "Old town river valley with a stone viaduct, autumn trees and a church spire, Luxembourg",
+      "place": "Grund, Luxembourg",
+      "alt": "The Grund quarter of Luxembourg in the Alzette valley, with a stone viaduct, autumn trees and a church spire",
       "portfolio": true,
       "evidence": {
         "subject": "pixels",
-        "location": "filename (Luxembourg); district unverified (resembles the Grund, Luxembourg City)"
+        "location": "owner confirmation (2026-10-16): Grund, Luxembourg"
       },
       "original_sha256": "aae0865aeade669deb4ef22862fe18bccc8fc61f8abbf0eb007270f5f7040005"
     },

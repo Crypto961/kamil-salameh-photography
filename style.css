@@ -2836,10 +2836,6 @@ body.legal-page {
 
 @media (prefers-reduced-motion: no-preference) {
 
-    .hero-background img {
-        animation: ks-settle 3.2s cubic-bezier(.22, 1, .36, 1) both;
-    }
-
     .hero-gradient {
         animation: ks-fade 1.4s ease both;
     }

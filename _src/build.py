@@ -21,7 +21,7 @@ import os
 import re
 import struct
 
-VERSION = "20261016a"
+VERSION = "20261016b"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)

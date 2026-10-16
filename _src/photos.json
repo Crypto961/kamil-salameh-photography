@@ -157,6 +157,34 @@
       "original_sha256": "a901362d63555065ccf72ecfda38b692a99b887aa98c4b75903b456defd53d60"
     },
     {
+      "id": "lebanon-1",
+      "original": "images/lebanon-1.jpg.avif",
+      "slug": "green-field-tree-line-lebanon-kamil-salameh",
+      "title": "Open Field",
+      "place": "Lebanon",
+      "alt": "Green field and a line of trees beneath a blue sky with white clouds, Lebanon",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels",
+        "location": "owner (filename; publication confirmed by the owner on 2026-10-16); exact site unverified"
+      },
+      "original_sha256": "35901a59e96b5649495c304aa121caa45dbcd6158486f62a38f0cfda0366398e"
+    },
+    {
+      "id": "lebanon-2",
+      "original": "images/lebanon-2.jpg.avif",
+      "slug": "praying-statue-silhouette-sunset-lebanon-kamil-salameh",
+      "title": "Statue at Sunset",
+      "place": "Lebanon",
+      "alt": "Silhouette of a hooded praying statue against an orange setting sun, Lebanon",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels (statue not identified)",
+        "location": "owner (filename; publication confirmed by the owner on 2026-10-16); exact site unverified"
+      },
+      "original_sha256": "2868f4e771dc02d02fc5e357057b5c4630e46f79ae00d2ebac6b53b69da46d29"
+    },
+    {
       "id": "luxembourg",
       "original": "images/luxembourg.jpg.avif",
       "slug": "old-town-valley-viaduct-luxembourg-kamil-salameh",
@@ -220,42 +248,12 @@
       "place": "Dinant, Belgium",
       "alt": "",
       "portfolio": false,
-      "role": "homepage hero background (decorative; same photograph as belgium.jpg.avif)",
+      "role": "unused: homepage hero image removed at the owner's request (2026-10-16); kept as an original, not published on any page",
       "evidence": {
         "subject": "pixels (same scene as belgium.jpg.avif)",
         "location": "owner caption (Dinant, Belgium)"
       },
       "original_sha256": "2f57f1beb3e0fed20319626b35eb287f8cc4727a5f23339ad2ef04c82815ac21"
-    },
-    {
-      "id": "lebanon-1",
-      "original": "images/lebanon-1.jpg.avif",
-      "slug": null,
-      "title": null,
-      "place": null,
-      "alt": null,
-      "portfolio": false,
-      "role": "unused: not referenced by any page; awaiting owner decision",
-      "evidence": {
-        "subject": "pixels: green field and a line of trees under a blue sky with white clouds",
-        "location": "filename only (Lebanon); unverified"
-      },
-      "original_sha256": "35901a59e96b5649495c304aa121caa45dbcd6158486f62a38f0cfda0366398e"
-    },
-    {
-      "id": "lebanon-2",
-      "original": "images/lebanon-2.jpg.avif",
-      "slug": null,
-      "title": null,
-      "place": null,
-      "alt": null,
-      "portfolio": false,
-      "role": "unused: not referenced by any page; awaiting owner decision",
-      "evidence": {
-        "subject": "pixels: silhouette of a hooded praying statue against an orange setting sun",
-        "location": "filename only (Lebanon); statue and site unverified"
-      },
-      "original_sha256": "2868f4e771dc02d02fc5e357057b5c4630e46f79ae00d2ebac6b53b69da46d29"
     }
   ]
 }

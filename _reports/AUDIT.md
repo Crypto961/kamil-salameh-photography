@@ -40,7 +40,7 @@ Architecture confirmed: static HTML/CSS/vanilla JS, no runtime dependencies, no 
 | 12 | Low (performance) | About page loaded the 871 KB AVIF original for a ~480px portrait card (LCP 5.30 s on emulated slow 4G) | Measurement | Fixed: responsive 600/1200px derivatives (LCP 1.96 s) |
 | 13 | Low (performance) | Order-page preview used the 871 KB original as a small CSS background | Markup | Fixed: 600px derivative |
 | 14 | Low | Lightbox `<img>` shipped with `src="data:,"` | Markup | Fixed: no `src` until opened |
-| 15 | Info | `lebanon-1.jpg.avif` and `lebanon-2.jpg.avif` are not referenced anywhere | Reference scan | Left unpublished (owner decision, §7) |
+| 15 | Info | `lebanon-1.jpg.avif` and `lebanon-2.jpg.avif` were not referenced anywhere | Reference scan | Published in the portfolio after the owner's confirmation (16 Oct) with neutral, pixel-based descriptions |
 
 No broken links, missing files, invalid JSON-LD, inline scripts or third-party requests were found at baseline.
 
@@ -62,10 +62,7 @@ Evidence levels recorded per photo in `_src/photos.json`:
 
 - **Originals untouched.** All 18 AVIF originals are byte-identical to the pre-audit backup (`fb162ff`). Each now carries a SHA-256 fingerprint in `photos.json`, and `validate.py` fails if any original changes.
 - **No recompression.** No photograph was re-encoded in this audit. The 28 derivative changes are pure renames (git `R100`).
-- **Hero image kept as the original.** The 5.3 MB `hero-bg.jpg.avif` remains the largest transfer, 5.64 MB on homepage load. A smaller derivative was considered and rejected:
-  - In portrait orientation, the hero is cropped to fill the screen, so phones need the full 2048px width.
-  - A JPEG would also clip the wide-gamut colour.
-  - Fidelity takes precedence. The right fix is a smaller Lightroom re-export (§7).
+- **Hero image removed (owner decision, 16 Oct).** The 5.3 MB `hero-bg.jpg.avif` was the largest transfer (5.64 MB of images on homepage load). The owner chose to drop the hero photograph; the hero now uses a dark, atmospheric background in the brand blues. Homepage image transfer fell to 0.29 MB. The original file stays in the repository, unpublished and fingerprinted.
 - **Turkey stays as the original.** `turkey.jpg.avif` is HDR (PQ transfer). It is served as-is (401 KB); no faithful SDR derivative was attempted.
 
 ## 5. Filename changes
@@ -76,37 +73,39 @@ Originals keep their URLs, which may already be indexed. Derivatives (about 12 d
 
 The repository holds one photograph per destination: 3 of Lebanon, 8 of Europe, 1 each of Türkiye, Armenia and Kenya, and 1 product shot. Dedicated collection pages would be thin near-duplicates of the portfolio, with no verified narrative to add. The portfolio page with unique captions, alt text and per-image structured data is the stronger option today. Reconsider when a series has about 6+ photographs.
 
-## 7. Needs the owner
+## 7. Owner decisions and remaining items
 
-1. **`lebanon-1` and `lebanon-2`** (field with tree line; silhouette of a hooded praying statue at sunset) are unpublished. Confirm their subjects and locations if they should be added.
-2. **Unverified places**: confirm the windmill site, German town, Swedish church and Luxembourg district. Edit `_src/photos.json`, then build.
-3. **Hero performance**: re-export the Dinant hero from Lightroom at a smaller size and quality, keeping BT.2020/wide-gamut, then replace `images/hero-bg.jpg.avif` and update its fingerprint.
-4. **"Enforce HTTPS"** in GitHub → Settings → Pages (not verifiable from this environment).
+Resolved on 16 October 2026: the two Lebanon photographs were published; the hero image was removed; "Enforce HTTPS" was turned on by the owner (not independently verifiable from this environment).
+
+Still open:
+
+1. **Unverified places**: confirm the windmill site, German town, Swedish church and Luxembourg district. Edit `_src/photos.json`, then build.
+2. **Lebanon photographs**: if the field and the statue can be located (town or monument name), add it to their `place`/`alt` in `_src/photos.json`.
 
 ## 8. File-by-file change summary
 
 | File | Change | Why |
 |---|---|---|
 | `_src/photos.json` (new) | Manifest of all 18 photographs: titles, places, alt text, slugs, evidence, fingerprints | Single source of truth; prevents unverified claims |
-| `_src/build.py` | Generates portfolio cards and `ImageObject` JSON-LD from the manifest; `{{THUMB}}`/`{{PHOTO}}` tags; dimension reader (stdlib); sitemap images from real `<img>` and original links; hash-based `lastmod`; fails on unexpanded placeholders; `VERSION` 20261016a | §2 items 3–7 |
+| `_src/build.py` | Generates portfolio cards and `ImageObject` JSON-LD from the manifest; `{{THUMB}}`/`{{PHOTO}}` tags; dimension reader (stdlib); sitemap images from real `<img>` and original links; hash-based `lastmod`; fails on unexpanded placeholders; `VERSION` 20261016b | §2 items 3–7 |
 | `_src/validate.py` (new) | Repeatable validation (11 check groups) plus CSV inventory | Regression protection |
 | `_src/lastmod.json` (new) | Content hashes and dates per page | Genuine `lastmod` |
 | `_src/portfolio.html` | Placeholders for grid and JSON-LD; link and focus styles; stacked captions; lightbox `src` removed | Crawlability, accessibility |
-| `_src/index.html` | Polaroid images from the manifest; "Riverside Dinant" | Accurate alt text, derivative names |
+| `_src/index.html` | Polaroid images from the manifest; "Riverside Dinant"; hero photograph, its preload and its `primaryImageOfPage` removed; atmospheric gradient background | Accurate alt text, derivative names, owner decision |
 | `_src/about.html` | Portrait uses responsive derivatives; Neowise claim removed; Kfardebian text matches the photos; FAQ synced with JSON-LD | Accuracy, LCP |
 | `_src/order.html` | Preview background uses the 600px derivative | Transfer size |
 | `_src/privacy.html` | Keyboard-reachable, labelled table regions | axe `scrollable-region-focusable` |
 | `portfolio.js` | Lightbox opens from real links; modified clicks keep link behaviour; caption shows title · place | Progressive enhancement |
 | `style.css` | Solid header on light pages; table focus ring | WCAG AA contrast |
 | `llms.txt` | Neowise line corrected | Accuracy |
-| `images/thumbs/*`, `images/web/*` | 28 renames (identical bytes) | Descriptive filenames |
+| `images/thumbs/*`, `images/web/*` | 28 renames (identical bytes); 4 new derivatives for the two Lebanon photographs (colour-checked: mean difference 3.3 and 1.7 levels) | Descriptive filenames, newly published photos |
 | Root `*.html`, `sitemap.xml` | Regenerated by the build | Kept in sync |
 | `README.md` | Documents the manifest, validator, `lastmod` and adding photographs | Maintainability |
 | `_reports/*` (new) | This report, validation log, image inventory | Deliverables (not published) |
 
 ## 9. Deployment
 
-Nothing in this branch has been merged or deployed. To publish:
+Merged into `main` and deployed by GitHub Pages on 16 October 2026 at the owner's request. To reproduce or re-verify:
 
 ```sh
 git checkout audit-image-seo
@@ -118,7 +117,7 @@ Merge the pull request into `main`. GitHub Pages rebuilds automatically, usually
 
 ## 10. Search Console follow-up (owner actions)
 
-1. Resubmit `https://kamilsalamehphotography.com/sitemap.xml` (it now lists 39 images with accurate `lastmod` dates).
+1. Resubmit `https://kamilsalamehphotography.com/sitemap.xml` (it now lists 42 images with accurate `lastmod` dates).
 2. Use URL Inspection → Request indexing for `/portfolio.html` and `/about.html`.
 3. Expect 404 reports for the old `images/web/*.jpg` and `images/thumbs/*.jpg` names. These are intentional; mark them as expected.
 4. Check the Rich results test for `/portfolio.html`: the image metadata (licensing) should be detected. Google decides whether to show the "Licensable" badge; markup alone does not guarantee it.

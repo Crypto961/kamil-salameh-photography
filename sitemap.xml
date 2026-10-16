@@ -8,9 +8,6 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://kamilsalamehphotography.com/images/hero-bg.jpg.avif</image:loc>
-    </image:image>
-    <image:image>
       <image:loc>https://kamilsalamehphotography.com/images/thumbs/faqra-roman-ruins-kfardebian-lebanon-kamil-salameh.jpg</image:loc>
     </image:image>
     <image:image>
@@ -74,6 +71,12 @@
       <image:loc>https://kamilsalamehphotography.com/images/web/natural-rock-bridge-kfardebian-lebanon-kamil-salameh.jpg</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/web/green-field-tree-line-lebanon-kamil-salameh.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/web/praying-statue-silhouette-sunset-lebanon-kamil-salameh.jpg</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://kamilsalamehphotography.com/images/web/old-town-valley-viaduct-luxembourg-kamil-salameh.jpg</image:loc>
     </image:image>
     <image:image>
@@ -114,6 +117,12 @@
     </image:image>
     <image:image>
       <image:loc>https://kamilsalamehphotography.com/images/kfardebian.jpg.avif</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/lebanon-1.jpg.avif</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kamilsalamehphotography.com/images/lebanon-2.jpg.avif</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://kamilsalamehphotography.com/images/luxembourg.jpg.avif</image:loc>

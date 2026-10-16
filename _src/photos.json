@@ -1,0 +1,259 @@
+{
+  "_about": "Source of truth for every photograph on the site. _src/build.py generates the portfolio grid, its ImageObject structured data, homepage/about image tags and the image inventory report from this file. 'original' files are the colour-managed BT.2020 AVIF exports and must never be recompressed (see README). 'slug' names the 600px (images/thumbs/) and 1200px (images/web/) JPEG derivatives. 'evidence' records where each fact comes from: 'pixels' = visible in the photograph, 'owner caption' = stated on the site by the owner before this audit, 'visual identification' = a landmark or species recognised in the pixels but not confirmed by the owner, 'unverified' = not confirmed. 'original_sha256' fingerprints each original so _src/validate.py fails if an original is ever modified.",
+  "photos": [
+    {
+      "id": "france",
+      "original": "images/france.jpg.avif",
+      "slug": "sacre-coeur-basilica-paris-kamil-salameh",
+      "title": "Sacré-Cœur Basilica",
+      "place": "Paris, France",
+      "alt": "White domes of the Sacré-Cœur Basilica in Paris framed by trees against a deep blue sky",
+      "portfolio": true,
+      "evidence": {
+        "subject": "visual identification (Sacré-Cœur Basilica, Montmartre)",
+        "location": "owner caption (Paris, France)"
+      },
+      "original_sha256": "d5469a12f6b761521e64858f5aa112f63a96cbb17ffffde7768b67df34848255"
+    },
+    {
+      "id": "kenya",
+      "original": "images/kenya.jpg.avif",
+      "slug": "vervet-monkey-masai-mara-kenya-kamil-salameh",
+      "title": "Vervet Monkey",
+      "place": "Masai Mara, Kenya",
+      "alt": "Vervet monkey peering through green foliage in the Masai Mara, Kenya",
+      "portfolio": true,
+      "evidence": {
+        "subject": "visual identification (vervet monkey)",
+        "location": "owner caption (Masai Mara, Kenya)"
+      },
+      "original_sha256": "af45835eceb951580ea7c7ff1c8af8327bdb3b570e80b4263adab252e4ac1e05"
+    },
+    {
+      "id": "netherlands",
+      "original": "images/netherlands.jpg.avif",
+      "slug": "dutch-windmills-riverbank-netherlands-kamil-salameh",
+      "title": "Dutch Windmills",
+      "place": "Netherlands",
+      "alt": "Two traditional Dutch windmills on a riverbank in warm evening light, Netherlands",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels",
+        "location": "filename (Netherlands); exact site unverified"
+      },
+      "original_sha256": "6185abc077288172f37313eee70f438c069484f9688211f148f2355adeae4646"
+    },
+    {
+      "id": "germany",
+      "original": "images/germany.jpg.avif",
+      "slug": "church-spire-autumn-leaves-germany-kamil-salameh",
+      "title": "Church in Autumn",
+      "place": "Germany",
+      "alt": "Red-brick church with a tall spire framed by yellow autumn leaves under a blue sky, Germany",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels",
+        "location": "filename (Germany); town and church unverified"
+      },
+      "original_sha256": "550e10e7e1adbe7b1a0f5207c9ddb4724b80fea4318e5e9372c42e0bdd2d454d"
+    },
+    {
+      "id": "norway",
+      "original": "images/norway.jpg.avif",
+      "slug": "waterfront-clock-tower-oslo-norway-kamil-salameh",
+      "title": "Waterfront Clock Tower",
+      "place": "Oslo, Norway",
+      "alt": "Clock tower on a wooden waterfront pier with orange benches under a cloudy sky in Oslo, Norway",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels",
+        "location": "owner caption (Oslo, Norway)"
+      },
+      "original_sha256": "1f6774f63620dae9e03b3aeb3ac9b5c836d7e23bd27aea1143a716416a23c3f0"
+    },
+    {
+      "id": "denmark",
+      "original": "images/denmark.jpg.avif",
+      "slug": "nyhavn-copenhagen-denmark-kamil-salameh",
+      "title": "Nyhavn",
+      "place": "Copenhagen, Denmark",
+      "alt": "Colourful townhouses and wooden boats along the Nyhavn waterfront in Copenhagen, Denmark",
+      "portfolio": true,
+      "evidence": {
+        "subject": "visual identification (Nyhavn)",
+        "location": "owner caption (Copenhagen, Denmark)"
+      },
+      "original_sha256": "8bc4afa0288391e76e2383d1a92be54e369355d42e4d33bf469a2fd4911b5271"
+    },
+    {
+      "id": "sweden",
+      "original": "images/sweden.jpg.avif",
+      "slug": "gothic-church-spire-street-sweden-kamil-salameh",
+      "title": "Gothic Spire",
+      "place": "Sweden",
+      "alt": "Openwork Gothic church spire seen down a historic street, Sweden",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels",
+        "location": "filename (Sweden); city and church unverified (resembles Riddarholmen Church, Stockholm)"
+      },
+      "original_sha256": "0ba047522a20932df1662966c0dfa33fb32d24cc9c5c00a8930693bcd47fb224"
+    },
+    {
+      "id": "belgium",
+      "original": "images/belgium.jpg.avif",
+      "slug": "dinant-citadel-meuse-belgium-kamil-salameh",
+      "title": "Dinant on the Meuse",
+      "place": "Dinant, Belgium",
+      "alt": "Dinant's citadel cliff, collegiate church and colourful riverside houses reflected in the Meuse, Belgium",
+      "portfolio": true,
+      "evidence": {
+        "subject": "visual identification (Dinant citadel and Collegiate Church of Notre-Dame)",
+        "location": "owner caption (Dinant, Belgium)"
+      },
+      "original_sha256": "81a4523109d99d65925a0f08cea5e1efc0ba09e22beb5c2ade3956b5c93303d7"
+    },
+    {
+      "id": "turkey",
+      "original": "images/turkey.jpg.avif",
+      "slug": null,
+      "hdr": true,
+      "title": "İstiklal Avenue Tram",
+      "place": "Istanbul, Türkiye",
+      "alt": "Red nostalgic tram on İstiklal Avenue beneath red and yellow bunting, Istanbul, Türkiye",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels (tram destination sign reads TAKSİM)",
+        "location": "visual identification (İstiklal Avenue, Istanbul); filename (Turkey)"
+      },
+      "original_sha256": "b5efc7a69c80f9e8ab5c9cee6a287e242102a8177ebd0a68a3c5a5f4a15f0a94"
+    },
+    {
+      "id": "lebanon",
+      "original": "images/lebanon.jpg.avif",
+      "slug": "faqra-roman-ruins-kfardebian-lebanon-kamil-salameh",
+      "title": "Faqra Roman Ruins",
+      "place": "Kfardebian, Lebanon",
+      "alt": "Roman temple ruins of Faqra at sunset framed by pine trees in Kfardebian, Lebanon",
+      "portfolio": true,
+      "evidence": {
+        "subject": "owner caption (Faqra Temple)",
+        "location": "owner caption (Kfardebian, Lebanon)"
+      },
+      "original_sha256": "5dbdbd0b6ab6c94d1792d5f2852119031d97f6248a7b3f492998d75b4a7445bf"
+    },
+    {
+      "id": "kfardebian",
+      "original": "images/kfardebian.jpg.avif",
+      "slug": "natural-rock-bridge-kfardebian-lebanon-kamil-salameh",
+      "title": "Natural Rock Bridge",
+      "place": "Kfardebian, Lebanon",
+      "alt": "Natural limestone rock bridge arching over a mountain stream in Kfardebian, Lebanon",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels (an earlier sitemap titled this file 'Neowise Comet', which the photograph does not show)",
+        "location": "filename and owner gallery title (Kfardebian, Lebanon)"
+      },
+      "original_sha256": "a901362d63555065ccf72ecfda38b692a99b887aa98c4b75903b456defd53d60"
+    },
+    {
+      "id": "lebanon-1",
+      "original": "images/lebanon-1.jpg.avif",
+      "slug": "green-field-tree-line-lebanon-kamil-salameh",
+      "title": "Open Field",
+      "place": "Lebanon",
+      "alt": "Green field and a line of trees beneath a blue sky with white clouds, Lebanon",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels",
+        "location": "owner (filename; publication confirmed by the owner on 2026-10-16); exact site unverified"
+      },
+      "original_sha256": "35901a59e96b5649495c304aa121caa45dbcd6158486f62a38f0cfda0366398e"
+    },
+    {
+      "id": "lebanon-2",
+      "original": "images/lebanon-2.jpg.avif",
+      "slug": "praying-statue-silhouette-sunset-lebanon-kamil-salameh",
+      "title": "Statue at Sunset",
+      "place": "Lebanon",
+      "alt": "Silhouette of a hooded praying statue against an orange setting sun, Lebanon",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels (statue not identified)",
+        "location": "owner (filename; publication confirmed by the owner on 2026-10-16); exact site unverified"
+      },
+      "original_sha256": "2868f4e771dc02d02fc5e357057b5c4630e46f79ae00d2ebac6b53b69da46d29"
+    },
+    {
+      "id": "luxembourg",
+      "original": "images/luxembourg.jpg.avif",
+      "slug": "old-town-valley-viaduct-luxembourg-kamil-salameh",
+      "title": "Old Town Valley",
+      "place": "Luxembourg",
+      "alt": "Old town river valley with a stone viaduct, autumn trees and a church spire, Luxembourg",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels",
+        "location": "filename (Luxembourg); district unverified (resembles the Grund, Luxembourg City)"
+      },
+      "original_sha256": "aae0865aeade669deb4ef22862fe18bccc8fc61f8abbf0eb007270f5f7040005"
+    },
+    {
+      "id": "armenia",
+      "original": "images/armenia.jpg.avif",
+      "slug": "mount-ararat-yerevan-armenia-kamil-salameh",
+      "title": "Mount Ararat over Yerevan",
+      "place": "Yerevan, Armenia",
+      "alt": "Snow-capped Mount Ararat rising above the Yerevan skyline at sunset, Armenia",
+      "portfolio": true,
+      "evidence": {
+        "subject": "visual identification (Greater and Little Ararat, Yerevan skyline)",
+        "location": "filename (Armenia) and visual identification"
+      },
+      "original_sha256": "0c641671fe0b5be30c88d7be513fcebc833b9a0f858bc700dad9dcab63ef9828"
+    },
+    {
+      "id": "astrophotography",
+      "original": "images/astrophotography.jpg.avif",
+      "slug": "milky-way-chairlift-kfardebian-lebanon-kamil-salameh",
+      "title": "Milky Way over Kfardebian",
+      "place": "Kfardebian, Lebanon",
+      "alt": "Milky Way and a star-filled sky above a ski chairlift in the mountains of Kfardebian, Lebanon",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels",
+        "location": "owner caption (Night Skies, Kfardebian, Lebanon)"
+      },
+      "original_sha256": "8889a0b21efbe8a31950d0a13dbed2ea4e8f3f257913c3c9058b4f0ea1cbf5b7"
+    },
+    {
+      "id": "product-photography",
+      "original": "images/product-photography.jpg.avif",
+      "slug": "vali-lash-lift-kit-product-photography-kamil-salameh",
+      "title": "VALI Lash Lift Kit",
+      "place": "Product Photography",
+      "alt": "VALI Lash Lift eyelash perming kit and vials arranged on a turquoise background",
+      "portfolio": true,
+      "evidence": {
+        "subject": "pixels (brand name printed on the packaging)",
+        "location": "not applicable (studio product photograph)"
+      },
+      "original_sha256": "d2b35cc03f6ed8c6e9f57def882cbc5d1a3dbaf10488be474e575d8734e2e6f2"
+    },
+    {
+      "id": "hero-bg",
+      "original": "images/hero-bg.jpg.avif",
+      "slug": "dinant-citadel-meuse-belgium-kamil-salameh",
+      "title": "Dinant on the Meuse",
+      "place": "Dinant, Belgium",
+      "alt": "",
+      "portfolio": false,
+      "role": "unused: homepage hero image removed at the owner's request (2026-10-16); kept as an original, not published on any page",
+      "evidence": {
+        "subject": "pixels (same scene as belgium.jpg.avif)",
+        "location": "owner caption (Dinant, Belgium)"
+      },
+      "original_sha256": "2f57f1beb3e0fed20319626b35eb287f8cc4727a5f23339ad2ef04c82815ac21"
+    }
+  ]
+}

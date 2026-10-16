@@ -2697,6 +2697,18 @@ body.legal-page {
     background: var(--off-white);
 }
 
+/* Light pages: the translucent header would sit on a light background,
+   so give it a near-solid fill to keep the navigation text legible. */
+.legal-page .site-header,
+.legal-page .site-header.scrolled {
+    background: rgba(7, 20, 28, .94);
+}
+
+.legal-table-wrap:focus-visible {
+    outline: 3px solid var(--blue-500);
+    outline-offset: 4px;
+}
+
 .legal-main {
     width: min(760px, calc(100% - 40px));
     margin: 0 auto;
@@ -2823,10 +2835,6 @@ body.legal-page {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-
-    .hero-background img {
-        animation: ks-settle 3.2s cubic-bezier(.22, 1, .36, 1) both;
-    }
 
     .hero-gradient {
         animation: ks-fade 1.4s ease both;

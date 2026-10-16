@@ -32,7 +32,7 @@
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="apple-touch-icon" href="images/logo.png">
     <link rel="preload" href="fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="style.css?v=20261004c">
+    <link rel="stylesheet" href="style.css?v=20261016b">
 
     <!-- Core identity (JSON-LD): who Kamil Salameh is and what Kamil Salameh Photography offers.
          Repeated on every page with stable @id values so search engines and AI assistants
@@ -130,7 +130,6 @@
       ]
     }
     </script>
-    <link rel="preload" href="images/hero-bg.jpg.avif" as="image" type="image/avif">
 
     <!-- Page structured data -->
     <script type="application/ld+json">
@@ -144,16 +143,6 @@
       "isPartOf": { "@id": "https://kamilsalamehphotography.com/#website" },
       "about": { "@id": "https://kamilsalamehphotography.com/#person" },
       "mainEntity": { "@id": "https://kamilsalamehphotography.com/#business" },
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "contentUrl": "https://kamilsalamehphotography.com/images/hero-bg.jpg.avif",
-        "caption": "Dinant, Belgium, reflected in the Meuse river",
-        "creator": { "@id": "https://kamilsalamehphotography.com/#person" },
-        "creditText": "Kamil Salameh",
-        "copyrightNotice": "© Kamil Salameh. All rights reserved.",
-        "license": "https://kamilsalamehphotography.com/terms.html#copyright",
-        "acquireLicensePage": "https://kamilsalamehphotography.com/order.html"
-      },
       "inLanguage": "en"
     }
     </script>
@@ -198,14 +187,13 @@
             background: var(--black);
         }
 
-        .hero-background img {
-            transform: none;
-        }
-
+        /* No hero photograph (owner's choice): a dark, atmospheric field
+           built from the brand blues keeps depth behind the headline. */
         .hero-gradient {
             background:
-                linear-gradient(90deg, rgba(11, 15, 18, .78) 0%, rgba(11, 15, 18, .45) 42%, rgba(11, 15, 18, 0) 75%),
-                linear-gradient(0deg, rgba(11, 15, 18, .85) 0%, rgba(11, 15, 18, 0) 30%);
+                radial-gradient(ellipse at 78% 28%, rgba(77, 149, 180, .22), transparent 48%),
+                radial-gradient(ellipse at 8% 92%, rgba(31, 77, 104, .45), transparent 55%),
+                linear-gradient(180deg, #0e161c 0%, #0b0f12 100%);
         }
 
         .hero-title {
@@ -591,10 +579,6 @@
                 display: none;
             }
 
-            .hero-gradient {
-                background: linear-gradient(180deg, rgba(11, 15, 18, .55) 0%, rgba(11, 15, 18, .45) 40%, rgba(11, 15, 18, .85) 100%);
-            }
-
             .hero {
                 padding-top: 130px;
                 padding-bottom: 4rem;
@@ -694,9 +678,6 @@
 
 <!-- HERO -->
 <section class="hero" id="home" aria-labelledby="hero-title">
-    <div class="hero-background">
-        <img src="images/hero-bg.jpg.avif" alt="" fetchpriority="high" decoding="async">
-    </div>
     <div class="hero-gradient"></div>
 
     <div class="hero-content container">
@@ -747,19 +728,19 @@
         <div class="polaroid-interactive-container is-expanded" role="button" tabindex="0" aria-expanded="true" aria-label="Philosophy photographs: press to stack or spread the photographs" data-reveal>
             <div class="polaroid-fan-wrapper">
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/lebanon.jpg" width="600" height="480" alt="Faqra Roman temple ruins at sunset in Kfardebian, Lebanon" loading="lazy" decoding="async"></div>
+                    <div class="pola-frame"><img src="images/thumbs/faqra-roman-ruins-kfardebian-lebanon-kamil-salameh.jpg" width="600" height="480" alt="Roman temple ruins of Faqra at sunset framed by pine trees in Kfardebian, Lebanon" loading="lazy" decoding="async"></div>
                     <figcaption class="pola-caption">Faqra Temple<span class="pola-subcaption">Kfardebian, Lebanon</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/france.jpg" width="600" height="750" alt="Parisian architecture in soft evening light" loading="lazy" decoding="async"></div>
+                    <div class="pola-frame"><img src="images/thumbs/sacre-coeur-basilica-paris-kamil-salameh.jpg" width="600" height="750" alt="White domes of the Sacré-Cœur Basilica in Paris framed by trees against a deep blue sky" loading="lazy" decoding="async"></div>
                     <figcaption class="pola-caption">Parisian Light<span class="pola-subcaption">Paris, France</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/astrophotography.jpg" width="600" height="463" alt="Star-filled night sky over the mountains of Kfardebian" loading="lazy" decoding="async"></div>
+                    <div class="pola-frame"><img src="images/thumbs/milky-way-chairlift-kfardebian-lebanon-kamil-salameh.jpg" width="600" height="463" alt="Milky Way and a star-filled sky above a ski chairlift in the mountains of Kfardebian, Lebanon" loading="lazy" decoding="async"></div>
                     <figcaption class="pola-caption">Night Skies<span class="pola-subcaption">Kfardebian, Lebanon</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/norway.jpg" width="600" height="750" alt="Calm Norwegian landscape" loading="lazy" decoding="async"></div>
+                    <div class="pola-frame"><img src="images/thumbs/waterfront-clock-tower-oslo-norway-kamil-salameh.jpg" width="600" height="750" alt="Clock tower on a wooden waterfront pier with orange benches under a cloudy sky in Oslo, Norway" loading="lazy" decoding="async"></div>
                     <figcaption class="pola-caption">Nordic Silence<span class="pola-subcaption">Oslo, Norway</span></figcaption>
                 </figure>
             </div>
@@ -784,19 +765,19 @@
         <div class="polaroid-interactive-container is-expanded" role="button" tabindex="0" aria-expanded="true" aria-label="Featured photographs: press to stack or spread the photographs" data-reveal>
             <div class="polaroid-fan-wrapper">
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/kenya.jpg" width="600" height="750" alt="Monkey in the wild in the Masai Mara, Kenya" loading="lazy" decoding="async"></div>
+                    <div class="pola-frame"><img src="images/thumbs/vervet-monkey-masai-mara-kenya-kamil-salameh.jpg" width="600" height="750" alt="Vervet monkey peering through green foliage in the Masai Mara, Kenya" loading="lazy" decoding="async"></div>
                     <figcaption class="pola-caption">Wild Horizon<span class="pola-subcaption">Masai Mara, Kenya</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/belgium.jpg" width="600" height="480" alt="Historic streets and architecture of Dinant, Belgium" loading="lazy" decoding="async"></div>
-                    <figcaption class="pola-caption">Gothic Alleyways<span class="pola-subcaption">Dinant, Belgium</span></figcaption>
+                    <div class="pola-frame"><img src="images/thumbs/dinant-citadel-meuse-belgium-kamil-salameh.jpg" width="600" height="480" alt="Dinant&#x27;s citadel cliff, collegiate church and colourful riverside houses reflected in the Meuse, Belgium" loading="lazy" decoding="async"></div>
+                    <figcaption class="pola-caption">Riverside Dinant<span class="pola-subcaption">Dinant, Belgium</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/denmark.jpg" width="600" height="480" alt="Architectural lines in Copenhagen, Denmark" loading="lazy" decoding="async"></div>
+                    <div class="pola-frame"><img src="images/thumbs/nyhavn-copenhagen-denmark-kamil-salameh.jpg" width="600" height="480" alt="Colourful townhouses and wooden boats along the Nyhavn waterfront in Copenhagen, Denmark" loading="lazy" decoding="async"></div>
                     <figcaption class="pola-caption">Nordic Lines<span class="pola-subcaption">Copenhagen, Denmark</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/product-photography.jpg" width="600" height="750" alt="Fine art still life product photograph" loading="lazy" decoding="async"></div>
+                    <div class="pola-frame"><img src="images/thumbs/vali-lash-lift-kit-product-photography-kamil-salameh.jpg" width="600" height="750" alt="VALI Lash Lift eyelash perming kit and vials arranged on a turquoise background" loading="lazy" decoding="async"></div>
                     <figcaption class="pola-caption">Fine Art Details<span class="pola-subcaption">Studio Collection</span></figcaption>
                 </figure>
             </div>
@@ -929,7 +910,7 @@
     </div>
 </div>
 
-<script src="site.js?v=20261004c"></script>
+<script src="site.js?v=20261016b"></script>
 
 </body>
 </html>

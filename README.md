@@ -34,17 +34,22 @@ Static HTML, CSS and vanilla JavaScript, hosted on GitHub Pages. No build step a
 
 ## Images
 
-Photos live in `images/` as AVIF exported from Lightroom. They use a wide-gamut BT.2020 colour space signalled in the file's `nclx` colour box. **Do not batch-recompress them with tools that drop that box** (for example sharp/libvips): the colours will look washed out. If you need smaller files, re-export from Lightroom (long edge 2048px, quality ~70).
+Photos live in `images/` as AVIF exported from Lightroom. They use a wide-gamut BT.2020 colour space signalled in the file's `nclx` colour box (`turkey.jpg.avif` is an HDR/PQ file). **Do not batch-recompress them with tools that drop that box** (for example sharp/libvips): the colours will look washed out. If you need smaller files, re-export from Lightroom (long edge 2048px, quality ~70).
+
+- **`_src/photos.json` is the single source of truth** for every photograph: title, place, alt text, descriptive derivative filename (`slug`), the evidence behind each fact, and a SHA-256 fingerprint of the original. The build generates the portfolio grid, its `ImageObject` structured data and the homepage/About image tags from it.
+- Derivatives: `images/thumbs/<slug>.jpg` (600px) and `images/web/<slug>.jpg` (1200px), colour-converted from the BT.2020 originals and checked against Chromium's rendering. Originals keep their stable URLs and are linked from each portfolio card (and shown in the lightbox).
+- To add a photograph: export the AVIF to `images/`, create the two JPEG derivatives with a verified colour conversion, add an entry to `photos.json` (run `python3 -c "import hashlib;print(hashlib.sha256(open('images/NAME.jpg.avif','rb').read()).hexdigest())"` for `original_sha256`), then build and validate.
 
 ## Editing pages (important)
 
 The HTML pages in the repository root are **generated**. Edit the templates in `_src/`, then run:
 
 ```sh
-python3 _src/build.py
+python3 _src/build.py      # generate pages and sitemap
+python3 _src/validate.py   # verify links, images, structured data, sitemap, robots, forms, CSP
 ```
 
-This fills in the shared header, footer, `<head>` tags and identity structured data, adds per-page SEO and social tags (defined in `SEO` in `_src/build.py`), adds cache-busting version tags to CSS/JS links, and regenerates `sitemap.xml`. Bump `VERSION` in `_src/build.py` whenever `style.css` or a `.js` file changes. GitHub Pages does not publish `_src/`.
+This fills in the shared header, footer, `<head>` tags and identity structured data, adds per-page SEO and social tags (defined in `SEO` in `_src/build.py`), adds cache-busting version tags to CSS/JS links, and regenerates `sitemap.xml`. A page's `<lastmod>` only changes when its generated HTML changes (content hashes are stored in `_src/lastmod.json`; commit that file). `python3 _src/validate.py --inventory` also refreshes `_reports/image-inventory.csv`. Audit and validation reports live in `_reports/` (not published). Bump `VERSION` in `_src/build.py` whenever `style.css` or a `.js` file changes. GitHub Pages does not publish `_src/`.
 
 ## SEO and AI discoverability
 

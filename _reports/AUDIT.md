@@ -126,3 +126,12 @@ Merge the pull request into `main`. GitHub Pages rebuilds automatically, usually
 3. Expect 404 reports for the old `images/web/*.jpg` and `images/thumbs/*.jpg` names. These are intentional; mark them as expected.
 4. Check the Rich results test for `/portfolio.html`: the image metadata (licensing) should be detected. Google decides whether to show the "Licensable" badge; markup alone does not guarantee it.
 5. Monitor Pages → "Alternate page with proper canonical tag" after the canonical-link fix from 12 October.
+
+## 11. Follow-up, 23 October 2026: Search Console "Invalid datetime value for dateModified"
+
+- **Cause:** the About page's `ProfilePage` structured data used a date-only value (`"dateModified": "2026-10-04"`). Google requires a full ISO 8601 datetime with timezone. The value was also stale: the page last changed on 16 October.
+- **Fix:**
+  - `_src/build.py` now records when each page's content changes, as a full datetime in the Asia/Beirut timezone (`_src/lastmod.json`). It fills the About page's `dateModified` from that record, and the sitemap uses the same values.
+  - Privacy and Terms keep their legal "last updated" date, matching the date shown on the page, in full form: `2026-10-04T00:00:00+03:00`.
+- **Prevention:** `_src/validate.py` now fails if any JSON-LD `dateModified`, `datePublished`, `dateCreated` or `uploadDate` lacks a time and timezone. A negative test confirmed it rejects the original value.
+- **Owner action:** in Search Console, open the Profile page report and click **Validate fix**.

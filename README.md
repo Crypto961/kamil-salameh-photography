@@ -49,7 +49,7 @@ python3 _src/build.py      # generate pages and sitemap
 python3 _src/validate.py   # verify links, images, structured data, sitemap, robots, forms, CSP
 ```
 
-This fills in the shared header, footer, `<head>` tags and identity structured data, adds per-page SEO and social tags (defined in `SEO` in `_src/build.py`), adds cache-busting version tags to CSS/JS links, and regenerates `sitemap.xml`. A page's `<lastmod>` only changes when its generated HTML changes (content hashes are stored in `_src/lastmod.json`; commit that file). `python3 _src/validate.py --inventory` also refreshes `_reports/image-inventory.csv`. Audit and validation reports live in `_reports/` (not published). Bump `VERSION` in `_src/build.py` whenever `style.css` or a `.js` file changes. GitHub Pages does not publish `_src/`.
+This fills in the shared header, footer, `<head>` tags and identity structured data, adds per-page SEO and social tags (defined in `SEO` in `_src/build.py`), adds cache-busting version tags to CSS/JS links, and regenerates `sitemap.xml`. A page's `<lastmod>` (and the About page's structured-data `dateModified`, via the `{{DATE_MODIFIED}}` placeholder) only changes when its generated HTML changes. Content hashes and full ISO 8601 timestamps are stored in `_src/lastmod.json`; commit that file. `python3 _src/validate.py --inventory` also refreshes `_reports/image-inventory.csv`. Audit and validation reports live in `_reports/` (not published). Bump `VERSION` in `_src/build.py` whenever `style.css` or a `.js` file changes. GitHub Pages does not publish `_src/`.
 
 ## SEO and AI discoverability
 

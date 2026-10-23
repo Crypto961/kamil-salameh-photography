@@ -18,6 +18,7 @@ Checks:
   9. Forms keep the Formspree endpoint, honeypot and required consent.
  10. No inline executable scripts or third-party script/style sources (CSP).
  11. CSS/JS links carry the current cache-busting VERSION.
+ 12. JSON-LD dates (dateModified etc.) are full ISO 8601 datetimes with timezone.
 """
 import csv
 import glob
@@ -159,6 +160,11 @@ def check_pages(photos):
                 except ValueError as e:
                     fail("%s: invalid JSON-LD: %s" % (name, e))
                     continue
+                # Google requires full ISO 8601 datetimes with a timezone for these
+                # (e.g. ProfilePage dateModified); a bare date is reported as invalid.
+                for key, value in re.findall(r'"(dateModified|datePublished|dateCreated|uploadDate)": "([^"]*)"', json.dumps(data)):
+                    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?([+-]\d{2}:\d{2}|Z)", value):
+                        fail("%s: %s is not a full ISO 8601 datetime with timezone: %r" % (name, key, value))
                 for url in re.findall(r'"(?:contentUrl|thumbnailUrl)": "([^"]+)"', json.dumps(data)):
                     if not os.path.exists(os.path.join(ROOT, rel(url))):
                         fail("%s: JSON-LD image missing: %s" % (name, url))

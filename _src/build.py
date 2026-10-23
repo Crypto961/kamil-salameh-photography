@@ -284,7 +284,51 @@ def expand_photo_tags(html):
     return html
 
 
+LASTMOD_FILE = os.path.join(HERE, "lastmod.json")
+TIMEZONE = "Asia/Beirut"
+DATE_PLACEHOLDER = "{{DATE_MODIFIED}}"
+
+
+def load_lastmod():
+    try:
+        with open(LASTMOD_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+def save_lastmod(state):
+    with open(LASTMOD_FILE, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(state, f, indent=2, sort_keys=True)
+        f.write("\n")
+
+
+def now_iso():
+    """Current time as a full ISO 8601 datetime with timezone offset, as
+    required by Google for dateModified (e.g. 2026-10-23T14:05:00+03:00)."""
+    from zoneinfo import ZoneInfo
+    return datetime.datetime.now(ZoneInfo(TIMEZONE)).replace(microsecond=0).isoformat()
+
+
+def full_datetime(value):
+    """Upgrade a legacy date-only value (YYYY-MM-DD) to a full datetime."""
+    return value if "T" in value else value + "T00:00:00+03:00"
+
+
+def stamp(name, html, state):
+    """Track when a page's content last changed. The hash is taken with the
+    {{DATE_MODIFIED}} placeholder still in place, so the date itself never
+    counts as a change. Returns the page with the placeholder filled in."""
+    digest = hashlib.sha256((html + "\n").encode("utf-8")).hexdigest()
+    entry = state.get(name)
+    if not entry or entry.get("sha256") != digest:
+        entry = {"sha256": digest, "lastmod": now_iso()}
+        state[name] = entry
+    return html.replace(DATE_PLACEHOLDER, full_datetime(entry["lastmod"]))
+
+
 def build():
+    state = load_lastmod()
     head, header, footer = read("head.html"), read("header.html"), read("footer.html")
     for name, active in PAGES.items():
         nav = header
@@ -298,7 +342,7 @@ def build():
         if name == "portfolio":
             html = html.replace("{{PORTFOLIO_LD}}", portfolio_ld()).replace("{{PORTFOLIO_GRID}}", portfolio_grid())
         html = expand_photo_tags(html)
-        leftover = re.findall(r"\{\{[A-Z_]+[^}]*\}\}", html)
+        leftover = [t for t in re.findall(r"\{\{[A-Z_]+[^}]*\}\}", html) if t != DATE_PLACEHOLDER]
         if leftover:
             raise SystemExit("unexpanded placeholders in %s: %s" % (name, leftover))
         if name == "index":
@@ -307,9 +351,12 @@ def build():
             # Served for any missing URL, including nested ones, so use root-relative paths.
             html = re.sub(r'(href|src)="(?!https?:|#|data:|/)([^"]+)"', r'\1="/\2"', html)
         html = versioned(html)
+        if name in TRACKED or DATE_PLACEHOLDER in html:
+            html = stamp(name, html, state)
         with open(os.path.join(ROOT, name + ".html"), "w", encoding="utf-8", newline="\n") as f:
             f.write(html + "\n")
         print("built", name + ".html")
+    save_lastmod(state)
 
 
 # Sitemap: every indexable page with the photographs it actually shows.
@@ -323,7 +370,7 @@ SITEMAP = [  # (page, priority, change frequency)
 ]
 
 
-LASTMOD_FILE = os.path.join(HERE, "lastmod.json")
+TRACKED = {name for name, _, _ in SITEMAP}
 
 
 def page_images(html):
@@ -340,14 +387,9 @@ def page_images(html):
 
 
 def build_sitemap():
-    """Write sitemap.xml. A page's <lastmod> changes only when its generated
-    HTML changes (tracked by content hash in _src/lastmod.json)."""
-    today = datetime.date.today().isoformat()
-    try:
-        with open(LASTMOD_FILE, encoding="utf-8") as f:
-            state = json.load(f)
-    except FileNotFoundError:
-        state = {}
+    """Write sitemap.xml. Each <lastmod> is the time the page's content last
+    changed, as tracked by build() in _src/lastmod.json."""
+    state = load_lastmod()
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
@@ -355,14 +397,9 @@ def build_sitemap():
     for name, priority, freq in SITEMAP:
         with open(os.path.join(ROOT, name + ".html"), encoding="utf-8") as f:
             html = f.read()
-        digest = hashlib.sha256(html.encode("utf-8")).hexdigest()
-        entry = state.get(name)
-        if not entry or entry.get("sha256") != digest:
-            entry = {"sha256": digest, "lastmod": today}
-            state[name] = entry
         out += ["  <url>",
                 "    <loc>%s%s</loc>" % (SITE, SEO[name]["path"]),
-                "    <lastmod>%s</lastmod>" % entry["lastmod"],
+                "    <lastmod>%s</lastmod>" % full_datetime(state[name]["lastmod"]),
                 "    <changefreq>%s</changefreq>" % freq,
                 "    <priority>%s</priority>" % priority]
         for src in page_images(html):
@@ -371,10 +408,8 @@ def build_sitemap():
     out.append("</urlset>")
     with open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(out) + "\n")
-    with open(LASTMOD_FILE, "w", encoding="utf-8", newline="\n") as f:
-        json.dump(state, f, indent=2, sort_keys=True)
-        f.write("\n")
     print("built sitemap.xml")
+
 
 if __name__ == "__main__":
     build()

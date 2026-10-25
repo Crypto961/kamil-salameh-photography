@@ -135,3 +135,13 @@ Merge the pull request into `main`. GitHub Pages rebuilds automatically, usually
   - Privacy and Terms keep their legal "last updated" date, matching the date shown on the page, in full form: `2026-10-04T00:00:00+03:00`.
 - **Prevention:** `_src/validate.py` now fails if any JSON-LD `dateModified`, `datePublished`, `dateCreated` or `uploadDate` lacks a time and timezone. A negative test confirmed it rejects the original value.
 - **Owner action:** in Search Console, open the Profile page report and click **Validate fix**.
+
+## 12. Follow-up, 25 October 2026: "Page with redirect" and "Alternate page with proper canonical tag" validations failed
+
+- **Finding:** the site creates neither condition. Of 980 URLs in the generated pages, sitemap, `llms.txt` and `robots.txt`, every link to one of our own pages uses its exact canonical URL: no `http://`, `www.`, `index.html` or extension-less variants.
+- **Cause:** the remaining URLs in both reports come from outside the site:
+  - GitHub Pages redirects `http://` → `https://` (HTTPS enforced) and `www.` → apex. These appear under "Page with redirect".
+  - GitHub Pages serves the same page at extension-less paths (`/portfolio`), and Google remembers `/index.html` from links that existed before 12 October, plus tracking-parameter variants (`?fbclid=…`). These declare the canonical URL and appear under "Alternate page with proper canonical tag".
+- **These are correct behaviours, not errors.** Validation of these two reasons will keep reporting "some fixes failed" because the URLs will always redirect or point to their canonical page. Google indexes the canonical pages instead.
+- **Prevention:** `_src/validate.py` check 13 now fails if any page, the sitemap, `llms.txt` or `robots.txt` links to a non-canonical form of our own URLs. A negative test confirmed it flags `http://www.` hosts and `/index.html`.
+- **Live verification:** not possible from this environment (the domain is blocked by its network policy). The owner should confirm in Search Console that the example URLs listed are variants like those above.

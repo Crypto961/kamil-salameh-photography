@@ -19,6 +19,9 @@ Checks:
  10. No inline executable scripts or third-party script/style sources (CSP).
  11. CSS/JS links carry the current cache-busting VERSION.
  12. JSON-LD dates (dateModified etc.) are full ISO 8601 datetimes with timezone.
+ 13. Every link to one of our own pages uses its canonical URL (no http://,
+     www., index.html or extension-less variants), so the site never feeds
+     Google "alternate" or "redirect" duplicates.
 """
 import csv
 import glob
@@ -210,6 +213,35 @@ def check_pages(photos):
     return parsed
 
 
+CANONICAL_PATHS = {"", "about.html", "portfolio.html", "order.html", "privacy.html", "terms.html"}
+OWN_HOST = re.compile(r"^(?:https?:)?//(?:www\.)?kamilsalamehphotography\.com(?=/|$)", re.I)
+
+
+def check_canonical_links(parsed):
+    texts = {name: load(name) for name in parsed}
+    for extra in ("sitemap.xml", "llms.txt", "robots.txt"):
+        texts[extra] = load(extra)
+    for name, text in texts.items():
+        urls = re.findall(r'(?:href|src)="([^"]+)"', text)
+        urls += re.findall(r"(?:https?:)?//(?:www\.)?kamilsalamehphotography\.com[^\"<\s)]*", text, re.I)
+        for url in urls:
+            m = OWN_HOST.match(url)
+            if m:
+                if not url.startswith(SITE[:-1]):
+                    fail("%s: non-canonical host in %s (use %s)" % (name, url, SITE))
+                    continue
+                path = url[len(SITE) - 1:]
+            elif re.match(r"^[a-z]+:|^#|^//", url, re.I):
+                continue
+            else:
+                path = "/" + url.lstrip("/")
+            page = path.split("#")[0].split("?")[0].lstrip("/")
+            if page.startswith(("images/", "fonts/")) or re.search(r"\.(css|js|xml|xsl|png|txt|jpg|avif|woff2)$", page):
+                continue
+            if page not in CANONICAL_PATHS:
+                fail("%s: link to non-canonical page URL %s" % (name, url))
+
+
 def check_css():
     css = load("style.css")
     for url in re.findall(r"url\([\"']?([^\"')]+)", css):
@@ -310,6 +342,7 @@ def main():
     check_originals(photos)
     parsed = check_pages(photos)
     check_css()
+    check_canonical_links(parsed)
     pages, images = check_sitemap(parsed)
     check_robots()
     if "--inventory" in sys.argv:

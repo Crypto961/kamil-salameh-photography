@@ -102,7 +102,9 @@ def esc(text):
 
 
 def seo_tags(name):
-    m = SEO[name]
+    """Search/social tags for a page: `name` is a key of SEO or a dict with
+    the same fields (photo pages pass their own)."""
+    m = SEO[name] if isinstance(name, str) else name
     url = SITE + m["path"] if m["path"] is not None else None
     image = SITE + m["image"]
     tags = [
@@ -125,9 +127,9 @@ def seo_tags(name):
         tags.append('    <meta property="og:url" content="%s">' % url)
     tags += [
         '    <meta property="og:image" content="%s">' % image,
-        '    <meta property="og:image:type" content="image/jpeg">',
-        '    <meta property="og:image:width" content="1200">',
-        '    <meta property="og:image:height" content="630">',
+        '    <meta property="og:image:type" content="%s">' % m.get("image_type", "image/jpeg"),
+        '    <meta property="og:image:width" content="%d">' % m.get("image_w", 1200),
+        '    <meta property="og:image:height" content="%d">' % m.get("image_h", 630),
         '    <meta property="og:image:alt" content="%s">' % esc(m["image_alt"]),
         '    <meta name="twitter:card" content="summary_large_image">',
         '    <meta name="twitter:title" content="%s">' % esc(m["title"]),
@@ -229,8 +231,8 @@ def portfolio_grid():
             '                <span class="image-wrapper">%s</span>\n'
             '                <span class="visually-hidden">View full-size photograph</span>\n'
             '            </a>\n'
-            '            <figcaption><h3>%s</h3><span>%s</span></figcaption>\n'
-            '        </figure>' % (delay, p["original"], img, attr(p["title"]), attr(p["place"])))
+            '            <figcaption><h3><a href="%s">%s</a></h3><span>%s</span></figcaption>\n'
+            '        </figure>' % (delay, p["original"], img, photo_path(p), attr(p["title"]), attr(p["place"])))
     return "\n\n".join(cards)
 
 
@@ -241,6 +243,7 @@ def portfolio_ld():
         obj = {
             "@type": "ImageObject",
             "@id": SITE + "portfolio.html#" + p["id"],
+            "url": SITE + photo_path(p),
             "contentUrl": SITE + display_src(p),
             "name": "%s, %s" % (p["title"], p["place"]) if p["place"] != "Product Photography" else p["title"],
             "caption": p["alt"],
@@ -282,6 +285,189 @@ def expand_photo_tags(html):
     html = re.sub(r"\{\{THUMBPATH:([a-z0-9-]+)\}\}", lambda m: thumb_path(PHOTOS[m.group(1)]), html)
     html = re.sub(r"\{\{ORIGINAL:([a-z0-9-]+)\}\}", lambda m: PHOTOS[m.group(1)]["original"], html)
     return html
+
+
+# ---------------------------------------------------------------------------
+# One page per photograph: photos/<slug>.html
+# Gives every photo its own URL, title, link preview (og:image) and
+# ImageObject, so search engines and AI assistants can cite and show the
+# actual photograph instead of the portfolio as a whole.
+# ---------------------------------------------------------------------------
+
+def page_slug(p):
+    return p.get("page") or p["slug"]
+
+
+def photo_path(p):
+    return "photos/%s.html" % page_slug(p)
+
+
+def portfolio_photos():
+    return [p for p in PHOTOS.values() if p["portfolio"]]
+
+
+def is_product(p):
+    return p["place"] == "Product Photography"
+
+
+def photo_heading(p):
+    """Title plus place, without repeating a place already in the title
+    ("Mount Ararat over Yerevan, Armenia", not "..., Yerevan, Armenia")."""
+    if is_product(p):
+        return p["title"]
+    parts = [x.strip() for x in p["place"].split(",")]
+    if len(parts) > 1 and parts[0].lower() in p["title"].lower():
+        parts = parts[1:]
+    return "%s, %s" % (p["title"], ", ".join(parts))
+
+
+def photo_seo(p):
+    w, h = image_size(display_src(p))
+    if is_product(p):
+        title = "%s | Product Photography by Kamil Salameh" % p["title"]
+    else:
+        title = "%s | Photo by Kamil Salameh" % photo_heading(p)
+    description = "%s. Photograph by Kamil Salameh, Lebanese landscape and fine art photographer." % p["alt"]
+    if len(description) > 160:
+        description = "%s. Photograph by Kamil Salameh." % p["alt"]
+    return dict(path=photo_path(p), title=title, description=description,
+                image=display_src(p), image_alt=p["alt"], image_w=w, image_h=h,
+                image_type="image/jpeg" if p["slug"] else "image/avif", og_type="article")
+
+
+def photo_ld(p):
+    url = SITE + photo_path(p)
+    w, h = image_size(p["original"])
+    image = {
+        "@type": "ImageObject",
+        "@id": url + "#image",
+        "url": url,
+        "contentUrl": SITE + display_src(p),
+        "name": photo_heading(p),
+        "caption": p["alt"],
+        "width": w, "height": h,
+        "creator": {"@id": SITE + "#person"},
+        "creditText": "Kamil Salameh",
+        "copyrightHolder": {"@id": SITE + "#person"},
+        "copyrightNotice": "© Kamil Salameh. All rights reserved.",
+        "license": SITE + "terms.html#copyright",
+        "acquireLicensePage": SITE + "order.html",
+        "isPartOf": {"@id": SITE + "portfolio.html#webpage"},
+    }
+    if p["slug"]:
+        image["thumbnailUrl"] = SITE + thumb_path(p)
+    if not is_product(p):
+        image["contentLocation"] = {"@type": "Place", "name": p["place"]}
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "ItemPage", "@id": url + "#webpage", "url": url, "name": photo_seo(p)["title"],
+         "isPartOf": {"@id": SITE + "#website"}, "about": {"@id": SITE + "#person"},
+         "mainEntity": {"@id": url + "#image"}, "primaryImageOfPage": {"@id": url + "#image"},
+         "breadcrumb": {"@id": url + "#breadcrumb"}, "inLanguage": "en"},
+        image,
+        {"@type": "BreadcrumbList", "@id": url + "#breadcrumb", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE},
+            {"@type": "ListItem", "position": 2, "name": "Portfolio", "item": SITE + "portfolio.html"},
+            {"@type": "ListItem", "position": 3, "name": photo_heading(p), "item": url}]}]}
+    return ("    <!-- Page structured data: this photograph (generated from _src/photos.json) -->\n"
+            '    <script type="application/ld+json">\n' + json.dumps(ld, indent=2, ensure_ascii=False) + "\n    </script>")
+
+
+def photo_body(p, prev, nxt):
+    w, h = image_size(p["original"])
+    img = img_responsive(p, "(max-width: 1240px) calc(100vw - 40px), 1200px", ' fetchpriority="high" decoding="async"')
+    meta_label = "Category" if is_product(p) else "Location"
+    pager = []
+    if prev:
+        pager.append('<a class="prev" href="%s"><span>← Previous</span>%s</a>' % (photo_path(prev), attr(photo_heading(prev))))
+    if nxt:
+        pager.append('<a class="next" href="%s"><span>Next →</span>%s</a>' % (photo_path(nxt), attr(photo_heading(nxt))))
+    return """    <nav class="photo-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><a href="portfolio.html">Portfolio</a><span aria-hidden="true">/</span><span aria-current="page">%(title)s</span>
+    </nav>
+
+    <figure class="photo-figure">
+        <a class="photo-frame" href="%(original)s">%(img)s<span class="visually-hidden">View the full-resolution photograph</span></a>
+        <figcaption class="visually-hidden">%(heading)s. Photograph by Kamil Salameh.</figcaption>
+    </figure>
+
+    <div class="photo-details">
+        <div>
+            <h1>%(title)s</h1>
+            <p class="photo-place">%(place)s</p>
+            <p class="photo-description">%(alt)s. Photographed by <a href="about.html">Kamil Salameh</a>, a Lebanese photographer specializing in landscape, astrophotography, architecture and fine art.</p>
+            <div class="photo-actions">
+                <a href="order.html" class="primary-button">Request a Print</a>
+                <a href="%(original)s" class="ghost-button">Full Resolution</a>
+            </div>
+        </div>
+        <aside class="photo-meta" aria-label="Photograph details">
+            <dl>
+                <div><dt>Photographer</dt><dd><a href="about.html">Kamil Salameh</a></dd></div>
+                <div><dt>%(meta_label)s</dt><dd>%(place)s</dd></div>
+                <div><dt>Original</dt><dd>%(w)d × %(h)d px</dd></div>
+                <div><dt>Copyright</dt><dd>© Kamil Salameh. All rights reserved. <a href="terms.html#copyright">Licensing</a></dd></div>
+            </dl>
+        </aside>
+    </div>
+
+    <nav class="photo-pager" aria-label="More photographs">
+        %(pager)s
+    </nav>""" % dict(title=attr(p["title"]), place=attr(p["place"]), alt=attr(p["alt"]), heading=attr(photo_heading(p)),
+                     original=p["original"], img=img, w=w, h=h, meta_label=meta_label, pager="\n        ".join(pager))
+
+
+def root_relative(html):
+    """Pages outside the site root (404, photos/) use root-relative links."""
+    html = re.sub(r'(href|src)="(?!https?:|#|data:|/|mailto:)([^"]+)"', r'\1="/\2"', html)
+
+    def fix_srcset(m):
+        parts = []
+        for part in m.group(1).split(","):
+            url, _, descriptor = part.strip().partition(" ")
+            if not re.match(r"^(https?:|/|data:)", url):
+                url = "/" + url
+            parts.append((url + " " + descriptor).strip())
+        return 'srcset="%s"' % ", ".join(parts)
+    return re.sub(r'srcset="([^"]+)"', fix_srcset, html)
+
+
+def build_photo_pages(head, header, footer, state):
+    os.makedirs(os.path.join(ROOT, "photos"), exist_ok=True)
+    shown = portfolio_photos()
+    nav = header
+    for key in ("about", "portfolio", "order"):
+        nav = nav.replace("{{%s}}" % key, ' aria-current="page"' if key == "portfolio" else "")
+    template = read("photo.html")
+    expected = set()
+    for i, p in enumerate(shown):
+        prev = shown[i - 1] if i > 0 else None
+        nxt = shown[i + 1] if i + 1 < len(shown) else None
+        html = (template.replace("{{SEO}}", seo_tags(photo_seo(p)))
+                .replace("{{HEAD}}", head).replace("{{HEADER}}", nav).replace("{{FOOTER}}", footer)
+                .replace("{{PHOTO_LD}}", photo_ld(p)).replace("{{PHOTO_BODY}}", photo_body(p, prev, nxt)))
+        html = versioned(root_relative(html))
+        name = photo_path(p)[:-5]  # "photos/<slug>"
+        html = stamp(name, html, state)
+        with open(os.path.join(ROOT, name + ".html"), "w", encoding="utf-8", newline="\n") as f:
+            f.write(html + "\n")
+        expected.add(os.path.basename(name) + ".html")
+    for stale in os.listdir(os.path.join(ROOT, "photos")):  # remove pages of photos no longer published
+        if stale.endswith(".html") and stale not in expected:
+            os.remove(os.path.join(ROOT, "photos", stale))
+            state.pop("photos/" + stale[:-5], None)
+    print("built %d photo pages" % len(expected))
+
+
+def build_llms_txt():
+    """llms.txt for AI assistants, with a generated list of every photograph."""
+    lines = []
+    for p in portfolio_photos():
+        lines.append("- [%s](%s%s): %s. Image: %s%s" % (
+            photo_heading(p), SITE, photo_path(p), p["alt"], SITE, display_src(p)))
+    text = read("llms.txt").replace("{{PHOTO_LIST}}", "\n".join(lines))
+    with open(os.path.join(ROOT, "llms.txt"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(text + "\n")
+    print("built llms.txt")
 
 
 LASTMOD_FILE = os.path.join(HERE, "lastmod.json")
@@ -349,14 +535,16 @@ def build():
             html = html.replace('href="/#contact">Contact', 'href="#contact">Contact')
         if name == "404":
             # Served for any missing URL, including nested ones, so use root-relative paths.
-            html = re.sub(r'(href|src)="(?!https?:|#|data:|/)([^"]+)"', r'\1="/\2"', html)
+            html = root_relative(html)
         html = versioned(html)
         if name in TRACKED or DATE_PLACEHOLDER in html:
             html = stamp(name, html, state)
         with open(os.path.join(ROOT, name + ".html"), "w", encoding="utf-8", newline="\n") as f:
             f.write(html + "\n")
         print("built", name + ".html")
+    build_photo_pages(head, header, footer, state)
     save_lastmod(state)
+    build_llms_txt()
 
 
 # Sitemap: every indexable page with the photographs it actually shows.
@@ -375,16 +563,14 @@ TRACKED = {name for name, _, _ in SITEMAP}
 
 def page_images(html):
     """Photographs a page exposes to crawlers: every <img> under images/
-    (except the logo) plus full-size originals linked from the portfolio."""
+    (except the logo) plus full-size originals linked from the page."""
     found = []
-    for src in re.findall(r'<img\b[^>]*?\ssrc="(images/[^"]+)"', html):
+    candidates = re.findall(r'<img\b[^>]*?\ssrc="/?(images/[^"]+)"', html)
+    candidates += re.findall(r'<a class="(?:portfolio-link|photo-frame)" href="/?(images/[^"]+)"', html)
+    for src in candidates:
         if not src.endswith("logo.png") and src not in found:
             found.append(src)
-    for href in re.findall(r'<a class="portfolio-link" href="(images/[^"]+)"', html):
-        if href not in found:
-            found.append(href)
     return found
-
 
 def build_sitemap():
     """Write sitemap.xml. Each <lastmod> is the time the page's content last
@@ -394,11 +580,13 @@ def build_sitemap():
            '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
            '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
-    for name, priority, freq in SITEMAP:
+    entries = [(name, SEO[name]["path"], priority, freq) for name, priority, freq in SITEMAP]
+    entries += [(photo_path(p)[:-5], photo_path(p), "0.7", "monthly") for p in portfolio_photos()]
+    for name, path, priority, freq in entries:
         with open(os.path.join(ROOT, name + ".html"), encoding="utf-8") as f:
             html = f.read()
         out += ["  <url>",
-                "    <loc>%s%s</loc>" % (SITE, SEO[name]["path"]),
+                "    <loc>%s%s</loc>" % (SITE, path),
                 "    <lastmod>%s</lastmod>" % full_datetime(state[name]["lastmod"]),
                 "    <changefreq>%s</changefreq>" % freq,
                 "    <priority>%s</priority>" % priority]

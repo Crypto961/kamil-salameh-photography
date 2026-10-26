@@ -1,0 +1,58 @@
+# Notify Bing (and other IndexNow search engines) when the site changes.
+# Bing's index also powers ChatGPT search and Microsoft Copilot, so this
+# helps new and updated pages and photographs appear there sooner.
+#
+# Runs after GitHub Pages finishes publishing, and submits every sitemap URL
+# whose <lastmod> is within the last 3 days. The key file at the site root
+# (ff5bbc359a14f62abe1021b59be2e366.txt) proves ownership; do not delete it.
+name: IndexNow
+
+on:
+  page_build:
+  workflow_dispatch:
+    inputs:
+      all:
+        description: "Submit every URL in the sitemap, not only recent changes"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for the published site to update
+        run: sleep 90
+
+      - name: Submit changed URLs to IndexNow
+        env:
+          INDEXNOW_KEY: "ff5bbc359a14f62abe1021b59be2e366"
+          SUBMIT_ALL: ${{ github.event.inputs.all || 'false' }}
+        run: |
+          python3 - <<'PY'
+          import datetime, json, os, re, urllib.request
+          site = "https://kamilsalamehphotography.com/"
+          key = os.environ["INDEXNOW_KEY"]
+          xml = open("sitemap.xml", encoding="utf-8").read()
+          cutoff = datetime.date.today() - datetime.timedelta(days=3)
+          urls = []
+          for block in re.findall(r"<url>(.*?)</url>", xml, re.S):
+              loc = re.search(r"<loc>([^<]+)</loc>", block).group(1)
+              lastmod = re.search(r"<lastmod>(\d{4}-\d{2}-\d{2})", block)
+              if os.environ["SUBMIT_ALL"] == "true" or (lastmod and datetime.date.fromisoformat(lastmod.group(1)) >= cutoff):
+                  urls.append(loc)
+          if not urls:
+              print("No recently changed URLs; nothing to submit.")
+              raise SystemExit(0)
+          body = json.dumps({"host": "kamilsalamehphotography.com", "key": key,
+                             "keyLocation": site + key + ".txt", "urlList": urls}).encode()
+          req = urllib.request.Request("https://api.indexnow.org/indexnow", data=body,
+                                       headers={"Content-Type": "application/json; charset=utf-8"})
+          with urllib.request.urlopen(req, timeout=30) as resp:
+              print("IndexNow responded", resp.status, "for", len(urls), "URLs:")
+          print("\n".join(urls))
+          PY

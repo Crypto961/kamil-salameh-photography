@@ -145,3 +145,20 @@ Merge the pull request into `main`. GitHub Pages rebuilds automatically, usually
 - **These are correct behaviours, not errors.** Validation of these two reasons will keep reporting "some fixes failed" because the URLs will always redirect or point to their canonical page. Google indexes the canonical pages instead.
 - **Prevention:** `_src/validate.py` check 13 now fails if any page, the sitemap, `llms.txt` or `robots.txt` links to a non-canonical form of our own URLs. A negative test confirmed it flags `http://www.` hosts and `/index.html`.
 - **Live verification:** not possible from this environment (the domain is blocked by its network policy). The owner should confirm in Search Console that the example URLs listed are variants like those above.
+
+## 13. Follow-up, 26 October 2026: AI assistants not showing the actual photographs
+
+- **Report:** asked about Kamil Salameh, ChatGPT linked to the official gallery but showed "visual search previews" (thumbnails from its image-search partners) rather than the actual photographs.
+- **Cause:** all photographs shared one URL (`portfolio.html`). A search result or AI citation could only point to "the portfolio", and its link preview was a single fixed image. Answer engines build their thumbnails from a result page's preview image and from image-search indexes such as Bing Images, so no result existed that represented an individual photograph.
+- **Fix:**
+  - **Photo pages:** one generated page per photograph at `photos/<slug>.html`, 17 in total. Each has:
+    - a title naming the photographer, for example "Nyhavn, Copenhagen, Denmark | Photo by Kamil Salameh"
+    - the photograph as its main content and as its `og:image` link preview
+    - a description, location, original dimensions and copyright/licensing
+    - `ItemPage` + `ImageObject` (creator, credit, license, location) + breadcrumbs, and previous/next links
+  - **Portfolio:** caption titles link to these pages, and the `ImageObject` entries carry their `url`.
+  - **Sitemap:** now 23 URLs and 75 images; each photo page lists its image and its full-resolution original.
+  - **`llms.txt`:** now generated, and lists every photograph with its page URL, description and direct image URL, plus a credit line.
+  - **IndexNow:** a GitHub Action (`.github/workflows/indexnow.yml`, triggered by each Pages publish) submits recently changed URLs to IndexNow, so Bing, which feeds ChatGPT search and Copilot, picks them up quickly. It can also be run manually with "submit all".
+- **Unchanged:** `robots.txt` already gives AI search and answer crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot and others) full access, images included. Training crawlers still cannot fetch `/images/`, per the copyright terms.
+- **Limits:** none of this guarantees that a specific assistant will display a specific image. That depends on each provider's crawling and index refresh, which typically takes days to weeks. The validator now requires every portfolio photograph to have its page, preview image and alt text.

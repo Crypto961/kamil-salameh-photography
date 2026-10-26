@@ -1,5 +1,5 @@
 {
-  "_about": "Source of truth for every photograph on the site. _src/build.py generates the portfolio grid, its ImageObject structured data, homepage/about image tags and the image inventory report from this file. 'original' files are the colour-managed BT.2020 AVIF exports and must never be recompressed (see README). 'slug' names the 600px (images/thumbs/) and 1200px (images/web/) JPEG derivatives. 'evidence' records where each fact comes from: 'pixels' = visible in the photograph, 'owner caption' = stated on the site by the owner before this audit, 'visual identification' = a landmark or species recognised in the pixels but not confirmed by the owner, 'unverified' = not confirmed. 'original_sha256' fingerprints each original so _src/validate.py fails if an original is ever modified.",
+  "_about": "Source of truth for every photograph on the site. _src/build.py generates the portfolio grid, its ImageObject structured data, homepage/about image tags and the image inventory report from this file. 'original' files are the colour-managed BT.2020 AVIF exports and must never be recompressed (see README). 'slug' names the 600px (images/thumbs/) and 1200px (images/web/) JPEG derivatives. 'evidence' records where each fact comes from: 'pixels' = visible in the photograph, 'owner caption' = stated on the site by the owner before this audit, 'visual identification' = a landmark or species recognised in the pixels but not confirmed by the owner, 'unverified' = not confirmed. 'original_sha256' fingerprints each original so _src/validate.py fails if an original is ever modified. Each portfolio photograph also gets its own page at photos/<slug>.html ('page' overrides the slug where no derivative exists).",
   "photos": [
     {
       "id": "france",
@@ -126,7 +126,8 @@
         "subject": "pixels (tram destination sign reads TAKSİM)",
         "location": "visual identification (İstiklal Avenue, Istanbul); filename (Turkey)"
       },
-      "original_sha256": "b5efc7a69c80f9e8ab5c9cee6a287e242102a8177ebd0a68a3c5a5f4a15f0a94"
+      "original_sha256": "b5efc7a69c80f9e8ab5c9cee6a287e242102a8177ebd0a68a3c5a5f4a15f0a94",
+      "page": "istiklal-avenue-tram-istanbul-turkiye-kamil-salameh"
     },
     {
       "id": "lebanon",

@@ -19,6 +19,7 @@ Checks:
  10. No inline executable scripts or third-party script/style sources (CSP).
  11. CSS/JS links carry the current cache-busting VERSION.
  12. JSON-LD dates (dateModified etc.) are full ISO 8601 datetimes with timezone.
+ 14. Every portfolio photograph has its own page with og:image and the photo.
  13. Every link to one of our own pages uses its canonical URL (no http://,
      www., index.html or extension-less variants), so the site never feeds
      Google "alternate" or "redirect" duplicates.
@@ -102,8 +103,13 @@ def load(path):
         return f.read()
 
 
+def html_files():
+    """Every generated page: root pages plus one page per photograph."""
+    return sorted(glob.glob(os.path.join(ROOT, "*.html"))) + sorted(glob.glob(os.path.join(ROOT, "photos", "*.html")))
+
+
 def check_build_sync():
-    pages = sorted(glob.glob(os.path.join(ROOT, "*.html"))) + [os.path.join(ROOT, "sitemap.xml")]
+    pages = html_files() + [os.path.join(ROOT, "sitemap.xml"), os.path.join(ROOT, "llms.txt")]
     before = {p: open(p, "rb").read() for p in pages}
     subprocess.run([sys.executable, os.path.join(HERE, "build.py")], check=True, capture_output=True)
     changed = [os.path.basename(p) for p in pages if open(p, "rb").read() != before[p]]
@@ -124,8 +130,8 @@ def check_originals(photos):
 
 def check_pages(photos):
     parsed = {}
-    for path in sorted(glob.glob(os.path.join(ROOT, "*.html"))):
-        name = os.path.basename(path)
+    for path in html_files():
+        name = os.path.relpath(path, ROOT)
         page = Page()
         page.feed(load(name))
         parsed[name] = page
@@ -213,11 +219,15 @@ def check_pages(photos):
     return parsed
 
 
-CANONICAL_PATHS = {"", "about.html", "portfolio.html", "order.html", "privacy.html", "terms.html"}
+CANONICAL_PATHS = set()  # filled from the pages' canonical tags in check_canonical_links()
 OWN_HOST = re.compile(r"^(?:https?:)?//(?:www\.)?kamilsalamehphotography\.com(?=/|$)", re.I)
 
 
 def check_canonical_links(parsed):
+    for page in parsed.values():
+        for l in page.links:
+            if l.get("rel") == "canonical":
+                CANONICAL_PATHS.add(l["href"][len(SITE):])
     texts = {name: load(name) for name in parsed}
     for extra in ("sitemap.xml", "llms.txt", "robots.txt"):
         texts[extra] = load(extra)
@@ -240,6 +250,22 @@ def check_canonical_links(parsed):
                 continue
             if page not in CANONICAL_PATHS:
                 fail("%s: link to non-canonical page URL %s" % (name, url))
+
+
+def check_photo_pages(photos, parsed):
+    for p in photos:
+        if not p.get("portfolio"):
+            continue
+        name = "photos/%s.html" % (p.get("page") or p["slug"])
+        if name not in parsed:
+            fail("missing photo page %s" % name)
+            continue
+        page = parsed[name]
+        og = [m.get("content") for m in page.metas if m.get("property") == "og:image"]
+        if not og or not os.path.exists(os.path.join(ROOT, rel(og[0]))):
+            fail("%s: og:image missing or broken" % name)
+        if not any(p["alt"] == img.get("alt") for img in page.imgs):
+            fail("%s: photograph with its alt text not found on the page" % name)
 
 
 def check_css():
@@ -343,6 +369,7 @@ def main():
     parsed = check_pages(photos)
     check_css()
     check_canonical_links(parsed)
+    check_photo_pages(photos, parsed)
     pages, images = check_sitemap(parsed)
     check_robots()
     if "--inventory" in sys.argv:

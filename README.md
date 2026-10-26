@@ -15,9 +15,11 @@ Static HTML, CSS and vanilla JavaScript, hosted on GitHub Pages. No build step a
 | `privacy.html` | Privacy & Cookie Policy (GDPR, Lebanese Law 81/2018) |
 | `terms.html` | Terms & Conditions, copyright and image licensing, order terms |
 | `404.html` | Not-found page served by GitHub Pages |
+| `photos/*.html` | One generated page per photograph (title, location, description, licensing, own link preview). Generated from `_src/photos.json` by `_src/photo.html` |
 | `sitemap.xml` / `sitemap.xsl` | XML sitemap for search engines, styled for humans (generated) |
 | `robots.txt` | Crawler rules: search and AI answer engines get full access; AI training crawlers get text but not `/images/` |
-| `llms.txt` | Plain-text summary of who Kamil Salameh is, for AI assistants |
+| `llms.txt` | Plain-text summary for AI assistants, including a generated list of every photograph with its page and image URL (source: `_src/llms.txt`) |
+| `<key>.txt`, `.github/workflows/indexnow.yml` | IndexNow: after each Pages publish, a GitHub Action notifies Bing (which also powers ChatGPT search and Copilot) of changed URLs. Keep the key file |
 
 ## Scripts
 

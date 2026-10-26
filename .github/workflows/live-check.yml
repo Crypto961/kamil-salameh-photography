@@ -1,0 +1,101 @@
+# Verify the published site from the open internet after every GitHub Pages
+# publish (and on demand from the Actions tab). Fails if any page or image in
+# the sitemap is not live, if HTTPS/www redirects are wrong, or if the photo
+# pages lack their title, photograph and link-preview image.
+name: Live site check
+
+on:
+  page_build:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for the published site to update
+        if: github.event_name == 'page_build'
+        run: sleep 90
+
+      - name: Check every sitemap URL and image on the live site
+        run: |
+          python3 - <<'PY'
+          import json, re, socket, sys, urllib.request, urllib.error
+
+          SITE = "https://kamilsalamehphotography.com/"
+          HOST = "kamilsalamehphotography.com"
+          failures = []
+
+          print("DNS:", HOST, "->", sorted({a[4][0] for a in socket.getaddrinfo(HOST, 443)}))
+
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, *args, **kwargs):
+                  return None
+
+          def fetch(url, follow=True):
+              opener = urllib.request.build_opener() if follow else urllib.request.build_opener(NoRedirect)
+              req = urllib.request.Request(url, headers={"User-Agent": "KSP-live-check/1.0"})
+              try:
+                  with opener.open(req, timeout=30) as r:
+                      return r.status, r.headers, r.read()
+              except urllib.error.HTTPError as e:
+                  return e.code, e.headers, b""
+
+          # Sitemap from the live site (not the repository) proves the deploy.
+          status, _, body = fetch(SITE + "sitemap.xml")
+          if status != 200:
+              sys.exit("sitemap.xml returned %s" % status)
+          xml = body.decode("utf-8")
+          pages = re.findall(r"<loc>([^<]+)</loc>", xml)
+          images = sorted(set(re.findall(r"<image:loc>([^<]+)</image:loc>", xml)))
+          print("Live sitemap: %d pages, %d images" % (len(pages), len(images)))
+
+          for url in pages:
+              status, headers, body = fetch(url)
+              html = body.decode("utf-8", "replace")
+              ok = status == 200 and "text/html" in headers.get("Content-Type", "")
+              canon = re.search(r'rel="canonical" href="([^"]+)"', html)
+              if not ok or not canon or canon.group(1) != url:
+                  failures.append("PAGE %s -> %s, canonical=%s" % (url, status, canon and canon.group(1)))
+              elif "/photos/" in url:
+                  og = re.search(r'property="og:image" content="([^"]+)"', html)
+                  h1 = re.search(r"<h1>([^<]+)</h1>", html)
+                  if not og or not h1 or "Kamil Salameh" not in html or 'class="photo-frame"' not in html:
+                      failures.append("PHOTO PAGE incomplete: %s" % url)
+                  else:
+                      print("  ok  %s  |  %s" % (url.replace(SITE, ""), h1.group(1)))
+              else:
+                  print("  ok  %s" % url.replace(SITE, "/"))
+
+          for url in images:
+              status, headers, body = fetch(url)
+              ctype = headers.get("Content-Type", "")
+              if status != 200 or not ctype.startswith("image/") or len(body) < 1000:
+                  failures.append("IMAGE %s -> %s %s (%d bytes)" % (url, status, ctype, len(body)))
+          print("Images checked: %d" % len(images))
+
+          for path in ("llms.txt", "robots.txt", "ff5bbc359a14f62abe1021b59be2e366.txt"):
+              status, _, body = fetch(SITE + path)
+              if status != 200:
+                  failures.append("FILE /%s -> %s" % (path, status))
+          if b"## Photographs" not in fetch(SITE + "llms.txt")[2]:
+              failures.append("llms.txt has no Photographs section")
+
+          # Redirects: http -> https and www -> apex
+          for url in ("http://%s/" % HOST, "https://www.%s/" % HOST):
+              status, headers, _ = fetch(url, follow=False)
+              loc = headers.get("Location", "")
+              print("Redirect %s -> %s %s" % (url, status, loc))
+              if status not in (301, 308) or not loc.startswith(SITE):
+                  failures.append("REDIRECT %s -> %s %s" % (url, status, loc))
+
+          if failures:
+              print("\nFAILED (%d):" % len(failures))
+              print("\n".join("  - " + f for f in failures))
+              sys.exit(1)
+          print("\nAll live checks passed.")
+          PY

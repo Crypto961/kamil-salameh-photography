@@ -20,6 +20,8 @@ Checks:
  11. CSS/JS links carry the current cache-busting VERSION.
  12. JSON-LD dates (dateModified etc.) are full ISO 8601 datetimes with timezone.
  14. Every portfolio photograph has its own page with og:image and the photo.
+ 15. Every photograph shown anywhere links to its photo page (or original).
+ 16. Every image file carries IPTC creator/copyright metadata (_src/iptc.py).
  13. Every link to one of our own pages uses its canonical URL (no http://,
      www., index.html or extension-less variants), so the site never feeds
      Google "alternate" or "redirect" duplicates.
@@ -157,7 +159,7 @@ def check_pages(photos):
                 fail("%s: <img> without alt: %s" % (name, img.get("src")))
             elif img["alt"] == "":
                 src = img.get("src", "")
-                if not (src.endswith("hero-bg.jpg.avif") or src.endswith("logo.png") or img.get("id") == "lightboxImage"):
+                if not (src.endswith("hero-bg.jpg.avif") or src.endswith("logo.jpg") or img.get("id") == "lightboxImage"):
                     fail("%s: empty alt on meaningful image %s" % (name, src))
             elif "/images/" in "/" + img.get("src", "") and len(img["alt"]) < 25:
                 fail("%s: alt text too short to be descriptive: %r" % (name, img["alt"]))
@@ -268,6 +270,25 @@ def check_photo_pages(photos, parsed):
             fail("%s: photograph with its alt text not found on the page" % name)
 
 
+def check_photo_links_and_metadata(parsed):
+    """15. Every photograph shown on a page links to its photo page (or, in the
+    portfolio grid, its full-resolution original, with the title linking to
+    the page). 16. Every image file carries IPTC creator/copyright metadata."""
+    for name in parsed:
+        text = load(name)
+        for pre, src in re.findall(r'(<a\b[^>]*>\s*(?:<span[^>]*>)?\s*)?<img\b[^>]*?\ssrc="([^"]+)"', text):
+            if src.endswith("logo.jpg") or not re.search(r"(^|/)images/", src):
+                continue
+            if not re.search(r'href="/?(photos/[^"]+\.html|images/[^"]+\.avif)"', pre or ""):
+                fail("%s: photograph %s is not linked to its photo page" % (name, src))
+    sys.path.insert(0, HERE)
+    sys.dont_write_bytecode = True
+    import iptc  # noqa: E402
+    for path, _ in iptc.targets():
+        if not iptc.has_metadata(path):
+            fail("%s: missing IPTC creator/copyright metadata (run python3 _src/iptc.py)" % path)
+
+
 def check_css():
     css = load("style.css")
     for url in re.findall(r"url\([\"']?([^\"')]+)", css):
@@ -370,6 +391,7 @@ def main():
     check_css()
     check_canonical_links(parsed)
     check_photo_pages(photos, parsed)
+    check_photo_links_and_metadata(parsed)
     pages, images = check_sitemap(parsed)
     check_robots()
     if "--inventory" in sys.argv:

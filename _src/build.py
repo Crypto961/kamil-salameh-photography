@@ -21,7 +21,7 @@ import os
 import re
 import struct
 
-VERSION = "20261016b"
+VERSION = "20261027a"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -281,6 +281,7 @@ def expand_photo_tags(html):
     html = re.sub(r"\{\{PHOTO:([a-z0-9-]+)\|([^}]*)\}\}",
                   lambda m: img_responsive(PHOTOS[m.group(1)], "(max-width: 900px) 92vw, 480px", m.group(2)), html)
     html = re.sub(r"\{\{ALT:([a-z0-9-]+)\}\}", lambda m: attr(PHOTOS[m.group(1)]["alt"]), html)
+    html = re.sub(r"\{\{PAGE:([a-z0-9-]+)\}\}", lambda m: photo_path(PHOTOS[m.group(1)]), html)
     html = re.sub(r"\{\{WEB:([a-z0-9-]+)\}\}", lambda m: web_path(PHOTOS[m.group(1)]), html)
     html = re.sub(r"\{\{THUMBPATH:([a-z0-9-]+)\}\}", lambda m: thumb_path(PHOTOS[m.group(1)]), html)
     html = re.sub(r"\{\{ORIGINAL:([a-z0-9-]+)\}\}", lambda m: PHOTOS[m.group(1)]["original"], html)
@@ -568,7 +569,7 @@ def page_images(html):
     candidates = re.findall(r'<img\b[^>]*?\ssrc="/?(images/[^"]+)"', html)
     candidates += re.findall(r'<a class="(?:portfolio-link|photo-frame)" href="/?(images/[^"]+)"', html)
     for src in candidates:
-        if not src.endswith("logo.png") and src not in found:
+        if not src.endswith("logo.jpg") and src not in found:
             found.append(src)
     return found
 

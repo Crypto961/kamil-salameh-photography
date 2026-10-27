@@ -91,9 +91,10 @@
     }
 
     document.querySelectorAll(".polaroid-interactive-container").forEach((stack) => {
+        const button = stack.querySelector(".stack-hint");
         const setSpread = (spread) => {
             stack.classList.toggle("is-expanded", spread);
-            stack.setAttribute("aria-expanded", String(spread));
+            if (button) button.setAttribute("aria-expanded", String(spread));
         };
 
         // Fan the stack out when it scrolls into view (it is spread by default
@@ -109,12 +110,21 @@
         }
 
         const toggleSpread = () => setSpread(!stack.classList.contains("is-expanded"));
-        stack.addEventListener("click", toggleSpread);
-        stack.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                toggleSpread();
+        if (button) button.addEventListener("click", toggleSpread);
+
+        stack.addEventListener("click", (e) => {
+            if (button && button.contains(e.target)) return;
+            const link = e.target.closest("a");
+            // Each photograph links to its own page. While the cards are
+            // stacked, the first tap spreads them instead of navigating.
+            if (link) {
+                if (!stack.classList.contains("is-expanded")) {
+                    e.preventDefault();
+                    setSpread(true);
+                }
+                return;
             }
+            toggleSpread();
         });
     });
 

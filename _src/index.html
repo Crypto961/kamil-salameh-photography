@@ -212,6 +212,7 @@
         }
 
         .pola-frame {
+            display: block;
             width: 100%;
             aspect-ratio: 1 / 1;
             overflow: hidden;
@@ -225,6 +226,11 @@
             object-fit: cover;
             display: block;
             transition: transform 0.5s ease;
+        }
+
+        a.pola-frame:focus-visible {
+            outline: 3px solid var(--blue-400);
+            outline-offset: 3px;
         }
 
         .pola-card:hover .pola-frame img {
@@ -566,7 +572,7 @@
         <div class="hero-pola-stack">
             <div class="hero-pola-card">
                 <div class="pola-frame">
-                    <img src="images/logo.png" alt="">
+                    <img src="images/logo.jpg" alt="">
                 </div>
                 <div class="pola-caption">Kamil Salameh Portfolio</div>
             </div>
@@ -584,26 +590,26 @@
             <a href="about.html" class="text-link">More about Kamil Salameh <span aria-hidden="true">→</span></a>
         </div>
 
-        <div class="polaroid-interactive-container is-expanded" role="button" tabindex="0" aria-expanded="true" aria-label="Philosophy photographs: press to stack or spread the photographs" data-reveal>
+        <div class="polaroid-interactive-container is-expanded" data-reveal>
             <div class="polaroid-fan-wrapper">
                 <figure class="pola-card">
-                    <div class="pola-frame">{{THUMB:lebanon}}</div>
+                    <a class="pola-frame" href="{{PAGE:lebanon}}">{{THUMB:lebanon}}</a>
                     <figcaption class="pola-caption">Faqra Temple<span class="pola-subcaption">Kfardebian, Lebanon</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame">{{THUMB:france}}</div>
+                    <a class="pola-frame" href="{{PAGE:france}}">{{THUMB:france}}</a>
                     <figcaption class="pola-caption">Parisian Light<span class="pola-subcaption">Paris, France</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame">{{THUMB:astrophotography}}</div>
+                    <a class="pola-frame" href="{{PAGE:astrophotography}}">{{THUMB:astrophotography}}</a>
                     <figcaption class="pola-caption">Night Skies<span class="pola-subcaption">Kfardebian, Lebanon</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame">{{THUMB:norway}}</div>
+                    <a class="pola-frame" href="{{PAGE:norway}}">{{THUMB:norway}}</a>
                     <figcaption class="pola-caption">Nordic Silence<span class="pola-subcaption">Oslo, Norway</span></figcaption>
                 </figure>
             </div>
-            <span class="stack-hint" aria-hidden="true"><span class="hint-open">✦ Tap to unfold</span><span class="hint-close">✕ Tap to stack</span></span>
+            <button type="button" class="stack-hint" aria-expanded="true"><span class="hint-open">✦ Unfold the photographs</span><span class="hint-close">✕ Stack the photographs</span></button>
         </div>
     </div>
 </section>
@@ -621,26 +627,26 @@
             <a href="portfolio.html" class="primary-button">Full Portfolio</a>
         </div>
 
-        <div class="polaroid-interactive-container is-expanded" role="button" tabindex="0" aria-expanded="true" aria-label="Featured photographs: press to stack or spread the photographs" data-reveal>
+        <div class="polaroid-interactive-container is-expanded" data-reveal>
             <div class="polaroid-fan-wrapper">
                 <figure class="pola-card">
-                    <div class="pola-frame">{{THUMB:kenya}}</div>
+                    <a class="pola-frame" href="{{PAGE:kenya}}">{{THUMB:kenya}}</a>
                     <figcaption class="pola-caption">Wild Horizon<span class="pola-subcaption">Masai Mara, Kenya</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame">{{THUMB:belgium}}</div>
+                    <a class="pola-frame" href="{{PAGE:belgium}}">{{THUMB:belgium}}</a>
                     <figcaption class="pola-caption">Riverside Dinant<span class="pola-subcaption">Dinant, Belgium</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame">{{THUMB:denmark}}</div>
+                    <a class="pola-frame" href="{{PAGE:denmark}}">{{THUMB:denmark}}</a>
                     <figcaption class="pola-caption">Nordic Lines<span class="pola-subcaption">Copenhagen, Denmark</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame">{{THUMB:product-photography}}</div>
+                    <a class="pola-frame" href="{{PAGE:product-photography}}">{{THUMB:product-photography}}</a>
                     <figcaption class="pola-caption">Fine Art Details<span class="pola-subcaption">Studio Collection</span></figcaption>
                 </figure>
             </div>
-            <span class="stack-hint" aria-hidden="true"><span class="hint-open">✦ Tap to unfold</span><span class="hint-close">✕ Tap to stack</span></span>
+            <button type="button" class="stack-hint" aria-expanded="true"><span class="hint-open">✦ Unfold the photographs</span><span class="hint-close">✕ Stack the photographs</span></button>
         </div>
     </div>
 </section>

@@ -162,3 +162,21 @@ Merge the pull request into `main`. GitHub Pages rebuilds automatically, usually
   - **IndexNow:** a GitHub Action (`.github/workflows/indexnow.yml`, triggered by each Pages publish) submits recently changed URLs to IndexNow, so Bing, which feeds ChatGPT search and Copilot, picks them up quickly. It can also be run manually with "submit all".
 - **Unchanged:** `robots.txt` already gives AI search and answer crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot and others) full access, images included. Training crawlers still cannot fetch `/images/`, per the copyright terms.
 - **Limits:** none of this guarantees that a specific assistant will display a specific image. That depends on each provider's crawling and index refresh, which typically takes days to weeks. The validator now requires every portfolio photograph to have its page, preview image and alt text.
+
+## 14. Follow-up, 27 October 2026: every image linked to a page; IPTC metadata
+
+- **Images without a page link:**
+  - The 8 homepage polaroids and the About portrait now link to their photo pages. The polaroid stacks were a single `role="button"`, which cannot contain links. They are now ordinary containers with real `<a>` links, and stacking/unfolding moved to a real `<button>` with `aria-expanded`. While stacked, the first tap unfolds the cards instead of navigating.
+  - `images/hero-bg.jpg.avif`, an unpublished duplicate of the Dinant photograph (which has its page), was removed from the site. It remains in git history.
+- **Logo:** `images/logo.png` was a JPEG file with a `.png` extension, so it was served with the wrong MIME type. It was renamed to `logo.jpg` and every reference was updated.
+- **IPTC metadata:** `_src/iptc.py` (ExifTool) writes the following to all 17 originals, 32 JPEG derivatives and 4 Open Graph crops:
+  - Creator, Copyright Notice, Credit Line, Web Statement of Rights, Marked
+  - Licensor name and URL, Creator work URL
+  - per-photo Title and Description
+  - for JPEGs, the IPTC IIM equivalents too
+- **Fidelity proof:** all 54 files decode to byte-identical pixels before and after. All 17 originals keep their `nclx` colour box. Chromium renders all 17 originals identically (screenshot hashes). Original fingerprints were updated.
+- **Logo excluded from tagging:** its existing metadata states "Made with Google AI" with IPTC DigitalSourceType `trainedAlgorithmicMedia`. Overwriting that with creator/copyright claims would remove an AI-provenance disclosure, so its bytes are unchanged.
+- **Prevention:**
+  - `validate.py` check 15: every displayed photograph links to its page or original.
+  - `validate.py` check 16: every image carries the metadata. Both were negative-tested.
+  - The live site check now also verifies the metadata on every published image.

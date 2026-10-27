@@ -13,7 +13,7 @@
         "subject": "visual identification (Sacré-Cœur Basilica, Montmartre)",
         "location": "owner caption (Paris, France)"
       },
-      "original_sha256": "d5469a12f6b761521e64858f5aa112f63a96cbb17ffffde7768b67df34848255"
+      "original_sha256": "f143055383f68a2f5435c63aae2169159817abeb0433bd5aa57d2e775f9de697"
     },
     {
       "id": "kenya",
@@ -27,7 +27,7 @@
         "subject": "visual identification (vervet monkey)",
         "location": "owner caption (Masai Mara, Kenya)"
       },
-      "original_sha256": "af45835eceb951580ea7c7ff1c8af8327bdb3b570e80b4263adab252e4ac1e05"
+      "original_sha256": "491a83c8131730136147bcb22a8d4444fae47ac554606ddb885c957affb6911f"
     },
     {
       "id": "netherlands",
@@ -41,7 +41,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Zaanse Schans, Zaandam"
       },
-      "original_sha256": "6185abc077288172f37313eee70f438c069484f9688211f148f2355adeae4646"
+      "original_sha256": "57371ccac7dde4e8d07e4a90e3d60225b796a80344dbaba3664efe6e0240e034"
     },
     {
       "id": "germany",
@@ -55,7 +55,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Saarburg (owner wrote 'Saaburg'; read as Saarburg, Rhineland-Palatinate)"
       },
-      "original_sha256": "550e10e7e1adbe7b1a0f5207c9ddb4724b80fea4318e5e9372c42e0bdd2d454d"
+      "original_sha256": "f22145f6710dd0ac30981e1b422e67410bb98595d1c7501a6ece4e5eaf1f544c"
     },
     {
       "id": "norway",
@@ -69,7 +69,7 @@
         "subject": "pixels",
         "location": "owner caption (Oslo, Norway)"
       },
-      "original_sha256": "1f6774f63620dae9e03b3aeb3ac9b5c836d7e23bd27aea1143a716416a23c3f0"
+      "original_sha256": "dc156d4b75f3b763022cc507d5d66975933398daff14fe92fc540fc1c7e1b6c7"
     },
     {
       "id": "denmark",
@@ -83,7 +83,7 @@
         "subject": "visual identification (Nyhavn)",
         "location": "owner caption (Copenhagen, Denmark)"
       },
-      "original_sha256": "8bc4afa0288391e76e2383d1a92be54e369355d42e4d33bf469a2fd4911b5271"
+      "original_sha256": "7f6ecbad2a6fdbb6d9794353fbc47cfc4f3942495224bc8c5c6e1b799f960efe"
     },
     {
       "id": "sweden",
@@ -97,7 +97,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Stockholm (church not named)"
       },
-      "original_sha256": "0ba047522a20932df1662966c0dfa33fb32d24cc9c5c00a8930693bcd47fb224"
+      "original_sha256": "69b56bef71d41d6d31433d3d8e1d3dfd6992cf319586de95aca46f62b44882b9"
     },
     {
       "id": "belgium",
@@ -111,7 +111,7 @@
         "subject": "visual identification (Dinant citadel and Collegiate Church of Notre-Dame)",
         "location": "owner caption (Dinant, Belgium)"
       },
-      "original_sha256": "81a4523109d99d65925a0f08cea5e1efc0ba09e22beb5c2ade3956b5c93303d7"
+      "original_sha256": "6657df11713f9f09c158eca76595004e24621e7a8d0b9f37f1545ff6f5a3071c"
     },
     {
       "id": "turkey",
@@ -126,7 +126,7 @@
         "subject": "pixels (tram destination sign reads TAKSİM)",
         "location": "visual identification (İstiklal Avenue, Istanbul); filename (Turkey)"
       },
-      "original_sha256": "b5efc7a69c80f9e8ab5c9cee6a287e242102a8177ebd0a68a3c5a5f4a15f0a94",
+      "original_sha256": "02037542a4f0618a177b1ce600bd08af76785145ec77e2f7997a0ec1ef8e4a75",
       "page": "istiklal-avenue-tram-istanbul-turkiye-kamil-salameh"
     },
     {
@@ -141,7 +141,7 @@
         "subject": "owner caption (Faqra Temple)",
         "location": "owner caption (Kfardebian, Lebanon)"
       },
-      "original_sha256": "5dbdbd0b6ab6c94d1792d5f2852119031d97f6248a7b3f492998d75b4a7445bf"
+      "original_sha256": "06d44b324a006613de3b21613540b09a23b9f77e3c7109bc5d66bb7545c62fa2"
     },
     {
       "id": "kfardebian",
@@ -155,7 +155,7 @@
         "subject": "pixels (an earlier sitemap titled this file 'Neowise Comet', which the photograph does not show)",
         "location": "filename and owner gallery title (Kfardebian, Lebanon)"
       },
-      "original_sha256": "a901362d63555065ccf72ecfda38b692a99b887aa98c4b75903b456defd53d60"
+      "original_sha256": "640650748a1cbe4a4c76f30a1000333632842df2dbd4912315fcfa8c423de88f"
     },
     {
       "id": "lebanon-1",
@@ -169,7 +169,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Bekaa Valley"
       },
-      "original_sha256": "35901a59e96b5649495c304aa121caa45dbcd6158486f62a38f0cfda0366398e"
+      "original_sha256": "2d7f2dad033485a8051d091caa66a13b40e8999047a1c1378d4b097649c843f8"
     },
     {
       "id": "lebanon-2",
@@ -183,7 +183,7 @@
         "subject": "pixels; statue identified by the owner as Saint Charbel",
         "location": "owner confirmation (2026-10-16): statue of Saint Charbel, Faraya"
       },
-      "original_sha256": "2868f4e771dc02d02fc5e357057b5c4630e46f79ae00d2ebac6b53b69da46d29"
+      "original_sha256": "a3f58ff506ce61a3989e82a7773c0bdce6fee691eedd16e6e5521f3991a122bc"
     },
     {
       "id": "luxembourg",
@@ -197,7 +197,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Grund, Luxembourg"
       },
-      "original_sha256": "aae0865aeade669deb4ef22862fe18bccc8fc61f8abbf0eb007270f5f7040005"
+      "original_sha256": "349e3a806cdf2ab74f2fdf770fd6d426231a356ba4676c6298d10cceb7832011"
     },
     {
       "id": "armenia",
@@ -211,7 +211,7 @@
         "subject": "visual identification (Greater and Little Ararat, Yerevan skyline)",
         "location": "filename (Armenia) and visual identification"
       },
-      "original_sha256": "0c641671fe0b5be30c88d7be513fcebc833b9a0f858bc700dad9dcab63ef9828"
+      "original_sha256": "90d9ee267cad3747a053480d663a6b2e9e6315288de2d78c9a0ffac3182bc4df"
     },
     {
       "id": "astrophotography",
@@ -225,7 +225,7 @@
         "subject": "pixels",
         "location": "owner caption (Night Skies, Kfardebian, Lebanon)"
       },
-      "original_sha256": "8889a0b21efbe8a31950d0a13dbed2ea4e8f3f257913c3c9058b4f0ea1cbf5b7"
+      "original_sha256": "7f42e464bdc5c8c31df56e46c09f6b8950735a3072fd53e88fe39a9bab886839"
     },
     {
       "id": "product-photography",
@@ -239,22 +239,7 @@
         "subject": "pixels (brand name printed on the packaging)",
         "location": "not applicable (studio product photograph)"
       },
-      "original_sha256": "d2b35cc03f6ed8c6e9f57def882cbc5d1a3dbaf10488be474e575d8734e2e6f2"
-    },
-    {
-      "id": "hero-bg",
-      "original": "images/hero-bg.jpg.avif",
-      "slug": "dinant-citadel-meuse-belgium-kamil-salameh",
-      "title": "Dinant on the Meuse",
-      "place": "Dinant, Belgium",
-      "alt": "",
-      "portfolio": false,
-      "role": "unused: homepage hero image removed at the owner's request (2026-10-16); kept as an original, not published on any page",
-      "evidence": {
-        "subject": "pixels (same scene as belgium.jpg.avif)",
-        "location": "owner caption (Dinant, Belgium)"
-      },
-      "original_sha256": "2f57f1beb3e0fed20319626b35eb287f8cc4727a5f23339ad2ef04c82815ac21"
+      "original_sha256": "0d090807f288d2ff47738cb1f28b7ed0fd8cffa7c9d8d4f9cb5c339cae34ae5e"
     }
   ]
 }

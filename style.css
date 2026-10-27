@@ -2887,8 +2887,14 @@ body.legal-page {
     letter-spacing: .2em;
     text-transform: uppercase;
     white-space: nowrap;
-    pointer-events: none;
+    cursor: pointer;
+    font-family: inherit;
     transition: background .3s ease, color .3s ease;
+}
+
+.stack-hint:focus-visible {
+    outline: 3px solid var(--blue-400);
+    outline-offset: 3px;
 }
 
 .polaroid-interactive-container:hover .stack-hint {

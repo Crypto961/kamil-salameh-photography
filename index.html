@@ -29,10 +29,10 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#07141C">
 
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+    <link rel="apple-touch-icon" href="images/logo.jpg">
     <link rel="preload" href="fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="style.css?v=20261016b">
+    <link rel="stylesheet" href="style.css?v=20261027a">
 
     <!-- Core identity (JSON-LD): who Kamil Salameh is and what Kamil Salameh Photography offers.
          Repeated on every page with stable @id values so search engines and AI assistants
@@ -85,7 +85,7 @@
           "alternateName": "Kamil Salameh Photography Studio",
           "description": "Fine art photography studio of Lebanese photographer Kamil Salameh, offering fine art prints, photo gifts, commercial and architectural photography, and private photography sessions.",
           "url": "https://kamilsalamehphotography.com/",
-          "logo": "https://kamilsalamehphotography.com/images/logo.png",
+          "logo": "https://kamilsalamehphotography.com/images/logo.jpg",
           "image": "https://kamilsalamehphotography.com/images/og/home.jpg",
           "founder": { "@id": "https://kamilsalamehphotography.com/#person" },
           "address": { "@type": "PostalAddress", "addressCountry": "LB" },
@@ -336,6 +336,7 @@
         }
 
         .pola-frame {
+            display: block;
             width: 100%;
             aspect-ratio: 1 / 1;
             overflow: hidden;
@@ -349,6 +350,11 @@
             object-fit: cover;
             display: block;
             transition: transform 0.5s ease;
+        }
+
+        a.pola-frame:focus-visible {
+            outline: 3px solid var(--blue-400);
+            outline-offset: 3px;
         }
 
         .pola-card:hover .pola-frame img {
@@ -707,7 +713,7 @@
         <div class="hero-pola-stack">
             <div class="hero-pola-card">
                 <div class="pola-frame">
-                    <img src="images/logo.png" alt="">
+                    <img src="images/logo.jpg" alt="">
                 </div>
                 <div class="pola-caption">Kamil Salameh Portfolio</div>
             </div>
@@ -725,26 +731,26 @@
             <a href="about.html" class="text-link">More about Kamil Salameh <span aria-hidden="true">→</span></a>
         </div>
 
-        <div class="polaroid-interactive-container is-expanded" role="button" tabindex="0" aria-expanded="true" aria-label="Philosophy photographs: press to stack or spread the photographs" data-reveal>
+        <div class="polaroid-interactive-container is-expanded" data-reveal>
             <div class="polaroid-fan-wrapper">
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/faqra-roman-ruins-kfardebian-lebanon-kamil-salameh.jpg" width="600" height="480" alt="Roman temple ruins of Faqra at sunset framed by pine trees in Kfardebian, Lebanon" loading="lazy" decoding="async"></div>
+                    <a class="pola-frame" href="photos/faqra-roman-ruins-kfardebian-lebanon-kamil-salameh.html"><img src="images/thumbs/faqra-roman-ruins-kfardebian-lebanon-kamil-salameh.jpg" width="600" height="480" alt="Roman temple ruins of Faqra at sunset framed by pine trees in Kfardebian, Lebanon" loading="lazy" decoding="async"></a>
                     <figcaption class="pola-caption">Faqra Temple<span class="pola-subcaption">Kfardebian, Lebanon</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/sacre-coeur-basilica-paris-kamil-salameh.jpg" width="600" height="750" alt="White domes of the Sacré-Cœur Basilica in Paris framed by trees against a deep blue sky" loading="lazy" decoding="async"></div>
+                    <a class="pola-frame" href="photos/sacre-coeur-basilica-paris-kamil-salameh.html"><img src="images/thumbs/sacre-coeur-basilica-paris-kamil-salameh.jpg" width="600" height="750" alt="White domes of the Sacré-Cœur Basilica in Paris framed by trees against a deep blue sky" loading="lazy" decoding="async"></a>
                     <figcaption class="pola-caption">Parisian Light<span class="pola-subcaption">Paris, France</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/milky-way-chairlift-kfardebian-lebanon-kamil-salameh.jpg" width="600" height="463" alt="Milky Way and a star-filled sky above a ski chairlift in the mountains of Kfardebian, Lebanon" loading="lazy" decoding="async"></div>
+                    <a class="pola-frame" href="photos/milky-way-chairlift-kfardebian-lebanon-kamil-salameh.html"><img src="images/thumbs/milky-way-chairlift-kfardebian-lebanon-kamil-salameh.jpg" width="600" height="463" alt="Milky Way and a star-filled sky above a ski chairlift in the mountains of Kfardebian, Lebanon" loading="lazy" decoding="async"></a>
                     <figcaption class="pola-caption">Night Skies<span class="pola-subcaption">Kfardebian, Lebanon</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/waterfront-clock-tower-oslo-norway-kamil-salameh.jpg" width="600" height="750" alt="Clock tower on a wooden waterfront pier with orange benches under a cloudy sky in Oslo, Norway" loading="lazy" decoding="async"></div>
+                    <a class="pola-frame" href="photos/waterfront-clock-tower-oslo-norway-kamil-salameh.html"><img src="images/thumbs/waterfront-clock-tower-oslo-norway-kamil-salameh.jpg" width="600" height="750" alt="Clock tower on a wooden waterfront pier with orange benches under a cloudy sky in Oslo, Norway" loading="lazy" decoding="async"></a>
                     <figcaption class="pola-caption">Nordic Silence<span class="pola-subcaption">Oslo, Norway</span></figcaption>
                 </figure>
             </div>
-            <span class="stack-hint" aria-hidden="true"><span class="hint-open">✦ Tap to unfold</span><span class="hint-close">✕ Tap to stack</span></span>
+            <button type="button" class="stack-hint" aria-expanded="true"><span class="hint-open">✦ Unfold the photographs</span><span class="hint-close">✕ Stack the photographs</span></button>
         </div>
     </div>
 </section>
@@ -762,26 +768,26 @@
             <a href="portfolio.html" class="primary-button">Full Portfolio</a>
         </div>
 
-        <div class="polaroid-interactive-container is-expanded" role="button" tabindex="0" aria-expanded="true" aria-label="Featured photographs: press to stack or spread the photographs" data-reveal>
+        <div class="polaroid-interactive-container is-expanded" data-reveal>
             <div class="polaroid-fan-wrapper">
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/vervet-monkey-masai-mara-kenya-kamil-salameh.jpg" width="600" height="750" alt="Vervet monkey peering through green foliage in the Masai Mara, Kenya" loading="lazy" decoding="async"></div>
+                    <a class="pola-frame" href="photos/vervet-monkey-masai-mara-kenya-kamil-salameh.html"><img src="images/thumbs/vervet-monkey-masai-mara-kenya-kamil-salameh.jpg" width="600" height="750" alt="Vervet monkey peering through green foliage in the Masai Mara, Kenya" loading="lazy" decoding="async"></a>
                     <figcaption class="pola-caption">Wild Horizon<span class="pola-subcaption">Masai Mara, Kenya</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/dinant-citadel-meuse-belgium-kamil-salameh.jpg" width="600" height="480" alt="Dinant&#x27;s citadel cliff, collegiate church and colourful riverside houses reflected in the Meuse, Belgium" loading="lazy" decoding="async"></div>
+                    <a class="pola-frame" href="photos/dinant-citadel-meuse-belgium-kamil-salameh.html"><img src="images/thumbs/dinant-citadel-meuse-belgium-kamil-salameh.jpg" width="600" height="480" alt="Dinant&#x27;s citadel cliff, collegiate church and colourful riverside houses reflected in the Meuse, Belgium" loading="lazy" decoding="async"></a>
                     <figcaption class="pola-caption">Riverside Dinant<span class="pola-subcaption">Dinant, Belgium</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/nyhavn-copenhagen-denmark-kamil-salameh.jpg" width="600" height="480" alt="Colourful townhouses and wooden boats along the Nyhavn waterfront in Copenhagen, Denmark" loading="lazy" decoding="async"></div>
+                    <a class="pola-frame" href="photos/nyhavn-copenhagen-denmark-kamil-salameh.html"><img src="images/thumbs/nyhavn-copenhagen-denmark-kamil-salameh.jpg" width="600" height="480" alt="Colourful townhouses and wooden boats along the Nyhavn waterfront in Copenhagen, Denmark" loading="lazy" decoding="async"></a>
                     <figcaption class="pola-caption">Nordic Lines<span class="pola-subcaption">Copenhagen, Denmark</span></figcaption>
                 </figure>
                 <figure class="pola-card">
-                    <div class="pola-frame"><img src="images/thumbs/vali-lash-lift-kit-product-photography-kamil-salameh.jpg" width="600" height="750" alt="VALI Lash Lift eyelash perming kit and vials arranged on a turquoise background" loading="lazy" decoding="async"></div>
+                    <a class="pola-frame" href="photos/vali-lash-lift-kit-product-photography-kamil-salameh.html"><img src="images/thumbs/vali-lash-lift-kit-product-photography-kamil-salameh.jpg" width="600" height="750" alt="VALI Lash Lift eyelash perming kit and vials arranged on a turquoise background" loading="lazy" decoding="async"></a>
                     <figcaption class="pola-caption">Fine Art Details<span class="pola-subcaption">Studio Collection</span></figcaption>
                 </figure>
             </div>
-            <span class="stack-hint" aria-hidden="true"><span class="hint-open">✦ Tap to unfold</span><span class="hint-close">✕ Tap to stack</span></span>
+            <button type="button" class="stack-hint" aria-expanded="true"><span class="hint-open">✦ Unfold the photographs</span><span class="hint-close">✕ Stack the photographs</span></button>
         </div>
     </div>
 </section>
@@ -910,7 +916,7 @@
     </div>
 </div>
 
-<script src="site.js?v=20261016b"></script>
+<script src="site.js?v=20261027a"></script>
 
 </body>
 </html>

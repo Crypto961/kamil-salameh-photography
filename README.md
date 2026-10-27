@@ -40,7 +40,8 @@ Photos live in `images/` as AVIF exported from Lightroom. They use a wide-gamut 
 
 - **`_src/photos.json` is the single source of truth** for every photograph: title, place, alt text, descriptive derivative filename (`slug`), the evidence behind each fact, and a SHA-256 fingerprint of the original. The build generates the portfolio grid, its `ImageObject` structured data and the homepage/About image tags from it.
 - Derivatives: `images/thumbs/<slug>.jpg` (600px) and `images/web/<slug>.jpg` (1200px), colour-converted from the BT.2020 originals and checked against Chromium's rendering. Originals keep their stable URLs and are linked from each portfolio card (and shown in the lightbox).
-- To add a photograph: export the AVIF to `images/`, create the two JPEG derivatives with a verified colour conversion, add an entry to `photos.json` (run `python3 -c "import hashlib;print(hashlib.sha256(open('images/NAME.jpg.avif','rb').read()).hexdigest())"` for `original_sha256`), then build and validate.
+- **IPTC metadata**: every photograph file (originals and derivatives) and the Open Graph crops carry Creator, Copyright Notice, Credit Line, Web Statement of Rights, Licensor and per-photo Title/Description, written by `python3 _src/iptc.py` with ExifTool (metadata only; pixels and the colour box are untouched). Re-run it after adding images, then `python3 _src/iptc.py --refingerprint`. The logo is excluded: its metadata discloses it was AI-generated.
+- To add a photograph: export the AVIF to `images/`, create the two JPEG derivatives with a verified colour conversion, add an entry to `photos.json` (run `python3 -c "import hashlib;print(hashlib.sha256(open('images/NAME.jpg.avif','rb').read()).hexdigest())"` for `original_sha256`), then run `python3 _src/iptc.py`, `python3 _src/iptc.py --refingerprint`, build and validate.
 
 ## Editing pages (important)
 

@@ -2,7 +2,12 @@
 #
 # Goal: maximum discoverability for Kamil Salameh and Kamil Salameh Photography
 # in search engines and AI assistants, while keeping the photographs themselves
-# out of AI model training (see terms.html#copyright).
+# out of AI model training.
+#
+# Usage terms: search engines and AI assistants may crawl, index and DISPLAY the
+# photographs (including thumbnails) in results and answers, with the credit
+# "Photo: Kamil Salameh" and a link to the photo's page:
+# https://kamilsalamehphotography.com/terms.html#search-and-ai
 
 # Search engines and everyone else: full access.
 User-agent: *

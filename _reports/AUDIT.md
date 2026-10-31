@@ -180,3 +180,19 @@ Merge the pull request into `main`. GitHub Pages rebuilds automatically, usually
   - `validate.py` check 15: every displayed photograph links to its page or original.
   - `validate.py` check 16: every image carries the metadata. Both were negative-tested.
   - The live site check now also verifies the metadata on every published image.
+
+## 15. Follow-up, 31 October 2026: explicit permission for search engines and AI assistants to display the photographs
+
+- **Report:** ChatGPT linked to the photographs but declined to show them, noting that "His website reserves reproduction rights".
+- **Cause:** the Terms, the footer on every page, the portfolio and `llms.txt` said only that the photographs "may not be copied, downloaded, reproduced or used". There was no exception for search engines or AI assistants, so assistants that read site policies defaulted to links only.
+- **Fix (permission is explicit; other rights stay reserved):**
+  - **Terms §1:** new "Search engines and AI assistants: permitted" section (`terms.html#search-and-ai`). Crawling, indexing, caching and displaying the photographs (including thumbnails) in results and answers is permitted with the credit "Photo: Kamil Salameh" and a link to the photo's page, without alteration. Reproduction elsewhere, editorial/commercial use and AI model training stay reserved. Terms "last updated" set to 31 October 2026.
+  - **Footer, portfolio note, every photo page and the About FAQ** (visible text and JSON-LD) now state the permission and link to the usage terms.
+  - **`llms.txt`** tells assistants they are permitted to display the photographs with credit and a link.
+  - **`robots.txt`** comment points to the usage terms. Crawl rules are unchanged: search and answer bots have full access; training bots are kept out of `/images/`.
+  - **Image metadata** (`_src/iptc.py`):
+    - added XMP Usage Terms stating the same permission;
+    - added IPTC/PLUS Data Mining = `DMI-PROHIBITED-GENAIMLTRAINING` (display allowed; generative-AI training not);
+    - all 53 tagged files re-checked: pixels identical (54/54 including the logo), colour boxes intact, fingerprints updated.
+- **Accessibility:** the new inline footer link is underlined (axe `link-in-text-block`); all 7 page types plus photo pages are clean on desktop and mobile.
+- **Limit:** whether a given assistant displays images inline is that provider's own product decision. These changes remove the site-side reason to withhold them.

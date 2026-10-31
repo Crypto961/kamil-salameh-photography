@@ -21,7 +21,7 @@ import os
 import re
 import struct
 
-VERSION = "20261027a"
+VERSION = "20261031a"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -406,7 +406,7 @@ def photo_body(p, prev, nxt):
                 <div><dt>Photographer</dt><dd><a href="about.html">Kamil Salameh</a></dd></div>
                 <div><dt>%(meta_label)s</dt><dd>%(place)s</dd></div>
                 <div><dt>Original</dt><dd>%(w)d × %(h)d px</dd></div>
-                <div><dt>Copyright</dt><dd>© Kamil Salameh. All rights reserved. <a href="terms.html#copyright">Licensing</a></dd></div>
+                <div><dt>Copyright</dt><dd>© Kamil Salameh. May be shown by search engines and AI assistants with the credit "Photo: Kamil Salameh" and a link to this page. <a href="terms.html#search-and-ai">Usage terms</a></dd></div>
             </dl>
         </aside>
     </div>

@@ -2613,6 +2613,11 @@ button {
     line-height: 1.6;
 }
 
+.site-footer .footer-bottom a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
 .site-footer .link-button {
     background: none;
     padding: 0;

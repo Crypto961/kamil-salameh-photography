@@ -14,7 +14,7 @@ Checks:
   5. JSON-LD parses; ImageObject contentUrl/thumbnailUrl files exist.
   6. sitemap.xml parses; page URLs equal the canonical URLs; image URLs exist.
   7. Canonical, robots meta and noindex rules are as intended.
-  8. robots.txt never blocks search crawlers; /images/ only for AI training bots.
+  8. robots.txt blocks nothing: open access for every crawler, AI bots included.
   9. Forms keep the Formspree endpoint, honeypot and required consent.
  10. No inline executable scripts or third-party script/style sources (CSP).
  11. CSS/JS links carry the current cache-busting VERSION.
@@ -334,12 +334,11 @@ def check_robots():
             current["rules"].append((key, value))
     if current:
         groups.append(current)
-    training = {"GPTBot", "ClaudeBot", "Google-Extended", "Applebot-Extended", "CCBot", "meta-externalagent"}
+    # Open access (owner decision, November 2026): no crawler may be blocked.
     for g in groups:
         for key, value in g["rules"]:
             if key == "disallow" and value:
-                if value != "/images/" or not set(g["agents"]) <= training:
-                    fail("robots.txt: unexpected Disallow %s for %s" % (value, g["agents"]))
+                fail("robots.txt: Disallow %s for %s contradicts open access" % (value, g["agents"]))
     if "Sitemap: %ssitemap.xml" % SITE not in load("robots.txt"):
         fail("robots.txt: sitemap declaration missing")
 

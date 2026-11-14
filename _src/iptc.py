@@ -20,8 +20,8 @@ Fields written (the ones Google Images and IPTC Photo Metadata use):
   Credit Line (photoshop:Credit, IPTC Credit)
   Web Statement of Rights (xmpRights:WebStatement), Marked = True
   Licensor name and URL (PLUS), Creator's work URL (IPTC Core contact info)
-  Usage Terms (display by search engines/AI assistants permitted with credit)
-  Data Mining (PLUS): prohibited for generative AI/ML training
+  Usage Terms (open access for search engines, AI assistants and crawlers)
+  Data Mining (PLUS): allowed
   Title and Description per photograph, from _src/photos.json
 
 Covers every photograph (AVIF originals and JPEG derivatives) and the Open
@@ -50,12 +50,13 @@ COMMON = [
     "-XMP-plus:LicensorName=Kamil Salameh Photography",
     "-XMP-plus:LicensorURL=" + SITE + "order.html",
     "-XMP-iptcCore:CreatorWorkURL=" + SITE,
-    # Permission travels with the file: display by search engines and AI
-    # assistants is allowed with credit and a link; generative-AI training is not.
-    "-XMP-xmpRights:UsageTerms=Display in search results and AI assistant answers is permitted with the credit "
-    "\"Photo: Kamil Salameh\" and a link to the photograph's page on kamilsalamehphotography.com. "
-    "All other rights reserved. See " + SITE + "terms.html#search-and-ai",
-    "-XMP-plus:DataMining=Prohibited for Generative AI/ML training",
+    # Open access travels with the file: search engines, AI assistants and AI
+    # crawlers may fetch, show, share and train on the photographs.
+    "-XMP-xmpRights:UsageTerms=Open access: search engines, AI assistants and AI crawlers may freely fetch, index, "
+    "display, share and train on this photograph. Credit \"Photo: Kamil Salameh\" with a link to "
+    "kamilsalamehphotography.com is appreciated. Commercial products and paid advertising require a licence. "
+    "See " + SITE + "terms.html#search-and-ai",
+    "-XMP-plus:DataMining=Allowed",
     "-EXIF:Artist=" + CREATOR,
     "-EXIF:Copyright=" + COPYRIGHT,
 ]

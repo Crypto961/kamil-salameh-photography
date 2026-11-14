@@ -13,7 +13,7 @@
         "subject": "visual identification (Sacré-Cœur Basilica, Montmartre)",
         "location": "owner caption (Paris, France)"
       },
-      "original_sha256": "0ced6d3d39c7fc39762a18448c253d7f24cda6dcc8d664952c3c9df060d1ea61"
+      "original_sha256": "ffdc357c2a222b663d8cf875852a16bf72fa352550f45476514388858318f3f7"
     },
     {
       "id": "kenya",
@@ -27,7 +27,7 @@
         "subject": "visual identification (vervet monkey)",
         "location": "owner caption (Masai Mara, Kenya)"
       },
-      "original_sha256": "ad33f89884a61b8b19c671e8dc2376627c9c99ec9aaa2ec505e4e4c792d344d8"
+      "original_sha256": "92ee2dd89dba1d763a6a7c54820befee8cedf2a4bb17e30587565bf004637d2e"
     },
     {
       "id": "netherlands",
@@ -41,7 +41,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Zaanse Schans, Zaandam"
       },
-      "original_sha256": "19ba265ba4b26ea6bcbe9b51c12dd4c985021fd589cd3c58c041ca1a1393db92"
+      "original_sha256": "7c2071b7feb085efc232d3d03ad66af0066743eb13c0a1c7d2cb0bc5be80473d"
     },
     {
       "id": "germany",
@@ -55,7 +55,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Saarburg (owner wrote 'Saaburg'; read as Saarburg, Rhineland-Palatinate)"
       },
-      "original_sha256": "33504807d6b81a9bb8ae31a7b46131c99fa7dc66ecb7562c8a0a5d7eedd3781c"
+      "original_sha256": "777015e8d8d1de5ba8bd2d5ad7e011747aac5babceee1d2487be5ab1c643753f"
     },
     {
       "id": "norway",
@@ -69,7 +69,7 @@
         "subject": "pixels",
         "location": "owner caption (Oslo, Norway)"
       },
-      "original_sha256": "f1ba1991bbb220e996cc73ba48ac99bc115c5eae3d37db2c108fb401c7ef2bc9"
+      "original_sha256": "09f9f9d34d3e046990f921632e72d1b1af5bbde4c7bb3ead3142317f4e76755c"
     },
     {
       "id": "denmark",
@@ -83,7 +83,7 @@
         "subject": "visual identification (Nyhavn)",
         "location": "owner caption (Copenhagen, Denmark)"
       },
-      "original_sha256": "06c13166cd55b7bf7f437264d2f6c04854d89aeeb55c9832c0a25d924dfc7dc0"
+      "original_sha256": "d8a616ae22e3a11781b93c86869e7420d6762dbb7e6950dd1881e0556fb3e17e"
     },
     {
       "id": "sweden",
@@ -97,7 +97,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Stockholm (church not named)"
       },
-      "original_sha256": "3b25a7cb230124b19d8b68dcceefb67155f52659128176c6336cf3adee644ea7"
+      "original_sha256": "bc2a7df65c2df472241b835e3611186fe85d5b07fa9b0a6423fa89b244e07193"
     },
     {
       "id": "belgium",
@@ -111,7 +111,7 @@
         "subject": "visual identification (Dinant citadel and Collegiate Church of Notre-Dame)",
         "location": "owner caption (Dinant, Belgium)"
       },
-      "original_sha256": "7f39796700d98840f0249c1e749e348637558443ad5daea3ba0f61a25b13d13d"
+      "original_sha256": "26506dd7f301f5bfb1abb6ea75eb2bec2e311f16ecde3ccda5b6173d93770636"
     },
     {
       "id": "turkey",
@@ -126,7 +126,7 @@
         "subject": "pixels (tram destination sign reads TAKSİM)",
         "location": "visual identification (İstiklal Avenue, Istanbul); filename (Turkey)"
       },
-      "original_sha256": "c5f64a262e0ed9be39a6bae9fdac6147739e23d8a8843dbac7346257ae903947",
+      "original_sha256": "aae190d5ba3e6298f3bbd0047e050894221f3d1c39e31f765c75393b878012af",
       "page": "istiklal-avenue-tram-istanbul-turkiye-kamil-salameh"
     },
     {
@@ -135,13 +135,13 @@
       "slug": "faqra-roman-ruins-kfardebian-lebanon-kamil-salameh",
       "title": "Faqra Roman Ruins",
       "place": "Kfardebian, Lebanon",
-      "alt": "Roman temple ruins of Faqra at sunset framed by pine trees in Kfardebian, Lebanon",
+      "alt": "Roman temple ruins of Faqra at sunset framed by cedar trees in Kfardebian, Lebanon",
       "portfolio": true,
       "evidence": {
-        "subject": "owner caption (Faqra Temple)",
+        "subject": "owner caption (Faqra Temple); trees identified as cedars by the owner (2026-11-13)",
         "location": "owner caption (Kfardebian, Lebanon)"
       },
-      "original_sha256": "fd243e2ac728c7c7fd54ecb99df4315a26d815585305f8b027af07e05511d96a"
+      "original_sha256": "0a4b8ace16d636b840d1f6a9098352f08d830cf24ebd6b94282e3d698c98b0c8"
     },
     {
       "id": "kfardebian",
@@ -155,7 +155,7 @@
         "subject": "pixels (an earlier sitemap titled this file 'Neowise Comet', which the photograph does not show)",
         "location": "filename and owner gallery title (Kfardebian, Lebanon)"
       },
-      "original_sha256": "70ef951859f786deb84cc5dc428751a060431d08b3213fae5bfe131d8ab5fb60"
+      "original_sha256": "b7d201046fd1a38ffbfc2c6d1760e533cb8b324ff5e86bffb69924419082b1ed"
     },
     {
       "id": "lebanon-1",
@@ -169,7 +169,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Bekaa Valley"
       },
-      "original_sha256": "114e82e9e151bb09c2f5b9cf21128a67822be0a63b6a9229d847200d249280b3"
+      "original_sha256": "4ff104a6a8c2654bfe0a59d3a262ce1749a6830faec36c732ef6b5481c0f8c7e"
     },
     {
       "id": "lebanon-2",
@@ -183,7 +183,7 @@
         "subject": "pixels; statue identified by the owner as Saint Charbel",
         "location": "owner confirmation (2026-10-16): statue of Saint Charbel, Faraya"
       },
-      "original_sha256": "55a4976b3da6790f2a3e45c0af248950c6c01237c7e2f4f74ea6f7fddde6dc2e"
+      "original_sha256": "673aac47e7f2d84881b30c491fad40ea27c137cd9150933832c062bf90db8ba9"
     },
     {
       "id": "luxembourg",
@@ -197,7 +197,7 @@
         "subject": "pixels",
         "location": "owner confirmation (2026-10-16): Grund, Luxembourg"
       },
-      "original_sha256": "fe5e4172eae2e049c9109b486bf25badf05dafd2b93f3b21a7ecee7dacf52cf8"
+      "original_sha256": "d0699b7d7c93a364b325274f11b1bead204c4c5b2e06b6344337c091f966dacf"
     },
     {
       "id": "armenia",
@@ -211,7 +211,7 @@
         "subject": "visual identification (Greater and Little Ararat, Yerevan skyline)",
         "location": "filename (Armenia) and visual identification"
       },
-      "original_sha256": "e3f75a09168733f9b670fffb5f3d402792ab8f6e28094f525c7868c59319be3d"
+      "original_sha256": "d4a14fab7c9a64f2df627d544a3bc74a3e644639dc8ec43e1be2d95e6f0b634c"
     },
     {
       "id": "astrophotography",
@@ -225,7 +225,7 @@
         "subject": "pixels",
         "location": "owner caption (Night Skies, Kfardebian, Lebanon)"
       },
-      "original_sha256": "2581f00f5904df0f50311f30a89b8328bacbb5792bfd114dc95db1c398aae2d4"
+      "original_sha256": "bd1abde1033f55ba5c431b0cb4c2768447ca729b584c86d58aa48b43ba9b1528"
     },
     {
       "id": "product-photography",
@@ -239,7 +239,7 @@
         "subject": "pixels (brand name printed on the packaging)",
         "location": "not applicable (studio product photograph)"
       },
-      "original_sha256": "f20b1582225ca26a2123d786e5ded66b4fc8a453fb9ea884760a695c024bc7aa"
+      "original_sha256": "0b88c8fd259a597814e27696aeba573d83b2aefe0d1cb561b04269c969f6e213"
     }
   ]
 }

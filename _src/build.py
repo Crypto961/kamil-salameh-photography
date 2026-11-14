@@ -406,7 +406,7 @@ def photo_body(p, prev, nxt):
                 <div><dt>Photographer</dt><dd><a href="about.html">Kamil Salameh</a></dd></div>
                 <div><dt>%(meta_label)s</dt><dd>%(place)s</dd></div>
                 <div><dt>Original</dt><dd>%(w)d × %(h)d px</dd></div>
-                <div><dt>Copyright</dt><dd>© Kamil Salameh. May be shown by search engines and AI assistants with the credit "Photo: Kamil Salameh" and a link to this page. <a href="terms.html#search-and-ai">Usage terms</a></dd></div>
+                <div><dt>Use</dt><dd>Free for search engines and AI assistants to show and share. Credit "Photo: Kamil Salameh" appreciated. <a href="terms.html#search-and-ai">Open access terms</a></dd></div>
             </dl>
         </aside>
     </div>

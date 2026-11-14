@@ -196,3 +196,21 @@ Merge the pull request into `main`. GitHub Pages rebuilds automatically, usually
     - all 53 tagged files re-checked: pixels identical (54/54 including the logo), colour boxes intact, fingerprints updated.
 - **Accessibility:** the new inline footer link is underlined (axe `link-in-text-block`); all 7 page types plus photo pages are clean on desktop and mobile.
 - **Limit:** whether a given assistant displays images inline is that provider's own product decision. These changes remove the site-side reason to withhold them.
+
+## 16. Follow-up, 14 November 2026: open access for all search engines and AI; 35AWARDS identity
+
+**Owner instruction:** no restrictions on search engines or AI returning or sharing the photographs. Link the 35AWARDS profile as the same person.
+
+- **Identity:**
+  - The Person `sameAs` now lists `https://35awards.com/author/salamehkamil/` (the URL the owner provided) and keeps `https://35awards.com/en/author/salamehkamil/` as an alias, alongside Instagram and LinkedIn.
+  - The footer, About profiles and `llms.txt` link to the new URL with `rel="me"`.
+- **`robots.txt`:** every crawler has full access, including AI training crawlers (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot, meta-externalagent) and image search, with no `Disallow` rules. The validator now enforces this.
+- **Terms §1 (`#search-and-ai`), rewritten as "open access":**
+  - Search engines, AI assistants, answer engines and AI crawlers may freely crawl, index, cache, fetch, display, return, share and train on everything, without conditions.
+  - Credit is appreciated, not required. Anyone may share the photographs.
+  - Only selling the photographs, merchandise and paid advertising need a licence, which protects the print business. Passing the photos off as someone else's work is asked against.
+  - Last updated: 14 November 2026.
+- **Same wording everywhere:** the footer, portfolio note, photo pages ("Use" row), About FAQ (visible and JSON-LD) and `llms.txt`, which explicitly asks assistants to show the photographs.
+- **Image metadata:** XMP Usage Terms state open access. PLUS Data Mining changed from "prohibited for generative AI training" to `DMI-ALLOWED`. All 53 tagged files re-checked: pixels identical (54/54), colour boxes intact, fingerprints updated.
+- **Owner correction ported:** the owner edited the generated `about.html` to say the Faqra photograph is framed by **cedar** trees, not pine. This was moved into `_src/photos.json`, so it now appears in every page, the image metadata and `llms.txt` (a direct edit to a generated file would have been overwritten by the next build).
+- **Checks:** validate.py all passed; axe clean on all 8 page types at desktop and mobile; forms unaffected.
